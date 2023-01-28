@@ -11,28 +11,43 @@ router.get('/signup', async (req, res, next) => {
   res.render('auth/signup');
 })
 
+// @desc    Sends user auth data to database to create a new user
+// @route   POST /auth/signup
+// @access  Public
+router.post('/signup', async function (req, res, next) { 
+  const { username, email, password, avatar, aboutMe } = req.body;
+  if (!username || !email || !password) {
+    res.render('auth/signup', { error: 'All fields are necessary.' });
+    return;
+  }
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    res.render('auth/signup', { error: 'Password needs to contain at least 6 characters, one number, one lowercase and one uppercase letter.' });
+    return;
+  }
+  try {
+    const userInDB = await User.findOne({ email: email });
+    if (userInDB) {
+      res.render('auth/signup', { error: `There already is a user with email ${email}` });
+      return;
+    } else {
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const user = await User.create({ username, email, password, avatar, aboutMe });
+      req.session.currentUser = user; 
+      res.render('profile', user);
+    }
+  } catch (error) {
+    next(error)
+  }
+});
+
 // @desc    Displays form view to log in
 // @route   GET /auth/login
 // @access  Public
 router.get('/login', async (req, res, next) => {
   res.render('auth/login');
 })
-
-// @desc    Sends user auth data to database to create a new user
-// @route   POST /auth/signup
-// @access  Public
-router.post('/signup', async (req, res, next) => {
-  const { email, password, username } = req.body;
-  // ⚠️ Add validations!
-  try {
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const user = await User.create({ username, email, hashedPassword });
-    res.render('auth/profile', user)
-  } catch (error) {
-    next(error)
-  }
-});
 
 // @desc    Sends user auth data to database to authenticate user
 // @route   POST /auth/login
