@@ -46,8 +46,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // routes intro
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
+// 👇 Routes here
+const indexRoutes = require("./routes/index.routes");
+const usersRoutes = require("./routes/users.routes");
+const authRoutes = require("./routes/auth.routes");
+const toolsRouter = require("./routes/tools.routes");
+const listsRouter = require("./routes/lists.routes")
+
+app.use("/", indexRoutes);
+app.use("/", usersRoutes);
+app.use("/auth", authRoutes);
+app.use('/tools', toolsRouter);
+app.use('/lists', listsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
