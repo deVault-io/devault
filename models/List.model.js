@@ -12,8 +12,9 @@ const listSchema = new Schema(
       type: String,
       trim: true
     },
-    owner: {
-      
+    user: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User'
     }
   },
   {

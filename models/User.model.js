@@ -7,9 +7,7 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       required: [true, 'Username is required.'],
-      unique: true,
-      createdAt: { type: Date, default: Date.now },
-      updatedAt: { type: Date, default: Date.now }
+      unique: true
     },
     email: { 
       type: String,
