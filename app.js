@@ -3,6 +3,7 @@ require('./db');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const hbs = require('hbs');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
@@ -35,11 +36,6 @@ app.use(
     })
   }) 
 )
-
-// Handles the handlebars
-// https://www.npmjs.com/package/hbs
-const hbs = require('hbs');
-const path = require('path');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
