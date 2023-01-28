@@ -1,1 +1,12 @@
-<h1>Home page</h1>
+<h1>deVault Home Page</h1>
+  <h2>Hello {{#if user}}{{username}}{{user.username}}{{userInDB.username}}{{/if}}</h1>
+  <div>
+    {{#if user}}
+    <a href="profile">My Profile</a>
+    <a href="auth/logout">Logout</a>
+    {{else}}
+    <a href="auth/signup">Signup</a>
+    <a href="auth/login">Login</a>
+    {{/if}}
+  </div>
+</body>
