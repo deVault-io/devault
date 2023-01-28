@@ -46,7 +46,8 @@ router.post('/signup', async function (req, res, next) {
 // @route   GET /auth/login
 // @access  Public
 router.get('/login', async (req, res, next) => {
-  res.render('auth/login');
+  const user = req.session.currentUser;
+  res.render('auth/login', user);
 })
 
 // @desc    Sends user auth data to database to authenticate user
@@ -54,26 +55,29 @@ router.get('/login', async (req, res, next) => {
 // @access  Public
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body;
-  // ⚠️ Add validations!
+  if (!email || !password) {
+    res.render('auth/login', { error: 'Introduce email and password to log in' });
+    return;
+  }
   try {
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      res.render('auth/login', { error: "User not found" });
+    const userInDB = await User.findOne({ email: email });
+    if (!userInDB) {
+      res.render('auth/login', { error: `There are no users by ${email}` });
       return;
     } else {
-      const match = await bcrypt.compare(password, user.hashedPassword);
-      if (match) {
-        // Remember to assign user to session cookie:
-        req.session.currentUser = user;
-        res.redirect('/');
+      const passwordMatch = await bcrypt.compare(password, userInDB.hashedPassword);
+      if (passwordMatch) {
+        req.session.currentUser = userInDB;
+        res.render('profile', {user: userInDB});
       } else {
-        res.render('auth/login', { error: "Unable to authenticate user" });
+        res.render('auth/login',  { error: 'Unable to authenticate user' });
+        return;
       }
     }
   } catch (error) {
-    next(error);
+    next(error)
   }
-})
+});
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
