@@ -19,6 +19,12 @@ const userSchema = new Schema(
     hashedPassword: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    avatar: {
+      type: String,
+    },
+    aboutMe:{
+      type: String,
     }
   },
   {
