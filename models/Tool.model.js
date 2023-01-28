@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
  
 const toolSchema = new Schema(
-  // Add whichever fields you need for your app
   {
     name: {
       type: String,
@@ -24,11 +23,21 @@ const toolSchema = new Schema(
         type: String,
         required: [true, 'Password is required.']
       },
-    owner: {
+    user: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User'
+      },
+    field:{
         type: String,
-        required: [true, 'Password is required.']
-      }
-
+        enum : ['UX/UI','Front End','Data Science','Back End'],
+        required:true,
+    },
+    tag:{
+        type: String,
+        enum : ['AI powered','Open Source','Color Theory','3D','Code Assistant','Investment','Story teller','Text processer','CSS3','HTML','Javascript','Python','Educational','Learning Resources','Documentation','Productivity','Presentations','Low-Code/No-Code'],
+        required:true,
+        min: [3, 'At least 3 tags are required.']
+    }
   },
   {
     timestamps: true

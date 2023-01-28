@@ -9,22 +9,27 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
       unique: true
     },
-    email: {
+    email: { 
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'Please add a valid email'],
       unique: true,
+      trim: true,
       lowercase: true,
-      trim: true
+      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
     },
     hashedPassword: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, 'Please add a password']
     },
-    avatar: {
+    image: {
       type: String,
     },
     aboutMe:{
       type: String,
+    },
+    darkMode:{
+      type: Boolean,
+      default: false,
     }
   },
   {
