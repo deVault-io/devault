@@ -9,8 +9,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 // Routers require
-const indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index.routes');
+const authRouter = require('./routes/auth.routes');
 
 const app = express();
 
@@ -49,15 +49,15 @@ app.set('view engine', 'hbs');
 // 👇 Routes here
 const indexRoutes = require("./routes/index.routes");
 const usersRoutes = require("./routes/users.routes");
-const toolsRouter = require("./routes/tools.routes");
+const toolsRoutes = require("./routes/tools.routes");
 const authRoutes = require("./routes/auth.routes");
-const listsRouter = require("./routes/lists.routes")
+const listsRoutes = require("./routes/lists.routes")
 
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
-app.use('/', toolsRouter);
+app.use("/", toolsRoutes);
 app.use("/auth", authRoutes);
-app.use('/lists', listsRouter);
+app.use("/lists", listsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
