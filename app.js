@@ -49,14 +49,14 @@ app.set('view engine', 'hbs');
 // 👇 Routes here
 const indexRoutes = require("./routes/index.routes");
 const usersRoutes = require("./routes/users.routes");
-const authRoutes = require("./routes/auth.routes");
 const toolsRouter = require("./routes/tools.routes");
+const authRoutes = require("./routes/auth.routes");
 const listsRouter = require("./routes/lists.routes")
 
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
+app.use('/', toolsRouter);
 app.use("/auth", authRoutes);
-app.use('/tools', toolsRouter);
 app.use('/lists', listsRouter);
 
 // catch 404 and forward to error handler
