@@ -2,22 +2,19 @@ const { Schema, model } = require('mongoose');
  
 const favSchema = new Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-      required: [true, 'List name is required.'],
-      default: 'My Favorites'
-    },
-    image: {
-      type: String,
-      trim: true
-    },
     list: {
-      
-    },
-    tool:{
-
-    }
+        type: [Schema.Types.ObjectId],
+        ref: 'List'
+      },
+    tool: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Tool'
+      },
+      //IS USER INCLUDED HERE OR DOES IT COME VIA LIST WHERE USER ID IS ALSO REFERRED
+      user: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User'
+      },
   },
   {
     timestamps: true
