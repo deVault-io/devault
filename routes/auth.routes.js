@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const isLoggedIn = require('../middlewares');
 
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
@@ -82,14 +83,15 @@ router.post('/login', async (req, res, next) => {
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
 // @access  Private 
-router.post('/logout', (req, res, next) => {
+router.get('/logout', isLoggedIn, (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
       next(err)
     } else {
-      res.redirect('/auth/login');
+      res.clearCookie('lab-express-rooms-with-reviews')
+      res.redirect('/');
     }
   });
-})
+});
 
 module.exports = router;
