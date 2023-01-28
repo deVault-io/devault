@@ -7,11 +7,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
-// Routers require
-const indexRouter = require('./routes/index.routes');
-const authRouter = require('./routes/auth.routes');
-
 const app = express();
 
 // cookies and loggers
@@ -41,9 +36,15 @@ app.use(
   }) 
 )
 
+// Handles the handlebars
+// https://www.npmjs.com/package/hbs
+const hbs = require('hbs');
+const path = require('path');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials'); 
 
 // routes intro
 // 👇 Routes here
