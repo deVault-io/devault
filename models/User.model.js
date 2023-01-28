@@ -7,24 +7,31 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       required: [true, 'Username is required.'],
-      unique: true
-    },
-    email: {
-      type: String,
-      required: [true, 'Email is required.'],
       unique: true,
+      createdAt: { type: Date, default: Date.now },
+      updatedAt: { type: Date, default: Date.now }
+    },
+    email: { 
+      type: String,
+      required: [true, 'Please add a valid email'],
+      unique: true,
+      trim: true,
       lowercase: true,
-      trim: true
+      match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
     },
     hashedPassword: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, 'Please add a password']
     },
-    avatar: {
+    image: {
       type: String,
     },
     aboutMe:{
       type: String,
+    },
+    darkMode:{
+      type: Boolean,
+      default: false,
     }
   },
   {
