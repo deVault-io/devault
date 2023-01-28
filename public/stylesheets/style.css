@@ -3,3 +3,12 @@ body {
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
+/* color variables for the app */
+
+:root {
+  --primary-purple-light: #17c3b2;
+  --primary-purlple-dark: #fbe6c4;
+  --primary-white: #f1f1f1;
+  --primary-black: #252323;
+}
