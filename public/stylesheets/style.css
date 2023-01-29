@@ -38,6 +38,7 @@ nav{
 }
 
  nav ul li a {
+  transition: ease-out 0.2s;
   font-size: 2vh;
   text-decoration: none;
   color: var(--primary-black);
@@ -60,7 +61,9 @@ nav ul li {
   max-width: 40px;
 }
 
-
+.navbarlogo:active{
+  transform: scale(1.5);;
+}
 
                           /* FORM STYLES */
 .form-container{
@@ -105,7 +108,7 @@ align-self: center;
   box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
 }
 .submit-btn:active {
-  transform: scale(0.1);
+  transform: scale(0.5);
 }
 .submit-btn:hover {
   color: white;
@@ -125,8 +128,45 @@ input[required]:before {
 }
                   /* USER PROFILE STYLING */
 .profile-container{
+  padding-top: 30px;
+  padding:0 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-       }         
+    justify-content: space-evenly;
+    height: 80vh;
+       }   
+     
+.user-avatar{
+  width: clamp(50px,30%,400px);
+}
+
+.profile-container a {
+  width:90%;
+align-self: center;
+  padding: 15px 30px;
+  text-align: center;
+  /* font-size: 18px; */
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--primary-purlple-dark);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid  var(--primary-purlple-dark);
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+}
+
+.profile-container a:active {
+  transform: scale(0.5);
+}
+.profile-container a:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0  var(--primary-purlple-dark);
+}
+#vault-btn{
+  color: #fafafa;
+  background: rgb(182,163,204);
+background: radial-gradient(circle, rgba(182,163,204,1) 0%, rgba(94,39,159,1) 100%);
+}
