@@ -12,16 +12,16 @@
   <label>Give us a cool image link!</label>
   <input required type="text" name="image" placeholder="https...//"/>
     <label for="field">Which field suits it better?:</label>
-   <select name="field" multiple>
-        {{#each field}}
+   <select id="field" name="field" required>
+      {{#each toolSchema.paths.field.enumValues}}
         <option value="{{this}}">{{this}}</option>
-        {{/each}}
+      {{/each}}
     </select>
-     <label for="field">Pick at least 3 tags:</label>
-   <select name="field" multiple>
-        {{#each tags}}
+     <label for="tag">Pick at least 3 tags:</label>
+   <select id="tag" name="tag" multiple required>
+      {{#each toolSchema.paths.tag.enumValues}}
         <option value="{{this}}">{{this}}</option>
-        {{/each}}
+      {{/each}}
     </select>
   <button type="submit" class="submit-btn" >Add to the vault!</button>
 </form>
