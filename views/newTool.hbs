@@ -18,6 +18,12 @@
         <option value="{{this}}">{{this}}</option>
         {{/each}}
     </select>
+     <label for="field">Pick at least 3 tags:</label>
+   <select name="field" multiple>
+        {{#each tags}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
   <button type="submit">Add to the vault!</button>
 </form>
     <img src="https://i.imgur.com/zJugYwi.png" alt="" class="form-logo">
