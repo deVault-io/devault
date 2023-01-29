@@ -13,15 +13,34 @@
   <input required type="text" name="image" placeholder="https...//"/>
     <label for="field">Which field suits it better?:</label>
    <select id="field" name="field" required>
-      {{#each toolSchema.paths.field.enumValues}}
-        <option value="{{this}}">{{this}}</option>
-      {{/each}}
+      <option value="UX/UI">UX/UI</option>
+      <option value="Front End">Front End</option>
+      <option value="Data Science">Data Science</option>
+      <option value="Back End">Back End</option>
     </select>
      <label for="tag">Pick at least 3 tags:</label>
-   <select id="tag" name="tag" multiple required>
-      {{#each toolSchema.paths.tag.enumValues}}
-        <option value="{{this}}">{{this}}</option>
-      {{/each}}
+   <select multiple id="tag" class="scroll" name="tag" multiple required>
+      <option value="AI powered">AI powered</option>
+      <option value="Open Source">Open Source</option>
+      <option value="Color Theory">Color Theory</option>
+      <option value="3D">3D</option>
+      <option value="Code Assistant">Code Assistant</option>
+      <option value="Investment">Investment</option>
+      <option value="Story teller">Story teller</option>
+      <option value="Text processer">Text processer</option>
+      <option value="CSS3">CSS3</option>
+      <option value="HTML">HTML</option>
+      <option value="Javascript">Javascript</option>
+      <option value="Python">Python</option>
+      <option value="Educational">Educational</option>
+      <option value="Learning Resources">Learning Resources</option>
+      <option value="Documentation">Documentation</option>
+      <option value="Productivity">Productivity</option>
+      <option value="Presentations">Presentations</option>
+      <option value="Low-Code/No-Code">Low-Code/No-Code</option>
+      <option value="Inspiration">Inspiration</option>
+      <option value="Community">Community</option>
+      <option value="Graphic design">Graphic design</option>
     </select>
   <button type="submit" class="submit-btn" >Add to the vault!</button>
 </form>
