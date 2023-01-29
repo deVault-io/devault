@@ -1,11 +1,20 @@
+/* BASELINE FOR THE WHOLE DOCUMENT  */
 * {
+  margin: 0;
+  padding:0;
   box-sizing: border-box;
   background-color: var(--primary-white);
-  color:var(--primary-black)
+  color:var(--primary-black);
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
-body {
 
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body {
+  background-color: var(--primary-white);
+  margin-top: 100px;
+  display: flex ;
+  flex-direction:column;
+  align-items: center;
 }
 
 /* color variables for the app */
@@ -16,105 +25,59 @@ body {
   --primary-white: #fafafa;
   --primary-black: #252323;
 }
-
-body {
-  padding: 50px;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
-  max-width: 1000px;
-  display: flex ;
-  flex-direction:column;
-  justify-content: center;
-  margin-top: 10px;
-
-}
-h2{
-  text-align: center;
-}
-a {
-  --c: var(--primary-black);
-  /* the color  */
-  --h: 1em;
-  /* the height */
-
-  line-height: var(--h);
-  background:
-    linear-gradient(var(--c) 0 0) no-repeat calc(200% - var(--_p, 0%)) 100%/200% var(--_p, .08em);
-  color: #0000;
-  overflow: hidden;
-  text-shadow:
-    0 calc(-1*var(--_t, 0em)) var(--c),
-    0 calc(var(--h) - var(--_t, 0em)) #fff;
-  transition: .3s var(--_s, 0s), background-position .3s calc(.3s - var(--_s, 0s));
-}
-
-a:hover {
-  --_t: var(--h);
-  --_p: 100%;
-  --_s: .3s
-}
-a{
-  text-decoration: none;
-}
-a:active{
-  color:#1095c1
-}
-a:visited{
-  color:1095c1
-}
-/* configuracion NAV bar */
-
-nav {
-  background-color: white;
+                    /* NAV BAR STYLES */
+nav{
+  width: 100vw;
+  height: 10vh;
+  background-color: --primary-white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: fixed;
-  position: -webkit-sticky;
   top: 0;
   flex-wrap: wrap;
   z-index: 9999;
-  max-width: 1000px;
+}
+
+ nav ul li a {
+  font-size: 2vh;
+  text-decoration: none;
+  color: var(--primary-black);
+  font-weight: 400;
 }
 
 nav ul {
-  text-align: center;
+  list-style: none;
   display: flex;
-  justify-content:flex-start;
-  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+  padding-right:10px;
 }
 
 nav ul li {
+  margin-left: 3.1vh;
   text-align: center;
-  padding: 0.5vh 1.5vh;
-  font-weight: 100;
-  list-style-type: none;
 }
-button {
-  padding: 0.3em 1em;
-  border: 2px solid #1095c1;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  background-color: transparent;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 16px;
-  transition: .3s;
-  z-index: 1;
-  font-family: inherit;
-  color: #1095c1;;
-  margin-top: 15px;
-  cursor: pointer;
+.navbarlogo{
+  max-width: 40px;
 }
-button:hover{
-  background-color:#1095c1 ;
-  color:white;
+
+
+
+                          /* FORM STYLES */
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.form-logo{
+  width: clamp(50px,50%,400px);
 }
 form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 90vw;
+  margin-top:70px;
 }
 form>*{
   padding:10px;
@@ -123,22 +86,47 @@ form>*{
 form>label{
   text-align: center;
 }
+/* SUBMIT BUTTONS */
+.submit-btn {
+  width:90%;
+align-self: center;
+  margin: 30px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--primary-purlple-dark);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid  var(--primary-purlple-dark);
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+}
+.submit-btn:active {
+  transform: scale(0.1);
+}
+.submit-btn:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0  var(--primary-purlple-dark);
+}
+
+/* INPUT STYLING */
+input:focus{
+  border-color: var(--primary-purple-light);
+}
 input{
-  border-color: #086f91;
-  box-shadow: inset 1px 1px 2px #0d6c8b;
+  border-color: var(--primary-purple-light);
 }
 input[required]:before {
   content:"*";
-  color:red;
+  color:rgb(165, 9, 9);
 }
-img{
-  max-width:100% ;
-}
-.index{
-  display: flex;
-  flex-direction: column;
-  align-items:center;
-  padding-top: 10vh;
-  max-width: 90vw;
-  gap: 30px;;
-}
+                  /* USER PROFILE STYLING */
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+       }         
