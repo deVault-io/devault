@@ -80,7 +80,7 @@ form{
   flex-direction: column;
   justify-content: center;
   max-width: 90vw;
-  margin-top:70px;
+  margin-top:30px;
   justify-content: space-evenly;
 }
 form>*{

@@ -1,7 +1,6 @@
 <h1>Create a new Tool!</h1>
 
 <div class="form-container">
-  <h2>New Tool</h2>
 
 <form method="POST" action="/tools/new">
   <label>What's the tool's name?</label>
@@ -14,7 +13,7 @@
   <input required type="text" name="image" placeholder="https...//"/>
     <label for="field">Which field suits it better?:</label>
    <select name="field" multiple>
-        {{#each fields}}
+        {{#each field}}
         <option value="{{this}}">{{this}}</option>
         {{/each}}
     </select>
@@ -24,7 +23,7 @@
         <option value="{{this}}">{{this}}</option>
         {{/each}}
     </select>
-  <button type="submit">Add to the vault!</button>
+  <button type="submit" class="submit-btn" >Add to the vault!</button>
 </form>
     <img src="https://i.imgur.com/zJugYwi.png" alt="" class="form-logo">
 </div>
