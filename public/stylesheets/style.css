@@ -81,6 +81,7 @@ form{
   justify-content: center;
   max-width: 90vw;
   margin-top:70px;
+  justify-content: space-evenly;
 }
 form>*{
   padding:10px;
@@ -170,3 +171,14 @@ align-self: center;
   background: rgb(182,163,204);
 background: radial-gradient(circle, rgba(182,163,204,1) 0%, rgba(94,39,159,1) 100%);
 }
+
+                          /* EDIT PROFILE STYLES */
+
+.edit-profile-container form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+  gap:30px;
+  height: 70vh;
+}                          

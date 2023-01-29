@@ -1,1 +1,9 @@
 <h1>Welcome {{ username }}</h1>
+
+<div class="edit-profile-container">
+<form method="POST" action="/profile/edit">
+  <label>New username:</label>
+  <input type="text" name="username" required="true" value="{{username}}" />
+  <button type="submit"class="submit-btn">Save changes</button>
+</form>
+</div>
