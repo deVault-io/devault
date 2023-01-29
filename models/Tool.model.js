@@ -21,7 +21,7 @@ const toolSchema = new Schema(
     },
     image: {
         type: String,
-        required: [true, 'Password is required.']
+        default:'https://i.imgur.com/ExgDzpE.png',
       },
     user: {
         type: [Schema.Types.ObjectId],
