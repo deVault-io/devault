@@ -10,7 +10,6 @@ router.get('/', async function (req, res, next) {
   try {
     const tools = await Tool.find({});
     res.render('index', { tools });
-    console.log(tools);
   } catch (error) {
     next(error)
   }

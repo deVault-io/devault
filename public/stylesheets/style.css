@@ -360,3 +360,15 @@ background: radial-gradient(circle, rgba(182,163,204,1) 0%, rgba(94,39,159,1) 10
   display: flex;
   margin-top: 15px; 
 }
+     /* CARD DETAIL STYLES */
+
+.card-detail-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:30px
+}
+.tool-h1{
+  font-size: 4em;
+}

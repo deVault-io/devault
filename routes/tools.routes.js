@@ -34,12 +34,18 @@ router.post('/tools/new', isLoggedIn, async function (req, res, next) {
 
 /* GET one tool */
 /* ROUTE /tools/:toolId */
-router.get('/tools/:toolId', isLoggedIn, async function (req, res, next) {
+// PUBLIC ROUTE
+router.get('/tools/:toolId', async function (req, res, next) {
+ 
   const { toolId } = req.params;
   const user = req.session.currentUser;
   try {
+    const count = await Tool.countDocuments();
+    const random = Math.floor(Math.random() * count);
     const tool = await Tool.findById(toolId).populate('user');
-    res.render('toolDetail', { user, tool });
+    const items = await Tool.find({field: tool.field, _id: { $ne: tool._id }}).skip(random).limit(3);
+    res.render('toolDetail', { user, tool, items:items  });
+    console.log(`random items:${items}`)
   } catch (error) {
     next(error)
   }
