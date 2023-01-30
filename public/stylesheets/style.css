@@ -388,7 +388,6 @@ input[required]:before {
 
 .card-detail-container{
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -398,7 +397,7 @@ input[required]:before {
   text-align: center;
   border-radius: 4px;
   box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
-  padding: 0px -1px 0px 0px;
+  padding-bottom: 20px;
 }
 .tool-h1{
   font-size: 2em;
@@ -439,6 +438,9 @@ input[required]:before {
   box-shadow: 0px 10px 15px -11px var(--primary-red);
   border: 1px solid  var(--primary-red);
   color:var(--primary-white);
+}
+#delete-tool-btn:active, #edit-tool-btn:active{
+  transform: scale(0.5);;
 }
     /* RANDOM RELATED TOOLS  */
 .random-tools-container{
