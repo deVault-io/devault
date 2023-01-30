@@ -16,11 +16,11 @@ router.get('/tools/new', isLoggedIn, function (req, res, next) {
 /* ROUTE /Tools/new */
 router.post('/tools/new', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
-  const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+  /* const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   if (!regexUrl.test(imageUrl)) {
     res.render('newTool', { error: 'image needs to be a valid http:// address'});
     return;
-  }
+  } */
   const {name, description, image, url, field, tag} = req.body;
   try {
     const createdTool = await Tool.create({ name, description, image, url, field, tag, user: user });
@@ -72,7 +72,20 @@ router.post('/tools/:toolId/edit', async (req, res, next) => {
     const tool = await Tool.findById(toolId).populate('user');
     const editedTool = await Tool.findByIdAndUpdate(toolId, { name, description, image, url, field, tag, user: user }, {new:true})
     res.redirect(`/tools/${editedTool._id}`)
-    
+  } catch (error) {
+    next(error)
+  }
+});
+
+/* GET delete Tool */
+/* ROUTE tools/:toolId/delete */
+router.get('/tools/:toolId/delete', async (req, res, next) => {
+  const user = req.session.currentUser;
+  const { toolId } = req.params;
+  try {
+    const tool = await Tool.findById(toolId).populate('user');
+      await Tool.findByIdAndRemove(toolId);
+      res.redirect('/')
   } catch (error) {
     next(error)
   }
