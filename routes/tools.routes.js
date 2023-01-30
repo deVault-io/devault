@@ -4,10 +4,6 @@ const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require('../middlewares');
 
-/* GET all tools*/
-/* ROUTE /tools
-PUBLIC ACCESS */
-
 
 
 /* GET form view */
@@ -38,12 +34,12 @@ router.post('/tools/new', isLoggedIn, async function (req, res, next) {
 
 /* GET one tool */
 /* ROUTE /tools/:toolId */
-router.get('/:toolId', isLoggedIn, async function (req, res, next) {
+router.get('/tools/:toolId', isLoggedIn, async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate('user');
-    res.render('tools/toolDetail', { user, tool });
+    res.render('toolDetail', { user, tool });
   } catch (error) {
     next(error)
   }

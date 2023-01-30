@@ -1,0 +1,13 @@
+<div class="card-detail-container">
+    <div class="detail-tool-image">
+    <img width="350px" src={{tool.image}} alt={{tool.name}}/>
+  </div>
+    <h1>{{tool.name}}</h1>
+    <div class="tool-description-box">
+    <p>{{tool.description}}</p>
+    <p>Link to their page: {{tool.url}}.</p>
+    {{!-- <p>Uploaded by: {{user.username}} </p> --}}
+    <a href="/tools/{{_id}}">See details</a>
+  </div>
+</div>
+
