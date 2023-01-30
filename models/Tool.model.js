@@ -17,7 +17,7 @@ const toolSchema = new Schema(
     },
     url: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, 'URL is required.']
     },
     image: {
         type: String,

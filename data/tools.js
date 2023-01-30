@@ -120,7 +120,9 @@ module.exports=[
     name: "GitHub",
     description:
       "A web-based hosting service for version control and collaboration for software development.",
-    tag: "Open Source",
+    url: "https://github.com/",
+    field: "Back End",
+    tag: "Productivity",
   },
   {
     name: "Slack",
@@ -135,6 +137,7 @@ module.exports=[
     description:
       "A presentation software developed by Microsoft used to create professional presentations.",
     field: "UX/UI",
+    url: "https://powerpoint.com",
     tag: "Presentations",
   },
   {
