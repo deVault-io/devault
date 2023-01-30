@@ -392,9 +392,10 @@ input[required]:before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:10px;
+  gap: 10px;
   margin-bottom: 40px;
   max-width: 90vh;
+  height: 65vh;
   text-align: center;
   border-radius: 4px;
   box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
@@ -453,6 +454,11 @@ input[required]:before {
 
 .random-tool-card image{
   width: 100%;
+}
+
+.detail-tool-image {
+  margin-top: -70px;
+  margin-bottom: 35px;
 }
 
 @media screen and (min-width: 768px) {
