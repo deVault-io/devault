@@ -13,10 +13,11 @@
   </div>
 </div>
 
-<div class="random-tools-container">
+<div class="random-tools-container"> 
+    <h1>You might also be interested in:</h1>
     {{#each items}}
-  {{this.name}}
-{{/each}}
+    {{>toolCard this}}
+    {{/each}}
 </div>
 
 

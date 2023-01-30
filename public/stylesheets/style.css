@@ -390,8 +390,24 @@ input[required]:before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:30px
+  gap:30px;
+  margin-bottom: 40px;
+  max-width: 90vh;
+  text-align: center;
 }
 .tool-h1{
-  font-size: 4em;
+  font-size: 3em;
+}
+    /* RANDOM RELATED TOOLS  */
+.random-tools-container{
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  justify-content:space-evenly;
+  align-items: center;
+  gap:5px;
+}
+
+.random-tool-card image{
+  width: 100%;
 }

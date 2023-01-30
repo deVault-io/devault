@@ -36,7 +36,7 @@ router.post('/tools/new', isLoggedIn, async function (req, res, next) {
 /* ROUTE /tools/:toolId */
 // PUBLIC ROUTE
 router.get('/tools/:toolId', async function (req, res, next) {
- 
+  // _id: { $ne: tool._id } 
   const { toolId } = req.params;
   const user = req.session.currentUser;
   try {
