@@ -99,7 +99,10 @@ nav ul li {
   border-radius: 10px;
   box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
 }
-
+#index-form{
+  width:clamp(100px,90vw,1200px);
+  text-align: center;
+}
 .search-btn:active {
 transform: scale(0.5);
 }
@@ -182,7 +185,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 90vw;
+  width: 70%;
   margin-top:30px;
   justify-content: space-evenly;
 }
@@ -324,12 +327,12 @@ input[required]:before {
 /* CARD STYLES */
 .card-container {
   max-width: 90vw;
-  height: 53vh;
+  height: 37vh;
   background: var(--primary-white);
   border-radius: 4px;
   box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
   padding: 0px -1px 0px 0px;
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .tool-image {
@@ -386,42 +389,17 @@ input[required]:before {
 }
      /* CARD DETAIL STYLES */
 
-.card-detail-container{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 40px;
-  max-width: 90vh;
-  height: 60vh;
-  text-align: center;
-  border-radius: 4px;
-  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
-  padding-bottom: 20px;
-}
-.tool-h1{
-  font-size: 2em;
-}
-.btn-span > * {
-  height:40px;
-  width: clamp(100px, 90%, 400px)
-}
-
 .btn-span {
-  display: inline-block;
   justify-content: center;
   align-items: baseline;
   width: 100%;
+  margin-bottom: 50px;
 }
 #delete-tool-btn,#edit-tool-btn{
-  border: #252323;
-  margin:10px 0;
-  width:90%;
-  padding: 5px 30px;
-  border-radius: 4px;
-  border-style: solid;
-  text-decoration: none;
+  margin:10px 0px;
+  width:50%;
+  padding: 5px 40px;
+  width:min-content;
   text-align: center;
   font-size: 15px;
   letter-spacing: 1px;
@@ -461,11 +439,18 @@ input[required]:before {
 .detail-tool-image {
   margin-bottom: 35px;
 }
-
+.cards-wrapped-container{
+  width:90vw;
+  display: flex;
+  justify-content: space-evenly;
+flex-wrap: wrap;
+}
 @media screen and (min-width: 768px) {
   .cards-wrapped-container {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+
   }
 
   .card-container {
