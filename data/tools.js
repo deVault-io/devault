@@ -1,1 +1,148 @@
-[  {    name: "Tool1",    description: "A powerful AI-powered tool for data science",    url: "https://tool1.com",    field: "Data Science",    tag: "AI powered, Open Source, Color Theory"  },  {    name: "Tool2",    description: "A user-friendly 3D design tool",    url: "https://tool2.com",    field: "UX/UI",    tag: "3D, Inspiration, Community"  },  {    name: "Tool3",    description: "A code assistant tool for front-end development",    url: "https://tool3.com",    field: "Front End",    tag: "Code Assistant, CSS3, HTML, Javascript"  },  {    name: "Tool4",    description: "An open-source text processing tool",    url: "https://tool4.com",    field: "Back End",    tag: "Open Source, Text processer, Python"  },  {    name: "Tool5",    description: "An educational platform for learning resources",    url: "https://tool5.com",    field: "UX/UI",    tag: "Educational, Learning Resources, Documentation"  },  {    name: "Tool6",    description: "A productivity tool for presentations",    url: "https://tool6.com",    field: "Front End",    tag: "Productivity, Presentations, Inspiration"  },  {    name: "Tool7",    description: "A low-code/no-code platform for building applications",    url: "https://tool7.com",    field: "Back End",    tag: "Low-Code/No-Code, Community, Productivity"  },  {    name: "Tool8",    description: "An investment tool for managing finances",    url: "https://tool8.com",    field: "Data Science",    tag: "Investment, Productivity, Open Source"  },  {    name: "Tool9",    description: "A tool for creating graphic designs",    url: "https://tool9.com",    field: "UX/UI",    tag: "Graphic design, Inspiration, Community"  },  {    name: "Tool10",    description: "A storytelling tool for creating presentations",    url: "https://tool10.com",    field: "Front End",    tag: "Story teller, Presentations, Inspiration"  },  ...  {    name: "Tool50",    description: "A platform for learning and sharing information about data science",    url: "https://tool50.com",    field: "Data Science",    tag: "Educational, Learning Resources, Open Source"  }]
+module.exports=[
+  {
+    name: "Sketch",
+    description: "A digital design toolkit",
+    url: "https://www.sketch.com/",
+    field: "UX/UI",
+    tag: "Graphic design",
+  },
+  {
+    name: "Adobe Photoshop",
+    description: "A professional image editing software",
+    url: "https://www.adobe.com/products/photoshop.html",
+    field: "UX/UI",
+    tag: "Graphic design",
+  },
+  {
+    name: "InVision Studio",
+    description: "A powerful digital product design platform",
+    url: "https://www.invisionapp.com/studio",
+    field: "UX/UI",
+    tag: "Inspiration",
+  },
+  {
+    name: "Figma",
+    description: "A collaborative interface design tool",
+    url: "https://www.figma.com/",
+    field: "UX/UI",
+    tag: "Community",
+  },
+  {
+    name: "React",
+    description: "A JavaScript library for building user interfaces",
+    url: "https://reactjs.org/",
+    field: "Front End",
+    tag: "Javascript",
+  },
+  {
+    name: "Vue.js",
+    description:
+      "A progressive JavaScript framework for building user interfaces",
+    url: "https://vuejs.org/",
+    field: "Front End",
+    tag: "Javascript",
+  },
+  {
+    name: "Angular",
+    description: "A platform for building web applications",
+    url: "https://angular.io/",
+    field: "Front End",
+    tag: "Javascript",
+  },
+  {
+    name: "TensorFlow",
+    description: "An open-source machine learning framework",
+    url: "https://www.tensorflow.org/",
+    field: "Data Science",
+    tag: "AI powered",
+  },
+  {
+    name: "PyTorch",
+    description: "An open source machine learning library",
+    url: "https://pytorch.org/",
+    field: "Data Science",
+    tag: "AI powered",
+  },
+  {
+    name: "Express",
+    description: "A fast, unopinionated, minimalist web framework for Node.js",
+    url: "https://expressjs.com/",
+    field: "Back End",
+    tag: "Javascript",
+  },
+  {
+    name: "Django",
+    description: "A high-level Python Web framework",
+    url: "https://www.djangoproject.com/",
+    field: "Back End",
+    tag: "Python",
+  },
+  {
+    name: "Flask",
+    description: "A micro web framework written in Python",
+    url: "https://flask.palletsprojects.com/en/1.1.x/",
+    field: "Back End",
+    tag: "Python",
+  },
+  {
+    name: "SVG Studio",
+    description:
+      "A vector graphics editor for creating, editing, and optimizing SVG graphics.",
+    url: "https://svgstudio.com/",
+    field: "UX/UI",
+    tag: "Graphic design",
+  },
+  {
+    name: "Dataquest",
+    description:
+      "An online platform for learning data science through hands-on coding projects and interactive lessons.",
+    url: "https://dataquest.io/",
+    field: "Data Science",
+    tag: "Learning Resources",
+  },
+  {
+    name: "Canva",
+    description:
+      "An easy-to-use graphic design tool with pre-made templates and elements.",
+    url: "https://www.canva.com/",
+    field: "UX/UI",
+    tag: "Graphic design",
+  },
+  {
+    name: "CodePen",
+    description:
+      "A social development environment for front-end developers to showcase and share their projects.",
+    url: "https://codepen.io/",
+    field: "Front End",
+    tag: "Inspiration",
+  },
+  {
+    name: "GitHub",
+    description:
+      "A web-based hosting service for version control and collaboration for software development.",
+    tag: "Open Source",
+  },
+  {
+    name: "Slack",
+    description:
+      "A cloud-based collaboration platform for teams to communicate and share files in real-time.",
+    url: "https://slack.com/",
+    field: "Back End",
+    tag: "Productivity",
+  },
+  {
+    name: "PowerPoint",
+    description:
+      "A presentation software developed by Microsoft used to create professional presentations.",
+    field: "UX/UI",
+    tag: "Presentations",
+  },
+  {
+    name: "Unity",
+    description:
+      "A cross-platform game engine used to develop 2D and 3D games and simulations.",
+    url: "https://unity.com/",
+    field: "UX/UI",
+    tag: "3D",
+  },
+];
