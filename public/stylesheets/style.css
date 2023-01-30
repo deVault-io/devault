@@ -270,4 +270,52 @@ background: radial-gradient(circle, rgba(182,163,204,1) 0%, rgba(94,39,159,1) 10
   justify-content:flex-start;
   gap:30px;
   height: 70vh;
-}                          
+}                     
+
+                          /* CARD STYLES */
+.card-container {
+  top: 604px; 
+  left: 23px; 
+  width: 343px; 
+  height: 337px; 
+  background: #FFFFFF; 
+  border-radius: 4px; 
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f; 
+}
+
+.tool-image {
+  top: 12px; 
+  left: 12px; 
+  width: 319px; 
+  height: 181px; 
+  border-radius: 4px; 
+}
+
+.tool-name {
+  top: 211px; 
+  left: 12px; 
+  width: 275px; 
+  font-family: Dosis; 
+  font-size: 14px; 
+  line-height: 22px; 
+  color: #171A1FFF; 
+}
+
+.fav-icon {
+  top: 209px; 
+  left: 300px; 
+  width: 24px; 
+  height: 24px; 
+  fill: #171A1FFF; 
+}
+
+.tool-description-box {
+  top: 242px; 
+  left: 12px; 
+  width: 312px; 
+  height: 77px; 
+  font-family: Inter; 
+  font-size: 12px; 
+  line-height: 20px; 
+  color: #9095A1FF; 
+}
