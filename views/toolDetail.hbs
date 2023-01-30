@@ -1,13 +1,23 @@
+
 <div class="card-detail-container">
     <div class="detail-tool-image">
     <img width="350px" src={{tool.image}} alt={{tool.name}}/>
   </div>
-    <h1>{{tool.name}}</h1>
+    <h1 class="tool-h1">{{tool.name}}</h1>
     <div class="tool-description-box">
     <p>{{tool.description}}</p>
-    <p>Link to their page: {{tool.url}}.</p>
-    {{!-- <p>Uploaded by: {{user.username}} </p> --}}
-    <a href="/tools/{{_id}}">See details</a>
+     <p>Uploaded by: {{user.username}} </p>
+    <div class="tool-link">
+      <a class="submit-btn-small" href={{url}}>Check Website</a>
+    </div>
   </div>
 </div>
+
+<div class="random-tools-container">
+    {{#each items}}
+  {{this.name}}
+{{/each}}
+</div>
+
+
 

@@ -383,3 +383,15 @@ input[required]:before {
   display: flex;
   margin-top: 15px; 
 }
+     /* CARD DETAIL STYLES */
+
+.card-detail-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:30px
+}
+.tool-h1{
+  font-size: 4em;
+}
