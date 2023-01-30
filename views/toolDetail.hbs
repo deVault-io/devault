@@ -4,21 +4,28 @@
     <img width="350px" src={{tool.image}} alt={{tool.name}}/>
   </div>
     <h1 class="tool-h1">{{tool.name}}</h1>
-    <div class="tool-description-box">
+<div class="tool-description-box">
     <p>{{tool.description}}</p>
      <p>Uploaded by: {{user.username}} </p>
-    <div class="tool-link">
+  </div>
+   <div class="tool-link">
       <a class="submit-btn-small" href={{url}}>Check Website</a>
     </div>
-  </div>
+  <span class="btn-span">
+        <a href="/tools/delete/{{tool._id}}" id="delete-tool-btn">Delete</a>
+        <a href="/tools/edit/{{tool._id}}" id="edit-tool-btn">Edit tool</a>
+    </span>
 </div>
 
 <div class="random-tools-container"> 
+     {{#if items}}
     <h1>You might also be interested in:</h1>
     {{#each items}}
     {{>toolCard this}}
     {{/each}}
+    {{/if}}
 </div>
+
 
 
 
