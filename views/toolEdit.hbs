@@ -1,0 +1,47 @@
+<h1>Edit Tool</h1>
+
+<div class="form-container">
+  <form method="POST" action="/tools/{{tool._id}}/edit">
+    <label>Tool Name</label>
+    <input required type="text" name="name" value="{{tool.name}}"/>
+    <label>What's about?</label>
+    <input required type="textarea" name="description" value="{{tool.description}}"></input>
+    <label>Website URL</label>
+    <input required type="text" name="url" value="{{tool.url}}"/>
+    <label>Image</label>
+    <input required type="text" name="image" value="{{tool.image}}"/>
+      <label for="field">Which field suits it better?:</label>
+    <select id="field" name="field" value="{{tool.field}}">
+        <option value="UX/UI">UX/UI</option>
+        <option value="Front End">Front End</option>
+        <option value="Data Science">Data Science</option>
+        <option value="Back End">Back End</option>
+      </select>
+      <label for="tag">Pick at least 3 tags:</label>
+    <select multiple id="tag" class="scroll" name="tag" value="{{tool.tag}}">
+        <option value="AI powered">AI powered</option>
+        <option value="Open Source">Open Source</option>
+        <option value="Color Theory">Color Theory</option>
+        <option value="3D">3D</option>
+        <option value="Code Assistant">Code Assistant</option>
+        <option value="Investment">Investment</option>
+        <option value="Story teller">Story teller</option>
+        <option value="Text processer">Text processer</option>
+        <option value="CSS3">CSS3</option>
+        <option value="HTML">HTML</option>
+        <option value="Javascript">Javascript</option>
+        <option value="Python">Python</option>
+        <option value="Educational">Educational</option>
+        <option value="Learning Resources">Learning Resources</option>
+        <option value="Documentation">Documentation</option>
+        <option value="Productivity">Productivity</option>
+        <option value="Presentations">Presentations</option>
+        <option value="Low-Code/No-Code">Low-Code/No-Code</option>
+        <option value="Inspiration">Inspiration</option>
+        <option value="Community">Community</option>
+        <option value="Graphic design">Graphic design</option>
+      </select>
+    <button type="submit" class="submit-btn" >Edit Tool</button>
+  </form>
+      <img src="https://i.imgur.com/zJugYwi.png" alt="" class="form-logo">
+</div>
