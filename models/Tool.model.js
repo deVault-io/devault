@@ -24,7 +24,7 @@ const toolSchema = new Schema(
         default:'https://i.imgur.com/ExgDzpE.png',
       },
     user: {
-        type: [Schema.Types.ObjectId],
+        type: Schema.Types.ObjectId,
         ref: 'User'
       },
     field:{
