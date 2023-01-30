@@ -23,6 +23,7 @@ body {
   --primary-purlple-dark: #5e279f;
   --primary-white: #fafafa;
   --primary-black: #252323;
+  --primary-red: rgb(225, 144, 144);
 }
 
 /* NAV BAR STYLES */
@@ -387,19 +388,61 @@ input[required]:before {
 
 .card-detail-container{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:30px;
+  gap:10px;
   margin-bottom: 40px;
   max-width: 90vh;
   text-align: center;
+  border-radius: 4px;
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
+  padding: 0px -1px 0px 0px;
 }
 .tool-h1{
-  font-size: 3em;
+  font-size: 2em;
+}
+.btn-span > * {
+  height:40px;
+  width: clamp(100px, 90%, 400px)
+}
+
+.btn-span {
+  display: inline-block;
+  justify-content: center;
+  align-items: baseline;
+  width: 100%;
+}
+#delete-tool-btn,#edit-tool-btn{
+  border: #252323;
+  margin:10px 0;
+  width:90%;
+  padding: 5px 30px;
+  border-radius: 4px;
+  border-style: solid;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--primary-purlple-dark);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 1px solid  var(--primary-purlple-dark);
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+}
+#delete-tool-btn{
+  background-color: var(--primary-red);
+  box-shadow: 0px 10px 15px -11px var(--primary-red);
+  border: 1px solid  var(--primary-red);
+  color:var(--primary-white);
 }
     /* RANDOM RELATED TOOLS  */
 .random-tools-container{
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   width: 90vw;
