@@ -411,3 +411,16 @@ input[required]:before {
 .random-tool-card image{
   width: 100%;
 }
+
+@media screen and (min-width: 768px) {
+  .cards-wrapped-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card-container {
+    margin: 25px 60px;
+    height: 37vh;
+  }
+
+}
