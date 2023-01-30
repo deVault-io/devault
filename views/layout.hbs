@@ -9,7 +9,7 @@
   <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/VIlpJsK.png">
 </head>
 <body>
-  <nav>
+  <nav id="navBar">
     <ul>
       {{#if user}}
       <li><a href="/"><img src="https://i.imgur.com/VIlpJsK.png"/ alt="" class="navbarlogo"></a></li>
@@ -25,5 +25,15 @@
     </ul>
   </nav>
     {{{ body }}}
+    <script>
+      const navBar = document.getElementById('navBar');
+      window.onscroll = function(){
+        if (window.scrollY >22){
+          navBar.classList.add('scrolled')
+        }else{
+          navBar.classList.remove('scrolled')
+        }
+      }
+    </script>
 </body>
 </html>

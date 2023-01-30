@@ -36,7 +36,9 @@ nav{
   flex-wrap: wrap;
   z-index: 9999;
 }
-
+nav.scrolled{
+  box-shadow: 0px 10px 15px -11px #b6a3cc;
+}
  nav ul li a {
   transition: ease-out 0.2s;
   font-size: 2vh;
@@ -62,7 +64,7 @@ nav ul li {
 }
 
 .navbarlogo:active{
-  transform: scale(1.5);;
+  transform: scale(1.1);
 }
 
                           /* FORM STYLES */
