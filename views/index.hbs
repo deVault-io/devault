@@ -1,12 +1,27 @@
-<h1>deVault Home Page</h1>
-  <h2>Hello {{#if user}}{{username}}{{user.username}}{{userInDB.username}}{{/if}}</h1>
-  <div>
-    {{#if user}}
-    <a href="profile">My Profile</a>
-    <a href="auth/logout">Logout</a>
-    {{else}}
-    <a href="auth/signup">Signup</a>
-    <a href="auth/login">Login</a>
-    {{/if}}
+
+  <h2>Welcome to the Vault {{#if user}}{{username}}{{user.username}}{{userInDB.username}}{{/if}}!</h1>
+  
+<form method="GET" action="/tools/search"> 
+  <span class="search-bar">
+  <input placeholder="Search into the Vault!"type="text" name="name" class="search-input"/>
+  <button type="submit" class="search-btn">Go!</button>
+  </span>
+  <div class="bubble-container">
+    <ul>
+		  <li><a href="#">UX/UI</a></li>
+      <li><a href="#">Front End</a></li>
+      <li><a href="#">Back End</a></li>
+		  <li><a href="#">Data Science</a></li>
+       <li><a href="#">Mobile Development</a></li>
+		  <li><a href="#">Full Stack Development</a></li>
+		  <li><a href="#">Cloud Computing</a></li>
+		  <li><a href="#">DevOps</a></li>
+		  <li><a href="#">Cybersecurity</a></li>
+		  <li><a href="#">Quality Assurance</a></li>
+    </ul>
   </div>
-</body>
+</form>
+
+{{#each tools}}
+  {{>toolCard this}}
+{{/each}}

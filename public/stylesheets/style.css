@@ -66,6 +66,93 @@ nav ul li {
 .navbarlogo:active{
   transform: scale(1.1);
 }
+                        /* HOME PAGE STYLES */
+.search-bar>*{
+  height:40px;
+  width: clamp(100px, 70vw, 400px)
+}
+.search-bar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+}
+.search-btn {
+  max-width: 20%;
+align-self: center;
+  margin: 0 5px;
+  padding: 10px 10px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--primary-purlple-dark);
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid  var(--primary-purlple-dark);
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+}
+.search-btn:active{
+transform: scale(0.5);
+}
+.search-input{
+  border-color: var(--primary-purple-light);
+  border-radius: 10px;
+  border-width: 1px;
+  padding-left:10px;
+  transition: ease-out 0.5s;
+}
+
+.search-input[required]:before {
+  content:"*";
+  color:rgb(165, 9, 9);
+}
+.bubble-container{
+  max-width: clamp(200px,90vw,900px);
+  flex-direction: column;
+  justify-content: center;
+}
+.bubble-container ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  flex-wrap: wrap;
+}
+.bubble-container ul li {
+	display: inline-block;
+	margin: 0 .1em .1em 0;
+	padding: 0;
+}
+.bubble-container ul li a {
+	display: inline-block;
+  padding:0 10px;
+	height: 2em;
+	line-height: 2em;
+	background-color: #fff;
+	border: 1px solid var(--primary-purple-light);
+	border-radius: 15px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: var(--primary-purlple-dark);
+	font-size: 0.7em;
+	text-decoration: none;
+	-webkit-transition: .2s;
+	transition: .2s;
+
+}
+.bubble-container ul li a:hover {
+	background-color: var(--primary-purple-light);
+	border: 1px solid --primary-purple-light;
+	color: #fff;
+}
+.bubble-container ul li a:active{
+	transform: scale(0.5);
+}
 
                           /* FORM STYLES */
 .form-container{
@@ -124,12 +211,13 @@ input:focus{
 }
 input{
   border-color: var(--primary-purple-light);
+  border-width: 1px;
 }
 input[required]:before {
   content:"*";
   color:rgb(165, 9, 9);
 }
-                  /* USER PROFILE STYLING */
+                  /* USER PROFILE PAGE STYLING */
 .profile-container{
   padding-top: 30px;
   padding:0 30px;
@@ -149,7 +237,6 @@ input[required]:before {
 align-self: center;
   padding: 15px 30px;
   text-align: center;
-  /* font-size: 18px; */
   letter-spacing: 1px;
   text-decoration: none;
   color: var(--primary-purlple-dark);
