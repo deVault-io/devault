@@ -4,13 +4,13 @@
   <form action="/auth/signup" method="POST">
  
     <label>Username</label>
-      <input type="text" name="username" placeholder="JohnDoe88" />
+      <input type="text" name="username" placeholder="JohnDoe88" class="input-old"/>
  
     <label>Email</label>
-      <input type="email" name="email" placeholder="john@doe.com" />
+      <input type="email" name="email" placeholder="john@doe.com" class="input-old" />
     
     <label>Password</label>
-      <input type="password" name="password" placeholder="********" />
+      <input type="password" name="password" placeholder="********" class="input-old"/>
 
       {{#if error}}
       <p style="color: red;">{{error}}</p>
