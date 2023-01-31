@@ -38,6 +38,7 @@ nav {
   position: fixed;
   bottom: 0;
   align-items: center;
+  z-index: 9999;
 
 }
 .nav__list, 
@@ -537,6 +538,7 @@ input.input-old[required]:before {
       justify-content: left;
       backdrop-filter: blur(10px);
       transition: 0.5s ease-in-out;
+      margin-bottom: 20px;
     }
     
     .random-card:hover {
@@ -550,6 +552,7 @@ input.input-old[required]:before {
       margin-left: 10px;
       border-radius: 10px;
       background: linear-gradient(#d7cfcf, #9198e5);
+      background: #353535;
     }
     
     .random-card:hover > .img {
@@ -560,29 +563,30 @@ input.input-old[required]:before {
     .random-textBox {
       width: calc(100% - 90px);
       margin-left: 10px;
-      color: white;
-      font-family: 'Poppins' sans-serif;
+      font-family: inherit;
+      background: #353535;
     }
     
     .random-textContent {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: #353535;
     }
     
-    .random-pan {
+    .random-span {
       font-size: 10px;
+      background: #353535;
+      color: var(--primary-white);
     }
     
     .random-h1 {
-      font-size: 16px;
+      font-size: 1.5rem;
       font-weight: bold;
+      background: #353535;
+      color: var(--primary-white);
     }
     
-    .random-p {
-      font-size: 12px;
-      font-weight: lighter;
-    }
     
     
 /* DETAIL CARDS CSS */
