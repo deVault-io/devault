@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const isLoggedIn = require('../middlewares');
 
-
+//Test
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
 // @access  Public
