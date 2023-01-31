@@ -3,13 +3,13 @@
 <div class="form-container">
 
 <form method="POST" action="/tools/new">
-  <label>What's the tool's name?</label>
+  <label>Tool Name</label>
   <input required type="text" name="name" placeholder="chat.openai.com"/>
-  <label>What's about?</label>
+  <label>Tool Description</label>
   <input required type="textarea" name="description" placeholder="This tool is about..."></input>
-  <label>Sounds good! Link us to it!</label>
-  <input required type="text" name="image" placeholder="paste their page here!"/>
-  <label>Give us a cool image link!</label>
+  <label>Tool Image</label>
+  <input type="text" name="image" placeholder="paste their website here!"/>
+  <label>Website URL</label>
   <input required type="text" name="url" placeholder="https...//"/>
     <label for="field">Which field suits it better?:</label>
    <select id="field" name="field">
