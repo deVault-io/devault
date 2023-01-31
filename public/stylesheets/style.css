@@ -182,10 +182,13 @@ transform: scale(0.5);
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  margin-top: 10vh;
 }
 
 .form-logo {
   width: clamp(50px,50%,400px);
+  position: fixed;
+  bottom: 100px;
 }
 
 form {
@@ -202,8 +205,8 @@ form.login {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-  margin-top: 30px;
+  width: 150%;
+  margin-top: 25px;
   align-items: center;
 }
 
