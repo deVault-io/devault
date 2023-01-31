@@ -42,8 +42,11 @@ router.get('/tools/:toolId', async function (req, res, next) {
     const random = Math.floor(Math.random() * count);
     const tool = await Tool.findById(toolId).populate('user');
     const items = await Tool.find({field: tool.field, _id: { $ne: tool._id }}).skip(random).limit(3);
-    res.render('toolDetail', { user, tool, items:items  });
+    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+    res.render('toolDetail', { user, tool, items:items, isLoggedInUserCreator });
     console.log(`random items:${items}`)
+    console.log(tool.user._id.toString())
+    console.log(user._id)
   } catch (error) {
     next(error)
   }
