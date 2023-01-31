@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaType } = require('mongoose');
  
 const userSchema = new Schema(
   // Add whichever fields you need for your app
@@ -30,6 +30,10 @@ const userSchema = new Schema(
     darkMode:{
       type: Boolean,
       default: false,
+    },
+    list: {
+      type: Schema.Types.ObjectId,
+      ref: 'List'
     }
   },
   {

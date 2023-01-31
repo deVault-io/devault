@@ -11,6 +11,10 @@ const favSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
+    list: {
+      type: Schema.Types.ObjectId,
+      ref: 'List',
+    }
   },
   {
     timestamps: true
