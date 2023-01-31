@@ -7,7 +7,6 @@
   color:var(--primary-black);
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
-  text-decoration: none;
 }
 
 body {
@@ -18,8 +17,8 @@ body {
   flex-direction:column;
   align-items: center;
 }
-a {
-  text-decoration: none;
+li a {
+  text-decoration: none !important;
 }
 /* APP COLOR VARIABLES */
 :root {
@@ -39,12 +38,13 @@ nav {
   position: fixed;
   bottom: 0;
   align-items: center;
+
 }
 .nav__list, 
 .nav__link {
   display: flex;
   width:100%;
-  text-decoration: none;
+  
 }
 .nav__link {
   flex-direction: column;
@@ -52,60 +52,36 @@ nav {
   row-gap: 4px;
   color: var(--title-color);
   font-weight: 600;
+  
 }
 .nav__list {
   justify-content: space-around;
 }
 .nav__name {
   font-size: var(--tiny-font-size);
-color: #252323;}
+  color: #444444;
+  text-decoration: none;}
   
 .nav__icon {
-    font-size: 1.5rem;
-    color: #252323;
-  }
-  .nav_item{
+    font-size: 2rem;
+   font-weight: lighter;
+    color: #444444;
     text-decoration: none;
   }
-  
-  /*Active link*/
+
+  /*Active link for DOM manipulation*/
   .active-link {
     position: relative;
     color: var(--first-color);
     transition: .3s;
   }
-  /* display: none;*/ /* Minimalist design, hidden labels */
-}
+  
+
 
 /* nav.scrolled {
   box-shadow: 30px #242128;
 }
 
- nav ul li a {
-  transition: ease-out 0.2s;
-  font-size: 2vh;
-  text-decoration: none;
-  color: var(--primary-black);
-  font-weight: 400;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
-  padding-right:10px;
-}
-
-nav ul li {
-  margin-left: 3.1vh;
-  text-align: center;
-}
-
-
-.navbarlogo:active {
-  transform: scale(1.5);
-} */
 
 /* HOME PAGE STYLES */
 .search-bar > * {
@@ -218,14 +194,15 @@ transform: scale(0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 10vh;
 }
 
 .form-logo {
-  width: clamp(50px,50%,400px);
-  position: fixed;
+  width: clamp(50px,30%,400px);
   bottom: 100px;
+  opacity: 0.7;
+  margin-top: 20px;
 }
 
 form {
@@ -255,12 +232,18 @@ form > * {
 form > label {
   text-align: center;
 }
-
+.link-text{
+  opacity: 0.5;
+}
+.link-text:active{
+  opacity: 1;
+  transform: scale(0.7)
+}
 /* SUBMIT BUTTONS */
 .submit-btn {
   width: 70%;
   align-self: center;
-  margin: 30px;
+  margin: 30px 30px 7px 30px;
   padding: 15px 30px;
   text-align: center;
   font-size: 18px;

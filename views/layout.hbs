@@ -14,16 +14,37 @@
   <nav id="nav-menu">
     <ul class="nav__list">
       {{#if user}}
-      <li >
-        <a href="/" class="navbarlogo">
-          <i class='bx bx-message-alt-add nav__icon'></i></a></li>
-      <li><a href="/tools/new">New tool</a></li>
-      <li><a href="/auth/logout">Log out</a></li>
-      <li>
+      <li class="nav__item">
+        <a href="/" class="nav__link active-link">
+          <i class='bx bx-home-alt-2 nav__icon' ></i>
+          <span class="nav__name">Home</span>
+        </a>
+      </li>
+        <li class="nav__item">
+        <a href="/" class="nav__link active-link">
+          <i class='bx bx-search nav__icon'></i>
+          <span class="nav__name">Search</span>
+        </a>
+      </li>
+      
+      <li class="nav__item">
+        <a href="/tools/new" class="nav__link active-link">
+          <i class='bx bx-plus-medical nav__icon' id="addbtn"></i>
+          <span class="nav__name">Add</span>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="/tools/fav" class="nav__link active-link">
+          <i class='bx bx-bookmark-heart nav__icon'></i>
+          <span class="nav__name">Favs</span>
+        </a>
+      </li>
+       <li>
         <a href="/profile" class="navbarlogo">
           <i class='bx bx-cog nav__icon'></i>
         </a>
       </li>
+      
      
       {{else}}    
       <li class="nav__item">
@@ -41,7 +62,7 @@
       
       <li class="nav__item">
         <a href="/tools/new" class="nav__link active-link">
-          <i class='bx bx-plus-medical nav__icon'></i>
+          <i class='bx bx-plus-medical nav__icon' id="addbtn"></i>
           <span class="nav__name">Add</span>
         </a>
       </li>
@@ -54,7 +75,7 @@
        <li class="nav__item">
         <a href="/auth/login" class="nav__link active-link">
           <i class='bx bx-log-in-circle nav__icon' ></i>
-          <span class="nav__name">Account</span>
+          <span class="nav__name">Login/Signup</span>
         </a>
       </li>
       {{/if}}
