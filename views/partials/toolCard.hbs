@@ -2,10 +2,21 @@
   <div class="tool-image">
     <img width="350px" src={{image}} alt={{name}}/>
   </div>
-  <h4 class="tool-name">{{name}}</h4>
+  <div class="tool-header">
+    <div class="tool-header-content">
+      <h4 class="tool-name">{{name}}</h4>
+    </div>
+    <div class="tool-header-content">
+      <a href="/favs" class="nav__link active-link">
+        <i class='bx bx-bookmark-heart nav__icon'></i>
+        <span class="nav__name">Favs</span>
+      </a>
+    </div>    
+  </div>
   <div class="tool-description-box">
     <p>{{description}}</p>
     <p>Uploaded by: {{user.username}} </p>
+    
     <div class="tool-link">
       <a class="submit-btn-small" href={{url}}>Check Website</a>
     </div>
