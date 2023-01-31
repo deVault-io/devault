@@ -526,20 +526,66 @@ input.input-old[required]:before {
   transform: scale(0.5);;
 }
     /* RANDOM RELATED TOOLS  */
-.random-tools-container{
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-  justify-content:space-evenly;
-  align-items: center;
-  gap:5px;
-}
-
-.random-tool-card image{
-  width: 100%;
-}
-
+    .random-card {
+      width: 100%;
+      max-width: 290px;
+      height: 70px;
+      background: #353535;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      backdrop-filter: blur(10px);
+      transition: 0.5s ease-in-out;
+    }
+    
+    .random-card:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+    
+    .random-img {
+      width: 50px;
+      height: 50px;
+      margin-left: 10px;
+      border-radius: 10px;
+      background: linear-gradient(#d7cfcf, #9198e5);
+    }
+    
+    .random-card:hover > .img {
+      transition: 0.5s ease-in-out;
+      background: linear-gradient(#9198e5, #712020);
+    }
+    
+    .random-textBox {
+      width: calc(100% - 90px);
+      margin-left: 10px;
+      color: white;
+      font-family: 'Poppins' sans-serif;
+    }
+    
+    .random-textContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .random-pan {
+      font-size: 10px;
+    }
+    
+    .random-h1 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .random-p {
+      font-size: 12px;
+      font-weight: lighter;
+    }
+    
+    
+/* DETAIL CARDS CSS */
 .detail-tool-image {
   margin-bottom: 35px;
 }
