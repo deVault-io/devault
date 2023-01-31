@@ -49,12 +49,14 @@ const usersRoutes = require("./routes/users.routes");
 const toolsRoutes = require("./routes/tools.routes");
 const authRoutes = require("./routes/auth.routes");
 const listsRoutes = require("./routes/lists.routes")
+const favsRoutes = require("./routes/favs.routes")
 
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
 app.use("/", toolsRoutes);
 app.use("/auth", authRoutes);
 app.use("/lists", listsRoutes);
+app.use("/favs", favsRoutes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

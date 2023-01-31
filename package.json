@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "seed": "node ./seed",
+    "seedTools": "node ./seed/index.js",
+    "seedFavs": "node ./seed/favs.js",
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www"
   },
