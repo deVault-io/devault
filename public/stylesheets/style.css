@@ -26,6 +26,7 @@ li a {
   --primary-purlple-dark: #5e279f;
   --primary-white: #fafafa;
   --primary-black: #252323;
+  --secondary-black:#3a3a3a;
   --primary-red: rgb(225, 144, 144);
   --tiny-font-size: .625rem;
 }
@@ -38,6 +39,7 @@ nav {
   position: fixed;
   bottom: 0;
   align-items: center;
+  z-index: 9999;
 
 }
 .nav__list, 
@@ -528,22 +530,29 @@ input.input-old[required]:before {
     /* RANDOM RELATED TOOLS  */
     .random-card {
       width: 100%;
-      max-width: 290px;
       height: 70px;
-      background: #353535;
-      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: left;
       backdrop-filter: blur(10px);
       transition: 0.5s ease-in-out;
+      margin: 5px 0;
+      width: clamp(90vw,90vw,50vw);
+      border-radius: 4px;
+      box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
     }
     
     .random-card:hover {
       cursor: pointer;
       transform: scale(1.05);
     }
-    
+    .bx-info-circle,.bx-link-external{
+      font-size: 1.4rem;
+      opacity: 0.5;
+    }
+    .bx-link-external:hover, .bx-link-external:active,.bx-info-circle:hover,  .bx-info-circle:active{
+      opacity: 1;
+    }
     .random-img {
       width: 50px;
       height: 50px;
@@ -560,29 +569,27 @@ input.input-old[required]:before {
     .random-textBox {
       width: calc(100% - 90px);
       margin-left: 10px;
-      color: white;
-      font-family: 'Poppins' sans-serif;
+      font-family: inherit;
     }
     
     .random-textContent {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
     }
     
-    .random-pan {
-      font-size: 10px;
+    .random-span {
+      font-size: 1.5rem;
+      color: var(--primary-black);
     }
     
     .random-h1 {
-      font-size: 16px;
+      font-size: 1.4rem;
       font-weight: bold;
+      color: var(--secondary-black);
+      text-decoration: none;
     }
     
-    .random-p {
-      font-size: 12px;
-      font-weight: lighter;
-    }
     
     
 /* DETAIL CARDS CSS */
