@@ -52,10 +52,13 @@ nav {
   row-gap: 4px;
   color: var(--title-color);
   font-weight: 600;
-  
+}
+.nav__link:active {
+  transform: scale(1.5);
 }
 .nav__list {
   justify-content: space-around;
+  list-style-type: none;
 }
 .nav__name {
   font-size: var(--tiny-font-size);
