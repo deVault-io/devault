@@ -28,12 +28,12 @@ const toolSchema = new Schema(
         ref: 'User'
       },
     field:{
-        type: String,
+        type: [String],
         enum : ['UX/UI','Front End','Data Science','Back End','Data Science','Mobile','Full Stack','Cloud Computing','DevOps', 'Cybersecurity','Quality Assurance','Other'],
         required:true,
     },
     tag:{
-        type: String,
+        type: [String],
         enum : ['AI powered','Open Source','Color Theory','3D','Code Assistant','Investment','Story teller','Text processer','CSS3','HTML','Javascript','Python','Educational','Learning Resources','Documentation','Productivity','Presentations','Low-Code/No-Code','Inspiration','Community','Graphic design'],
         required:true,
         min: [3, 'At least 3 tags are required.']
