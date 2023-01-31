@@ -38,12 +38,19 @@ router.get('/tools/:toolId', async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   if (!req.session.currentUser) {
-    const count = await Tool.countDocuments();
-    const random = Math.floor(Math.random() * count);
     const tool = await Tool.findById(toolId).populate('user');
-    const items = await Tool.find({field: tool.field, _id: { $ne: tool._id }}).skip(random).limit(3);
+    const count = await Tool.count({field:`${tool.field}`});
+  if (count <= 3){
+    const items = await Tool.aggregate([{$sample: {size: 3}}]);
     res.render('toolDetail', { user, tool, items:items });
-    return;
+    return items
+  } else{
+    const itemsToRandom = await Tool.find({field: `${tool.field}`, _id: { $ne: tool._id }});
+    const items = itemsToRandom.sort(()=> 0.5- Math.random()).slice(0,3);
+    res.render('toolDetail', { user, tool, items:items });
+    return items;
+  }
+    
   } try {
     const count = await Tool.countDocuments();
     const random = Math.floor(Math.random() * count);
