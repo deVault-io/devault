@@ -197,6 +197,7 @@ form {
   justify-content: space-evenly;
 }
 
+/* added .login class to have it only for login and not signup */
 form.login {
   display: flex;
   flex-direction: column;
@@ -271,6 +272,7 @@ form > label {
 }
 
 /* INPUT STYLING */
+ /* added .input-old class so that new style doesn't affect signup form */
 input.input-old:focus {
   border-color: var(--primary-purple-light);
 }
@@ -312,6 +314,7 @@ input.input-old[required]:before {
   transition: 150ms cubic-bezier(0.4,0,0.2,1);
  }
  
+ /* added .input class so that new style doesn't affect signup form */
  .input:focus, input.input:valid {
   outline: none;
   border: 1.5px solid var(--primary-purlple-dark);
