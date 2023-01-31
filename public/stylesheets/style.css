@@ -68,7 +68,7 @@ nav {
 .nav__icon {
     font-size: 2rem;
    font-weight: lighter;
-    color: #444444;
+    color: var(--primary-purlple-dark);
     text-decoration: none;
   }
 
