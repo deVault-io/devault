@@ -11,12 +11,15 @@
 
 body {
   background-color: var(--primary-white);
-  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-top: 50px;
   display: flex ;
   flex-direction:column;
   align-items: center;
 }
-
+li a {
+  text-decoration: none !important;
+}
 /* APP COLOR VARIABLES */
 :root {
   --primary-purple-light: #b6a3cc;
@@ -24,51 +27,64 @@ body {
   --primary-white: #fafafa;
   --primary-black: #252323;
   --primary-red: rgb(225, 144, 144);
+  --tiny-font-size: .625rem;
 }
 
 /* NAV BAR STYLES */
 nav {
-  width: 100vw;
+  width: 100%;
   height: 10vh;
-  background-color: --primary-white;
   display: flex;
   position: fixed;
-  top: 0;
-  flex-wrap: wrap;
-  z-index: 9999;
-}
-
-nav.scrolled {
-  box-shadow: 0px 10px 15px -11px #b6a3cc;
-}
-
- nav ul li a {
-  transition: ease-out 0.2s;
-  font-size: 2vh;
-  text-decoration: none;
-  color: var(--primary-black);
-  font-weight: 400;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content:space-around;
+  bottom: 0;
   align-items: center;
-  padding-right:10px;
+
+}
+.nav__list, 
+.nav__link {
+  display: flex;
+  width:100%;
+  
+}
+.nav__link {
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4px;
+  color: var(--title-color);
+  font-weight: 600;
+}
+.nav__link:active {
+  transform: scale(1.5);
+}
+.nav__list {
+  justify-content: space-around;
+  list-style-type: none;
+}
+.nav__name {
+  font-size: var(--tiny-font-size);
+  color: #444444;
+  text-decoration: none;}
+  
+.nav__icon {
+    font-size: 2rem;
+   font-weight: lighter;
+    color: var(--primary-purlple-dark);
+    text-decoration: none;
+  }
+
+  /*Active link for DOM manipulation*/
+  .active-link {
+    position: relative;
+    color: var(--first-color);
+    transition: .3s;
+  }
+  
+
+
+/* nav.scrolled {
+  box-shadow: 30px #242128;
 }
 
-nav ul li {
-  margin-left: 3.1vh;
-  text-align: center;
-}
-.navbarlogo {
-  max-width: 40px;
-}
-
-.navbarlogo:active {
-  transform: scale(1.1);
-}
 
 /* HOME PAGE STYLES */
 .search-bar > * {
@@ -181,14 +197,15 @@ transform: scale(0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 10vh;
 }
 
 .form-logo {
-  width: clamp(50px,50%,400px);
-  position: fixed;
+  width: clamp(50px,30%,400px);
   bottom: 100px;
+  opacity: 0.7;
+  margin-top: 20px;
 }
 
 form {
@@ -218,12 +235,18 @@ form > * {
 form > label {
   text-align: center;
 }
-
+.link-text{
+  opacity: 0.5;
+}
+.link-text:active{
+  opacity: 1;
+  transform: scale(0.7)
+}
 /* SUBMIT BUTTONS */
 .submit-btn {
   width: 70%;
   align-self: center;
-  margin: 30px;
+  margin: 30px 30px 7px 30px;
   padding: 15px 30px;
   text-align: center;
   font-size: 18px;
