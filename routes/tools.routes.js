@@ -37,7 +37,14 @@ router.get('/tools/:toolId', async function (req, res, next) {
   // _id: { $ne: tool._id } 
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  try {
+  if (!req.session.currentUser) {
+    const count = await Tool.countDocuments();
+    const random = Math.floor(Math.random() * count);
+    const tool = await Tool.findById(toolId).populate('user');
+    const items = await Tool.find({field: tool.field, _id: { $ne: tool._id }}).skip(random).limit(3);
+    res.render('toolDetail', { user, tool, items:items });
+    return;
+  } try {
     const count = await Tool.countDocuments();
     const random = Math.floor(Math.random() * count);
     const tool = await Tool.findById(toolId).populate('user');
