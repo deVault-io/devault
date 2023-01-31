@@ -39,7 +39,7 @@ router.post('/signup', async function (req, res, next) {
       const user = await User.create({ username, email, hashedPassword, avatar, aboutMe });
       await List.create({user: user._id});
       req.session.currentUser = user; 
-      res.render('auth/profile', user);
+      res.render('auth/profile', {user});
     }
   } catch (error) {
     next(error)
