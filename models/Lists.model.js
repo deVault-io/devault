@@ -6,7 +6,6 @@ const listSchema = new Schema(
       type: String,
       trim: true,
       required: [true, 'List name is required.'],
-      unique: true,
       default: 'My Favourites',
     },
     image: {
@@ -16,7 +15,7 @@ const listSchema = new Schema(
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     }
   },
   {
