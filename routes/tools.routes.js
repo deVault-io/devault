@@ -136,10 +136,11 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
 router.post("/tools/search", async function (req, res, next) {
+  const user = req.session.currentUser;
   const searchTerm = req.body.input;
   const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
   const regex = new RegExp(words.join("|"), "i");
-  const match = await Tool.aggregate(
+  const items = await Tool.aggregate(
     [
     {
         $match: {
@@ -148,8 +149,9 @@ router.post("/tools/search", async function (req, res, next) {
         }
     }
 ], function(err, result) {
-    console.log(result);
+  
 });
+res.render("toolSearchResults", { user, items });
 });
 
 module.exports = router;

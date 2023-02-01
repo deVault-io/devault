@@ -1,0 +1,23 @@
+{{#if items}}
+{{#each items}}
+<div class="card-container" id="detail-card">
+    <div class="tool-image">
+    <img width="350px" src={{this.image}} alt={{this.name}}/>
+  </div>
+    <h1 class="tool-name">{{this.name}}</h1>
+<div class="tool-description-box">
+    <p>{{this.description}}</p>
+     <p>Uploaded by: {{this.user.username}} </p>
+  </div>
+   <div class="tool-link">
+      <a class="submit-btn-small" href={{this.url}}>Check Website</a>
+    </div>
+  <span class="btn-span">
+    {{#if isLoggedInUserCreator}} 
+        <a href="/tools/{{this._id}}/delete" id="delete-tool-btn">Delete</a>
+        <a href="/tools/{{this._id}}/edit" id="edit-tool-btn">Edit tool</a>
+    {{/if}}    
+    </span>
+</div>
+{{/each}}
+{{/if}}
