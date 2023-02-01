@@ -54,8 +54,8 @@ const favsRoutes = require("./routes/favs.routes")
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
 app.use("/", toolsRoutes);
-app.use("/auth", authRoutes);
 app.use("/lists", listsRoutes);
+app.use("/auth", authRoutes);
 app.use("/favs", favsRoutes)
 
 // catch 404 and forward to error handler
