@@ -30,6 +30,37 @@ li a {
   --primary-red: rgb(225, 144, 144);
   --tiny-font-size: .625rem;
 }
+/* HEADER STYLING */
+h1 {
+  --bg-size: 400%;
+  --color-one: var(--primary-purlple-dark);
+  --color-two: var(--primary-purple-light);
+  font-family: sans-serif;
+  font-size: clamp(3rem, 25vmin, 8rem);
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: move-bg 18s infinite linear;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #boujee-text {
+    animation: move-bg 19s linear infinite;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+}
+
 
 /* NAV BAR STYLES */
 nav {
