@@ -1,1 +1,10 @@
 <h1>Hello</h1>
+
+<h1>{{user.username}} Favourites</h1>
+<p>These are the tools you have favourited. You can remove them from your favourites by clicking the bookmark icon.</p>
+
+<div class="cards-wrapped-container">
+  {{#each favs}}
+    {{>favCard this}}
+  {{/each}}
+</div>

@@ -97,18 +97,18 @@ router.post('/tools/:toolId/edit', async (req, res, next) => {
 /* GET one tool fav */
 /* Adds tool to favList */
 /* ROUTE /tools/:toolId/fav */
-router.get('/tools/:toolId/fav', async (req, res, next) => {
+/* router.get('/tools/:toolId/fav', async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate('user');
     const editedlist = await Lists.findOne({listName: 'My Favourites'});
-    const fav = await Favs.create({ tool: tool._id, user: user._id, list: editedlist._id }) 
-    res.render(`lists/${editedlist._id}`, { user, tool, editedlist, fav });
+    const fav = await Favs.create({ tool: tool._id, user: user._id, list: editedlist._id });
+    res.render(`lists/favsList`, { user, tool, editedlist, fav });
   } catch (error) {
     next(error)
   }
-});
+}); */
 
 /* GET delete Tool */
 /* ROUTE tools/:toolId/delete */
