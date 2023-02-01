@@ -21,5 +21,17 @@ router.get('/', isLoggedIn, async function (req, res, next) {
   }
 });
 
+/* GET One list */
+router.get('/:listId', async function (req, res, next) {
+  const { listId } = req.params;
+  const user = req.session.currentUser;
+  try {
+    const list = await Lists.findById(listId).populate('user');
+    res.render('lists/favsListDetail', { user, list });
+  } catch (error) {
+    next(error)
+  }
+});
+
 
 module.exports = router;
