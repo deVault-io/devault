@@ -51,11 +51,10 @@ router.get("/tools/:toolId", async function (req, res, next) {
       path: "user",
       select: "_id",
     });
-    console.log(tool);
     const count = await Tool.count({ field: `${tool.field}` });
     if (count <= 3) {
-      const items = await Tool.aggregate([{ $sample: { size: 3 } }]);
-      res.render("toolDetail", { user, tool, items: items });
+      const items = await  Tool.aggregate([{ $sample: { size: 3} }]);
+      res.render("toolDetail", { user, tool, items: items});
       return items;
     } else {
       const itemsToRandom = await Tool.find({
@@ -63,7 +62,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         _id: { $ne: tool._id },
       });
       const items = itemsToRandom.sort(() => 0.5 - Math.random()).slice(0, 3);
-      res.render("toolDetail", { user, tool, items: items });
+      res.render("toolDetail", { user, tool, items: items});
       return items;
     }
   }
@@ -82,7 +81,6 @@ router.get("/tools/:toolId", async function (req, res, next) {
       items: items,
       isLoggedInUserCreator,
     });
-    console.log(`random items:${items}`);
   } catch (error) {
     next(error);
   }
@@ -137,7 +135,6 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
-// PROTECTED VIEW
 router.post("/tools/search", async function (req, res, next) {
   const searchTerm = req.body.input;
   const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
