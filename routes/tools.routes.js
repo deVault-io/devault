@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
+const exclude= require('../data/exclude');
 
 /* GET form view */
 /* ROUTE /Tools/new 
@@ -139,7 +140,6 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 // PROTECTED VIEW
 router.post("/tools/search", async function (req, res, next) {
   const searchTerm = req.body.input;
-  const exclude = ["the", "at", "for", "with", "that", "this", "an", "a", "user","at",];
   const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
   const regex = new RegExp(words.join("|"), "i");
   const match = await Tool.aggregate(
