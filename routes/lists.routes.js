@@ -38,18 +38,13 @@ router.get('/:listId', async function (req, res, next) {
 router.get('/:toolId/fav', async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  try {
-    const tool = await Tool.findById(toolId).populate('user');
-    const editedlist = await Lists.findOne({listName: 'My Favourites'});
-    const favExists = await Favs.find({tool: {$eq: tool._id}, list: {$eq: editedlist._id}});
-    console.log(favExists) 
-    if (favExists) {
-    res.redirect('/');
-    return; 
-    } else { 
-      const newFav = await Favs.create({ tool: tool._id, user: user._id, list: editedlist._id });
-      console.log(newFav)
-      res.render(`lists/favsListDetail`, { user, tool, editedlist, newFav });
+  const tool = await Tool.findById(toolId).populate('user');
+  const editedList = await Lists.findOne({listName: 'My Favourites'});
+  const favExists = await Favs.findOne({tool: tool._id, list: editedList._id, user: user._id});
+  try { if (!favExists) {
+    const newFav = await Favs.create({ tool: tool._id, user: user._id, list: editedList._id });
+    res.redirect(`/lists/${editedList._id}`);
+    return newFav; 
     }
   } catch (error) {
     next(error)
