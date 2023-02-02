@@ -3,22 +3,11 @@
   margin: 0;
   padding:0;
   box-sizing: border-box;
-  background-color: var(--primary-white);
-  color:var(--primary-black);
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
 }
 
-body {
-  background-color: var(--primary-white);
-  margin-bottom: 100px;
-  display: flex ;
-  flex-direction:column;
-  align-items: center;
-}
-li a {
-  text-decoration: none !important;
-}
+
 /* APP COLOR VARIABLES */
 :root {
   --primary-purple-light: #b6a3cc;
@@ -28,10 +17,67 @@ li a {
   --secondary-black:#3a3a3a;
   --primary-red: rgb(225, 144, 144);
   --tiny-font-size: .625rem;
+  --bkg-color:var(var(--primary-white));
+  --text-color:var(--primary-black);
 }
+/* DARK MODE BUTTON */
+body {
+  background-color: var(--bkg-color);
+  margin-bottom: 100px;
+  display: flex ;
+  flex-direction:column;
+  align-items: center;
+  color:var(--text-color);
+}
+
+body.dark-theme {
+  --text-color: #eee;
+  --bkg-color: #121212;
+}
+body, div, p, span, h1, h2, h3, h4, h5, h6 {
+  --text-color: inherit;
+  --bkg-color: inherit;
+}
+.nav.light-theme, .btn.light-theme, .card-container.light-theme {
+  background-color: var(--primary-white);
+  color: var(--primary-black);
+}
+.nav.dark-theme, .btn.dark-theme, .card-container.dark-theme {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  border-color: var(--primary-white);
+}
+@media (prefers-color-scheme: dark) {
+  /* defaults to dark theme */
+  body {
+    --text-color: var(--primary-white);
+    --bkg-color: var(--primary-black);
+  }
+  .nav.dark-theme, .btn.dark-theme, .card-container.dark-theme {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    border-color: var(--primary-white);
+  }
+  body.light-theme {
+    --text-color: var(--primary-black);
+    --bkg-color: var(--primary-white);
+  }
+  .light-theme .nav, .light-theme .btn, .light-theme .card-container  {
+    --text-color: var(--primary-black);
+    --bkg-color: var(--primary-white);
+  }
+}
+
+
+.btn-toggle{
+  border: none;
+}
+li a {
+  text-decoration: none !important;
+}
+
 /* HEADER STYLING */
 header{
-  padding-top: 25px;
   width:100vw;
   display: flex;
   flex-direction:column;
@@ -79,6 +125,8 @@ header h2{
   font-weight: 200;
 }
 
+
+
 /* NAV BAR STYLES */
 nav {
   width: 100%;
@@ -88,7 +136,7 @@ nav {
   bottom: 0;
   align-items: center;
   z-index: 9999;
-
+  background-color: var(--bkg-color);
 }
 .nav__list, 
 .nav__link {
