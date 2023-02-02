@@ -206,6 +206,19 @@ transform: scale(0.5);
   max-width: 60%;
 }
 
+.form-container-lists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7vh;
+  max-width: 80%;
+}
+
+.form-container-lists > p {
+  margin-top: 35px;
+}
+
 .form-logo {
   width: clamp(50px,30%,400px);
   bottom: 100px;
@@ -247,6 +260,14 @@ form > label {
   opacity: 1;
   transform: scale(0.7)
 }
+
+.already-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: inherit;
+}
+
 /* SUBMIT BUTTONS */
 .submit-btn {
   width: 70%;
