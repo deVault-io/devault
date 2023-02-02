@@ -6,7 +6,6 @@ const isLoggedIn = require("../middlewares");
 const exclude= require('../data/exclude');
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
-const isLoggedIn = require('../middlewares');
 
 /* GET form view */
 /* ROUTE /Tools/new 
