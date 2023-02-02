@@ -118,10 +118,12 @@ nav {
 .nav__icon {
     font-size: 2rem;
    font-weight: lighter;
-    color: var(--primary-purlple-dark);
+    color: rgb(87, 87, 87);
     text-decoration: none;
   }
-
+  .nav__icon:hover, .nav__icon:active{
+    color: var(--primary-purlple-dark)
+  }
   /*Active link for DOM manipulation*/
   .active-link {
     position: relative;
@@ -132,7 +134,7 @@ nav {
 
 
  nav.scrolled {
-  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.35);
 }
 
 
@@ -197,6 +199,8 @@ transform: scale(0.5);
 	padding: 0;
 	list-style: none;
   display: flex;
+  align-content: stretch;
+  align-items: baseline;
   flex-direction: row;
   gap:5px;
   flex-wrap: wrap;
@@ -214,7 +218,7 @@ transform: scale(0.5);
 	line-height: 2em;
 	background-color: #fff;
 	border: 1px solid var(--primary-purple-light);
-	border-radius: 15px;
+	border-radius: 4px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
