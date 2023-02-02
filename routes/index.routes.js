@@ -9,7 +9,7 @@ const isLoggedIn = require('../middlewares');
 router.get('/', async function (req, res, next) {
   const user = req.session.currentUser;
   try {
-    const tools = await Tool.find({}).populate('user');
+    const tools = await Tool.find({}).sort({ timestamp: 1 }).populate('user');
     res.render('index', { user, tools });
   } catch (error) {
     next(error)
