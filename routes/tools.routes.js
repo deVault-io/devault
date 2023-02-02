@@ -123,7 +123,8 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   const { toolId } = req.params;
   try {
     const tool = await Tool.findById(toolId).populate("user");
-    await Tool.findByIdAndRemove(toolId);
+    await Favs.deleteMany({ tool: toolId });
+    await Tool.deleteOne({ _id: toolId })
     res.redirect("/");
   } catch (error) {
     next(error);
