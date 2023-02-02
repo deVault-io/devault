@@ -31,6 +31,7 @@ li a {
   --primary-white: #fafafa;
   --primary-black: #252323;
   --primary-red: rgb(225, 144, 144);
+  --error-red: #db433e;
   --tiny-font-size: .625rem;
 }
 
@@ -275,7 +276,7 @@ form > label {
 
 .oaerror{
   width:80%;
-  background-color: #ffffff;
+  background-color: var(--primary-white);
   padding:20px;
   border:1px solid #eee;
   border-left-width:5px;
@@ -286,12 +287,12 @@ form > label {
 }
 
 .danger{
-  border-left-color: #db433e; 
+  border-left-color: var(--error-red);
   background-color: rgba(217, 83, 79, 0.1); 
 }
 
 .danger strong {
-  color: #db433e;
+  color: var(--error-red);
   background-color: rgba(217, 84, 79, 0);
 }
 
