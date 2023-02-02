@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
+const Favs = require("../models/Favs.model");
+const Lists = require("../models/Lists.model");
 const isLoggedIn = require('../middlewares');
 
 /* GET form view */
@@ -43,7 +45,7 @@ router.get('/tools/:toolId', async function (req, res, next) {
   if (count <= 3){
     const items = await Tool.aggregate([{$sample: {size: 3}}]);
     res.render('toolDetail', { user, tool, items:items });
-    return items
+    return items;
   } else{
     const itemsToRandom = await Tool.find({field: `${tool.field}`, _id: { $ne: tool._id }});
     const items = itemsToRandom.sort(()=> 0.5- Math.random()).slice(0,3);

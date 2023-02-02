@@ -18,13 +18,12 @@
     </span>
 </div>
 
-
-     {{#if items}}
-    <h1>You might also be interested in:</h1>
-    {{#each items}}
-    {{>randomCard this}}
-    {{/each}}
-    {{/if}}
+{{#if items}}
+  <h1>You might also be interested in:</h1>
+  {{#each items}}
+  {{>randomCard this}}
+  {{/each}}
+{{/if}}
 
 
 

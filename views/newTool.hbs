@@ -1,48 +1,57 @@
-<h1>Create a new Tool!</h1>
-
-<div class="form-container">
-
-<form method="POST" action="/tools/new">
-  <label>Tool Name</label>
-  <input required type="text" name="name" placeholder="chat.openai.com"/>
-  <label>Tool Description</label>
-  <input required type="textarea" name="description" placeholder="This tool is about..."></input>
-  <label>Tool Image</label>
-  <input type="text" name="image" placeholder="paste their website here!"/>
-  <label>Website URL</label>
-  <input required type="text" name="url" placeholder="https...//"/>
-    <label for="field">Which field suits it better?:</label>
-   <select id="field" name="field">
-      <option value="UX/UI">UX/UI</option>
-      <option value="Front End">Front End</option>
-      <option value="Data Science">Data Science</option>
-      <option value="Back End">Back End</option>
-    </select>
-     <label for="tag">Pick at least 3 tags:</label>
-   <select multiple id="tag" class="scroll" name="tag">
-      <option value="AI powered">AI powered</option>
-      <option value="Open Source">Open Source</option>
-      <option value="Color Theory">Color Theory</option>
-      <option value="3D">3D</option>
-      <option value="Code Assistant">Code Assistant</option>
-      <option value="Investment">Investment</option>
-      <option value="Story teller">Story teller</option>
-      <option value="Text processer">Text processer</option>
-      <option value="CSS3">CSS3</option>
-      <option value="HTML">HTML</option>
-      <option value="Javascript">Javascript</option>
-      <option value="Python">Python</option>
-      <option value="Educational">Educational</option>
-      <option value="Learning Resources">Learning Resources</option>
-      <option value="Documentation">Documentation</option>
-      <option value="Productivity">Productivity</option>
-      <option value="Presentations">Presentations</option>
-      <option value="Low-Code/No-Code">Low-Code/No-Code</option>
-      <option value="Inspiration">Inspiration</option>
-      <option value="Community">Community</option>
-      <option value="Graphic design">Graphic design</option>
-    </select>
-  <button type="submit" class="submit-btn" >Add to the vault!</button>
-</form>
-    <img src="https://i.imgur.com/zJugYwi.png" alt="" class="form-logo">
+<div class="form-container-login">
+  <h1>Add a new Tool</h1>
+  <form  class="login" action="/tools/new" method="POST">
+    <div class="input-group">
+      <input required type="text" name="name" placeholder="chat.openai.com" autocomplete="off" class="input"/>
+      <label class="user-label">Tool Name</label>
+    </div>
+    <div class="input-group">
+      <input required type="textarea" name="description" placeholder="This tool is about..." autocomplete="off" class="input"></input>
+      <label class="user-label">Tool Description</label>
+    </div>
+    <div class="input-group">
+      <input required type="text" name="url" placeholder="https://website" autocomplete="off" class="input"/>
+      <label class="user-label">Tool Website</label>
+    </div>
+    <div class="input-group">
+      <input required type="text" name="image" placeholder="https://image" autocomplete="off" class="input"/>
+      <label class="user-label">Tool Image</label>
+    </div>
+    <div class="input-group">
+      <select id="field" name="field" autocomplete="off" class="input">
+        <option value="UX/UI">UX/UI</option>
+        <option value="Front End">Front End</option>
+        <option value="Data Science">Data Science</option>
+        <option value="Back End">Back End</option>
+      </select>
+      <label class="user-label" for="field">Tool Field</label>
+    </div>
+    <div class="input-group">
+      <p class="tag-label">Pick at least 3 tags</p>
+      <select multiple id="tag" class="scroll" name="tag" autocomplete="off" class="input">
+        <option value="AI powered">AI powered</option>
+        <option value="Open Source">Open Source</option>
+        <option value="Color Theory">Color Theory</option>
+        <option value="3D">3D</option>
+        <option value="Code Assistant">Code Assistant</option>
+        <option value="Investment">Investment</option>
+        <option value="Story teller">Story teller</option>
+        <option value="Text processer">Text processer</option>
+        <option value="CSS3">CSS3</option>
+        <option value="HTML">HTML</option>
+        <option value="Javascript">Javascript</option>
+        <option value="Python">Python</option>
+        <option value="Educational">Educational</option>
+        <option value="Learning Resources">Learning Resources</option>
+        <option value="Documentation">Documentation</option>
+        <option value="Productivity">Productivity</option>
+        <option value="Presentations">Presentations</option>
+        <option value="Low-Code/No-Code">Low-Code/No-Code</option>
+        <option value="Inspiration">Inspiration</option>
+        <option value="Community">Community</option>
+        <option value="Graphic design">Graphic design</option>
+      </select>
+    </div>  
+    <button type="submit" class="submit-btn" >Add to deVault</button>
+  </form>
 </div>

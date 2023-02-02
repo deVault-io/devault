@@ -12,11 +12,15 @@
 body {
   background-color: var(--primary-white);
   margin-bottom: 100px;
-  margin-top: 50px;
   display: flex ;
   flex-direction:column;
   align-items: center;
 }
+
+h1, h2, h3, h4 {
+  color: var(--primary-purlple-dark);
+}
+
 li a {
   text-decoration: none !important;
 }
@@ -28,6 +32,7 @@ li a {
   --primary-black: #252323;
   --secondary-black:#3a3a3a;
   --primary-red: rgb(225, 144, 144);
+  --error-red: #db433e;
   --tiny-font-size: .625rem;
 }
 
@@ -200,7 +205,21 @@ transform: scale(0.5);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10vh;
+  margin-top: 7vh;
+  max-width: 60%;
+}
+
+.form-container-lists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7vh;
+  max-width: 80%;
+}
+
+.form-container-lists > p {
+  margin-top: 35px;
 }
 
 .form-logo {
@@ -244,6 +263,41 @@ form > label {
   opacity: 1;
   transform: scale(0.7)
 }
+
+.already-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: inherit;
+}
+
+/* ERRORS */
+.error-notice{
+  margin:5px; /* Make sure to keep some distance from all sides */
+}
+
+.oaerror{
+  width:80%;
+  background-color: var(--primary-white);
+  padding:20px;
+  border:1px solid #eee;
+  border-left-width:5px;
+  border-radius: 3px;
+  margin:10px auto;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.danger{
+  border-left-color: var(--error-red);
+  background-color: rgba(217, 83, 79, 0.1); 
+}
+
+.danger strong {
+  color: var(--error-red);
+  background-color: rgba(217, 84, 79, 0);
+}
+
 /* SUBMIT BUTTONS */
 .submit-btn {
   width: 70%;
@@ -332,6 +386,10 @@ input.input-old[required]:before {
   color: var(--primary-purlple-dark);
   transition: border 150ms cubic-bezier(0.4,0,0.2,1);
  }
+
+ .input::placeholder {
+  opacity: 0; outline: 0; border: 0;
+ }
  
  .user-label {
   position: absolute;
@@ -341,11 +399,36 @@ input.input-old[required]:before {
   transform: translateY(1rem);
   transition: 150ms cubic-bezier(0.4,0,0.2,1);
  }
+
+ p.tag-label {
+  color: var(--primary-purlple-dark);
+  margin-bottom: 10px;
+  margin-left: 10px;
+ }
+
+ select#tag {
+  border-radius: 1rem;
+ }
+
+ select#tag > option {
+  margin-left: 10px;
+  margin-top: 5px;
+  color: var(--primary-purlple-dark);
+ }
+
+ select[multiple]:focus option:checked {
+  background: #b6a3cc linear-gradient(0deg, #b6a3cc 0%, #b6a3cc 100%);
+  font-weight: bold;
+  }
  
  /* added .input class so that new style doesn't affect signup form */
  .input:focus, input.input:valid {
   outline: none;
   border: 1.5px solid var(--primary-purlple-dark);
+ }
+
+ .input:focus::placeholder {
+  opacity: 1; outline: 1; border: 1;
  }
  
  .input:focus ~ label, input.input:valid ~ label {
@@ -432,19 +515,20 @@ input.input-old[required]:before {
 
 .tool-header {
   display: flex;
-  /* flex-wrap: wrap; */
-  /* align-content: space-between; */
   align-items: baseline;
-  /* justify-content: space-between; */
   margin-top: 30px;
 }
 
 .tool-header-content {
+  display: flex;
+  justify-content: left;
   width: 50%;
 }
 
 .tool-header-content a {
   text-decoration: none;
+  display: flex;
+  justify-content: left;
 }
 
 .tool-name {

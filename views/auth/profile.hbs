@@ -1,11 +1,8 @@
 <h1>Welcome {{user.username}}</h1>
   <div class="profile-container">
-    
     <img src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w" class="user-avatar">
     <p>Email: {{user.email}}</p>
+    <a href="/lists" id="vault-btn">My Library</a>
     <a href="/profile/edit">Edit profile</a> 
-    <a href="/tools/myTools" id="vault-btn">My Vault</a>
-    <a href="/tools/myFavs">My favorites</a>
-    <a href="/"> ← Go Home {{user.username}}!</a>
     <a href="/auth/logout">Logout</a>
   </div>

@@ -1,9 +1,14 @@
-<h1>Welcome {{ username }}</h1>
-
-<div class="edit-profile-container">
-<form method="POST" action="/profile/edit">
-  <label>New username:</label>
-  <input type="text" name="username" required="true" value="{{username}}" />
-  <button type="submit"class="submit-btn">Save changes</button>
-</form>
+<div class="form-container-login">
+  <h1>{{ username }}'s Profile</h1>
+  <form class="login" method="POST" action="/profile/edit">
+    <div class="input-group">
+      <input type="text" name="username" required="true" value="{{username}}" autocomplete="off" class="input"/>
+      <label class="user-label">New username</label>
+    </div>
+    <div class="input-group">
+      <input type="text" name="email" required="true" value="{{email}}" autocomplete="off" class="input"/>
+      <label class="user-label">New email</label>
+    </div>
+    <button type="submit"class="submit-btn">Save</button>
+  </form>
 </div>

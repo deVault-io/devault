@@ -1,0 +1,10 @@
+<div class="form-container-lists">
+<h1>{{user.username}} Favourites</h1>
+<p>These are the tools you have favourited.</p>
+
+<div class="cards-wrapped-container">
+  {{#each favs}}
+    {{>favCard this}}
+  {{/each}}
+</div>
+</div>
