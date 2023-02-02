@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
  
 const listSchema = new Schema(
   {
+    default: {
+      type: Boolean,
+      default: false,
+    },
     listName: {
       type: String,
       trim: true,

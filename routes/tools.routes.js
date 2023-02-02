@@ -58,7 +58,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   } else{
     const itemsToRandom = await Tool.find({field: `${tool.field}`, _id: { $ne: tool._id }});
     const items = itemsToRandom.sort(()=> 0.5- Math.random()).slice(0,3);
-    res.render('toolDetail', { user, tool, items:items });
+    res.render('toolDetail', { user, tool, items: items });
     return items;
   }
     
@@ -69,8 +69,9 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const items = await Tool.find({ field: tool.field, _id: { $ne: tool._id } })
       .skip(random)
       .limit(3);
-    const isLoggedInUserCreator =
-      tool.user._id.toString() == user._id ? true : false;
+      console.log(items)
+    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+    
     res.render("toolDetail", {
       user,
       tool,
