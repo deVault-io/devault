@@ -13,8 +13,6 @@ router.get('/', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const lists = await Lists.find({user: user});
-    console.log(lists)
-    console.log(lists.user)
     res.render('lists/favsList', {user, lists});
   } catch (error) {
     next(error)
@@ -28,7 +26,6 @@ router.get('/:listId', async function (req, res, next) {
   try {
     const list = await Lists.findById(listId).populate('user');
     const favs = await Favs.find({});
-    console.log(favs)
     res.render('lists/favsListDetail', { user, list, favs });
   } catch (error) {
     next(error)
