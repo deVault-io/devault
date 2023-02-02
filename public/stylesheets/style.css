@@ -465,19 +465,20 @@ input.input-old[required]:before {
 
 .tool-header {
   display: flex;
-  /* flex-wrap: wrap; */
-  /* align-content: space-between; */
   align-items: baseline;
-  /* justify-content: space-between; */
   margin-top: 30px;
 }
 
 .tool-header-content {
+  display: flex;
+  justify-content: left;
   width: 50%;
 }
 
 .tool-header-content a {
   text-decoration: none;
+  display: flex;
+  justify-content: left;
 }
 
 .tool-name {

@@ -17,10 +17,10 @@ router.get('/profile/edit', isLoggedIn, function (req, res, next) {
 
 /* POST user edit. */
 router.post('/profile/edit', isLoggedIn, async function (req, res, next) {
-  const { username } = req.body;
+  const { username, email } = req.body;
   const user = req.session.currentUser;
   try {
-    const userInDB = await User.findByIdAndUpdate(user._id, { username }, { new: true });
+    const userInDB = await User.findByIdAndUpdate(user._id, { username, email }, { new: true });
     req.session.currentUser = userInDB;
     res.redirect('/profile');
   } catch (error) {
