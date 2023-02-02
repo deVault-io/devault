@@ -1,4 +1,28 @@
 {{#if items}}
+
+<form method="POST" action="/tools/search" id="index-form"> 
+  <span class="search-bar">
+  <input placeholder="Search into the Vault!"type="text" name="input" class="search-input"/>
+  <button type="submit" class="search-btn">Go!</button>
+  </span>
+   <div class="bubble-container">
+    <ul>
+		  <li><a href="#" class="bubble">UX/UI</a></li>
+      <li><a href="#" class="bubble">Front End</a></li>
+      <li><a href="#" class="bubble">Back End</a></li>
+		  <li><a href="#" class="bubble">Data Science</a></li>
+       <li><a href="#" class="bubble">Mobile</a></li>
+		  <li><a href="#" class="bubble">Full Stack </a></li>
+		  <li><a href="#" class="bubble">Cloud Computing</a></li>
+		  <li><a href="#" class="bubble">DevOps</a></li>
+		  <li><a href="#" class="bubble">Cybersecurity</a></li>
+		  <li><a href="#" class="bubble">Quality Assurance</a></li>
+      <li><a href="#" class="bubble">Other</a></li>
+    </ul>
+  </div>
+</form>
+
+<h2 class="search-page-header" id="search-page-header">THESE ARE THE AMAZING TOOLS WE FOUND FOR YOU:</h2>
 {{#each items}}
 <div class="card-container" id="detail-card">
     <div class="tool-image">
@@ -12,6 +36,12 @@
    <div class="tool-link">
       <a class="submit-btn-small" href={{this.url}}>Check Website</a>
     </div>
+     <div class="tool-header-content">
+      <a href="/favs" class="nav__link active-link">
+        <i class='bx bx-bookmark-heart nav__icon'></i>
+        <span class="nav__name">Favs</span>
+      </a>
+    </div>    
   <span class="btn-span">
     {{#if isLoggedInUserCreator}} 
         <a href="/tools/{{this._id}}/delete" id="delete-tool-btn">Delete</a>
