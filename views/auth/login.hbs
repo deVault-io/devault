@@ -11,7 +11,11 @@
   </div>
   <button type="submit" class="submit-btn">Login</button>
     {{#if error}}
-      <p style="color:rgb(218, 90, 90)">{{ error }}</p>
+      <div class="error-notice">
+        <div class="oaerror danger">
+          <strong>Error</strong> {{error}}
+        </div>
+      </div>
     {{/if}}
   </form>
   <div class="already-user-container">

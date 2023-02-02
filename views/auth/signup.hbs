@@ -15,7 +15,11 @@
   </div>
   <button type="submit" class="submit-btn">Create account</button>
     {{#if error}}
-      <p style="color: red;">{{error}}</p>
+      <div class="error-notice">
+        <div class="oaerror danger">
+          <strong>Error</strong> {{error}}
+        </div>
+      </div>
     {{/if}}
   </form>
   <div class="already-user-container">
