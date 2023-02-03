@@ -1,0 +1,17 @@
+<form method="POST" action="/tools/search" id="index-form"> 
+  <span class="search-bar">
+  <input placeholder="Search into the Vault!"type="text" name="input" class="search-input"/>
+  <button type="submit" class="search-btn">Go!</button>
+  </span>
+  <div class="scrollmenu">
+     {{#each tag}}
+      <a href="/tools/search/{{this}}" class="{{this}}">{{this}}</a>
+  {{/each}}
+  </div>
+</form>
+
+<div class="cards-wrapped-container">
+  {{#each tools}}
+    {{>toolCard this}}
+  {{/each}}
+</div>

@@ -676,7 +676,7 @@ input.input-old[required]:before {
   margin:10px 0px;
   width:50%;
   padding: 5px 40px;
-  width:min-content;
+  width:max-content;
   text-align: center;
   font-size: 15px;
   letter-spacing: 1px;

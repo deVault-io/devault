@@ -37,6 +37,11 @@ router.post('/new', isLoggedIn, async function (req, res, next) {
   }
 });
 
+/* GET Tools to add */
+router.get('/:listId/add', isLoggedIn, function (req, res, next) {
+  res.render('lists/favsAddToList');
+});
+
 /* GET One list */
 router.get('/:listId', async function (req, res, next) {
   const { listId } = req.params;
