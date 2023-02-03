@@ -1,0 +1,14 @@
+<div class="form-container-login">
+  <h1>Add a new List</h1>
+  <form  class="login" action="/lists/new" method="POST">
+    <div class="input-group">
+      <input required type="text" name="listName" placeholder="My List Name" autocomplete="off" class="input"/>
+      <label class="user-label">List Name</label>
+    </div>
+    <div class="input-group">
+      <input required type="text" name="image" placeholder="https://..." autocomplete="off" class="input"/>
+      <label class="user-label">List Cover</label>
+    </div>
+    <button type="submit" class="submit-btn" >Create List</button>
+  </form>
+</div>
