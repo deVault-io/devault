@@ -64,7 +64,7 @@ router.post('/login', async (req, res, next) => {
     return;
   }
   try {
-    const userInDB = await User.findOne({ email: email });
+    const userInDB = await User.findOne({ email: email, status: 'ACTIVE' });
     if (!userInDB) {
       res.render('auth/login', { error: `There are no users by ${email}` });
       return;
@@ -91,7 +91,7 @@ router.get('/logout', isLoggedIn, (req, res, next) => {
     if (err) {
       next(err)
     } else {
-      res.clearCookie('lab-express-rooms-with-reviews')
+      res.clearCookie('devault-app')
       res.redirect('/');
     }
   });

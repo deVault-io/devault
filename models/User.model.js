@@ -34,6 +34,11 @@ const userSchema = new Schema(
     list: {
       type: Schema.Types.ObjectId,
       ref: 'List'
+    },
+    status:{
+      type: String,
+      enum : ['ACTIVE','DELETED'],
+      default: 'ACTIVE'
     }
   },
   {

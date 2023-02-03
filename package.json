@@ -6,6 +6,7 @@
     "seedTools": "node ./seed/index.js",
     "seedFavs": "node ./seed/favs.js",
     "seedLists": "node ./seed/lists.js",
+    "seedUsers": "node ./seed/users.js",
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www"
   },
