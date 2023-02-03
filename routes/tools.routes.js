@@ -168,5 +168,87 @@ router.post("/tools/search", async function (req, res, next) {
   );
   res.render("toolSearchResults", { user, items });
 });
+//  FINE SEARCH
+router.post("/tools/finesearch", async function (req, res, next) {
+  const textToSearch = req.body.search;
+  const fieldToSearch = req.body.field;
+  const tagToSearch = req.body.tag;
+
+  console.log(`Search: ${textToSearch}`);
+  console.log(`Field: ${fieldToSearch}`);
+  console.log(`Tags: ${tagToSearch}`);
+  const user = req.session.currentUser;
+  const searchTerm = req.body.input;
+  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const field = tools.map((tool) => tool.field);
+  const words = textToSearch
+    .split(" ")
+    .filter((word) => !exclude.includes(word));
+  const regex = new RegExp(words.join("|"), "i");
+  const items = await Tool.aggregate(
+    [
+      {
+        $match: {
+          $or: [{ description: { $regex: regex } }],
+        },
+      },
+    ],
+    function (err, result) {}
+  );
+  console.log(`Tags: ${items}`);
+  res.render("toolSearchResults", { user, items });
+});
 
 module.exports = router;
+
+// MATCH travieso
+// [
+//   {
+//     $match: {
+//       $and: [
+//         {
+//           $or: [
+//             {
+//               description: {
+//                 $regex: regex,
+//               },
+//             },
+//             {
+//               name: {
+//                 $regex: regex,
+//               },
+//             },
+//           ],
+//         },
+//         {
+//           $or: [
+//             {
+//               field: {
+//                 $in: fieldToSearch,
+//               },
+//             },
+//             {
+//               field: {
+//                 $exists: !fieldToSearch,
+//               },
+//             },
+//           ],
+//         },
+//         {
+//           $or: [
+//             {
+//               tag: {
+//                 $in: tagToSearch,
+//               },
+//             },
+//             {
+//               tag: {
+//                 $exists: !tagToSearch,
+//               },
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   },
+// ]

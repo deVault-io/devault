@@ -10,7 +10,7 @@
   </div>
 </form>
 <div class="advanced-search-container">
-<form action="/" method="post">
+<form action="/tools/finesearch" method="post">
   <fieldset>
     <legend>Search Tool</legend>
     <div>
@@ -20,12 +20,19 @@
     <div>
       <label for="field">Field:</label>
       <select id="field" name="field">
-        <option value="UX/UI">UX/UI</option>
+         <option value="">Select Field</option>
+        {{#each field}}
+      <option value="{{this}}">{{this}}</option>
+  {{/each}} 
       </select>
     </div>
     <div>
       <label for="tags">Tags:</label>
-     
+     <select id="tad-select" name="tag" multiple>
+         <option value="">Select tags</option>
+       {{#each tag}}
+      <option value="{{this}}">{{this}}</option>
+  {{/each}} 
       </select>
     </div>
     <div>
@@ -36,3 +43,4 @@
 
 
 </div>
+
