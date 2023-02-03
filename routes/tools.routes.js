@@ -79,25 +79,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
     next(error);
   }
 });
-// TOOL RETURNS RANDOM TOOL BASED ON NUMBER OF MATCHES IN SEARCH
-const randomTool = async function (){
-  try {
-  const tool = await Tool.findById(toolId).populate('user');
-  const count = await Tool.count({field:`${tool.field}`});
-  if (count <= 3){
-    const items = await Tool.aggregate([{$sample: {size: 3}}]);
-    res.render('toolDetail', { user, tool, items:items });
-    return items
-  } else{
-    const itemsToRandom = await Tool.find({field: `${tool.field}`, _id: { $ne: tool._id }});
-    const items = itemsToRandom.sort(()=> 0.5- Math.random()).slice(0,3);
-    res.render('toolDetail', { user, tool, items: items });
-    return items;
-  }
-} catch (error) {
-  next(error);
-}
-}
+
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
@@ -147,27 +129,6 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   }
 });
 
-/* GET one tool edit */
-/* ROUTE /tools/discover */
-// PUBLIC ROUTE
-// FLAT MAP HELPER FUNCTION
-function flatMap(array, mapper) {
-  return [].concat(...array.map(mapper));
-}
-router.get("/tools/discover", async function (req, res, next) {
-  try{
-    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
-    const tag = [...new Set(flatMap(tools, tool => tool.tag))];
-    const field = [...new Set(flatMap(tools, tool => tool.field))];
-    const user = req.session.currentUser;
-    res.render("toolSearchResults", { user, field, tag });
-
-  } catch(error) {
-    next(error);
-  }
-});
-
-
 //  SEARCH TEXT INPUT
 router.post("/tools/search", async function (req, res, next) {
   const user = req.session.currentUser;
@@ -189,6 +150,30 @@ router.post("/tools/search", async function (req, res, next) {
 });
 res.render("toolSearchResults", { user, items });
 });
+
+
+/* ROUTE /tools/discover */
+// PUBLIC ROUTE
+// FLAT MAP HELPER FUNCTION
+function flatMap(array, mapper) {
+  return [].concat(...array.map(mapper));
+}
+router.get("/tools/discover", async function (req, res, next) {
+  try{
+    const user = req.session.currentUser;
+    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
+    const tag = [...new Set(flatMap(tools, tool => tool.tag))];
+    console.log(tag)
+    const field = [...new Set(flatMap(tools, tool => tool.field))];
+    console.log(field)
+    res.render("toolDiscover", { user, field, tag, tools });
+
+  } catch(error) {
+    next(error);
+  }
+});
+
+
 
 
 
