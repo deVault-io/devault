@@ -7,20 +7,10 @@
   <input placeholder="Search into the Vault!"type="text" name="input" class="search-input"/>
   <button type="submit" class="search-btn">Go!</button>
   </span>
-  <div class="bubble-container">
-    <ul>
-		  <li><a href="#" class="bubble">UX/UI</a></li>
-      <li><a href="#" class="bubble">Front End</a></li>
-      <li><a href="#" class="bubble">Back End</a></li>
-		  <li><a href="#" class="bubble">Data Science</a></li>
-       <li><a href="#" class="bubble">Mobile</a></li>
-		  <li><a href="#" class="bubble">Full Stack </a></li>
-		  <li><a href="#" class="bubble">Cloud Computing</a></li>
-		  <li><a href="#" class="bubble">DevOps</a></li>
-		  <li><a href="#" class="bubble">Cybersecurity</a></li>
-		  <li><a href="#" class="bubble">Quality Assurance</a></li>
-      <li><a href="#" class="bubble">Other</a></li>
-    </ul>
+  <div class="scrollmenu">
+     {{#each field}}
+      <a href="/tools/search/{{this}}" class="{{this}}">{{this}}</a>
+  {{/each}}
   </div>
 </form>
 
