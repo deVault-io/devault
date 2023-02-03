@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
-const exclude= require('../data/exclude');
+const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 
@@ -14,7 +14,25 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render("newTool", { user });
 });
-
+/* ROUTE /tools/discover */
+// PUBLIC ROUTE
+// FLAT MAP HELPER FUNCTION
+function flatMap(array, mapper) {
+  return [].concat(...array.map(mapper));
+}
+router.get("/tools/discover", async function (req, res, next) {
+  try {
+    const user = req.session.currentUser;
+    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+    const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
+    console.log(tag);
+    const field = [...new Set(flatMap(tools, (tool) => tool.field))];
+    console.log(field);
+    res.render("toolDiscover", { user, field, tag, tools });
+  } catch (error) {
+    next(error);
+  }
+});
 /* POST  GET USERS NEW TOOL */
 /* ROUTE /Tools/new */
 router.post("/tools/new", isLoggedIn, async function (req, res, next) {
@@ -45,39 +63,37 @@ router.post("/tools/new", isLoggedIn, async function (req, res, next) {
 /* ROUTE /tools/:toolId */
 // PUBLIC ROUTE
 router.get("/tools/:toolId", async function (req, res, next) {
-  // _id: { $ne: tool._id }
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  if (!req.session.currentUser) {
-    const tool = await Tool.findById(toolId).populate('user');
-    const count = await Tool.count({field:`${tool.field}`});
-  if (count <= 3){
-    const items = await Tool.aggregate([{$sample: {size: 3}}]);
-    res.render('toolDetail', { user, tool, items:items });
-    return items
-  } else{
-    const itemsToRandom = await Tool.find({field: `${tool.field}`, _id: { $ne: tool._id }});
-    const items = itemsToRandom.sort(()=> 0.5- Math.random()).slice(0,3);
-    res.render('toolDetail', { user, tool, items: items });
-    return items;
-  }
-    
-  } try {
-    const count = await Tool.countDocuments();
-    const random = Math.floor(Math.random() * count);
-    const tool = await Tool.findById(toolId).populate("user");
-    const items = await Tool.find({ field: tool.field, _id: { $ne: tool._id } })
-      .skip(random)
-      .limit(3);
-      console.log(items)
-    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
-    
-    res.render("toolDetail", {
-      user,
-      tool,
-      items: items,
-      isLoggedInUserCreator,
-    });
+  console.log(tool);
+  let items = [];
+  try {
+    const count = await Tool.count({ field: `${tool.field}` });
+    if (count <= 3) {
+      items = await Tool.aggregate([{ $sample: { size: 3 } }]);
+    } else if (count > 3) {
+      const itemsToRandom = await Tool.find({
+        field: `${tool.field}`,
+        _id: { $ne: tool._id },
+      });
+      items = itemsToRandom.sort(() => 0.5 - Math.random()).slice(0, 3);
+    }
+    if (req.session.currentUser) {
+      const isLoggedInUserCreator =
+        tool.user._id.toString() == user._id ? true : false;
+      res.render("toolDetail", {
+        user,
+        tool,
+        items: items,
+        isLoggedInUserCreator,
+      });
+    } else {
+      res.render("toolDetail", {
+        user,
+        tool,
+        items: items,
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -124,32 +140,114 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   try {
     const tool = await Tool.findById(toolId).populate("user");
     await Favs.deleteMany({ tool: toolId });
-    await Tool.deleteOne({ _id: toolId })
+    await Tool.deleteOne({ _id: toolId });
     res.redirect("/");
   } catch (error) {
     next(error);
   }
 });
 
-/* GET one tool edit */
-/* ROUTE /tools/:toolId/edit */
+//  SEARCH TEXT INPUT
 router.post("/tools/search", async function (req, res, next) {
   const user = req.session.currentUser;
   const searchTerm = req.body.input;
-  const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
+  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const field = tools.map((tool) => tool.field);
+  const words = searchTerm.split(" ").filter((word) => !exclude.includes(word));
   const regex = new RegExp(words.join("|"), "i");
   const items = await Tool.aggregate(
     [
-    {
+      {
         $match: {
-            $or: [{ description: { $regex: regex } }
-            ]
-        }
-    }
-], function(err, result) {
-  
+          $or: [{ description: { $regex: regex } }],
+        },
+      },
+    ],
+    function (err, result) {}
+  );
+  res.render("toolSearchResults", { user, items });
 });
-res.render("toolSearchResults", { user, items });
+//  FINE SEARCH
+router.post("/tools/finesearch", async function (req, res, next) {
+  const textToSearch = req.body.search;
+  const fieldToSearch = req.body.field;
+  const tagToSearch = req.body.tag;
+
+  console.log(`Search: ${textToSearch}`);
+  console.log(`Field: ${fieldToSearch}`);
+  console.log(`Tags: ${tagToSearch}`);
+  const user = req.session.currentUser;
+  const searchTerm = req.body.input;
+  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const field = tools.map((tool) => tool.field);
+  const words = textToSearch
+    .split(" ")
+    .filter((word) => !exclude.includes(word));
+  const regex = new RegExp(words.join("|"), "i");
+  const items = await Tool.aggregate(
+    [
+      {
+        $match: {
+          $or: [{ description: { $regex: regex } }],
+        },
+      },
+    ],
+    function (err, result) {}
+  );
+  console.log(`Tags: ${items}`);
+  res.render("toolSearchResults", { user, items });
 });
 
 module.exports = router;
+
+// MATCH travieso
+// [
+//   {
+//     $match: {
+//       $and: [
+//         {
+//           $or: [
+//             {
+//               description: {
+//                 $regex: regex,
+//               },
+//             },
+//             {
+//               name: {
+//                 $regex: regex,
+//               },
+//             },
+//           ],
+//         },
+//         {
+//           $or: [
+//             {
+//               field: {
+//                 $in: fieldToSearch,
+//               },
+//             },
+//             {
+//               field: {
+//                 $exists: !fieldToSearch,
+//               },
+//             },
+//           ],
+//         },
+//         {
+//           $or: [
+//             {
+//               tag: {
+//                 $in: tagToSearch,
+//               },
+//             },
+//             {
+//               tag: {
+//                 $exists: !tagToSearch,
+//               },
+//             },
+//           ],
+//         },
+//       ],
+//     },
+//   },
+// ]

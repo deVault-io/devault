@@ -1,27 +1,33 @@
-{{#if items}}
-
-<form method="POST" action="/tools/search" id="index-form"> 
-  <span class="search-bar">
-  <input placeholder="Search into the Vault!"type="text" name="input" class="search-input"/>
-  <button type="submit" class="search-btn">Go!</button>
-  </span>
-   <div class="bubble-container">
-    <ul>
-		  <li><a href="#" class="bubble">UX/UI</a></li>
-      <li><a href="#" class="bubble">Front End</a></li>
-      <li><a href="#" class="bubble">Back End</a></li>
-		  <li><a href="#" class="bubble">Data Science</a></li>
-       <li><a href="#" class="bubble">Mobile</a></li>
-		  <li><a href="#" class="bubble">Full Stack </a></li>
-		  <li><a href="#" class="bubble">Cloud Computing</a></li>
-		  <li><a href="#" class="bubble">DevOps</a></li>
-		  <li><a href="#" class="bubble">Cybersecurity</a></li>
-		  <li><a href="#" class="bubble">Quality Assurance</a></li>
-      <li><a href="#" class="bubble">Other</a></li>
-    </ul>
-  </div>
+<div class="advanced-search-container">
+<form action="/" method="post">
+  <fieldset>
+    <legend>Search Tool</legend>
+    <div>
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search">
+    </div>
+    <div>
+      <label for="field">Field:</label>
+      <select id="field" name="field">
+        <option value="UX/UI">UX/UI</option>
+      </select>
+    </div>
+    <div>
+      <label for="tags">Tags:</label>
+     
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Submit">
+    </div>
+  </fieldset>
 </form>
 
+
+</div>
+
+
+{{#if items}}
 <h2 class="search-page-header" id="search-page-header">THESE ARE THE AMAZING TOOLS WE FOUND FOR YOU:</h2>
 {{#each items}}
 <div class="card-container" id="detail-card">

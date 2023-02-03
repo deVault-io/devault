@@ -61,9 +61,9 @@
         </a>
       </li>
       <li class="nav__item">
-        <a href="/" class="nav__link active-link">
-          <i class='bx bx-search nav__icon'></i>
-          <span class="nav__name">Search</span>
+        <a href="/tools/discover" class="nav__link active-link">
+          <i class='bx bx-compass nav__icon' ></i>
+          <span class="nav__name">Discover</span>
         </a>
       </li>
       <li class="nav__item">
@@ -83,6 +83,7 @@
   </nav>
     {{{ body }}}
     <script>
+              {{!-- NAVBAR SHADOWN ON SCROLL --}}
       const navBar = document.getElementById('nav-menu');
       window.onscroll = function(){
         if (window.scrollY >22){
@@ -101,7 +102,7 @@ if (currentTheme == "dark") {
 } else if (currentTheme == "light") {
   document.body.classList.toggle("light-theme");
 }
-
+          {{!-- DARK MODE SCRIPT --}}
 btn.addEventListener("click", function () {
   if (prefersDarkScheme.matches) {
     document.body.classList.toggle("light-theme");
@@ -123,7 +124,19 @@ btn.addEventListener("click", function () {
 
   localStorage.setItem("theme", theme);
 });
-
+$('option').mousedown(function(e) {
+    e.preventDefault();
+    var originalScrollTop = $(this).parent().scrollTop();
+    console.log(originalScrollTop);
+    $(this).prop('selected', $(this).prop('selected') ? false : true);
+    var self = this;
+    $(this).parent().focus();
+    setTimeout(function() {
+        $(self).parent().scrollTop(originalScrollTop);
+    }, 0);
+    
+    return false;
+});
     </script>
 </body>
 </html>
