@@ -45,7 +45,6 @@ router.post("/tools/new", isLoggedIn, async function (req, res, next) {
 /* ROUTE /tools/:toolId */
 // PUBLIC ROUTE
 router.get("/tools/:toolId", async function (req, res, next) {
-  // _id: { $ne: tool._id }
   const { toolId } = req.params;
   const tool = await Tool.findById(toolId).populate("user");
   const user = req.session.currentUser;
@@ -149,10 +148,32 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 });
 
 /* GET one tool edit */
-/* ROUTE /tools/:toolId/edit */
+/* ROUTE /tools/discover */
+// PUBLIC ROUTE
+// FLAT MAP HELPER FUNCTION
+function flatMap(array, mapper) {
+  return [].concat(...array.map(mapper));
+}
+router.get("/tools/discover", async function (req, res, next) {
+  try{
+    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
+    const tag = [...new Set(flatMap(tools, tool => tool.tag))];
+    const field = [...new Set(flatMap(tools, tool => tool.field))];
+    const user = req.session.currentUser;
+    res.render("toolSearchResults", { user, field, tag });
+
+  } catch(error) {
+    next(error);
+  }
+});
+
+
+//  SEARCH TEXT INPUT
 router.post("/tools/search", async function (req, res, next) {
   const user = req.session.currentUser;
   const searchTerm = req.body.input;
+  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
+  const field = tools.map(tool => tool.field);
   const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
   const regex = new RegExp(words.join("|"), "i");
   const items = await Tool.aggregate(
@@ -168,5 +189,9 @@ router.post("/tools/search", async function (req, res, next) {
 });
 res.render("toolSearchResults", { user, items });
 });
+
+
+
+
 
 module.exports = router;
