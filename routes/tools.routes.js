@@ -148,7 +148,7 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 });
 
 //  SEARCH TEXT INPUT
-router.post("/tools/search", async function (req, res, next) {
+router.post("/tools/search/:tag", async function (req, res, next) {
   const user = req.session.currentUser;
   const searchTerm = req.body.input;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
@@ -172,31 +172,75 @@ router.post("/tools/finesearch", async function (req, res, next) {
   const textToSearch = req.body.search;
   const fieldToSearch = req.body.field;
   const tagToSearch = req.body.tag;
-
-  console.log(`Search: ${textToSearch}`);
-  console.log(`Field: ${fieldToSearch}`);
-  console.log(`Tags: ${tagToSearch}`);
   const user = req.session.currentUser;
-  const searchTerm = req.body.input;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
   const field = tools.map((tool) => tool.field);
-  const words = textToSearch
+  const filter = [];
+  if (textToSearch) {
+    const words = textToSearch
     .split(" ")
     .filter((word) => !exclude.includes(word));
-  const regex = new RegExp(words.join("|"), "i");
-  const items = await Tool.aggregate(
-    [
+  const wordVariants = words.map(word => [word, word + 's', word.slice(0, -1)]).flat();
+  console.log(wordVariants)
+  const textRegex = new RegExp(wordVariants.join("|"), "i");
+    filter.push({ description: { $regex: textRegex } });
+  }
+  if (fieldToSearch) {
+    filter.push({ field: fieldToSearch });
+  }
+  if (tagToSearch) {
+    const tagWords = tagToSearch
+    .split(" ")
+    .filter((word) => !exclude.includes(word));
+    const tagRegex = new RegExp(tagWords.join("|"), "i");
+    filter.push({ tag: { $regex: tagRegex } });
+  }
+  console.log(filter)
+  if (filter.length > 0) {
+    const items = await Tool.aggregate([
       {
         $match: {
-          $or: [{ description: { $regex: regex } }],
-        },
-      },
-    ],
-    function (err, result) {}
-  );
-  console.log(`Tags: ${items}`);
-  res.render("toolSearchResults", { user, items });
+          $and: filter
+        }
+      }
+    ], function (err, result) {});
+    console.log(`Tags: ${items}`);
+    res.render("toolSearchResults", { user, items });
+  } else {
+    console.log(`No search criteria provided`);
+    res.render("toolSearchResults", { user, items: [] });
+  }
 });
+
+
+// router.post("/tools/finesearch", async function (req, res, next) {
+//   const textToSearch = req.body.search;
+//   const fieldToSearch = req.body.field;
+//   const tagToSearch = req.body.tag;
+
+//   console.log(`Search: ${textToSearch}`);
+//   console.log(`Field: ${fieldToSearch}`);
+//   console.log(`Tags: ${tagToSearch}`);
+//   const user = req.session.currentUser;
+//   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+//   const field = tools.map((tool) => tool.field);
+//   const words = textToSearch
+//     .split(" ")
+//     .filter((word) => !exclude.includes(word));
+//   const regex = new RegExp(words.join("|"), "i");
+//   const items = await Tool.aggregate(
+//     [
+//       {
+//         $match: {
+//           $or: [{ description: { $regex: regex } }],
+//         },
+//       },
+//     ],
+//     function (err, result) {}
+//   );
+//   console.log(`Tags: ${items}`);
+//   res.render("toolSearchResults", { user, items });
+// });
 
 module.exports = router;
 
