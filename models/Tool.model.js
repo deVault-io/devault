@@ -11,7 +11,6 @@ const toolSchema = new Schema(
     description: {
       type: String,
       required: [true, 'Email is required.'],
-      unique: true,
       lowercase: true,
       trim: true
     },
@@ -22,11 +21,11 @@ const toolSchema = new Schema(
     image: {
         type: String,
         default:'https://i.imgur.com/ExgDzpE.png',
-      },
+    }, 
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-      },
+    },
     field:{
         type: [String],
         enum : ['UX/UI','Front End','Data Science','Back End','Data Science','Mobile','Full Stack','Cloud Computing','DevOps', 'Cybersecurity','Quality Assurance','Other'],

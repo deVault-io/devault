@@ -42,12 +42,13 @@ router.post("/tools/new", isLoggedIn, async function (req, res, next) {
     res.render('newTool', { error: 'image needs to be a valid http:// address'});
     return;
   } */
-  const { name, description, image, url, field, tag } = req.body;
+  const { name, description, image, /* imageFile, */ url, field, tag } = req.body;
   try {
     const createdTool = await Tool.create({
       name,
       description,
       image,
+      /* imageFile: `/Users/guillegarciac/Desktop/ggc_iron/second_module/devault/public/Images/${imageFile}` , */
       url,
       field,
       tag,
@@ -68,7 +69,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   console.log(tool);
   let items = [];
   try {
-    const count = await Tool.count({ field: `${tool.field}` });
+    const count = await Tool.count({ field: {$size: tool.field} });
     if (count <= 3) {
       items = await Tool.aggregate([{ $sample: { size: 3 } }]);
     } else if (count > 3) {
