@@ -10,7 +10,8 @@ router.get('/', async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
-    res.render('index', { user, tools });
+    const field = tools.map(tool => tool.field);
+    res.render('index', { user, tools, field });
   } catch (error) {
     next(error)
   }
