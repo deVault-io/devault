@@ -47,44 +47,10 @@ router.post("/tools/new", isLoggedIn, async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   // _id: { $ne: tool._id }
   const { toolId } = req.params;
-  const tool = await Tool.findById(toolId).populate("user");
   const user = req.session.currentUser;
-  console.log(tool);
-  let items = [];
-  try {
-    const count = await Tool.count({ field: `${tool.field}` });
-    if (count <= 3) {
-      items = await Tool.aggregate([{ $sample: { size: 3 } }]);
-    } else if (count > 3) {
-      const itemsToRandom = await Tool.find({
-        field: `${tool.field}`,
-        _id: { $ne: tool._id },
-      });
-      items = itemsToRandom.sort(() => 0.5 - Math.random()).slice(0, 3);
-    }  if (req.session.currentUser) {
-      const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
-      res.render("toolDetail", {
-        user,
-        tool,
-        items: items,
-        isLoggedInUserCreator,
-      });
-    } else {
-      res.render("toolDetail", {
-        user,
-        tool,
-        items: items,
-      });
-    }
-  } catch (error) {
-    next(error);
-  }
-});
-// TOOL RETURNS RANDOM TOOL BASED ON NUMBER OF MATCHES IN SEARCH
-const randomTool = async function (){
-  try {
-  const tool = await Tool.findById(toolId).populate('user');
-  const count = await Tool.count({field:`${tool.field}`});
+  if (!req.session.currentUser) {
+    const tool = await Tool.findById(toolId).populate('user');
+    const count = await Tool.count({field:`${tool.field}`});
   if (count <= 3){
     const items = await Tool.aggregate([{$sample: {size: 3}}]);
     res.render('toolDetail', { user, tool, items:items });
@@ -95,10 +61,27 @@ const randomTool = async function (){
     res.render('toolDetail', { user, tool, items: items });
     return items;
   }
-} catch (error) {
-  next(error);
-}
-}
+    
+  } try {
+    const count = await Tool.countDocuments();
+    const random = Math.floor(Math.random() * count);
+    const tool = await Tool.findById(toolId).populate("user");
+    const items = await Tool.find({ field: tool.field, _id: { $ne: tool._id } })
+      .skip(random)
+      .limit(3);
+      console.log(items)
+    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+    
+    res.render("toolDetail", {
+      user,
+      tool,
+      items: items,
+      isLoggedInUserCreator,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
