@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
-const exclude= require('../data/exclude');
+const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 
@@ -14,7 +14,25 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render("newTool", { user });
 });
-
+/* ROUTE /tools/discover */
+// PUBLIC ROUTE
+// FLAT MAP HELPER FUNCTION
+function flatMap(array, mapper) {
+  return [].concat(...array.map(mapper));
+}
+router.get("/tools/discover", async function (req, res, next) {
+  try {
+    const user = req.session.currentUser;
+    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+    const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
+    console.log(tag);
+    const field = [...new Set(flatMap(tools, (tool) => tool.field))];
+    console.log(field);
+    res.render("toolDiscover", { user, field, tag, tools });
+  } catch (error) {
+    next(error);
+  }
+});
 /* POST  GET USERS NEW TOOL */
 /* ROUTE /Tools/new */
 router.post("/tools/new", isLoggedIn, async function (req, res, next) {
@@ -60,8 +78,10 @@ router.get("/tools/:toolId", async function (req, res, next) {
         _id: { $ne: tool._id },
       });
       items = itemsToRandom.sort(() => 0.5 - Math.random()).slice(0, 3);
-    }  if (req.session.currentUser) {
-      const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+    }
+    if (req.session.currentUser) {
+      const isLoggedInUserCreator =
+        tool.user._id.toString() == user._id ? true : false;
       res.render("toolDetail", {
         user,
         tool,
@@ -79,7 +99,6 @@ router.get("/tools/:toolId", async function (req, res, next) {
     next(error);
   }
 });
-
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
@@ -122,7 +141,7 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   try {
     const tool = await Tool.findById(toolId).populate("user");
     await Favs.deleteMany({ tool: toolId });
-    await Tool.deleteOne({ _id: toolId })
+    await Tool.deleteOne({ _id: toolId });
     res.redirect("/");
   } catch (error) {
     next(error);
@@ -133,50 +152,21 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
 router.post("/tools/search", async function (req, res, next) {
   const user = req.session.currentUser;
   const searchTerm = req.body.input;
-  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
-  const field = tools.map(tool => tool.field);
-  const words = searchTerm.split(" ").filter(word => !exclude.includes(word));
+  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const field = tools.map((tool) => tool.field);
+  const words = searchTerm.split(" ").filter((word) => !exclude.includes(word));
   const regex = new RegExp(words.join("|"), "i");
   const items = await Tool.aggregate(
     [
-    {
+      {
         $match: {
-            $or: [{ description: { $regex: regex } }
-            ]
-        }
-    }
-], function(err, result) {
-  
+          $or: [{ description: { $regex: regex } }],
+        },
+      },
+    ],
+    function (err, result) {}
+  );
+  res.render("toolSearchResults", { user, items });
 });
-res.render("toolSearchResults", { user, items });
-});
-
-
-/* ROUTE /tools/discover */
-// PUBLIC ROUTE
-// FLAT MAP HELPER FUNCTION
-function flatMap(array, mapper) {
-  return [].concat(...array.map(mapper));
-}
-router.get("/tools/discover", async function (req, res, next) {
-  try{
-    const user = req.session.currentUser;
-    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
-    const tag = [...new Set(flatMap(tools, tool => tool.tag))];
-    console.log(tag)
-    const field = [...new Set(flatMap(tools, tool => tool.field))];
-    console.log(field)
-    res.render("toolDiscover", { user, field, tag, tools });
-
-  } catch(error) {
-    next(error);
-  }
-});
-
-
-
-
-
-
 
 module.exports = router;

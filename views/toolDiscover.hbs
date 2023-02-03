@@ -1,0 +1,38 @@
+<form method="POST" action="/tools/search" id="index-form"> 
+  <span class="search-bar">
+  <input placeholder="Search into the Vault!"type="text" name="input" class="search-input"/>
+  <button type="submit" class="search-btn">Go!</button>
+  </span>
+  <div class="scrollmenu">
+     {{#each tag}}
+      <a href="/tools/search/{{this}}" class="{{this}}">{{this}}</a>
+  {{/each}}
+  </div>
+</form>
+<div class="advanced-search-container">
+<form action="/" method="post">
+  <fieldset>
+    <legend>Search Tool</legend>
+    <div>
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search">
+    </div>
+    <div>
+      <label for="field">Field:</label>
+      <select id="field" name="field">
+        <option value="UX/UI">UX/UI</option>
+      </select>
+    </div>
+    <div>
+      <label for="tags">Tags:</label>
+     
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+
+
+</div>
