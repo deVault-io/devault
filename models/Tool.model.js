@@ -18,9 +18,9 @@ const toolSchema = new Schema(
       type: String,
       required: [true, 'URL is required.']
     },
-    image: {
-        type: String,
-        default:'https://i.imgur.com/ExgDzpE.png',
+    imageFile: {
+      type: String,
+      default:'https://i.imgur.com/ExgDzpE.png',
     }, 
     user: {
         type: Schema.Types.ObjectId,

@@ -509,6 +509,19 @@ input.input-old[required]:before {
   }
  
  /* added .input class so that new style doesn't affect signup form */
+
+input::file-selector-button {
+  color: var(--primary-purlple-dark);
+  background-color: var(--primary-white);
+  padding: 0.3em;
+  border: thin solid var(--primary-purlple-dark);
+  border-radius: 0.8rem;
+}
+
+input#file-upload {
+  color: var(--primary-purlple-dark);
+}
+
  .input:focus, input.input:valid {
   outline: none;
   border: 1.5px solid var(--primary-purlple-dark);
@@ -524,6 +537,7 @@ input.input-old[required]:before {
   padding: 0 .2em;
   color: var(--primary-purlple-dark);
  }
+
 
 /* USER PROFILE PAGE STYLING */
 .profile-container {
@@ -704,7 +718,7 @@ output .image span:hover {
 
 output .span--hidden{
   visibility: hidden;
-} */
+}  */
 
      /* CARD DETAIL STYLES */
 #detail-card{

@@ -6,6 +6,7 @@ const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
+const fileUploader = require('../config/cloudinary.config');
 
 /* GET form view */
 /* ROUTE /Tools/new 
@@ -35,20 +36,20 @@ router.get("/tools/discover", async function (req, res, next) {
 });
 /* POST  GET USERS NEW TOOL */
 /* ROUTE /Tools/new */
-router.post("/tools/new", isLoggedIn, async function (req, res, next) {
+router.post("/tools/new", isLoggedIn, fileUploader.single('imageFile'), async function (req, res, next) {
   const user = req.session.currentUser;
   /* const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   if (!regexUrl.test(imageUrl)) {
     res.render('newTool', { error: 'image needs to be a valid http:// address'});
     return;
   } */
-  const { name, description, image, /* imageFile, */ url, field, tag } = req.body;
+  const { name, description, image, url, field, tag } = req.body;
   try {
     const createdTool = await Tool.create({
       name,
       description,
       image,
-      /* imageFile: `/Users/guillegarciac/Desktop/ggc_iron/second_module/devault/public/Images/${imageFile}` , */
+      imageFile: req.file.path,
       url,
       field,
       tag,
@@ -63,7 +64,7 @@ router.post("/tools/new", isLoggedIn, async function (req, res, next) {
 /* GET one tool */
 /* ROUTE /tools/:toolId */
 // PUBLIC ROUTE
-router.get("/tools/:toolId", async function (req, res, next) {
+/* router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   console.log(tool);
@@ -98,7 +99,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   } catch (error) {
     next(error);
   }
-});
+}); */
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
