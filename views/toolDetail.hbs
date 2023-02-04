@@ -10,12 +10,7 @@
    <div class="tool-link">
       <a class="submit-btn-small" href={{url}}>Check Website</a>
     </div>
-  <span class="btn-span">
-    {{#if isLoggedInUserCreator}} 
-        <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
-        <a href="/tools/{{tool._id}}/edit" id="edit-tool-btn">Edit tool</a>
-    {{/if}}    
-    </span>
+ 
 </div>
 
 {{#if items}}
@@ -24,6 +19,7 @@
   {{>randomCard this}}
   {{/each}}
 {{/if}}
+
 
 
 

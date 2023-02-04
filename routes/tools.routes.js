@@ -63,13 +63,13 @@ router.post("/tools/new", isLoggedIn, fileUploader.single('imageFile'), async fu
 /* GET one tool */
 /* ROUTE /tools/:toolId */
 // PUBLIC ROUTE
-/* router.get("/tools/:toolId", async function (req, res, next) {
+router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  console.log(tool);
   let items = [];
   try {
-    const count = await Tool.count({ field: {$size: tool.field} });
+    const tool = await Tool.findById(toolId);
+    /* const count = await Tool.count({ field: {$size: tool.field} });
     if (count <= 3) {
       items = await Tool.aggregate([{ $sample: { size: 3 } }]);
     } else if (count > 3) {
@@ -88,17 +88,18 @@ router.post("/tools/new", isLoggedIn, fileUploader.single('imageFile'), async fu
         items: items,
         isLoggedInUserCreator,
       });
-    } else {
-      res.render("toolDetail", {
+      console.log(count)
+    } else { */
+      res.render("newToolDetail", {
         user,
         tool,
         items: items,
       });
-    }
+  
   } catch (error) {
     next(error);
   }
-}); */
+});
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */

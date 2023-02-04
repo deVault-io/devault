@@ -677,6 +677,47 @@ input#file-upload {
   display: flex; 
 }
 
+/* CARD DETAIL NEW STYLES */
+.card-detail-container-wrap{
+
+}
+
+.card-detail-container {
+
+}
+
+.card-detail-header {
+
+}
+
+.card-detail-header-title {
+
+}
+
+.card-detail-header-buttons {
+
+}
+
+.card-detail-header-buttons-link {
+
+}
+
+.card-detail-content {
+
+}
+
+.card-detail-content-img {
+
+}
+
+.card-detail-content-description {
+
+}
+
+.card-detail-content-edit-delete {
+
+}
+
 /* UPLOAD IMAGE STYLES */
 
 /* output{
@@ -835,7 +876,7 @@ output .span--hidden{
   width:90vw;
   display: flex;
   justify-content: space-evenly;
-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 @media screen and (min-width: 768px) {
   .cards-wrapped-container {
