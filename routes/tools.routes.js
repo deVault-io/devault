@@ -182,8 +182,8 @@ router.post("/tools/finesearch", async function (req, res, next) {
     .filter((word) => !exclude.includes(word));
   const wordVariants = words.map(word => [word, word + 's', word.slice(0, -1)]).flat();
   console.log(wordVariants)
-  const textRegex = new RegExp(wordVariants.join("|"), "i");
-    filter.push({ description: { $regex: textRegex } });
+  const textRegex = words.map(word => ({ description: { $regex: word, $options: 'i' } }));
+  filter.push({ $or: textRegex });
   }
   if (fieldToSearch) {
     filter.push({ field: fieldToSearch });
