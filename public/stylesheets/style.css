@@ -189,7 +189,7 @@ nav {
     color: rgb(87, 87, 87);
     text-decoration: none;
   }
-  .nav__icon:hover, .nav__icon:active{
+.nav__icon:hover, .nav__icon:active{
     color: var(--primary-purlple-dark)
   }
   /*Active link for DOM manipulation*/
