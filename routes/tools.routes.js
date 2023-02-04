@@ -194,11 +194,13 @@ router.post("/tools/finesearch", async function (req, res, next) {
     filter.push({ field: fieldToSearch });
   }
   if (typeof tagToSearch == `object`) {
+    console.log('i get here')
     const stringFromObject = JSON.stringify(tagToSearch);
+    console.log(`string from object ${stringFromObject}`)
     const tagWords = stringFromObject.split(" ").filter((word) => !exclude.includes(word));
     const tagRegex = new RegExp(tagWords.join("|"), "i");
     filter.push({ tag: { $regex: tagRegex } });
-  } else {
+  } else if (typeof tagToSearch == `string`) {
     const tagWords = tagToSearch.split(" ").filter((word) => !exclude.includes(word));
     const tagRegex = new RegExp(tagWords.join("|"), "i");
     filter.push({ tag: { $regex: tagRegex } });
