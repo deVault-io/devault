@@ -1,0 +1,55 @@
+<div class="card-detail-container-wrap">
+  <div class="card-detail-container">
+    <div class="card-detail-header">
+      <div class="card-detail-header-title">
+        <h1>{{tool.name}}</h1>
+        <button>
+          <span>
+            <svg></svg>
+          </span>
+        </button>
+      </div>
+      <div class="card-detail-header-buttons">
+        <div class="card-detail-header-buttons-link">
+          <a href={{url}}>Visit Website
+            <span>
+              <svg></svg>
+            </span>
+          </a>
+        </div>
+        <button>favs</button>
+      </div>
+    </div>
+    <h2>Tool information</h2>
+    <div class="card-detail-content">
+      <div class="card-detail-content-img">
+        <a><img width="350px" src={{tool.image}} alt={{tool.name}}/>
+        <div>
+          <div>
+            <span></span>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="card-detail-content-description">
+        <p>Uploaded by: {{tool.user.username}} </p>
+        <p>{{tool.description}}</p>
+      </div>
+      <div class="card-detail-content-edit-delete">
+         <span>
+          {{#if isLoggedInUserCreator}} 
+            <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
+            <a href="/tools/{{tool._id}}/edit" id="edit-tool-btn">Edit tool</a>
+          {{/if}}    
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if items}}
+  <h1>You might also be interested in:</h1>
+    {{#each items}}
+      {{>randomCard this}}
+    {{/each}}
+{{/if}}
