@@ -4,6 +4,7 @@ const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
+const flatMap = require('../utils')
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 const fileUploader = require('../config/cloudinary.config');
@@ -16,12 +17,9 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render("newTool", { user });
 });
+
 /* ROUTE /tools/discover */
 // PUBLIC ROUTE
-// FLAT MAP HELPER FUNCTION
-function flatMap(array, mapper) {
-  return [].concat(...array.map(mapper));
-}
 router.get("/tools/discover", async function (req, res, next) {
   try {
     const user = req.session.currentUser;
@@ -169,8 +167,10 @@ router.get("/tools/search/:tag", async function (req, res, next) {
   );
   res.render("toolSearchResults", { user, items });
 });
+
 //  FINE SEARCH
 router.post("/tools/finesearch", async function (req, res, next) {
+{search: textToSearch, search: nameToSearch, field: fieldToSearch, tag: tagToSearch} = req.body;
   const textToSearch = req.body.search;
   const nameToSearch = req.body.search;
   const fieldToSearch = req.body.field;
@@ -179,33 +179,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
   const user = req.session.currentUser;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
   const filter = [];
-  if (textToSearch) {
-  const words = textToSearch.toLowerCase().split(" ").filter((word) => !exclude.includes(word));
-  const wordVariants = words.map(word => [word, word + 's', word.slice(0, -1)]).flat();
-  const textRegex = wordVariants.map(word => ({ description: { $regex: word, $options: 'i' } }));
-  filter.push({ $or:textRegex });
-  }
-  if (nameToSearch) {
-    const words = nameToSearch.toLowerCase().split(" ").filter((word) => !exclude.includes(word));
-  const wordVariants = words.map(word => [word, word + 's', word.slice(0, -1)]).flat();
-  const textRegex = wordVariants.map(word => ({ name: { $regex: word, $options: 'i' } }));
-  filter.push({ $or: textRegex });
-  }
-  if (fieldToSearch) {
-    filter.push({ field: fieldToSearch });
-  }
-  if (typeof tagToSearch == `object`) {
-    console.log('i get here')
-    const stringFromObject = JSON.stringify(tagToSearch);
-    console.log(`string from object ${stringFromObject}`)
-    const tagWords = stringFromObject.split(" ").filter((word) => !exclude.includes(word));
-    const tagRegex = new RegExp(tagWords.join("|"), "i");
-    filter.push({ tag: { $regex: tagRegex } });
-  } else if (typeof tagToSearch == `string`) {
-    const tagWords = tagToSearch.split(" ").filter((word) => !exclude.includes(word));
-    const tagRegex = new RegExp(tagWords.join("|"), "i");
-    filter.push({ tag: { $regex: tagRegex } });
-  }
+  function filterSearchItems(textToSearch,tagToSrch,fieldToSearch)
   if (filter.length > 0) {
     try {
         const items = await Tool.aggregate([
