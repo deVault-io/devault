@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
-const flatMap = require("../utils");
-const filterSearchItems = require("../utils");
 const Favs = require("../models/Favs.model");
-const Lists = require("../models/Lists.model");
 const fileUploader = require("../config/cloudinary.config");
-const { text } = require("express");
 
 /* GET form view */
 /* ROUTE /Tools/new 
@@ -19,12 +14,17 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
   res.render("newTool", { user });
 });
 
+// VIEW FOR ALL CATEGORIES AND ADVANCED SEARCH TOOL
 /* ROUTE /tools/discover */
 // PUBLIC ROUTE
+function flatMap(array, mapper) {
+  return [].concat(...array.map(mapper));
+}
 router.get("/tools/discover", async function (req, res, next) {
   try {
     const user = req.session.currentUser;
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+    console.log(`tools debugging ${tools}`)
     const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
     const field = [...new Set(flatMap(tools, (tool) => tool.field))];
     res.render("toolDiscover", { user, field, tag, tools });
@@ -32,8 +32,10 @@ router.get("/tools/discover", async function (req, res, next) {
     next(error);
   }
 });
-/* POST  GET USERS NEW TOOL */
+
+/* POST GET USERS NEW TOOL */
 /* ROUTE /Tools/new */
+//PROTECTED ROUTE
 router.post(
   "/tools/new",
   isLoggedIn,
@@ -73,6 +75,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   let items = [];
   try {
     const tool = await Tool.findById(toolId);
+  
     /* const count = await Tool.count({ field: {$size: tool.field} });
     if (count <= 3) {
       items = await Tool.aggregate([{ $sample: { size: 3 } }]);
@@ -119,8 +122,9 @@ router.get("/tools/:toolId/edit", async function (req, res, next) {
   }
 });
 
-/* POST Tool Update */
+//ROUTE that allow user to edit
 /* ROUTE tools/:toolId/edit */
+//PROTECTED ROUTE
 router.post("/tools/:toolId/edit", async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
@@ -140,6 +144,7 @@ router.post("/tools/:toolId/edit", async (req, res, next) => {
 
 /* GET delete Tool */
 /* ROUTE tools/:toolId/delete */
+//PROTECTED ROUTE
 router.get("/tools/:toolId/delete", async (req, res, next) => {
   const user = req.session.currentUser;
   const { toolId } = req.params;
@@ -153,26 +158,6 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   }
 });
 
-//  SEARCH TEXT INPUT
-router.get("/tools/search/:tag", async function (req, res, next) {
-  const user = req.session.currentUser;
-  const searchTerm = req.body.input;
-  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-  const field = tools.map((tool) => tool.field);
-  const words = searchTerm.split(" ").filter((word) => !exclude.includes(word));
-  const regex = new RegExp(words.join("|"), "i");
-  const items = await Tool.aggregate(
-    [
-      {
-        $match: {
-          $or: [{ description: { $regex: regex } }],
-        },
-      },
-    ],
-    function (err, result) {}
-  );
-  res.render("toolSearchResults", { user, items });
-});
 
 //  FINE SEARCH
 router.post("/tools/finesearch", async function (req, res, next) {
@@ -182,11 +167,54 @@ router.post("/tools/finesearch", async function (req, res, next) {
     field: fieldToSearch,
     tag: tagToSearch,
   } = req.body;
-  console.log(`this is the first tag to search${tagToSearch}`);
   const user = req.session.currentUser;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
   filter=[];
-  filterSearchItems(textToSearch, tagToSearch, fieldToSearch,nameToSearch);
+  if (textToSearch) {
+    const words = textToSearch
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const wordVariants = words
+      .map((word) => [word, word + "s", word.slice(0, -1)])
+      .flat();
+    const textRegex = wordVariants.map((word) => ({
+      description: { $regex: word, $options: "i" },
+    }));
+    filter.push({ $or: textRegex });
+  }
+  if (nameToSearch) {
+    const words = nameToSearch
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const wordVariants = words
+      .map((word) => [word, word + "s", word.slice(0, -1)])
+      .flat();
+    const textRegex = wordVariants.map((word) => ({
+      name: { $regex: word, $options: "i" },
+    }));
+    filter.push({ $or: textRegex });
+  }
+  if (fieldToSearch) {
+    filter.push({ field: fieldToSearch });
+  }
+  if (typeof tagToSearch == `object` && tagToSearch === 'string') {
+    console.log("i get here");
+    const stringFromObject = JSON.stringify(tagToSearch);
+    console.log(`string from object ${stringFromObject}`);
+    const tagWords = stringFromObject
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const tagRegex = new RegExp(tagWords.join("|"), "i");
+    filter.push({ tag: { $regex: tagRegex } });
+  } else if (typeof tagToSearch == `string` && tagToSearch=== 'string') {
+    const tagWords = tagToSearch
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const tagRegex = new RegExp(tagWords.join("|"), "i");
+    filter.push({ tag: { $regex: tagRegex } });
+  }
   if (filter.length > 0) {
     try {
       const items = await Tool.aggregate([

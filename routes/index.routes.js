@@ -2,12 +2,12 @@ const router = require('express').Router();
 const Tool = require("../models/Tool.model");
 const User = require("../models/User.model");
 const isLoggedIn = require('../middlewares');
+// const flatMap = require('../utils/index')
 
 
 // @desc    App home page
 // @route   GET /
 // @access  Public
-
 function flatMap(array, mapper) {
   return [].concat(...array.map(mapper));
 }
