@@ -4,10 +4,11 @@ const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
-const flatMap = require('../utils')
+const flatMap = require("../utils");
+const filterSearchItems = require("../utils");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
-const fileUploader = require('../config/cloudinary.config');
+const fileUploader = require("../config/cloudinary.config");
 const { text } = require("express");
 
 /* GET form view */
@@ -33,30 +34,35 @@ router.get("/tools/discover", async function (req, res, next) {
 });
 /* POST  GET USERS NEW TOOL */
 /* ROUTE /Tools/new */
-router.post("/tools/new", isLoggedIn, fileUploader.single('imageFile'), async function (req, res, next) {
-  const user = req.session.currentUser;
-  /* const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+router.post(
+  "/tools/new",
+  isLoggedIn,
+  fileUploader.single("imageFile"),
+  async function (req, res, next) {
+    const user = req.session.currentUser;
+    /* const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   if (!regexUrl.test(imageUrl)) {
     res.render('newTool', { error: 'image needs to be a valid http:// address'});
     return;
   } */
-  const { name, description, image, url, field, tag } = req.body;
-  try {
-    const createdTool = await Tool.create({
-      name,
-      description,
-      image,
-      imageFile: req.file.path,
-      url,
-      field,
-      tag,
-      user: user,
-    });
-    res.redirect(`/tools/${createdTool._id}`);
-  } catch (error) {
-    next(error);
+    const { name, description, image, url, field, tag } = req.body;
+    try {
+      const createdTool = await Tool.create({
+        name,
+        description,
+        image,
+        imageFile: req.file.path,
+        url,
+        field,
+        tag,
+        user: user,
+      });
+      res.redirect(`/tools/${createdTool._id}`);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 /* GET one tool */
 /* ROUTE /tools/:toolId */
@@ -170,30 +176,31 @@ router.get("/tools/search/:tag", async function (req, res, next) {
 
 //  FINE SEARCH
 router.post("/tools/finesearch", async function (req, res, next) {
-{search: textToSearch, search: nameToSearch, field: fieldToSearch, tag: tagToSearch} = req.body;
-  const textToSearch = req.body.search;
-  const nameToSearch = req.body.search;
-  const fieldToSearch = req.body.field;
-  const tagToSearch = req.body.tag;
-  console.log(`this is the first tag to search${tagToSearch}`)
+  const {
+    search: textToSearch,
+    search: nameToSearch,
+    field: fieldToSearch,
+    tag: tagToSearch,
+  } = req.body;
+  console.log(`this is the first tag to search${tagToSearch}`);
   const user = req.session.currentUser;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-  const filter = [];
-  function filterSearchItems(textToSearch,tagToSrch,fieldToSearch)
+  filter=[];
+  filterSearchItems(textToSearch, tagToSearch, fieldToSearch,nameToSearch);
   if (filter.length > 0) {
     try {
-        const items = await Tool.aggregate([
-          {
-            $match: {
-              $or: filter
-            }
-          }
-        ]);
-        res.render("toolSearchResults", { user, items });
+      const items = await Tool.aggregate([
+        {
+          $match: {
+            $or: filter,
+          },
+        },
+      ]);
+      res.render("toolSearchResults", { user, items });
     } catch (error) {
       console.error(error);
       next(error);
     }
   }
-})
+});
 module.exports = router;
