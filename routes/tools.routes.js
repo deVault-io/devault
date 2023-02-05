@@ -24,10 +24,74 @@ router.get("/tools/discover", async function (req, res, next) {
   try {
     const user = req.session.currentUser;
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-    console.log(`tools debugging ${tools}`)
+    console.log(`tools debugging ${tools}`);
     const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
     const field = [...new Set(flatMap(tools, (tool) => tool.field))];
     res.render("toolDiscover", { user, field, tag, tools });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/* GET one tool */
+/* ROUTE /tools/:toolId */
+// PUBLIC ROUTE
+
+router.get("/tools/:toolId", async function (req, res, next) {
+  const { toolId } = req.params;
+  const user = req.session.currentUser;
+  let items = [];
+  try {
+    const tool = await Tool.findById(toolId);
+    const isLoggedInUserCreator =
+      tool.user._id.toString() == user._id ? true : false;
+    const otherTools = await Tool.find({
+      field: tool.field,
+      _id: { $ne: tool._id },
+    });
+    const descriptionVariant = tool.description
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !exclude.includes(word))
+      .map((word) => [
+        word,
+        word + "s",
+        word.slice(0, -1),
+        word + "ing",
+        word + "ed",
+        word + "ly",
+        word.replace(/y$/, "ies"),
+        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
+      ])
+      .flat();
+    items = otherTools
+      .map((t) => {
+        const descriptionWords = t.description.split(" ").filter((word) => !exclude.includes(word))
+        .map((word) => [
+          word,
+          word + "s",
+          word.slice(0, -1),
+          word + "ing",
+          word + "ed",
+          word + "ly",
+          word.replace(/y$/, "ies"),
+          word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+          word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+          word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
+        ])
+        .flat();;
+        const similarity = descriptionWords.filter((word) =>
+          descriptionVariant.includes(word)
+        ).length;
+        return { ...t, similarity };
+      })
+      .sort((a, b) => b.similarity - a.similarity)
+      .splice(0, 3)
+      .map(({ similarity, ...t }) => t);
+    console.log(items);
+    res.render("newToolDetail", { user, tool, items: items });
   } catch (error) {
     next(error);
   }
@@ -65,48 +129,6 @@ router.post(
     }
   }
 );
-
-/* GET one tool */
-/* ROUTE /tools/:toolId */
-// PUBLIC ROUTE
-router.get("/tools/:toolId", async function (req, res, next) {
-  const { toolId } = req.params;
-  const user = req.session.currentUser;
-  let items = [];
-  try {
-    const tool = await Tool.findById(toolId);
-  
-    /* const count = await Tool.count({ field: {$size: tool.field} });
-    if (count <= 3) {
-      items = await Tool.aggregate([{ $sample: { size: 3 } }]);
-    } else if (count > 3) {
-      const itemsToRandom = await Tool.find({
-        field: `${tool.field}`,
-        _id: { $ne: tool._id },
-      });
-      items = itemsToRandom.sort(() => 0.5 - Math.random()).slice(0, 3);
-    }
-    if (req.session.currentUser) {
-      const isLoggedInUserCreator =
-        tool.user._id.toString() == user._id ? true : false;
-      res.render("toolDetail", {
-        user,
-        tool,
-        items: items,
-        isLoggedInUserCreator,
-      });
-      console.log(count)
-    } else { */
-      res.render("newToolDetail", {
-        user,
-        tool,
-        items: items,
-      });
-  
-  } catch (error) {
-    next(error);
-  }
-});
 
 /* GET one tool edit */
 /* ROUTE /tools/:toolId/edit */
@@ -158,8 +180,9 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   }
 });
 
-
-//  FINE SEARCH
+/* GET advanced search */
+/* ROUTE tools/finesearche */
+//PUBLIC ROUTE
 router.post("/tools/finesearch", async function (req, res, next) {
   const {
     search: textToSearch,
@@ -169,7 +192,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
   } = req.body;
   const user = req.session.currentUser;
   const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-  filter=[];
+  filter = [];
   if (textToSearch) {
     const words = textToSearch
       .toLowerCase()
@@ -199,7 +222,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
   if (fieldToSearch) {
     filter.push({ field: fieldToSearch });
   }
-  if (typeof tagToSearch == `object` && tagToSearch === 'string') {
+  if (typeof tagToSearch == `object` && tagToSearch === "string") {
     console.log("i get here");
     const stringFromObject = JSON.stringify(tagToSearch);
     console.log(`string from object ${stringFromObject}`);
@@ -208,7 +231,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
       .filter((word) => !exclude.includes(word));
     const tagRegex = new RegExp(tagWords.join("|"), "i");
     filter.push({ tag: { $regex: tagRegex } });
-  } else if (typeof tagToSearch == `string` && tagToSearch=== 'string') {
+  } else if (typeof tagToSearch == `string` && tagToSearch === "string") {
     const tagWords = tagToSearch
       .split(" ")
       .filter((word) => !exclude.includes(word));

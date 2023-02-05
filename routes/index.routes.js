@@ -16,7 +16,6 @@ router.get('/', async function (req, res, next) {
   try {
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate('user');
     const tag = [...new Set(flatMap(tools, tool => tool.tag))];
-    console.log(tag)
     res.render('index', { user, tools, tag});
   } catch (error) {
     next(error)
