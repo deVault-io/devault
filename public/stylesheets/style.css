@@ -406,6 +406,24 @@ form > label {
   box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
 }
 
+.submit-btn-google {
+  width: 85%;
+  align-self: center;
+  margin: 30px 30px 7px 30px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: var(--primary-purlple-dark);
+  background: #0000;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid var(--primary-purlple-dark);
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+}
+
 .submit-btn:active {
   transform: scale(0.5);
 }
