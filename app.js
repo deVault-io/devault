@@ -9,6 +9,8 @@ const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 // cookies and loggers
 app.use(logger('dev'));
@@ -16,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // For deployment
 app.set('trust proxy', 1);
@@ -64,6 +67,44 @@ app.use("/favs", favsRoutes)
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+//passport use
+passport.serializeUser((user, cb) => cb(null, user._id));
+ 
+passport.deserializeUser((id, cb) => {
+  User.findById(id)
+    .then(user => cb(null, user))
+    .catch(err => cb(err));
+});
+ 
+passport.use(
+  new LocalStrategy(
+    { passReqToCallback: true },
+    {
+      usernameField: 'username', // by default
+      passwordField: 'password' // by default
+    },
+    (username, password, done) => {
+      User.findOne({ username })
+        .then(user => {
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username' });
+          }
+ 
+          if (!bcrypt.compareSync(password, user.password)) {
+            return done(null, false, { message: 'Incorrect password' });
+          }
+ 
+          done(null, user);
+        })
+        .catch(err => done(err));
+    }
+  )
+);
+
+// passport intit methods
+app.use(passport.initialize());
+app.use(passport.session());
 
 // error handler
 app.use(function(err, req, res, next) {
