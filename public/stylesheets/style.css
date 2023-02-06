@@ -679,29 +679,124 @@ input#file-upload {
 
 /* CARD DETAIL NEW STYLES */
 .card-detail-container-wrap{
-
+  width: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .card-detail-container {
-
+  width: 100%;
+  
 }
 
 .card-detail-header {
-
+  flex-direction: column;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
 }
 
 .card-detail-header-title {
-
+  display: flex;
+  gap: 16px;
+  -webkit-box-align: center;
+  align-items: center;
+  vertical-align: middle;
+  margin-bottom: 16px;
+}
+.card-detail-header-title > h1 {
+  margin: 0;
+  font-family: 'DM Sans',sans-serif;
+  font-weight: 400;
+  font-size: 1.5625rem;
+  line-height: 1.235;
+  font-weight: 600;
+  margin-right: 8px;
 }
 
 .card-detail-header-buttons {
-
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  column-gap: 32px;
+  width: 100%;
+  margin-top: 0px;
 }
 
 .card-detail-header-buttons-link {
-
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  -webkit-box-align: center;
+  align-items: center;
 }
 
+.card-detail-header-buttons-link > a {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: #0000;
+    outline: 0;
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    color: #000000de;
+    background-color: #0ea5e9;
+    box-shadow: none;
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.card-detail-header-buttons-link-favs {
+  display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: #0000;
+    background-color: #0000;
+    outline: 0px;
+    margin: 0px;
+    cursor: pointer;
+    user-select: none;
+    vertical-align: middle;
+    appearance: none;
+    text-decoration: none;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 5px 15px;
+    border-radius: 4px;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border: 1px solid #0ea5e980;
+    color: #0ea5e9;
+    box-shadow: none;
+}
 .card-detail-content {
 
 }
