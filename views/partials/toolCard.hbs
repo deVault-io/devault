@@ -1,4 +1,4 @@
-<div class="card-container" id="{{_id}}">
+{{!-- <div class="card-container" id="{{_id}}">
   <div class="tool-image">
     <img width="350px" src={{imageFile}} alt={{name}}/>
   </div>
@@ -22,4 +22,48 @@
       <a class="submit-btn-small" href="/tools/{{_id}}">View details</a>
     </div>
   </div> 
+</div> --}}
+
+<div class="card-small-container-wrap">
+  <div class="card-small-container" id="{{_id}}">
+    <div class="card-small-field-container">
+      <p class="card-small-field {{field}}">{{field}}</p>
+    </div>
+    <div class="card-small-img-container">
+      <span>
+      <img src="{{imageFile}}" alt="{{name}}">
+      </span>
+    </div>
+    <div class="card-small-content-container">
+      <div class="card-small-content-textbox-container">
+        <a href="/tools/{{_id}}" class="card-small-tool-anchor">
+          <div class="card-small-content-header-container">
+            <h3 class="card-small-header-title"> {{name}}
+              <div class="card-small-vote-container">
+              </div></h3>
+            <div class="card-small-header-favs-container">
+                 <i class='bx bx-bookmark-heart nav__icon'></i>
+                  <span class="nav__name"></span>
+            </div>
+          </div>
+          <p class="card-small-content-description">
+            {{description}}
+          </p>
+        </a>
+        <div class="card-small-tags-container">
+               {{#each tool.tag}}
+                <p>{{tag}}</p>
+             {{/each}}
+        </div>
+      </div>
+      <div class="card-small-linkandfav-container">
+        <div class="card-small-link-container">
+          <a href="{{url}}"><i class='bx bx-bookmark-heart' ></i></a>
+        </div>
+        <div class="card-small-fav-container">
+          <a href="/lists/{{_id}}/fav" id="none-tool-btn" class="nav__link active-link" ><i class='bx bx-bookmark-heart nav__icon'></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

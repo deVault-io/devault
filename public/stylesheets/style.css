@@ -24,6 +24,7 @@ li a {
 }
 /* APP COLOR VARIABLES */
 :root {
+  --primary-color: #0ea5e9;
   --primary-purple-light: #b6a3cc;
   --primary-purlple-dark: #441b72;
   --primary-white: #fafafa;
@@ -824,6 +825,59 @@ input#file-upload {
 
 }
 
+/* STYLES FOR THE SMALL CARD CONTAINER */
+
+.card-small-container-wrap{
+
+}
+.card-small-container{
+
+}
+.card-small-field-container{
+
+}
+.card-small-field{
+
+}
+.card-small-img-container{
+
+}
+.card-small-content-container{
+
+}
+.card-small-content-textbox{
+
+}
+.card-small-tool-anchor{
+
+}
+.card-small-content-header{
+
+}
+.card-small-header-title{
+
+}
+.card-small-vote-container{
+
+}
+.card-small-header-favs{
+
+}
+.card-small-content-descriptio{
+
+}
+.card-small-tags-container{
+
+}
+.card-small-linkandfav-container{
+
+}
+.card-small-link-container{
+
+}
+.card-small-fav-container{
+  
+}
 /* UPLOAD IMAGE STYLES */
 
 /* output{
