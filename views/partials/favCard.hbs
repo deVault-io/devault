@@ -13,9 +13,7 @@
   </div>
   <div class="tool-description-box">
     <p>{{tool.description}}</p>
-    {{#if tool.user}}
-    <p>Uploaded by: {{this.username}} </p> {{!-- doesnt populate correctly second level --}}
-    {{/if}}
+    <p>Uploaded by: {{user.username}} </p> {{!-- doesnt populate correctly second level --}}
     <div class="tool-link">
       <a class="submit-btn-small" href={{tool.url}}>Check Website</a>
     </div>

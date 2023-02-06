@@ -47,9 +47,9 @@ router.get('/:listId', async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
   try {
-    const list = await Lists.findById(listId).populate('user');
+    const tools = await Tool.find({}).populate('user');
     const favs = await Favs.find({}).populate('tool').populate('user');
-    res.render('lists/favsListDetail', { user, list, favs });
+    res.render('lists/favsListDetail', { user, list: listId, tools, favs });
   } catch (error) {
     next(error)
   }
