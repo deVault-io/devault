@@ -43,13 +43,13 @@ router.get("/tools/:toolId", async function (req, res, next) {
   let items = [];
   try {
     const tool = await Tool.findById(toolId);
-    const isLoggedInUserCreator =
-      tool.user._id.toString() == user._id ? true : false;
-    const otherTools = await Tool.find({
+    /* const isLoggedInUserCreator =
+      tool.user._id.toString() == user._id ? true : false; */
+    /* const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
-    });
-    const descriptionVariant = tool.description
+    }); */
+    /* const descriptionVariant = tool.description
       .toLowerCase()
       .split(" ")
       .filter((word) => !exclude.includes(word))
@@ -89,9 +89,9 @@ router.get("/tools/:toolId", async function (req, res, next) {
       })
       .sort((a, b) => b.similarity - a.similarity)
       .splice(0, 3)
-      .map(({ similarity, ...t }) => t);
+      .map(({ similarity, ...t }) => t); */
     console.log(items);
-    res.render("newToolDetail", { user, tool, items: items });
+    res.render("newToolDetail", { user, tool, items: items/* , isLoggedInUserCreator */ });
   } catch (error) {
     next(error);
   }

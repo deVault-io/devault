@@ -690,7 +690,11 @@ input#file-upload {
 
 .card-detail-container {
   width: 100%;
-  
+}
+
+.card-detail-container > h2 {
+  padding: 20px 20px 0px 20px;
+  margin-bottom: 0px
 }
 
 .card-detail-header {
@@ -698,6 +702,7 @@ input#file-upload {
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  padding: 20px;
 }
 
 .card-detail-header-title {
@@ -798,15 +803,21 @@ input#file-upload {
     box-shadow: none;
 }
 .card-detail-content {
-
+  padding: 20px;
 }
 
 .card-detail-content-img {
 
 }
 
-.card-detail-content-description {
+.card-detail-content-img > a > img {
+  width: fit-content;
+  max-width: 100%;
+}
 
+.card-detail-content-description {
+  margin-top: 20px;
+  text-align: justify;
 }
 
 .card-detail-content-edit-delete {
