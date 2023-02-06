@@ -71,7 +71,7 @@ router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   const tool = await Tool.findById(toolId).populate('user');
-  const defaultList = await Lists.findOne({default: true});
+  const defaultList = await Lists.findOne({default: true, user: user._id});
   const favExists = await Favs.findOne({tool: tool._id, list: defaultList._id, user: user._id});
   try { if (!favExists) {
     const newFav = await Favs.create({ tool: tool._id, user: user._id, list: defaultList._id });
