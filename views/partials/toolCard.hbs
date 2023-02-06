@@ -30,8 +30,8 @@
       <p class="card-small-field {{field}}">{{field}}</p>
     </div>
     <div class="card-small-img-container">
-      <span>
-      <img src="{{imageFile}}" alt="{{name}}">
+      <span class="card-small-img-span">
+      <img src="{{imageFile}}" alt="{{name}}" id="small-container-img">
       </span>
     </div>
     <div class="card-small-content-container">
@@ -42,8 +42,8 @@
               <div class="card-small-vote-container">
               </div></h3>
             <div class="card-small-header-favs-container">
-                 <i class='bx bx-bookmark-heart nav__icon'></i>
-                  <span class="nav__name"></span>
+                 <i class='bx card-small-bx-bookmark-heart nav__icon'></i>
+                  <span class="fav-count">23</span>
             </div>
           </div>
           <p class="card-small-content-description">
@@ -58,10 +58,10 @@
       </div>
       <div class="card-small-linkandfav-container">
         <div class="card-small-link-container">
-          <a href="{{url}}"><i class='bx bx-bookmark-heart' ></i></a>
+          <a href="{{url}}" class="card-small-link-btn"><i class='bx bx-link-external' ></i></a>
         </div>
         <div class="card-small-fav-container">
-          <a href="/lists/{{_id}}/fav" id="none-tool-btn" class="nav__link active-link" ><i class='bx bx-bookmark-heart nav__icon'></i></a>
+          <a href="/lists/{{_id}}/fav" class="card-small-fav-btn"id="none-tool-btn" ><i class='bx bx-bookmark-heart'></i></a>
         </div>
       </div>
     </div>
