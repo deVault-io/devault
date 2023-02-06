@@ -42,9 +42,9 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   let items = [];
   try {
-    const tool = await Tool.findById(toolId);
-    const isLoggedInUserCreator =
-      tool.user._id.toString() == user._id ? true : false;
+    const tool = await Tool.findById(toolId).populate('user');
+    // const isLoggedInUserCreator =
+    //   tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
@@ -66,6 +66,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
       ])
       .flat();
+      console.log(descriptionVariant)
     items = otherTools
       .map((t) => {
         const descriptionWords = t.description.split(" ").filter((word) => !exclude.includes(word))
@@ -89,9 +90,9 @@ router.get("/tools/:toolId", async function (req, res, next) {
       })
       .sort((a, b) => b.similarity - a.similarity)
       .splice(0, 3)
-      .map(({ similarity, ...t }) => t);
+      .map(item => item._doc);
     console.log(items);
-    res.render("newToolDetail", { user, tool, items: items });
+    res.render("newToolDetail", { user, tool,items });
   } catch (error) {
     next(error);
   }
