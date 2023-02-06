@@ -35,6 +35,7 @@ li a {
   --tiny-font-size: .625rem;
   --bkg-color:var(var(--primary-white));
   --text-color:var(--primary-black);
+  --main-gap:20px;
 }
 /* DARK MODE BUTTON */
 body {
@@ -836,14 +837,16 @@ gap: 20px;
   border: 1px solid #eaeaea;
   padding-top: 0px;
   border-radius: 8px;
-  min-height: 475px;
   max-width: 400px;
+  min-height: 370px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   overflow: hidden;
-  max-width: 90vw;
+  width: 90vw;
   margin-top: 20px;
+  height:37vh;
+  padding-bottom:20px;
 }
 .card-small-field-container{
   min-width: 50px;
@@ -854,7 +857,7 @@ gap: 20px;
     top: 10px;
     right: 0;
     background-color: #f0f9ff;
-    opacity: 0.9;
+    opacity: 0.7;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -862,10 +865,11 @@ gap: 20px;
 .card-small-field{
   margin: 0;
   font-family: 'DM Sans',sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 0.7rem;
   line-height: 1.5;
   font-weight: 500;
+  color:var(--primary-color);
 }
 .card-small-img-container{
   width: 100%;
@@ -880,8 +884,6 @@ gap: 20px;
   box-sizing: border-box;
   display: block;
   overflow: hidden;
-  width: initial;
-  height: initial;
   background: none;
   opacity: 1;
   border: 0;
@@ -904,6 +906,7 @@ gap: 20px;
     border: none;
     margin: auto;
     display: block;
+    max-width: 100%;
     object-fit: cover;
     object-position: center;
 }
@@ -912,6 +915,8 @@ gap: 20px;
   flex-direction: column;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  gap:10px;
+  padding:10px;
 }
 .card-small-content-textbox-container{
 display: block;
@@ -927,7 +932,7 @@ display: block;
   flex-direction: row;
 }
 .card-small-header-title{
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   text-align: left;
   width: 100%;
@@ -935,6 +940,7 @@ display: block;
   display: flex;
   gap: 8px;
   align-items: center;
+  color:var(--primary-black)
 }
 .card-small-header-title>h3{
 margin-block-start: 1em;
@@ -984,6 +990,7 @@ line-height: 1.5;
 
 }
 .card-small-linkandfav-container{
+margin-bottom: 30px;
 display: flex;
 flex-direction: row;
 width:100%;
@@ -991,63 +998,20 @@ width:100%;
 justify-content: space-between;
 }
 .card-small-link-container{
-
-}
-.card-small-link-btn{
-  display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    position: relative;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-    background-color: transparent;
-    outline: 0;
-    border: 0;
-    margin: 0;
-    border-radius: 0;
-    padding: 0;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    color: inherit;
-    font-family: 'DM Sans',sans-serif;
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.75;
-    text-transform: uppercase;
-    min-width: 64px;
-    padding: 6px 16px;
-    border-radius: 4px;
-    -webkit-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    color: rgba(0, 0, 0, 0.87);
-    background-color: #0ea5e9;
-    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
-    box-shadow: none;
-    color: white;
-    letter-spacing: 0.1em;
-    width: 100%;
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap:10px;
+  width: 100%;
+  padding:10px;
 }
 .card-small-fav-container{
-
+   width: calc(50%-var(--main-gap)/2);
+ }
+.card-small-link-container{
+  width: calc(50%-var(--main-gap)/2);
 }
+
 /* UPLOAD IMAGE STYLES */
 
 /* output{
