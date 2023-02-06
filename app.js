@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 
 // cookies and loggers
 app.use(logger('dev'));
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 
 // For deployment

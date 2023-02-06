@@ -89,38 +89,19 @@ router.post('/login', async (req, res, next) => {
 // @route   GET /auth/passportLogin
 // @access  Public
 router.get('/passportLogin', async (req, res, next) => {
-  const user = req.session.currentUser;
-  res.render('auth/passportLogin', user);
+  res.render('auth/passportLogin', { errorMessage: req.flash('error')} );
 })
 
 // @desc    Sends user auth data to database to authenticate user
 // @route   POST /auth/login
 // @access  Public
-router.post('/passportLogin', (req, res, next) => {
-  passport.authenticate('local', (err, theUser, failureDetails) => {
-    if (err) {
-      // Something went wrong authenticating user
-      return next(err);
-    }
- 
-    if (!theUser) {
-      // Unauthorized, `failureDetails` contains the error messages from our logic in "LocalStrategy" {message: '…'}.
-      res.render('auth/passportLogin', { error: 'Wrong password or username' });
-      return;
-    }
- 
-    // save user in session: req.user
-    req.login(theUser, err => {
-      if (err) {
-        // Session save went bad
-        return next(err);
-      }
- 
-      // All good, we are now logged in and `req.user` is now set
-      res.redirect('/');
-    });
-  })(req, res, next);
-});
+router.post('/passportLogin',
+passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/passportLogin',
+  failureFlash: true // !!!
+})
+);
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout

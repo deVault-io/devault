@@ -1,6 +1,6 @@
 <div class="form-container-login">
-  <h2>Welcome back</h2>
-  <form class="login" action="/auth/login" method="POST">
+  <h2>Passport Login (OAuth) -WIP</h2>
+  <form class="login" action="/auth/passportLogin" method="POST">
   <div class="input-group">
     <input required="true" type="email" name="email" autocomplete="off" class="input">
     <label class="user-label">Email address</label>
@@ -10,12 +10,10 @@
     <label class="user-label">Password</label>
   </div>
   <button type="submit" class="submit-btn">Login</button>
-    {{#if error}}
-      <div class="error-notice">
-        <div class="oaerror danger">
-          <strong>Error</strong> {{error}}
+    {{#if errorMessage}}
+        <div class="error-message">
+          {{errorMessage}}
         </div>
-      </div>
     {{/if}}
   </form>
   <div class="already-user-container">
