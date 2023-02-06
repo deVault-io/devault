@@ -130,7 +130,7 @@ passport.use(
             return;
           }
  
-          User.create({ googleID: profile.id , username: profile.displayName })
+          User.create({ googleID: profile.id , username: profile.displayName, image: profile.photos[0].value, email: profile.emails[0].value })
             .then(newUser => {
               done(null, newUser);
             })
