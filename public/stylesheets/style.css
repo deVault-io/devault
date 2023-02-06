@@ -887,7 +887,7 @@ gap: 20px;
   font-size: 0.7rem;
   line-height: 1.5;
   font-weight: 500;
-  color:var(--primary-color);
+  color:var(--primary-black);
 }
 .card-small-img-container{
   width: 100%;
@@ -948,6 +948,7 @@ display: block;
   justify-content: space-between;
   cursor: pointer;
   flex-direction: row;
+  align-items: baseline;
 }
 .card-small-header-title{
   font-size: 1.5rem;
@@ -970,11 +971,16 @@ margin-block-start: 1em;
  
 }
 
-.card-small-header-favs-container{
+.fav-count{
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  margin-bottom: 0;
+  font-size: 1.25rem;
+}
+.fav-count p{
+  margin-bottom: 0;
 }
 .card-small-bx-bookmark-heart{
   color: gray;
