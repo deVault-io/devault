@@ -6,12 +6,12 @@ const userSchema = new Schema(
     username: {
       type: String,
       trim: true,
-      required: [true, 'Username is required.'],
+      /* required: [true, 'Username is required.'], */
       unique: true
     },
     email: { 
       type: String,
-      required: [true, 'Please add a valid email'],
+      /* required: [true, 'Please add a valid email'], */
       unique: true,
       trim: true,
       lowercase: true,
@@ -19,13 +19,16 @@ const userSchema = new Schema(
     },
     hashedPassword: {
       type: String,
-      required: [true, 'Please add a password']
+      /* required: [true, 'Please add a password'] */
     },
     image: {
       type: String,
     },
     aboutMe:{
       type: String,
+    }, 
+    googleID: {
+      type: String, 
     },
     darkMode:{
       type: Boolean,

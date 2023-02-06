@@ -8,7 +8,6 @@ const isLoggedIn = require('../middlewares');
 const passport = require('passport');
 
 
-//Test
 // @desc    Displays form view to sign up
 // @route   GET /auth/signup
 // @access  Public
@@ -85,7 +84,7 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// @desc    Displays form view to OAuth
+// @desc    Displays form view to Login PassportJS
 // @route   GET /auth/passportLogin
 // @access  Public
 router.get('/passportLogin', async (req, res, next) => {
@@ -101,6 +100,25 @@ passport.authenticate('local', {
   failureRedirect: '/auth/passportLogin',
   failureFlash: true // !!!
 })
+);
+
+//Google oAuth
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login" // here you would redirect to the login page using traditional login approach
+  })
 );
 
 // @desc    Destroy user session and log out
