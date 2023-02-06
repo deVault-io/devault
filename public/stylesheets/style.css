@@ -836,14 +836,15 @@ gap: 20px;
   border: 1px solid #eaeaea;
   padding-top: 0px;
   border-radius: 8px;
-  min-height: 475px;
   max-width: 400px;
+  min-height: 350px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   overflow: hidden;
-  max-width: 90vw;
+  width: 90vw;
   margin-top: 20px;
+  height:37vh;
 }
 .card-small-field-container{
   min-width: 50px;
@@ -984,6 +985,7 @@ line-height: 1.5;
 
 }
 .card-small-linkandfav-container{
+margin-bottom: 30px;
 display: flex;
 flex-direction: row;
 width:100%;
