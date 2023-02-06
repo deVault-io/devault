@@ -1,7 +1,7 @@
-<div class="form-container-lists">
-<h1>{{user.username}} Favourites</h1>
-  <p>These are the tools you have favourited.</p>
-  <a href="/lists/{{list._id}}/add" id="edit-tool-btn">Add Favs to List</a>
+<div class="form-container-lists" id="{{list.id}}">
+<h1>{{list.listName}}</h1>
+  <p>Hey {{user.username}}, these are the tools you have favourited.</p>
+  <a href="/lists/{{list.id}}/add" id="edit-tool-btn">Add more tools to {{list.listName}}</a>
   <div class="cards-wrapped-container">
     {{#each favs}}
       {{>favCard this}}
