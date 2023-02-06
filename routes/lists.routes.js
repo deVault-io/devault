@@ -12,7 +12,8 @@ USER PROTECTED ROUTE*/
 router.get('/', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
-    const lists = await Lists.find({});
+    const lists = await Lists.find({user: { $eq: user }});
+
     res.render('lists/favsList', {user, lists});
   } catch (error) {
     next(error)
