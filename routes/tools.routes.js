@@ -48,8 +48,8 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
-    }); */
-    /* const descriptionVariant = tool.description
+    });
+    const descriptionVariant = tool.description
       .toLowerCase()
       .split(" ")
       .filter((word) => !exclude.includes(word))
