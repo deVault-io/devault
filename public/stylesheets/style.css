@@ -180,6 +180,7 @@ nav {
 .nav__list {
   justify-content: space-around;
   list-style-type: none;
+  margin:0;
 }
 .nav__name {
   font-size: var(--tiny-font-size);

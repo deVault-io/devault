@@ -194,9 +194,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
     search: nameToSearch,
     field: fieldToSearch,
     tag: tagToSearch,
+    time: timeToSearch
   } = req.body;
   const user = req.session.currentUser;
-  const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
   filter = [];
   if (textToSearch) {
     const words = textToSearch
@@ -204,7 +204,17 @@ router.post("/tools/finesearch", async function (req, res, next) {
       .split(" ")
       .filter((word) => !exclude.includes(word));
     const wordVariants = words
-      .map((word) => [word, word + "s", word.slice(0, -1)])
+      .map((word) => [
+        word,
+        word + "s",
+        word.slice(0, -1),
+        word + "ing",
+        word + "ed",
+        word + "ly",
+        word.replace(/y$/, "ies"),
+        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
       .flat();
     const textRegex = wordVariants.map((word) => ({
       description: { $regex: word, $options: "i" },
@@ -217,7 +227,17 @@ router.post("/tools/finesearch", async function (req, res, next) {
       .split(" ")
       .filter((word) => !exclude.includes(word));
     const wordVariants = words
-      .map((word) => [word, word + "s", word.slice(0, -1)])
+      .map((word) => [
+        word,
+        word + "s",
+        word.slice(0, -1),
+        word + "ing",
+        word + "ed",
+        word + "ly",
+        word.replace(/y$/, "ies"),
+        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
       .flat();
     const textRegex = wordVariants.map((word) => ({
       name: { $regex: word, $options: "i" },
@@ -227,14 +247,33 @@ router.post("/tools/finesearch", async function (req, res, next) {
   if (fieldToSearch) {
     filter.push({ field: fieldToSearch });
   }
-  if (typeof tagToSearch == `object` && tagToSearch === "string") {
+  if (timeToSearch) {
+    let currentDate = new Date();
+    let range = { $gte: new Date(0) };
+    switch (timeToSearch) {
+      case "today":
+        range = { $gte: currentDate };
+        break;
+      case "last-week":
+        range = { $gte: new Date(currentDate.setDate(currentDate.getDate() - 7)) };
+        break;
+      case "last-month":
+        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 1)) };
+        break;
+      case "last-sixth-months":
+        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 6)) };
+        break;
+    }
+    filter.push({ dateCreated: range });
+  }
+  if (typeof tagToSearch == `object`) {
     const stringFromObject = JSON.stringify(tagToSearch);
     const tagWords = stringFromObject
       .split(" ")
       .filter((word) => !exclude.includes(word));
     const tagRegex = new RegExp(tagWords.join("|"), "i");
     filter.push({ tag: { $regex: tagRegex } });
-  } else if (typeof tagToSearch == `string` && tagToSearch === "string") {
+  } else if (typeof tagToSearch == `string`) {
     const tagWords = tagToSearch
       .split(" ")
       .filter((word) => !exclude.includes(word));
