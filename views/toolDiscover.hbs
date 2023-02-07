@@ -1,10 +1,15 @@
+<header><h1 class="boujee-text" id="discover-header">Discover.</h1></header>
+
 <div class="advanced-search-container">
 <form action="/tools/finesearch" method="post">
   <fieldset>
-    <legend>What you looking for?:</legend>
+    <legend>What are you looking for?:</legend>
     <div>
       <label for="search">Search:</label>
       <input type="text" id="search" name="search">
+    </div>
+    <div>
+      <input type="submit" value="Submit">
     </div>
     <div>
       <label for="field">Field:</label>
@@ -23,9 +28,6 @@
       <option value="{{this}}">{{this}}</option>
   {{/each}} 
       </select>
-    </div>
-    <div>
-      <input type="submit" value="Submit">
     </div>
   </fieldset>
 </form>

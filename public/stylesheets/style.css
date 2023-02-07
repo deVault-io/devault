@@ -16,7 +16,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
 }
 
 li a {
@@ -33,7 +33,7 @@ li a {
   --primary-red: rgb(225, 144, 144);
   --error-red: #db433e;
   --tiny-font-size: .625rem;
-  --bkg-color:var(var(--primary-white));
+  --bkg-color:var(--primary-white);
   --text-color:var(--primary-black);
   --main-gap:20px;
 }
@@ -132,7 +132,7 @@ header h1 {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  #boujee-text {
+  .boujee-text {
     animation: move-bg 19s linear infinite;
   }
   @keyframes move-bg {
@@ -145,6 +145,7 @@ header h1 {
   font-size: 1.2rem;
   max-width: 80%;
   font-weight: 200;
+  color:var(--primary-black)
 }
 
 
@@ -192,7 +193,7 @@ nav {
     text-decoration: none;
   }
 .nav__icon:hover, .nav__icon:active{
-    color: var(--primary-purlple-dark)
+    color: var(--primary-color)
   }
   /*Active link for DOM manipulation*/
   .active-link {
@@ -209,7 +210,61 @@ nav {
 
 
 /* HOME PAGE STYLES */
-.search-bar > * {
+
+#index-form{
+  width:clamp(100px,90vw,1200px);
+  text-align: center;
+  margin-top: 15px;
+}
+.small-search-input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  margin: 0 !important;
+  padding: 0;
+
+}
+
+.small-search-input {
+  padding: 10px 20px;
+  border-top-right-radius: 20px;
+  border: 1px solid #eaeaea;
+  border-bottom-right-radius: 20px;
+  color: rgb(218, 218, 218);
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: var(--primary-white);
+  width: 100%;
+  height: 40px;
+}
+
+.small-search-input:focus {
+  border: 1px solid var(--primary-color);
+  outline: none;
+}
+
+.small-search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9.3px 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  outline: none;
+  background: #2020;
+  border: none;
+  background:  #0ea5e9;
+  transition: .3s ease;
+  height: 40px;
+}
+
+.small-search-btn:hover {
+  cursor: pointer;
+  background-color: rgb(100, 100, 100);
+}
+/*commented until we decide the style */
+/* .search-bar > * {
   height:40px;
   width: clamp(100px, 70vw, 400px)
 }
@@ -246,7 +301,7 @@ transform: scale(0.5);
 }
 
 .search-input {
-  border-color: var(--primary-purple-light);
+  border-color: var(--primary-color);
   border-radius: 10px;
   border-width: 1px;
   padding-left:10px;
@@ -255,7 +310,7 @@ transform: scale(0.5);
 .search-input[required]:before {
   content:"*";
   color:rgb(165, 9, 9);
-}
+} */
 div.scrollmenu {
   background-color:transparent;
   overflow: auto;
@@ -267,12 +322,12 @@ div.scrollmenu a {
 	height: 2em;
 	line-height: 2em;
 	background-color: #fff;
-	border: 1px solid var(--primary-purple-light);
+	border: 1px solid var(--primary-color);
 	border-radius: 999px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	color: var(--primary-purlple-dark);
+	color: var(--primary-color);
 	font-size: 1em;
 	text-decoration: none;
 	-webkit-transition: .2s;
@@ -397,13 +452,13 @@ form > label {
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid  var(--primary-purlple-dark);
+  border: 2px solid  var(--primary-color);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+  box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
 
 .submit-btn-google {
@@ -415,13 +470,13 @@ form > label {
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background: #0000;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid var(--primary-purlple-dark);
+  border: 2px solid var(--primary-color);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+  box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
 
 .submit-btn:active {
@@ -429,7 +484,7 @@ form > label {
 }
 .submit-btn:hover {
   color: white;
-  box-shadow: inset 0 -100px 0 0  var(--primary-purlple-dark);
+  box-shadow: inset 0 -100px 0 0  var(--primary-color);
 }
 
 .submit-btn-small {
@@ -442,13 +497,13 @@ form > label {
   font-size: 15px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid  var(--primary-purlple-dark);
+  border: 2px solid  var(--primary-color);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+  box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
 
 .submit-btn-small:active {
@@ -457,17 +512,17 @@ form > label {
 
 .submit-btn-small:hover {
   color: white;
-  box-shadow: inset 0 -100px 0 0  var(--primary-purlple-dark);
+  box-shadow: inset 0 -100px 0 0  var(--primary-color);
 }
 
 /* INPUT STYLING */
  /* added .input-old class so that new style doesn't affect signup form */
 input.input-old:focus {
-  border-color: var(--primary-purple-light);
+  border-color: var(--primary-color);
 }
 
 input.input-old {
-  border-color: var(--primary-purple-light);
+  border-color: var(--primary-color);
   border-width: 1px;
 }
 
@@ -490,7 +545,7 @@ input.input-old[required]:before {
   background: none;
   padding: 1rem;
   font-size: 1rem;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   transition: border 150ms cubic-bezier(0.4,0,0.2,1);
  }
 
@@ -501,14 +556,14 @@ input.input-old[required]:before {
  .user-label {
   position: absolute;
   left: 30px;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   pointer-events: none;
   transform: translateY(1rem);
   transition: 150ms cubic-bezier(0.4,0,0.2,1);
  }
 
  p.tag-label {
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   margin-bottom: 10px;
   margin-left: 10px;
  }
@@ -520,7 +575,7 @@ input.input-old[required]:before {
  select#tag > option {
   margin-left: 10px;
   margin-top: 5px;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
  }
 
  select[multiple]:focus option:checked {
@@ -531,20 +586,20 @@ input.input-old[required]:before {
  /* added .input class so that new style doesn't affect signup form */
 
 input::file-selector-button {
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background-color: var(--primary-white);
   padding: 0.3em;
-  border: thin solid var(--primary-purlple-dark);
+  border: thin solid var(--primary-color);
   border-radius: 0.8rem;
 }
 
 input#file-upload {
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
 }
 
  .input:focus, input.input:valid {
   outline: none;
-  border: 1.5px solid var(--primary-purlple-dark);
+  border: 1.5px solid var(--primary-color);
  }
 
  .input:focus::placeholder {
@@ -555,7 +610,7 @@ input#file-upload {
   transform: translateY(-50%) scale(0.8);
   background-color: var(--primary-white);
   padding: 0 .2em;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
  }
 
 
@@ -581,13 +636,13 @@ input#file-upload {
   text-align: center;
   letter-spacing: 1px;
   text-decoration: none;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid  var(--primary-purlple-dark);
+  border: 2px solid  var(--primary-color);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+  box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
 
 .profile-container a:active {
@@ -596,7 +651,7 @@ input#file-upload {
 
 .profile-container a:hover {
   color: white;
-  box-shadow: inset 0 -100px 0 0  var(--primary-purlple-dark);
+  box-shadow: inset 0 -100px 0 0  var(--primary-color);
 }
 
 #vault-btn {
@@ -1098,13 +1153,13 @@ output .span--hidden{
   font-size: 15px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: var(--primary-purlple-dark);
+  color: var(--primary-color);
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 1px solid  var(--primary-purlple-dark);
+  border: 1px solid  var(--primary-color);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -11px var(--primary-purlple-dark);
+  box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
 #delete-tool-btn{
   background-color: var(--primary-red);
@@ -1180,6 +1235,28 @@ output .span--hidden{
     
     /* DISCOVER PAGE STYLES */
     
+    #discover-header{
+    font-size: 4rem;
+      width: 90vw;
+      margin:0;
+    }
+
+.advanced-search-container{
+  width:90vw;
+  margin-bottom: 10px;
+}
+.advanced-search-container fieldset{
+  width:90vw;
+  border: 1px solid #eaeaea;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+fieldset>legend{
+  width:100%;
+  font-size: larger;
+  
+}
     .discover-field-card-grid {
       display: grid;
   grid-template-columns: repeat(2, 1fr);

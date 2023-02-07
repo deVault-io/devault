@@ -1,8 +1,29 @@
 
-<header><h1 id="boujee-text">deVault</h1>
+<header><h1 class="boujee-text">deVault</h1>
 <h2>KEEP YOUR TOOLS IN PLACE. DISCOVER. SHARE.</h2></header>
-  
+
+
 <form method="POST" action="/tools/finesearch" id="index-form" > 
+  <div class="small-search-input-group">
+<button class="small-search-btn">
+  <svg fill="none" stroke="#ffffff" viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+      <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
+      <circle r="7" cy="10" cx="10"></circle>
+      <line y2="15" x2="15" y1="21" x1="21"></line>
+    </svg>
+</button>
+<input class="small-search-input" name="search" type="text">
+</div>
+ <div class="scrollmenu">
+     {{#each tag}}
+      <a href="/tools/search/{{this}}" class="{{this}}">{{this}}</a>
+  {{/each}}
+  </div>
+</form>
+
+
+  
+{{!-- <form method="POST" action="/tools/finesearch" id="index-form" > 
   <span class="search-bar">
   <input placeholder="Search into the Vault!"type="text" name="search" class="search-input"/>
   <button type="submit" class="search-btn">Go!</button>
@@ -12,7 +33,7 @@
       <a href="/tools/search/{{this}}" class="{{this}}">{{this}}</a>
   {{/each}}
   </div>
-</form>
+</form> --}}
 
 <div class="cards-wrapped-container">
   {{#each tools}}
