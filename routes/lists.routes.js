@@ -99,6 +99,8 @@ router.get('/:toolId/:listId/add', isLoggedIn, async (req, res, next) => {
     const newFav = await Favs.create({ tool: tool._id, user: user._id, list: selectedList._id });
     res.redirect(`/lists/${selectedList._id}`);
     return newFav; 
+    } else {
+      throw new Error(`${tool.name} already added to ${selectedList.listName}`)
     }
   } catch (error) {
     next(error)
