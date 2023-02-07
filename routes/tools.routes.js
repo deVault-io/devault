@@ -16,6 +16,20 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
   res.render("newTool", { user });
 });
 
+// @desc    Tool new rout form
+// @route   GET /tools/new
+// @access  Private
+router.get("/tools/myTools", isLoggedIn, async function (req, res, next) {
+  const user = req.session.currentUser;
+  try {
+    const tools = await Tool.find({user: { $eq: user }});
+    console.log(tools)
+  res.render("myTools", { user, tools });
+  } catch (error) {
+  next(error);
+}
+});
+
 // @desc    View for all categories and advanced search tool
 // @route   GET /tools/discover
 // @access  Public
