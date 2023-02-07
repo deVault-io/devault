@@ -38,6 +38,7 @@ router.get('/', async function (req, res, next) {
         }
       },
     ]).exec();
+    console.log(tools)
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
     res.render('index', { user, tools, tag});
   } catch (error) {

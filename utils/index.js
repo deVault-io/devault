@@ -1,4 +1,5 @@
 const exclude = require("../data/exclude");
+
 const flattenMap = (array,mapper) =>{
   return [].concat(...array.map(mapper));
 }
@@ -55,5 +56,8 @@ const sortRelatedItems = (tool,otherTools)=>{
       .splice(0, 3)
       .map(item => item._doc);
     }
+
+    
+
 
 module.exports = {flattenMap,sortRelatedItems}

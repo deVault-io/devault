@@ -144,6 +144,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
     tag: tagToSearch,
     time: timeToSearch,
   } = req.body;
+  console.log(timeToSearch)
+  console.log(fieldToSearch)
+  console.log(req.body)
   const user = req.session.currentUser;
   filter = [];
   if (textToSearch) {
@@ -221,8 +224,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
         break;
     }
     filter.push({ createdAt: range });
+    console.log(range)
+    console.log(timeToSearch)
   }
-  console.log(timeToSearch);
   if (typeof tagToSearch == `object`) {
     const stringFromObject = JSON.stringify(tagToSearch);
     const tagWords = stringFromObject
@@ -244,9 +248,6 @@ router.post("/tools/finesearch", async function (req, res, next) {
           $match: {
             $or: filter,
           },
-        },
-        {
-          $sort: sort,
         },
       ]);
       res.render("toolSearchResults", { user, items });
