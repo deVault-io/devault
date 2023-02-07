@@ -224,23 +224,49 @@ router.post("/:listId/search", async function (req, res, next) {
   }
 });
 
-// @desc    one tool fav
-// @route   GET /tools/:toolId/fav
+// @desc    Edit one list view
+// @route   GET /lists/:listId/edit
 // @access  Private
-/* router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
-  const { toolId } = req.params;
+router.get("/:listId/edit", async function (req, res, next) {
+  const { listId } = req.params;
   const user = req.session.currentUser;
-  const tool = await Tool.findById(toolId).populate('user');
-  const defaultList = await Lists.findOne({default: true, user: user._id});
-  const favExists = await Favs.findOne({tool: tool._id, list: defaultList._id, user: user._id});
-  try { if (!favExists) {
-    const newFav = await Favs.create({ tool: tool._id, user: user._id, list: defaultList._id });
-    res.redirect(`/lists/${defaultList._id}`);
-    return newFav; 
-    }
+  try {
+    const list = await Lists.findById(listId).populate("user");
+    res.render("lists/favsListEdit", { user, list });
   } catch (error) {
-    next(error)
+    next(error);
   }
-}); */
+});
+
+// @desc    Edit one list form
+// @route   POST /lists/:listId/edit
+// @access  Private
+router.post("/lists/:listId/edit", async (req, res, next) => {
+  const { listId } = req.params;
+  const user = req.session.currentUser;
+  const { listName, image  } = req.body;
+  try {
+    const list = await Lists.findById(listId).populate("user");
+    const editedList = await Lists.findByIdAndUpdate(list, { listName, image, user: user }, { new: true });
+    console.log(editedList)
+    res.redirect(`/lists/${editedList._id}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Delete one list
+// @route   GET /lists/:listId/delete
+// @access  Private
+router.get("/:listId/delete", isLoggedIn, async (req, res, next) => {
+  const { listId } = req.params;
+  try {
+    await Favs.deleteMany({});
+    await Lists.deleteOne({ _id: listId });
+    res.redirect("/lists");
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
