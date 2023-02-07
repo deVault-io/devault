@@ -19,7 +19,7 @@ router.get('/signup', async (req, res, next) => {
 // @route   POST /auth/signup
 // @access  Public
 router.post('/signup', async function (req, res, next) { 
-  const { username, email, password, avatar, aboutMe } = req.body;
+  const { username, email, password, image, aboutMe } = req.body;
   if (!username || !email || !password) {
     res.render('auth/signup', { error: 'All fields are necessary.' });
     return;
