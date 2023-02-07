@@ -881,9 +881,9 @@ input#file-upload {
   padding: 20px;
 }
 
-.card-detail-content-img {
+/* .card-detail-content-img {
 
-}
+} */
 
 .card-detail-content-img > a > img {
   width: fit-content;
@@ -895,9 +895,9 @@ input#file-upload {
   text-align: justify;
 }
 
-.card-detail-content-edit-delete {
+/* .card-detail-content-edit-delete {
 
-}
+} */
 
 /* STYLES FOR THE SMALL CARD CONTAINER */
 
@@ -1022,9 +1022,9 @@ margin-block-start: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px
 }
-.card-small-vote-container{
+/* .card-small-vote-container{
  
-}
+} */
 
 .fav-count{
   display: flex;
@@ -1065,9 +1065,9 @@ line-height: 1.5;
     text-overflow: ellipsis!important;
     white-space: normal!important;
 }
-.card-small-tags-container{
+/* .card-small-tags-container{
 
-}
+} */
 .card-small-linkandfav-container{
 margin-bottom: 30px;
 display: flex;

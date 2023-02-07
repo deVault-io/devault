@@ -69,10 +69,46 @@ router.get('/:listId/add', async function (req, res, next) {
   }
 });
 
-// @desc    one tool fav
+// @desc    tool select list to add
 // @route   GET /tools/:toolId/fav
 // @access  Private
 router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
+  const { toolId } = req.params;
+  const user = req.session.currentUser;
+  const tool = await Tool.findById(toolId).populate('user');
+  const list = await Lists.find({user: user});
+  console.log(list)
+  try {
+    const lists = await Lists.find({user: { $eq: user }});
+    res.render('lists/selectList', {user, lists});
+  } catch (error) {
+    next(error)
+  }
+});
+
+// @desc    one tool fav
+// @route   GET /tools/:toolId/fav
+// @access  Private
+router.get('/:toolId/:listId/add', isLoggedIn, async (req, res, next) => {
+  const { toolId, listId } = req.params;
+  const user = req.session.currentUser;
+  const tool = await Tool.findById(toolId).populate('user');
+  const selectedList = await Lists.findById(listId);
+  const favExists = await Favs.findOne({tool: tool._id, list: selectedList._id, user: user._id});
+  try { if (!favExists) {
+    const newFav = await Favs.create({ tool: tool._id, user: user._id, list: selectedList._id });
+    res.redirect(`/lists/${selectedList._id}`);
+    return newFav; 
+    }
+  } catch (error) {
+    next(error)
+  }
+});
+
+// @desc    one tool fav
+// @route   GET /tools/:toolId/fav
+// @access  Private
+/* router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   const tool = await Tool.findById(toolId).populate('user');
@@ -86,6 +122,6 @@ router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-});
+}); */
 
 module.exports = router;
