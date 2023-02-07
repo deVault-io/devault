@@ -4,6 +4,7 @@ const User = require("../models/User.model");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 const isLoggedIn = require('../middlewares');
+const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Profile view
 // @route   GET /profile
@@ -29,6 +30,30 @@ router.post('/profile/edit', isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {
     const userInDB = await User.findByIdAndUpdate(user._id, { username, email }, { new: true });
+    req.session.currentUser = userInDB;
+    res.redirect('/profile');
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Edit profile view
+// @route   GET /profile/edit
+// @access  Private
+router.get('/profile/editAvatar', isLoggedIn, function (req, res, next) {
+  const user = req.session.currentUser;
+  res.render('auth/profileEditAvatar', user);
+});
+
+// @desc    Edit profile view post
+// @route   POST /profile/edit
+// @access  Private
+router.post('/profile/editAvatar', isLoggedIn, fileUploader.single("image"), async (req, res, next) => {
+  const { image } = req.body;
+  const user = req.session.currentUser;
+  try {
+    const userInDB = await User.findByIdAndUpdate(user._id, { image: req.file.path, }, { new: true });
+    console.log(userInDB)
     req.session.currentUser = userInDB;
     res.redirect('/profile');
   } catch (error) {

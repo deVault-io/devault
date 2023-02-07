@@ -1,10 +1,24 @@
-<h1>Welcome {{user.username}}</h1>
-  <div class="profile-container">
-    <img src="https://www.arlis.umd.edu/sites/default/files/default_images/avatardefault_92824.png" class="user-avatar">
-    <p>Email: {{user.email}}</p>
-    <a href="/tools/myTools">My Tools</a>
-    <a href="/lists">My Library</a>
-    <a href="/profile/edit">Edit profile</a> 
-    <a href="/profile/delete">Delete profile</a> 
-    <a href="/auth/logout">Logout</a>
+<div class="profile-container">
+  <h1>Welcome {{user.username}}</h1>
+  <form  class="login" action="/profile/editAvatar" method="POST" enctype="multipart/form-data">
+  <div class="personal-image">
+    <label class="label">
+      <input id="file-upload" type="file" name="image" accept="image/jpeg, image/png, image/jpg">
+      <figure class="personal-figure">
+        <img src={{user.image}} class="personal-avatar" alt="avatar">
+        <figcaption class="personal-figcaption">
+          <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+        </figcaption>
+      </figure>
+    </label>
+    <input type="submit" class="submit-btn"></input>
+  </form>
   </div>
+  <p>Email: {{user.email}}</p>
+  <a href="/tools/myTools">My Tools</a>
+  <a href="/lists">My Library</a>
+  <a href="/profile/edit">Edit profile</a>
+  <a href="/profile/delete">Delete profile</a>
+  <a href="/auth/logout">Logout</a>
+</div>
+

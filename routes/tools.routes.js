@@ -75,11 +75,6 @@ router.post(
   fileUploader.single("imageFile"),
   async function (req, res, next) {
     const user = req.session.currentUser;
-    /* const regexUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
-  if (!regexUrl.test(imageUrl)) {
-    res.render('newTool', { error: 'image needs to be a valid http:// address'});
-    return;
-  } */
     const { name, description, image, url, field, tag } = req.body;
     try {
       const createdTool = await Tool.create({
