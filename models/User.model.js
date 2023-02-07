@@ -30,6 +30,10 @@ const userSchema = new Schema(
     googleID: {
       type: String, 
     },
+    source: {
+      type: String,
+      default: 'deVault' 
+    },
     darkMode:{
       type: Boolean,
       default: false,

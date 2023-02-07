@@ -37,7 +37,7 @@ router.post('/signup', async function (req, res, next) {
     } else {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(password, salt);
-      const user = await User.create({ username, email, hashedPassword, avatar, aboutMe });
+      const user = await User.create({ username, email, hashedPassword, image, aboutMe });
       await List.create({user: user._id, default: true});
       req.session.currentUser = user; 
       res.render('auth/profile', {user});
@@ -118,8 +118,6 @@ router.get(
   passport.authenticate("google", {
     failureRedirect: "/",
     successRedirect: "/profile",
-    failureFlash: true,
-    successFlash: "Successfully logged in!",
   })
 );
 
