@@ -37,7 +37,6 @@ router.get("/tools/discover", async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  let items = [];
   try {
     const tool = await Tool.findById(toolId).populate("user");
     // const isLoggedInUserCreator =
@@ -46,7 +45,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       field: tool.field,
       _id: { $ne: tool._id },
     });
-    sortRelatedItems(tool,otherTools);
+    const items = sortRelatedItems(tool,otherTools);
     res.render("newToolDetail", { user, tool, items });
   } catch (error) {
     next(error);

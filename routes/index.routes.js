@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Tool = require("../models/Tool.model");
-const flattenMap = require("../utils")
+const {flattenMap} = require("../utils")
 
 
 // @desc    App home page
