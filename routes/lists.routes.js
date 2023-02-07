@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/User.model");
 const Tool = require("../models/Tool.model");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 const isLoggedIn = require('../middlewares');
 
-/* GET lists of favs view */
-/* ROUTE /Lists
-USER PROTECTED ROUTE*/
+// @desc    lists of favorites view
+// @route   GET /
+// @access  Private
 router.get('/', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
@@ -19,14 +18,16 @@ router.get('/', isLoggedIn, async function (req, res, next) {
   }
 });
 
-/* GET list view */
-/* ROUTE /lists/new */
+// @desc    new list view
+// @route   GET /new
+// @access  Private
 router.get('/new', isLoggedIn, function (req, res, next) {
   res.render('lists/favsListNew');
 });
 
-/* POST get users list inputs */
-/* ROUTE /lists/new */
+// @desc    creates a new list
+// @route   POST /new
+// @access  Private
 router.post('/new', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   const { listName, image } = req.body;
@@ -38,7 +39,9 @@ router.post('/new', isLoggedIn, async function (req, res, next) {
   }
 });
 
-/* GET One list */
+// @desc    Gets ONE list
+// @route   GET /:listId
+// @access  Private
 router.get('/:listId', async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
@@ -52,7 +55,9 @@ router.get('/:listId', async function (req, res, next) {
   }
 });
 
-/* GET Tools to add to list */
+// @desc    Tools to add to list
+// @route   GET /:listId/add
+// @access  Private
 router.get('/:listId/add', async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
@@ -64,9 +69,9 @@ router.get('/:listId/add', async function (req, res, next) {
   }
 });
 
-/* GET one tool fav */
-/* Adds tool to favList */
-/* ROUTE /tools/:toolId/fav */
+// @desc    one tool fav
+// @route   GET /tools/:toolId/fav
+// @access  Private
 router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;

@@ -1,26 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User.model");
-const Tool = require("../models/Tool.model");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 const isLoggedIn = require('../middlewares');
-const { ObjectId } = require('mongodb');
 
-
-/* GET users listing. */
+// @desc    Profile view
+// @route   GET /profile
+// @access  Private
 router.get('/profile', isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render('auth/profile', {user});
 });
 
-/* GET users listing. */
+// @desc    Edit profile view
+// @route   GET /profile/edit
+// @access  Private
 router.get('/profile/edit', isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render('auth/profileEdit', user);
 });
 
-/* POST user edit. */
+// @desc    Edit profile view post
+// @route   POST /profile/edit
+// @access  Private
 router.post('/profile/edit', isLoggedIn, async (req, res, next) => {
   const { username, email } = req.body;
   const user = req.session.currentUser;
@@ -33,7 +36,9 @@ router.post('/profile/edit', isLoggedIn, async (req, res, next) => {
   }
 });
 
-/* GET delete Profile */
+// @desc    Delete profile 
+// @route   GET /profile/edit
+// @access  Private
 router.get("/profile/delete", isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   try {

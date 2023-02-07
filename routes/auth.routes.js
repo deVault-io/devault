@@ -102,7 +102,9 @@ passport.authenticate('local', {
 })
 );
 
-//Google oAuth
+// @desc    Autehtnticates google loggin
+// @route   GET /google
+// @access  Public
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -113,6 +115,9 @@ router.get(
   })
 );
 
+// @desc    Autehtnticates google loggin
+// @route   GET /google/callback
+// @access  Public
 router.get(
   "/google/callback",
   passport.authenticate("google", {

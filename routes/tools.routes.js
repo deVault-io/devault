@@ -6,17 +6,17 @@ const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const fileUploader = require("../config/cloudinary.config");
 
-/* GET form view */
-/* ROUTE /Tools/new 
-USER PROTECTED ROUTE*/
+// @desc    Tool new rout form
+// @route   GET /tools/new
+// @access  Private
 router.get("/tools/new", isLoggedIn, function (req, res, next) {
   const user = req.session.currentUser;
   res.render("newTool", { user });
 });
 
-// VIEW FOR ALL CATEGORIES AND ADVANCED SEARCH TOOL
-/* ROUTE /tools/discover */
-// PUBLIC ROUTE
+// @desc    View for all categories and advanced search tool
+// @route   GET /tools/discover
+// @access  Public
 function flatMap(array, mapper) {
   return [].concat(...array.map(mapper));
 }
@@ -24,7 +24,6 @@ router.get("/tools/discover", async function (req, res, next) {
   try {
     const user = req.session.currentUser;
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-    console.log(`tools debugging ${tools}`);
     const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
     const field = [...new Set(flatMap(tools, (tool) => tool.field))];
     res.render("toolDiscover", { user, field, tag, tools });
@@ -33,10 +32,9 @@ router.get("/tools/discover", async function (req, res, next) {
   }
 });
 
-/* GET one tool */
-/* ROUTE /tools/:toolId */
-// PUBLIC ROUTE
-
+// @desc    Tool detail view
+// @route   GET /tools:toolId
+// @access  Public
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
@@ -49,6 +47,8 @@ router.get("/tools/:toolId", async function (req, res, next) {
       field: tool.field,
       _id: { $ne: tool._id },
     });
+    //Takes the tool description and split it, take the single words, exclude the 
+    //excluded words from data and generate word variations for each one, then flat it()
     const descriptionVariant = tool.description
       .toLowerCase()
       .split(" ")
@@ -66,7 +66,8 @@ router.get("/tools/:toolId", async function (req, res, next) {
         word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
       ])
       .flat();
-      console.log(descriptionVariant)
+      //takes the tools related by field, split the words, exclude the excluded words
+      //add variations for each one then flat it
     items = otherTools
       .map((t) => {
         const descriptionWords = t.description.split(" ").filter((word) => !exclude.includes(word))
@@ -83,6 +84,10 @@ router.get("/tools/:toolId", async function (req, res, next) {
           word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
         ])
         .flat();;
+        //find similarity, which is the amout of matches of the tool description and
+        //the word variantes from the other tools, the return that similarity(number)
+        //embeded in the object properties.  Then sort them by similarity and for each 
+        // tool send to view the _doc property that includes the tool properties
         const similarity = descriptionWords.filter((word) =>
           descriptionVariant.includes(word)
         ).length;
@@ -91,16 +96,15 @@ router.get("/tools/:toolId", async function (req, res, next) {
       .sort((a, b) => b.similarity - a.similarity)
       .splice(0, 3)
       .map(item => item._doc);
-    console.log(items);
     res.render("newToolDetail", { user, tool,items });
   } catch (error) {
     next(error);
   }
 });
 
-/* POST GET USERS NEW TOOL */
-/* ROUTE /Tools/new */
-//PROTECTED ROUTE
+// @desc    Creates a new tool
+// @route   POST /tools/new
+// @access  Private
 router.post(
   "/tools/new",
   isLoggedIn,
@@ -131,9 +135,9 @@ router.post(
   }
 );
 
-/* GET one tool edit */
-/* ROUTE /tools/:toolId/edit */
-// PROTECTED VIEW
+// @desc    Edit one tool view
+// @route   GET /tools/:toolId/edit
+// @access  Private
 router.get("/tools/:toolId/edit", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
@@ -145,9 +149,9 @@ router.get("/tools/:toolId/edit", async function (req, res, next) {
   }
 });
 
-//ROUTE that allow user to edit
-/* ROUTE tools/:toolId/edit */
-//PROTECTED ROUTE
+// @desc    Edit one tool form
+// @route   POST /tools/:toolId/edit
+// @access  Private
 router.post("/tools/:toolId/edit", async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
@@ -165,9 +169,9 @@ router.post("/tools/:toolId/edit", async (req, res, next) => {
   }
 });
 
-/* GET delete Tool */
-/* ROUTE tools/:toolId/delete */
-//PROTECTED ROUTE
+// @desc    Delete one tool
+// @route   GET /tools/:toolId/delete
+// @access  Private
 router.get("/tools/:toolId/delete", async (req, res, next) => {
   const user = req.session.currentUser;
   const { toolId } = req.params;
@@ -181,9 +185,9 @@ router.get("/tools/:toolId/delete", async (req, res, next) => {
   }
 });
 
-/* GET advanced search */
-/* ROUTE tools/finesearche */
-//PUBLIC ROUTE
+// @desc    Takes the inputs from the search form
+// @route   POST /tools/finesearch
+// @access  Public
 router.post("/tools/finesearch", async function (req, res, next) {
   const {
     search: textToSearch,
@@ -224,9 +228,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     filter.push({ field: fieldToSearch });
   }
   if (typeof tagToSearch == `object` && tagToSearch === "string") {
-    console.log("i get here");
     const stringFromObject = JSON.stringify(tagToSearch);
-    console.log(`string from object ${stringFromObject}`);
     const tagWords = stringFromObject
       .split(" ")
       .filter((word) => !exclude.includes(word));
