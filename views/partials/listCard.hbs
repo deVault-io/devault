@@ -1,16 +1,27 @@
-<div class="card-container" id="{{_id}}">
-  <div class="tool-image">
-    <img width="350px" src={{image}} alt={{name}}/>
-  </div>
-  <div class="tool-header">
-    <div class="tool-header-content">
-      <h4 class="tool-name">{{listName}}</h4>
+<div class="card-small-container-wrap">
+  <div class="card-small-container-list" id="{{_id}}">
+    <div class="card-small-img-container">
+      <span class="card-small-img-span">
+      <img width="350px" src={{image}} alt={{name}} id="small-container-img">
+      </span>
+    </div>
+    <div class="card-small-content-container-list">
+      <div class="card-small-content-textbox-container">
+        <a href="/lists/{{_id}}" class="card-small-tool-anchor">Check Favs</a>
+      </div>
+      <div class="card-small-linkandfav-container-list">
+        <div class="card-small-link-container-list">
+          <a href="/lists/{{_id}}">Check Favs</a>
+        </div>
+        <div class="card-small-link-container-list">
+          <a href="/lists/{{_id}}/edit">Edit List</a>
+        </div>
+        <div class="card-small-link-container-list">
+          <a href="/lists/{{_id}}/delete">Delete List</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="tool-description-box">
-    <p>{{description}}</p> 
-    <div class="tool-link">
-      <a class="submit-btn-small" href="/lists/{{_id}}">Check Favs</a>
-    </div>
-  </div> 
 </div>
+
+
