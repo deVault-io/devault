@@ -10,10 +10,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const app = express();
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const flash = require('connect-flash');
+/* const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash'); */
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("./models/User.model");
+const List = require("./models/Lists.model");
 
 // cookies and loggers
 app.use(logger('dev'));
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash());
+/* app.use(flash()); Not needed*/ 
 
 
 // For deployment
@@ -72,16 +73,19 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-//passport use
-passport.serializeUser((user, cb) => cb(null, user._id));
- 
-passport.deserializeUser((id, cb) => {
-  User.findById(id)
-    .then(user => cb(null, user))
-    .catch(err => cb(err));
+//passport use (not needed)
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+  console.log(user.id)
 });
+
+passport.deserializeUser((id,done)=>{
+  User.findById(id).then((user)=>{
+      done(null,user)
+  })
+})
  
-passport.use(
+/*  passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     {
@@ -104,12 +108,12 @@ passport.use(
         .catch(err => done(err));
     }
   )
-);
+);  */
 
-// passport intit methods
-app.use(passport.initialize());
+// passport intit methods not needed
+/* app.use(passport.initialize());
 app.use(passport.session());
-
+ */
 
 // passport Google
 passport.use(
@@ -130,11 +134,10 @@ passport.use(
             return;
           }
  
-          User.create({ googleID: profile.id , username: profile.displayName, image: profile.photos[0].value, email: profile.emails[0].value })
-            .then(newUser => {
-              done(null, newUser);
+          User.create({ googleID: profile.id , username: profile.displayName, image: profile.photos[0].value, email: profile.emails[0].value, source: "Google" })
+            .then(newUser => {done(null, newUser);
             })
-            .catch(err => done(err)); // closes User.create()
+            .catch(err => done(err)); // closes User.create()  
         })
         .catch(err => done(err)); // closes User.findOne()
     }
