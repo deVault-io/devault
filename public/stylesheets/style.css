@@ -115,8 +115,8 @@ header h1 {
   max-width: 90%;
   font-size: 5.5rem;
   --bg-size: 400%;
-  --color-one: rgb(66, 167, 234);
-  --color-two: var(--primary-purple-light);
+  --color-one:var(--primary-color);
+  --color-two: #81c7e8;;
   font-family: sans-serif;
   background: linear-gradient(
       90deg,
