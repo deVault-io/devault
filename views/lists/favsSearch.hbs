@@ -1,1 +1,112 @@
-<h1>Hello</h1>
+<header><h1 class="boujee-text" id="discover-header">Add Favs to List</h1></header>
+
+<div class="advanced-search-container">
+<form action="{{list.id}}/search" method="post">
+  <fieldset>
+    <legend>What are you looking for?:</legend>
+    <div class="advanced-search-bar-container">
+    <div>
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search">
+    </div>
+    <div>
+      <input type="submit" value="Submit">
+    </div>
+    </div>
+    <div class="advanced-search-main-container">
+      <div class="advanced-search-fiedlandtag-container">
+      <div>
+      <label for="field">Field:</label>
+      <select id="field" name="field">
+         <option value="">Select Field</option>
+        {{#each field}}
+      <option value="{{this}}">{{this}}</option>
+  {{/each}} 
+      </select>
+    </div>
+    <div>
+      <label for="tags">Tags:</label>
+     <select id="tad-select" name="tag" multiple>
+         <option value="">Select tags</option>
+       {{#each tag}}
+      <option value="{{this}}">{{this}}</option>
+  {{/each}} 
+      </select>
+    </div>
+    </div>
+    <div class="advanced-search-time-container">
+      <label for="field">Upload:</label>
+     <select id="time" name="time">
+         <option value="">Uploaded:</option>
+      <option value="today">today</option>
+      <option value="last-week">Last week</option>
+      <option value="last-month">Last month</option>
+      <option value="last-sixth-months">Last six months</option>
+      </select>
+      </div>
+    </div>
+  </fieldset>
+</form>
+</div>
+<div class="discover-field-card-grid">
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Back End</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Front End</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Data Science</p>
+    </div>
+  </div>
+<div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>UX/UI</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Block-chain</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Productivity</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Task Management</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Cyber Security</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Mobile Development</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>Cloud Computing</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>AI/Machine Learning</p>
+    </div>
+  </div>
+  <div class="discover-field-card">
+    <div class="discover-field-card-content">
+      <p>DevOps</p>
+    </div>
+  </div>
+</div>

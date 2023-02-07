@@ -1,0 +1,58 @@
+<div class="advanced-search-container">
+<form action="/" method="post">
+  <fieldset>
+    <legend>Search Tool</legend>
+    <div>
+      <label for="search">Search:</label>
+      <input type="text" id="search" name="search">
+    </div>
+    <div>
+      <label for="field">Field:</label>
+      <select id="field" name="field">
+        <option value="UX/UI">UX/UI</option>
+      </select>
+    </div>
+    <div>
+      <label for="tags">Tags:</label>
+      </select>
+    </div>
+    <div>
+      <input type="submit" value="Submit">
+    </div>
+  </fieldset>
+</form>
+
+
+</div>
+
+
+{{#if items}}
+<h2 class="search-page-header" id="search-page-header">THESE ARE THE AMAZING TOOLS WE FOUND FOR YOU:</h2>
+{{#each items}}
+<div class="card-container" id="detail-card">
+    <div class="tool-image">
+    <img width="350px" src={{this.image}} alt={{this.name}}/>
+  </div>
+    <h1 class="tool-name">{{this.name}}</h1>
+<div class="tool-description-box">
+    <p>{{this.description}}</p>
+     <p>Uploaded by: {{this.user.username}} </p>
+  </div>
+   <div class="tool-link">
+      <a class="submit-btn-small" href={{this.url}}>Check Website</a>
+    </div>
+     <div class="tool-header-content">
+      <a href="/favs" class="nav__link active-link">
+        <i class='bx bx-bookmark-heart nav__icon'></i>
+        <span class="nav__name">Favs</span>
+      </a>
+    </div>    
+  <span class="btn-span">
+    {{#if isLoggedInUserCreator}} 
+        <a href="/tools/{{this._id}}/delete" id="delete-tool-btn">Delete</a>
+        <a href="/tools/{{this._id}}/edit" id="edit-tool-btn">Edit tool</a>
+    {{/if}}    
+    </span>
+</div>
+{{/each}}
+{{/if}}

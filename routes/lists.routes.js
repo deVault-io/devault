@@ -55,19 +55,7 @@ router.get('/:listId', async function (req, res, next) {
   }
 });
 
-// @desc    Tools to add to list
-// @route   GET /:listId/add
-// @access  Private
-router.get('/:listId/add', async function (req, res, next) {
-  const { listId } = req.params;
-  const user = req.session.currentUser;
-  try {
-    const list = await Lists.findById(listId).populate("user");
-    res.render("lists/favsSearch", { user, list });
-  } catch (error) {
-    next(error)
-  }
-});
+
 
 // @desc    tool select list to add
 // @route   GET /tools/:toolId/fav
@@ -104,6 +92,135 @@ router.get('/:toolId/:listId/add', isLoggedIn, async (req, res, next) => {
     }
   } catch (error) {
     next(error)
+  }
+});
+
+
+// @desc    Tools to add to list
+// @route   GET /:listId/add
+// @access  Private
+router.get('/:listId/add', async function (req, res, next) {
+  const { listId } = req.params;
+  const user = req.session.currentUser;
+  try {
+    const list = await Lists.findById(listId).populate("user");
+    res.render("lists/favsSearch", { user, list });
+  } catch (error) {
+    next(error)
+  }
+});
+
+// @desc    Takes the inputs from the search form
+// @route   POST /tools/finesearch
+// @access  Public
+router.post("/:listId/search", async function (req, res, next) {
+  const { listId } = req.params;
+  const {
+    search: textToSearch,
+    search: nameToSearch,
+    field: fieldToSearch,
+    tag: tagToSearch,
+    time: timeToSearch
+  } = req.body;
+  const user = req.session.currentUser;
+  const list = Lists.findById(listId).populate("user");
+  filter = [];
+  if (textToSearch) {
+    const words = textToSearch
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const wordVariants = words
+      .map((word) => [
+        word,
+        word + "s",
+        word.slice(0, -1),
+        word + "ing",
+        word + "ed",
+        word + "ly",
+        word.replace(/y$/, "ies"),
+        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
+      .flat();
+    const textRegex = wordVariants.map((word) => ({
+      description: { $regex: word, $options: "i" },
+    }));
+    filter.push({ $or: textRegex });
+  }
+  if (nameToSearch) {
+    const words = nameToSearch
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const wordVariants = words
+      .map((word) => [
+        word,
+        word + "s",
+        word.slice(0, -1),
+        word + "ing",
+        word + "ed",
+        word + "ly",
+        word.replace(/y$/, "ies"),
+        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
+        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
+      .flat();
+    const textRegex = wordVariants.map((word) => ({
+      name: { $regex: word, $options: "i" },
+    }));
+    filter.push({ $or: textRegex });
+  }
+  if (fieldToSearch) {
+    filter.push({ field: fieldToSearch });
+  }
+  if (timeToSearch) {
+    let currentDate = new Date();
+    let range = { $gte: new Date(0) };
+    switch (timeToSearch) {
+      case "today":
+        range = { $gte: currentDate };
+        break;
+      case "last-week":
+        range = { $gte: new Date(currentDate.setDate(currentDate.getDate() - 7)) };
+        break;
+      case "last-month":
+        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 1)) };
+        break;
+      case "last-sixth-months":
+        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 6)) };
+        break;
+    }
+    filter.push({ dateCreated: range });
+  }
+  if (typeof tagToSearch == `object`) {
+    const stringFromObject = JSON.stringify(tagToSearch);
+    const tagWords = stringFromObject
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const tagRegex = new RegExp(tagWords.join("|"), "i");
+    filter.push({ tag: { $regex: tagRegex } });
+  } else if (typeof tagToSearch == `string`) {
+    const tagWords = tagToSearch
+      .split(" ")
+      .filter((word) => !exclude.includes(word));
+    const tagRegex = new RegExp(tagWords.join("|"), "i");
+    filter.push({ tag: { $regex: tagRegex } });
+  }
+  if (filter.length > 0) {
+    try {
+      const items = await Tool.aggregate([
+        {
+          $match: {
+            $or: filter,
+          },
+        },
+      ]);
+      res.render("favsSearchResults", { user, items, list });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
   }
 });
 
