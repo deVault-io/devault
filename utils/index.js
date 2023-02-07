@@ -1,8 +1,11 @@
+const exclude = require("../data/exclude");
+
 const flattenMap = (array,mapper) =>{
   return [].concat(...array.map(mapper));
 }
 
 const sortRelatedItems = (tool,otherTools)=>{
+ let items=[];
     //Takes the tool description and split it, take the single words, exclude the 
     //excluded words from data and generate word variations for each one, then flat it()
     const descriptionVariant = tool.description
@@ -24,7 +27,7 @@ const sortRelatedItems = (tool,otherTools)=>{
       .flat();
       //takes the tools related by field, split the words, exclude the excluded words
       //add variations for each one then flat it
-    items = otherTools
+    return items = otherTools
       .map((t) => {
         const descriptionWords = t.description.split(" ").filter((word) => !exclude.includes(word))
         .map((word) => [
@@ -53,5 +56,8 @@ const sortRelatedItems = (tool,otherTools)=>{
       .splice(0, 3)
       .map(item => item._doc);
     }
+
+    
+
 
 module.exports = {flattenMap,sortRelatedItems}

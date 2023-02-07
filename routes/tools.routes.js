@@ -37,7 +37,6 @@ router.get("/tools/discover", async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  let items = [];
   try {
     const tool = await Tool.findById(toolId).populate("user");
     // const isLoggedInUserCreator =
@@ -46,7 +45,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       field: tool.field,
       _id: { $ne: tool._id },
     });
-    sortRelatedItems(tool,otherTools);
+    const items = sortRelatedItems(tool,otherTools);
     res.render("newToolDetail", { user, tool, items });
   } catch (error) {
     next(error);
@@ -145,6 +144,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
     tag: tagToSearch,
     time: timeToSearch,
   } = req.body;
+  console.log(timeToSearch)
+  console.log(fieldToSearch)
+  console.log(req.body)
   const user = req.session.currentUser;
   filter = [];
   if (textToSearch) {
@@ -222,8 +224,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
         break;
     }
     filter.push({ createdAt: range });
+    console.log(range)
+    console.log(timeToSearch)
   }
-  console.log(timeToSearch);
   if (typeof tagToSearch == `object`) {
     const stringFromObject = JSON.stringify(tagToSearch);
     const tagWords = stringFromObject
@@ -245,9 +248,6 @@ router.post("/tools/finesearch", async function (req, res, next) {
           $match: {
             $or: filter,
           },
-        },
-        {
-          $sort: sort,
         },
       ]);
       res.render("toolSearchResults", { user, items });

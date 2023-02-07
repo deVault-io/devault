@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Tool = require("../models/Tool.model");
-const flattenMap = require("../utils")
+const {flattenMap} = require("../utils")
 
 
 // @desc    App home page
@@ -38,6 +38,7 @@ router.get('/', async function (req, res, next) {
         }
       },
     ]).exec();
+    console.log(tools)
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
     res.render('index', { user, tools, tag});
   } catch (error) {
