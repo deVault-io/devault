@@ -116,8 +116,10 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/",
-    failureRedirect: "/login" // here you would redirect to the login page using traditional login approach
+    failureRedirect: "/",
+    successRedirect: "/profile",
+    failureFlash: true,
+    successFlash: "Successfully logged in!",
   })
 );
 
