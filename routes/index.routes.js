@@ -1,16 +1,11 @@
 const router = require('express').Router();
 const Tool = require("../models/Tool.model");
-const User = require("../models/User.model");
-const Fav = require("../models/Favs.model")
-const isLoggedIn = require('../middlewares');
-// const flatMap = require('../utils/index')
+const flattenMap = require("../utils")
+
 
 // @desc    App home page
 // @route   GET /
 // @access  Public
-function flatMap(array, mapper) {
-  return [].concat(...array.map(mapper));
-}
 router.get('/', async function (req, res, next) {
   const user = req.session.currentUser;
   try {
@@ -43,7 +38,7 @@ router.get('/', async function (req, res, next) {
         }
       },
     ]).exec();
-    const tag = [...new Set(flatMap(tools, tool => tool.tag))];
+    const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
     res.render('index', { user, tools, tag});
   } catch (error) {
     next(error)
