@@ -5,6 +5,8 @@ const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const fileUploader = require("../config/cloudinary.config");
+const {flattenMap,sortRelatedItems} = require("../utils");
+
 
 // @desc    Tool new rout form
 // @route   GET /tools/new
@@ -17,15 +19,12 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
 // @desc    View for all categories and advanced search tool
 // @route   GET /tools/discover
 // @access  Public
-function flatMap(array, mapper) {
-  return [].concat(...array.map(mapper));
-}
 router.get("/tools/discover", async function (req, res, next) {
   try {
     const user = req.session.currentUser;
     const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-    const tag = [...new Set(flatMap(tools, (tool) => tool.tag))];
-    const field = [...new Set(flatMap(tools, (tool) => tool.field))];
+    const tag = [...new Set(flattenMap(tools, (tool) => tool.tag))];
+    const field = [...new Set(flattenMap(tools, (tool) => tool.field))];
     res.render("toolDiscover", { user, field, tag, tools });
   } catch (error) {
     next(error);
@@ -40,63 +39,15 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   let items = [];
   try {
-    const tool = await Tool.findById(toolId).populate('user');
+    const tool = await Tool.findById(toolId).populate("user");
     // const isLoggedInUserCreator =
     //   tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
     });
-    //Takes the tool description and split it, take the single words, exclude the 
-    //excluded words from data and generate word variations for each one, then flat it()
-    const descriptionVariant = tool.description
-      .toLowerCase()
-      .split(" ")
-      .filter((word) => !exclude.includes(word))
-      .map((word) => [
-        word,
-        word + "s",
-        word.slice(0, -1),
-        word + "ing",
-        word + "ed",
-        word + "ly",
-        word.replace(/y$/, "ies"),
-        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
-        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
-      ])
-      .flat();
-      //takes the tools related by field, split the words, exclude the excluded words
-      //add variations for each one then flat it
-    items = otherTools
-      .map((t) => {
-        const descriptionWords = t.description.split(" ").filter((word) => !exclude.includes(word))
-        .map((word) => [
-          word,
-          word + "s",
-          word.slice(0, -1),
-          word + "ing",
-          word + "ed",
-          word + "ly",
-          word.replace(/y$/, "ies"),
-          word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
-          word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-          word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
-        ])
-        .flat();;
-        //find similarity, which is the amout of matches of the tool description and
-        //the word variantes from the other tools, the return that similarity(number)
-        //embeded in the object properties.  Then sort them by similarity and for each 
-        // tool send to view the _doc property that includes the tool properties
-        const similarity = descriptionWords.filter((word) =>
-          descriptionVariant.includes(word)
-        ).length;
-        return { ...t, similarity };
-      })
-      .sort((a, b) => b.similarity - a.similarity)
-      .splice(0, 3)
-      .map(item => item._doc);
-    res.render("newToolDetail", { user, tool,items });
+    sortRelatedItems(tool,otherTools);
+    res.render("newToolDetail", { user, tool, items });
   } catch (error) {
     next(error);
   }
@@ -173,10 +124,8 @@ router.post("/tools/:toolId/edit", async (req, res, next) => {
 // @route   GET /tools/:toolId/delete
 // @access  Private
 router.get("/tools/:toolId/delete", async (req, res, next) => {
-  const user = req.session.currentUser;
   const { toolId } = req.params;
   try {
-    const tool = await Tool.findById(toolId).populate("user");
     await Favs.deleteMany({ tool: toolId });
     await Tool.deleteOne({ _id: toolId });
     res.redirect("/");
@@ -194,7 +143,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     search: nameToSearch,
     field: fieldToSearch,
     tag: tagToSearch,
-    time: timeToSearch
+    time: timeToSearch,
   } = req.body;
   const user = req.session.currentUser;
   filter = [];
@@ -214,7 +163,8 @@ router.post("/tools/finesearch", async function (req, res, next) {
         word.replace(/y$/, "ies"),
         word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
         word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
+      ])
       .flat();
     const textRegex = wordVariants.map((word) => ({
       description: { $regex: word, $options: "i" },
@@ -237,7 +187,8 @@ router.post("/tools/finesearch", async function (req, res, next) {
         word.replace(/y$/, "ies"),
         word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
         word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),])
+        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
+      ])
       .flat();
     const textRegex = wordVariants.map((word) => ({
       name: { $regex: word, $options: "i" },
@@ -255,17 +206,24 @@ router.post("/tools/finesearch", async function (req, res, next) {
         range = { $gte: currentDate };
         break;
       case "last-week":
-        range = { $gte: new Date(currentDate.setDate(currentDate.getDate() - 7)) };
+        range = {
+          $gte: new Date(currentDate.setDate(currentDate.getDate() - 7)),
+        };
         break;
       case "last-month":
-        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 1)) };
+        range = {
+          $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 1)),
+        };
         break;
       case "last-sixth-months":
-        range = { $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 6)) };
+        range = {
+          $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 6)),
+        };
         break;
     }
-    filter.push({ dateCreated: range });
+    filter.push({ createdAt: range });
   }
+  console.log(timeToSearch);
   if (typeof tagToSearch == `object`) {
     const stringFromObject = JSON.stringify(tagToSearch);
     const tagWords = stringFromObject
@@ -287,6 +245,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
           $match: {
             $or: filter,
           },
+        },
+        {
+          $sort: sort,
         },
       ]);
       res.render("toolSearchResults", { user, items });
