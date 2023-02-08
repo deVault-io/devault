@@ -1,5 +1,9 @@
-<div class="discover-field-card-content">
+<div class="form-container-lists">
+<h1>{{user.username}}'s Library</h1>
+<p>Select the list in which you want to add the tool.</p>
+<div class="cards-wrapped-container">
   {{#each lists}}
     {{>listCardFav this}}
   {{/each}}
+</div>
 </div>
