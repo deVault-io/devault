@@ -108,6 +108,7 @@ passport.authenticate('local', {
 router.get(
   "/google",
   passport.authenticate("google", {
+    keepSessionInfo: true,
     scope: [
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email"
@@ -123,6 +124,7 @@ router.get(
   passport.authenticate("google", {
     failureRedirect: "/",
     successRedirect: "/profile",
+    keepSessionInfo: true
   })
 );
 

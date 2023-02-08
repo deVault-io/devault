@@ -32,7 +32,7 @@ router.post('/new', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   const { listName, image } = req.body;
   try {
-    const createdList = await Lists.create({ default: false, listName, image, user });
+    const createdList = await Lists.create({ default: false, listName, image: 'https://i.imgur.com/ExgDzpE.png', user });
     res.redirect(`/lists/${createdList._id}`);
   } catch (error) {
     next(error)
