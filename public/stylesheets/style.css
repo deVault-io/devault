@@ -37,6 +37,7 @@ li a {
   --bkg-color:var(--primary-white);
   --text-color:var(--primary-black);
   --main-gap:20px;
+  --primary-border-color: #d3d2d2;
 }
 
 /* DARK MODE BUTTON */
@@ -233,7 +234,7 @@ nav {
 .small-search-input {
   padding: 10px 20px;
   border-top-right-radius: 20px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--primary-border-color)
   border-bottom-right-radius: 20px;
   color: rgb(218, 218, 218);
   font-size: 1rem;
@@ -822,7 +823,7 @@ input#file-upload {
   gap: 20px;
 }
 .card-small-container{
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--primary-border-color);
   padding-top: 0px;
   border-radius: 8px;
   max-width: 400px;
@@ -982,23 +983,45 @@ margin-block-start: 1em;
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
+  gap:calc(var(--main-gap)/2);
   width:100%;
   -webkit-box-pack: justify;
   justify-content: space-between;
 }
+.card-small-link-container, .card-small-fav-container{
+  border-radius: 8px;
+ 
+}
 .card-small-link-container{
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  gap:10px;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding:10px;
+  width: calc(50%-var(--main-gap)/2);
+  border: 1 solid var(--primary-color);
+  background-color: var(--primary-color);
+}
+.card-small-link-container .bx-link-external{
+  color:var(--primary-white);
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 1;
 }
 .card-small-fav-container{
-   width: calc(50%-var(--main-gap)/2);
- }
-.card-small-link-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding:10px;
   width: calc(50%-var(--main-gap)/2);
+   border: 1px solid var(--primary-color);
+ }
+ .card-small-fav-container .bx-bookmark-heart{
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 1;
 }
 
 /* UPLOAD IMAGE STYLES */
@@ -1010,7 +1033,7 @@ margin-block-start: 1em;
 }
 
 .card-small-container-list {
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--primary-border-color)
   padding-top: 0px;
   border-radius: 8px;
   max-width: 400px;
@@ -1256,7 +1279,7 @@ margin-block-start: 1em;
 }
 .advanced-search-container fieldset{
   width:90vw;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--primary-border-color);
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
