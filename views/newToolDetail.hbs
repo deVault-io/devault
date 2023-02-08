@@ -20,7 +20,6 @@
       </div>
       <div class="card-detail-content-description">
         <p>Uploaded by: {{tool.user.username}} <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"></p>
-        
         <p>{{tool.description}}</p>
       </div>
       <div class="card-detail-content-edit-delete">
@@ -32,12 +31,13 @@
         </span>
       </div>
     </div>
-  </div>
-</div>
-
-{{#if items}}
-  <h1>You might also be interested in:</h1>
+      {{#if items}}
+    <h2>You might also be interested in:</h2>
     {{#each items}}
       {{>randomCard this}}
     {{/each}}
-{{/if}}
+  {{/if}}
+  </div>
+
+</div>
+
