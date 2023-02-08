@@ -1396,6 +1396,13 @@ fieldset>legend{
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
+.list-add-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (min-width: 768px) {
   .cards-wrapped-container {
     display: flex;
