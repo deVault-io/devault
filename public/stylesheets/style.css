@@ -236,11 +236,12 @@ nav {
 }
 
 .small-search-input {
+  font-family: 'DM sans';
   padding: 10px 20px;
   border-top-right-radius: 20px;
   border: 1px solid var(--primary-border-color);
-  border-bottom-right-radius: 20px;
-  color: rgb(218, 218, 218);
+  border-bottom-right-radius: 0px;
+  color: var(--primary-black);
   font-size: 1rem;
   font-weight: 500;
   background-color: var(--primary-white);
@@ -259,7 +260,7 @@ nav {
   align-items: center;
   padding: 9.3px 10px;
   border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 0px;
   outline: none;
   background: #2020;
   border: none;
@@ -869,8 +870,9 @@ padding: 0px 20px 0px 20px;
   overflow: hidden;
   width: 90vw;
   margin-top: 20px;
-  height:37vh;
+  max-height:54vh;
   padding-bottom:20px;
+  box-shadow: 0 2px 20px rgba(102, 102, 102, 0.2);
 }
 .card-small-field-container{
   min-width: 50px;
@@ -1014,28 +1016,45 @@ margin-block-start: 1em;
   white-space: normal!important;
 }
 
+.card-small-user-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.card-small-user-container img{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.card-small-user-info-container{
+
+}
+.card-small-user-info-container h5{
+  margin:0;
+}
+
 .card-small-linkandfav-container{
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
-  gap:calc(var(--main-gap)/2);
   width:100%;
   -webkit-box-pack: justify;
   justify-content: space-between;
 }
-.card-small-link-container, .card-small-fav-container{
+.card-small-link-btn,.card-small-fav-btn,.card-small-link-container, .card-small-fav-container{
   border-radius: 8px;
- 
-}
-.card-small-link-container{
+  width:100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  padding:10px;
-  width: calc(50%-var(--main-gap)/2);
+  padding: 10px;
+}
+.card-small-link-container{
   border: 1 solid var(--primary-color);
   background-color: var(--primary-color);
+  width:100%;
 }
 .card-small-link-container .bx-link-external{
   color:var(--primary-white);
@@ -1044,12 +1063,7 @@ margin-block-start: 1em;
   opacity: 1;
 }
 .card-small-fav-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  padding:10px;
-  width: calc(50%-var(--main-gap)/2);
    border: 1px solid var(--primary-color);
  }
  .card-small-fav-container .bx-bookmark-heart{
