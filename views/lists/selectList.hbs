@@ -1,9 +1,19 @@
 <div class="form-container-lists">
 <h1>{{user.username}}'s Library</h1>
 <p>Select the list in which you want to add the tool.</p>
-<div class="cards-wrapped-container">
-  {{#each lists}}
+<a href="/lists/new" id="edit-tool-btn">Create New List</a>
+    {{#if lists}}
+    <div class="cards-wrapped-container">
+      {{#each lists}}
     {{>listCardFav this}}
   {{/each}}
-</div>
+    </div>
+    {{else}}
+      <div>
+        <img height="350" src="/images/folder-is-empty-4064360-3363921.png" alt="not-found" />
+      </div>
+      <div class="list-add-container">
+        <h2>Oops! No Lists</h2>
+      </div>
+    {{/if}}
 </div>
