@@ -1,14 +1,19 @@
 <div class="form-container-lists">
 <h1>{{user.username}}'s Library</h1>
 <p>Here you can create lists and manage your favourites. You can remove them from your favourites by clicking the bookmark icon.</p>
-
-<div class="cards-wrapped-container">
-  {{#each lists}}
-    {{>listCard this}}
-  {{/each}}
-</div>
-
-<a href="/lists/new" id="edit-tool-btn">Add List</a>
-
+    {{#if lists}}
+    <div class="cards-wrapped-container">
+      {{#each lists}}
+      {{>listCard this}}
+      {{/each}}
+      <a href="/lists/new" id="edit-tool-btn">Add List</a>
+    </div>
+    {{else}}
+      <div>
+        <img height="350" src="/images/folder-is-empty-4064360-3363921.png" alt="not-found" />
+      </div>
+        <h2>Oops! No Lists</h2>
+        <a href="/lists/new" id="edit-tool-btn">Add List</a>
+    {{/if}}
 </div>
 
