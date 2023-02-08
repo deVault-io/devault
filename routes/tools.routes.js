@@ -53,14 +53,13 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate("user");
-    // const isLoggedInUserCreator =
-    //   tool.user._id.toString() == user._id ? true : false;
+    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
     });
     const items = sortRelatedItems(tool,otherTools);
-    res.render("newToolDetail", { user, tool, items });
+    res.render("newToolDetail", { user, tool, items, isLoggedInUserCreator});
   } catch (error) {
     next(error);
   }
