@@ -187,13 +187,13 @@ nav {
 }
 .nav__name {
   font-size: var(--tiny-font-size);
-  color: #444444;
+  color: var(--primary-color);
   text-decoration: none;}
   
 .nav__icon {
     font-size: 2rem;
-   font-weight: lighter;
-    color: rgb(87, 87, 87);
+    font-weight: lighter;
+    color: var(--primary-color);
     text-decoration: none;
   }
 .nav__icon:hover, .nav__icon:active{
