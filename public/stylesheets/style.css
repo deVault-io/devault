@@ -1022,6 +1022,7 @@ font-size: 1.2rem;
 .card-small-user-container{
   display: flex;
   flex-direction: row;
+  align-content: center;
 }
 
 .card-small-user-container img{
@@ -1032,10 +1033,14 @@ font-size: 1.2rem;
 }
 
 .card-small-user-info-container{
-
+margin:0;
 }
 .card-small-user-info-container h5{
   margin:0;
+  font-size: 1.1rem;
+}
+.card-small-user-info-container p{
+  font-size: 0.8rem;
 }
 
 .card-small-linkandfav-container{
@@ -1045,14 +1050,23 @@ font-size: 1.2rem;
   width:100%;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  gap:10px;
 }
-.card-small-link-btn,.card-small-fav-btn,.card-small-link-container, .card-small-fav-container{
-  border-radius: 8px;
-  width:100%;
+.card-small-link-btn,.card-small-fav-btn{
+  padding:0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  width: 50%;
+  padding: 10px 0;
+}
+.card-small-link-container, .card-small-fav-container{
+  border-radius: 8px;
+  width:100%;
+  height:35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card-small-link-container{
   border: 1 solid var(--primary-color);
