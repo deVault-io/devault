@@ -19,9 +19,13 @@
         </a>
       </div>
       <div class="card-detail-content-description">
-        <p>Uploaded by: {{tool.user.username}} <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"></p>
         <p>{{tool.description}}</p>
       </div>
+      </div>
+      <div class="card-detail-content-description-uploader">
+        <p>Uploaded by: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong></p>
+      </div>  
+      
       <div class="card-detail-content-edit-delete">
          <span>
           {{#if isLoggedInUserCreator}} 
@@ -30,7 +34,7 @@
           {{/if}}    
         </span>
       </div>
-    </div>
+    
       {{#if items}}
     <h2>You might also be interested in:</h2>
     {{#each items}}

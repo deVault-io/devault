@@ -812,10 +812,28 @@ input#file-upload {
 }
 
 .card-detail-content-description {
-  margin-top: 20px;
+  margin: 5px 20px;
   text-align: justify;
 }
 
+.card-detail-content-description-uploader {
+padding: 0px 20px 0px 20px;
+  margin-bottom: 0px;
+  font-size: 15px;
+}
+/* STYLES CARD DETAIL NOT MOBILE */
+
+@media (min-width: 568px) {
+  .card-detail-content-img > a > img {
+    width: 200%;
+  }
+
+  .card-detail-content {
+    padding: 20px;
+    display: flex;
+  }
+  
+}
 
 /* STYLES FOR THE SMALL CARD CONTAINER */
 
