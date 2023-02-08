@@ -29,18 +29,11 @@ router.get('/', async function (req, res, next) {
       {
         $sort: { createdAt: -1 }
       },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'user',
-          foreignField: '_id',
-          as: 'user'
-        }
-      },
     ]).exec();
-    console.log(tools)
+    const populatedTools = await Tool.populate(tools, { path: "user" });
+  console.log(tools[0].user.username)
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
-    res.render('index', { user, tools, tag});
+    res.render('index', { user,tools, populatedTools, tag });
   } catch (error) {
     next(error)
   }

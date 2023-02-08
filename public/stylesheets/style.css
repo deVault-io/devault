@@ -979,13 +979,16 @@ margin-block-start: 1em;
 .fav-count{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   flex-direction: row;
   margin-bottom: 0;
   font-size: 1.25rem;
 }
 .fav-count p{
-  margin-bottom: 0;
+margin-bottom: 0;
+}
+.fav-count p .bx-bookmark-heart{
+font-size: 1.2rem;
 }
 .card-small-bx-bookmark-heart{
   color: gray;
