@@ -1093,8 +1093,15 @@ margin-block-start: 1em;
   overflow: hidden;
   width: 90vw;
   margin-top: 20px;
-  height: 15vh;
+  height: 22vh;
   padding-bottom: 20px;
+}
+
+.card-small-container-list-name {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: -10px;
 }
 
 .card-small-img-container-list {

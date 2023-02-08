@@ -2,10 +2,14 @@
   <div class="card-small-container-list" id="{{_id}}">
     <div class="card-small-img-container-list">
       <span class="card-small-img-span">
-      <img width="400px" src={{image}} alt={{name}} id="small-container-img">
+      <img width="400px" src={{image}} alt={{listName}} id="small-container-img">
       </span>
     </div>
+    <div class="card-small-container-list-name">
+      <h3>{{listName}}</h3>
+    </div>
     <div class="card-small-content-container-list">
+
       <div class="card-small-linkandfav-container-list">
         <div class="card-small-link-container-list">
           <a href="/lists/{{_id}}" class="submit-btn-small-card">Check Favs</a>
