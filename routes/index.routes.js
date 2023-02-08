@@ -30,10 +30,11 @@ router.get('/', async function (req, res, next) {
         $sort: { createdAt: -1 }
       },
     ]).exec();
+    console.log(tools)
     const populatedTools = await Tool.populate(tools, { path: "user" });
-  console.log(tools[0].user.username)
+    console.log(`tools ${tools}`)
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
-    res.render('index', { user,tools, populatedTools, tag });
+    res.render('index', { user,tools: populatedTools, tag });
   } catch (error) {
     next(error)
   }
