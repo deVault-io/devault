@@ -68,6 +68,10 @@ body, div, p, span, h1, h2, h3, h4, h5, h6 {
   border-color: var(--primary-white);
 }
 
+bx bx-bookmark-heart nav__icon-white, bx bx-link-external nav__icon-white {
+  color: var(--primary-white);
+}
+
 @media (prefers-color-scheme: dark) {
   /* defaults to dark theme */
   body {
@@ -737,6 +741,7 @@ input#file-upload {
   column-gap: 8px;
   -webkit-box-align: center;
   align-items: center;
+  width: 100%;
 }
 
 .card-detail-header-buttons-link > a {
@@ -759,7 +764,7 @@ input#file-upload {
     font-size: 0.875rem;
     line-height: 1.75;
     text-transform: uppercase;
-    min-width: 64px;
+    width: 100%;
     padding: 6px 16px;
     border-radius: 4px;
     color: #000000de;
@@ -824,6 +829,7 @@ padding: 0px 20px 0px 20px;
 /* STYLES CARD DETAIL NOT MOBILE */
 
 @media (min-width: 568px) {
+  
   .card-detail-content-img > a > img {
     width: 200%;
   }
@@ -833,6 +839,15 @@ padding: 0px 20px 0px 20px;
     display: flex;
   }
   
+}
+
+@media (min-width: 1024px) {
+  body {
+    padding: 0px 150px;
+  }
+  .card-detail-content-img > a > img {
+    width: 150%;
+  }
 }
 
 /* STYLES FOR THE SMALL CARD CONTAINER */
