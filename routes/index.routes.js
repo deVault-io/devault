@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Tool = require("../models/Tool.model");
-const {flattenMap} = require("../utils")
+const {flattenMap,calculateTime} = require("../utils")
 
 
 // @desc    App home page
@@ -29,18 +29,13 @@ router.get('/', async function (req, res, next) {
       {
         $sort: { createdAt: -1 }
       },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'user',
-          foreignField: '_id',
-          as: 'user'
-        }
-      },
     ]).exec();
-    console.log(tools)
+    const populatedTools = await Tool.populate(tools, { path: "user" });
+    populatedTools.forEach(tool => {
+      tool.createdAgo = calculateTime(tool.createdAt);
+    });
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
-    res.render('index', { user, tools, tag});
+    res.render('index', { user,tools: populatedTools, tag });
   } catch (error) {
     next(error)
   }
