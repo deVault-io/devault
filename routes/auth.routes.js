@@ -123,9 +123,18 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/",
-    successRedirect: "/profile",
     keepSessionInfo: true
-  })
+  }),
+  function (req, res) {
+    User.findById(req.session.passport.user)
+    .then(user => {
+      req.session.currentUser = user;
+      res.redirect('/profile')
+    }) 
+    .catch(err => {
+      res.redirect('/')
+    })
+  }
 );
 
 // @desc    Destroy user session and log out
