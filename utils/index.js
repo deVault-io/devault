@@ -57,7 +57,33 @@ const sortRelatedItems = (tool,otherTools)=>{
       .map(item => item._doc);
     }
 
+    //function that calculates the time since the tool was created
+
+    function calculateTime(date) {
+      const now = new Date();
+      const elapsedTime = now - date;
     
+      const seconds = Math.floor(elapsedTime / 1000);
+      const minutes = Math.floor(elapsedTime / 1000 / 60);
+      const hours = Math.floor(elapsedTime / 1000 / 60 / 60);
+      const days = Math.floor(elapsedTime / 1000 / 60 / 60 / 24);
+      const months = Math.floor(elapsedTime / 1000 / 60 / 60 / 24 / 30);
+      const years = Math.floor(elapsedTime / 1000 / 60 / 60 / 24 / 365);
+    
+      if (seconds < 60) {
+        return `${seconds} seconds ago`;
+      } else if (minutes < 60) {
+        return `${minutes} minutes ago`;
+      } else if (hours < 24) {
+        return `${hours} hours ago`;
+      } else if (days < 30) {
+        return `${days} days ago`;
+      } else if (months < 12) {
+        return `${months} months ago`;
+      } else {
+        return `${years} years ago`;
+      }
+    }
 
 
-module.exports = {flattenMap,sortRelatedItems}
+module.exports = {flattenMap,sortRelatedItems,calculateTime}
