@@ -1,5 +1,57 @@
+{{!-- <div class="card-small-container-wrap"> --}}
+  <div class="card-small-container" id="{{_id}}">
+    <div class="card-small-field-container">
+      <p class="card-small-field {{field}}-card">{{field}}</p>
+    </div>
+    <div class="card-small-img-container">
+      <span class="card-small-img-span">
+      <img src="{{imageFile}}" alt="{{name}}" id="small-container-img">
+      </span>
+    </div>
+    <div class="card-small-content-container">
+      <div class="card-small-content-textbox-container">
+        <a href="/tools/{{_id}}" class="card-small-tool-anchor">
+          <div class="card-small-content-header-container">
+            <h3 class="card-small-header-title"> {{name}}
+              <div class="card-small-vote-container">
+              </div></h3>
+            <div class="card-small-header-favs-container">
+                  <span class="fav-count"><p><i class='bx bx-bookmark-heart' ></i></p></i>{{favCount}}</span>
+            </div>
+          </div>
+          <p class="card-small-content-description">
+            {{description}}
+          </p>
+        </a>
+        <div class="card-small-tags-container">
+               {{#each tool.tag}}
+                <p>{{tag}}</p>
+             {{/each}}
+        </div>
+      </div>
+       <div class="card-small-user-container">
+        <img src="{{user.image}}" alt="user" />
+        <div class="card-small-user-info-container">
+          <h5>{{user.username}}</h5>
+          <p>{{createdAgo}}</p>
+        </div>
+      </div>
+      <div class="card-small-linkandfav-container">
+        <a href="{{url}}" class="card-small-link-btn">
+        <div class="card-small-link-container">
+          <i class='bx bx-link-external' ></i>
+        </div></a>
+<a href="/lists/{{_id}}/fav" class="card-small-fav-btn"id="none-tool-btn" >
+        <div class="card-small-fav-container">
+          <i class='bx bx-bookmark-heart'></i>
+        </div></a>
+    </div>
+  </div>
+</div>
 
-<div class="random-card" id="{{_id}}">
+
+
+{{!-- <div class="random-card" id="{{_id}}">
   <div class="random-img">
     <img width="50px" src="{{imageFile}}" alt={{name}}/>
   </div>
@@ -11,4 +63,4 @@
   <div>
 </div>
 </div>
-</div>
+</div> --}}

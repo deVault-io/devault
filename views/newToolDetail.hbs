@@ -39,11 +39,14 @@
     
       {{#if items}}
     <h2>You might also be interested in:</h2>
-    {{#each items}}
+     <div class="card-small-container-wrap"> 
+{{#each items}}
       {{>randomCard this}}
     {{/each}}
   {{/if}}
+    
+    
   </div>
-
+</div> 
 </div>
 
