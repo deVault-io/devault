@@ -59,21 +59,19 @@ const usersRoutes = require("./routes/users.routes");
 const toolsRoutes = require("./routes/tools.routes");
 const authRoutes = require("./routes/auth.routes");
 const listsRoutes = require("./routes/lists.routes")
-const favsRoutes = require("./routes/favs.routes")
 
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
 app.use("/", toolsRoutes);
 app.use("/lists", listsRoutes);
 app.use("/auth", authRoutes);
-app.use("/favs", favsRoutes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-//passport use (not needed)
+// passport Google
 passport.serializeUser((user, done) => {
   done(null, user.id);
   console.log(user.id)
@@ -85,37 +83,6 @@ passport.deserializeUser((id,done)=>{
   })
 })
  
-/*  passport.use(
-  new LocalStrategy(
-    { passReqToCallback: true },
-    {
-      usernameField: 'username', // by default
-      passwordField: 'password' // by default
-    },
-    (username, password, done) => {
-      User.findOne({ username })
-        .then(user => {
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username' });
-          }
- 
-          if (!bcrypt.compareSync(password, user.password)) {
-            return done(null, false, { message: 'Incorrect password' });
-          }
- 
-          done(null, user);
-        })
-        .catch(err => done(err));
-    }
-  )
-);  */
-
-// passport intit methods not needed
-/* app.use(passport.initialize());
-app.use(passport.session());
- */
-
-// passport Google
 passport.use(
   new GoogleStrategy(
     {
