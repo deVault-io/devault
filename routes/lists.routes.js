@@ -238,7 +238,7 @@ router.get("/:listId/edit", async function (req, res, next) {
 // @desc    Edit one list form
 // @route   POST /lists/:listId/edit
 // @access  Private
-router.post("/lists/:listId/edit", isLoggedIn, async (req, res, next) => {
+router.post("/:listId/edit", isLoggedIn, async (req, res, next) => {
   const { listId } = req.params;
   console.log(listId)
   const user = req.session.currentUser;
