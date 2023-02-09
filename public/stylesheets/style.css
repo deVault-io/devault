@@ -363,17 +363,13 @@ div.scrollmenu a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 7vh;
-  max-width: 60%;
+  margin-top: 5vh;
+  max-width: 80%;
 }
 
 .form-container-lists {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 7vh;
-  max-width: 80%;
+  width: 100%;
+  margin-top: 75px;
 }
 
 .form-container-lists > p {
@@ -388,12 +384,12 @@ div.scrollmenu a:hover {
 }
 
 form {
-  display: flex;
+/*   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 70%;
   margin-top:30px;
-  justify-content: space-evenly;
+  justify-content: space-evenly; */
 }
 
 /* added .login class to have it only for login and not signup */
@@ -401,8 +397,6 @@ form.login {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 150%;
-  margin-top: 25px;
   align-items: center;
 }
 
@@ -549,7 +543,7 @@ input.input-old[required]:before {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 100%;
  }
  
  .input {
@@ -1544,4 +1538,23 @@ div.devops{
     height: 37vh;
   }
 
+}
+
+/*GUILLE REFACTOR*/
+nav#nav-bar {
+  width: 100%;
+  height: 6.3vh;
+  background-color: var (--primary-white);
+  border: 1px var (--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+nav#nav-bar > a{
+margin-left: 15px;
 }
