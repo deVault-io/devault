@@ -1,5 +1,7 @@
-<div class="form-container-login">
-  <h1>Add a new Tool</h1>
+<nav id="nav-bar" class="scrolled">
+  <a href="/">   ←   Add a New Tool</a>
+</nav>
+<div class="form-container-lists">
   <form  class="login" action="/tools/new" method="POST" enctype="multipart/form-data">
     <div class="input-group">
       <input required type="text" name="name" placeholder="chat.openai.com" autocomplete="off" class="input"/>
@@ -15,7 +17,6 @@
     </div>
     <div class="input-group">
       <input id="file-upload" type="file" name="imageFile" accept="image/jpeg, image/png, image/jpg">
-      {{!-- <output id="file-upload"></output> --}}
     </div> 
     <div class="input-group">
       <p class="tag-label">Select a category</p>
