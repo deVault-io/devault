@@ -124,7 +124,7 @@ header h1 {
   letter-spacing: 1px;
   max-width: 90%;
   margin-top: 20px;
-  font-size: 4.5rem;
+  font-size: 3rem;
   --bg-size: 400%;
   --color-one:var(--primary-color);
   --color-two: #81c7e8;;
