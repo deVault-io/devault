@@ -367,13 +367,27 @@ div.scrollmenu a:hover {
   max-width: 80%;
 }
 
+.form-container-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5vh;
+  width:100%;
+  margin-top: 40px;
+}
+
 .form-container-lists {
   width: 100%;
   margin-top: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-container-lists > p {
   margin-top: 35px;
+  text-align:center;
 }
 
 .form-logo {
@@ -398,6 +412,15 @@ form.login {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+form.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  margin-top: 50px;
 }
 
 form > * {
@@ -623,13 +646,13 @@ input#file-upload {
 
 /* USER PROFILE PAGE STYLING */
 .profile-container {
-  padding-top: 30px;
   padding:0 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     height: 80vh;
+    margin-top:70px;
 }   
      
 .user-avatar {

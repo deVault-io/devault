@@ -238,13 +238,14 @@ router.get("/:listId/edit", async function (req, res, next) {
 // @desc    Edit one list form
 // @route   POST /lists/:listId/edit
 // @access  Private
-router.post("/lists/:listId/edit", async (req, res, next) => {
+router.post("/lists/:listId/edit", isLoggedIn, async (req, res, next) => {
   const { listId } = req.params;
+  console.log(listId)
   const user = req.session.currentUser;
   const { listName, image  } = req.body;
   try {
     const list = await Lists.findById(listId).populate("user");
-    const editedList = await Lists.findByIdAndUpdate(list, { listName, image, user: user }, { new: true });
+    const editedList = await Lists.findByIdAndUpdate(listId, { listName, image, user: user }, { new: true });
     console.log(editedList)
     res.redirect(`/lists/${editedList._id}`);
   } catch (error) {

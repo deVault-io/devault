@@ -1,4 +1,3 @@
-{{!-- <div class="card-small-container-wrap"> --}}
   <div class="card-small-container" id="{{_id}}">
     <div class="card-small-field-container">
       <p class="card-small-field {{field}}-card">{{field}}</p>
@@ -15,9 +14,6 @@
             <h3 class="card-small-header-title"> {{name}}
               <div class="card-small-vote-container">
               </div></h3>
-            <div class="card-small-header-favs-container">
-                  <span class="fav-count"><p><i class='bx bx-bookmark-heart' ></i></p></i>{{favCount}}</span>
-            </div>
           </div>
           <p class="card-small-content-description">
             {{description}}
@@ -27,13 +23,6 @@
                {{#each tool.tag}}
                 <p>{{tag}}</p>
              {{/each}}
-        </div>
-      </div>
-       <div class="card-small-user-container">
-        <img src="{{user.image}}" alt="user" />
-        <div class="card-small-user-info-container">
-          <h5>{{user.username}}</h5>
-          <p>{{createdAgo}}</p>
         </div>
       </div>
       <div class="card-small-linkandfav-container">
@@ -47,22 +36,4 @@
         </div></a>
     </div>
   </div>
-</div>
-
-
-
-<div class="random-card-container">
-<div class="random-card" id="{{_id}}">
-  <div class="random-img">
-    <img width="50px" src="{{imageFile}}" alt={{name}}/>
-  </div>
-  <div class="random-textBox">
-    <div class="random-textContent">
-      <a class="random-span"href="/tools/{{_id}}"> <p class="random-h1">{{name}}</a></p><a href="{{url}}"><i class='bx bx-link-external'></i></a>
-      <a class="random-span"href="/tools/{{_id}}"><i class='bx bx-info-circle'></i></a>
-    </div>
-  <div>
-</div>
-</div>
-</div>
 </div>
