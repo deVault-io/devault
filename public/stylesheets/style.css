@@ -1321,20 +1321,28 @@ margin:0;
 }
 
 /* RANDOM RELATED TOOLS  */
+.random-card-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap:10px;
+}
 .random-card {
   width: 100%;
   height: 70px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: left;
+  align-items: center;
   transition: 0.5s ease-in-out;
-  margin: 15px 20px;
+  margin: 2px 20px;
   width: clamp(90vw,90vw,50vw);
   border-radius: 10px;
   border-width: 1px;
-  border-color: var(--primary-border-color);
+  border-color: var(--primary-color);
   border-color: black;
-  background-color: #0ea5e9;
+  background-color: var(--primary-white);
+  gap:10px;
 }
 
 .random-card:active {
@@ -1351,11 +1359,21 @@ margin:0;
 .random-img {
   width: 50px;
   height: 50px;
-  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   border-radius: 10px;
   background: linear-gradient(#d7cfcf, #9198e5);
 }
 
+.random-img img {
+  width: auto;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
 .random-card:hover > .img {
   transition: 0.5s ease-in-out;
   background: linear-gradient(#9198e5, #712020);
@@ -1363,19 +1381,17 @@ margin:0;
 
 .random-textBox {
   width: calc(100% - 90px);
-  margin-left: 10px;
   font-family: inherit;
 }
 
 .random-textContent {
-  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: left;
 }
 .random-textContent .bx-link-external{
-  color: var(--primary-white);
+  color: var(--primary-color);
 }
 .random-span {
   font-size: 2rem;
@@ -1385,7 +1401,7 @@ margin:0;
 .random-h1 {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--primary-white);
+  color: var(--primary-color);
   text-decoration: none;
   line-height: 25px;
 }
