@@ -731,7 +731,7 @@ input#file-upload {
   flex-direction: row;
   -webkit-box-align: center;
   align-items: center;
-  column-gap: 32px;
+  column-gap: 10px;
   width: 100%;
   margin-top: 0px;
 }
@@ -830,16 +830,22 @@ padding: 0px 20px 0px 20px;
 /* STYLES CARD DETAIL NOT MOBILE */
 
 @media (min-width: 568px) {
-  
-  .card-detail-content-img > a > img {
-    width: 200%;
-  }
 
   .card-detail-content {
     padding: 20px;
     display: flex;
   }
-  
+
+  .card-detail-content-img {
+  width: 40%;
+  float: left;
+  }
+
+  .card-detail-content-description {
+  width: 60%;
+  float: left;
+  padding: 0px 20px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -849,6 +855,26 @@ padding: 0px 20px 0px 20px;
   .card-detail-content-img > a > img {
     width: 150%;
   }
+
+  .card-detail-header-buttons {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    column-gap: 32px;
+    width: 60%;
+    margin-top: 0px;
+  }
+  .card-detail-content-img {
+    width: 40%;
+    float: left;
+    }
+  
+    .card-detail-content-description {
+    width: 60%;
+    float: left;
+    padding: 0px 20px;
+    }
 }
 
 /* STYLES FOR THE SMALL CARD CONTAINER */
