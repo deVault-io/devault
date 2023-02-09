@@ -35,6 +35,7 @@ router.get('/', async function (req, res, next) {
       tool.createdAgo = calculateTime(tool.createdAt);
     });
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
+    console.log(tag)
     res.render('index', { user,tools: populatedTools, tag });
   } catch (error) {
     next(error)

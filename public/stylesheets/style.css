@@ -1448,7 +1448,7 @@ fieldset>legend{
   position: relative;
 }
 #back-end-small-card{
-  background-color: linear-gradient(to right, var(--error-red),#4c58c6) !important;
+  background-color: linear-gradient(to right, var(--error-red),#25beaa) !important;
 }
 
 .discover-field-card-content {
