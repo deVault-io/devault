@@ -1440,17 +1440,51 @@ fieldset>legend{
 }
 
 .discover-field-card {
-  background: linear-gradient(to right, var(--primary-color), #4c58c6);
   height: 70px;
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   position: relative;
 }
-#back-end-small-card{
-  background-color: linear-gradient(to right, var(--error-red),#25beaa) !important;
+.discover-field-card-content{
+  
 }
-
+div.back-end{
+  background: linear-gradient(to right, var(--primary-color), #4c58c6);
+}
+div.front-end{
+  background: linear-gradient(to right, orange, #d3782d);
+}
+div.data-science{
+  background: linear-gradient(to right, rgb(107, 220, 32), #1a9a5e);
+}
+div.ux-ui{
+  background: linear-gradient(to right, rgb(196, 98, 224), #6b127f);
+}
+div.blockchain{
+  background: linear-gradient(to right, rgb(189, 189, 189), #d29e9e);
+}
+div.productivity{
+  background: linear-gradient(to right, rgb(55, 240, 209), #1f8e8c);
+}
+div.task-management{
+  background: linear-gradient(to right, rgb(224, 204, 113), #fe483e);
+}
+div.cyber-security{
+  background: linear-gradient(to right, rgb(225, 147, 236), #be18c6);
+}
+div.mobile-development{
+  background: linear-gradient(to right, rgb(253, 161, 24), #ebbf73);
+}
+div.cloud-computing{
+  background: linear-gradient(to right, rgb(129, 206, 230), #4646ca);
+}
+div.ai-machine-learning{
+  background: linear-gradient(to right, #9ad26c, rgb(23, 187, 2));
+}
+div.devops{
+  background: linear-gradient(to right, rgb(101, 227, 204), #05974e);
+}
 .discover-field-card-content {
   display: flex;
   align-items: center;
