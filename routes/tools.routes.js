@@ -5,7 +5,7 @@ const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const fileUploader = require("../config/cloudinary.config");
-const {flattenMap,sortRelatedItems} = require("../utils");
+const {flattenMap,sortRelatedItems,filterSearchItems} = require("../utils");
 
 
 // @desc    Tool new rout form
@@ -154,103 +154,8 @@ router.post("/tools/finesearch", async function (req, res, next) {
     tag: tagToSearch,
     time: timeToSearch,
   } = req.body;
-  console.log(timeToSearch)
-  console.log(fieldToSearch)
-  console.log(req.body)
   const user = req.session.currentUser;
-  filter = [];
-  if (textToSearch) {
-    const words = textToSearch
-      .toLowerCase()
-      .split(" ")
-      .filter((word) => !exclude.includes(word));
-    const wordVariants = words
-      .map((word) => [
-        word,
-        word + "s",
-        word.slice(0, -1),
-        word + "ing",
-        word + "ed",
-        word + "ly",
-        word.replace(/y$/, "ies"),
-        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
-        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
-      ])
-      .flat();
-    const textRegex = wordVariants.map((word) => ({
-      description: { $regex: word, $options: "i" },
-    }));
-    filter.push({ $or: textRegex });
-  }
-  if (nameToSearch) {
-    const words = nameToSearch
-      .toLowerCase()
-      .split(" ")
-      .filter((word) => !exclude.includes(word));
-    const wordVariants = words
-      .map((word) => [
-        word,
-        word + "s",
-        word.slice(0, -1),
-        word + "ing",
-        word + "ed",
-        word + "ly",
-        word.replace(/y$/, "ies"),
-        word.replace(/([aeiou])([^aeiou]+)$/, "$1$2s"),
-        word.replace(/([aeiou])([^aeiou]+)([sxzh])$/, "$1$2$3es"),
-        word.replace(/([^aeiou])([aeiou])([^aeiou]+)$/, "$1$2$3s"),
-      ])
-      .flat();
-    const textRegex = wordVariants.map((word) => ({
-      name: { $regex: word, $options: "i" },
-    }));
-    filter.push({ $or: textRegex });
-  }
-  if (fieldToSearch) {
-    filter.push({ field: fieldToSearch });
-  }
-  if (timeToSearch) {
-    let currentDate = new Date();
-    let range = { $gte: new Date(0) };
-    switch (timeToSearch) {
-      case "today":
-        range = { $gte: currentDate };
-        break;
-      case "last-week":
-        range = {
-          $gte: new Date(currentDate.setDate(currentDate.getDate() - 7)),
-        };
-        break;
-      case "last-month":
-        range = {
-          $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 1)),
-        };
-        break;
-      case "last-sixth-months":
-        range = {
-          $gte: new Date(currentDate.setMonth(currentDate.getMonth() - 6)),
-        };
-        break;
-    }
-    filter.push({ createdAt: range });
-    console.log(range)
-    console.log(timeToSearch)
-  }
-  if (typeof tagToSearch == `object`) {
-    const stringFromObject = JSON.stringify(tagToSearch);
-    const tagWords = stringFromObject
-      .split(" ")
-      .filter((word) => !exclude.includes(word));
-    const tagRegex = new RegExp(tagWords.join("|"), "i");
-    filter.push({ tag: { $regex: tagRegex } });
-  } else if (typeof tagToSearch == `string`) {
-    const tagWords = tagToSearch
-      .split(" ")
-      .filter((word) => !exclude.includes(word));
-    const tagRegex = new RegExp(tagWords.join("|"), "i");
-    filter.push({ tag: { $regex: tagRegex } });
-  }
+  const filter = filterSearchItems(textToSearch,nameToSearch,fieldToSearch,tagToSearch,timeToSearch)
   if (filter.length > 0) {
     try {
       const items = await Tool.aggregate([
