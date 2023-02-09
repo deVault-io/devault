@@ -173,3 +173,30 @@ router.post("/tools/finesearch", async function (req, res, next) {
   }
 });
 module.exports = router;
+
+// @desc    Takes the inputs from params
+// @route   POST /tools/search
+// @access  Public
+
+router.get("/tools/tools/search/:itemToSearch", async function (req, res, next) {
+  const fieldToSearch = req.params.itemToSearch;
+  console.log(`field to search in get route ${fieldToSearch}`);
+  const user = req.session.currentUser;
+  const filter = filterSearchItems(fieldToSearch)
+  console.log(fieldToSearch)
+  if (filter.length > 0) {
+    try {
+      const items = await Tool.aggregate([
+        {
+          $match: {
+            $or: filter,
+          },
+        },
+      ]);
+      res.render("toolSearchResults", { user, items });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
+});
