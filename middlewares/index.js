@@ -5,5 +5,3 @@ module.exports = isLoggedIn = (req, res, next) => {
     next()
   }
 };
-
-//Create Middleware para el user creator (Guille)
