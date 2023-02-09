@@ -55,8 +55,6 @@ router.get('/:listId', async function (req, res, next) {
   }
 });
 
-
-
 // @desc    tool select list to add
 // @route   GET /tools/:toolId/fav
 // @access  Private
@@ -94,7 +92,6 @@ router.get('/:toolId/:listId/add', isLoggedIn, async (req, res, next) => {
     next(error)
   }
 });
-
 
 // @desc    Tools to add to list
 // @route   GET /:listId/add
