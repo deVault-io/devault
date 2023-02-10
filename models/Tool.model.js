@@ -28,7 +28,7 @@ const toolSchema = new Schema(
     },
     field:{
         type: [String],
-        enum : ['UX UI','Front End','Data Science','Back End','Task Management','Mobile','Cloud Computing','DevOps', 'Cyber Security','Machine Learning','Other','Blockchain'],
+        enum : ['UX/UI','Front End','Data Science','Back End','Task Management','Mobile','Cloud Computing','DevOps', 'Cyber Security','Machine Learning','Other','Blockchain'],
         required:true,
     },
     tag:{

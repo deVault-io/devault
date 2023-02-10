@@ -205,6 +205,14 @@ nav {
     color: var(--primary-color);
     text-decoration: none;
   }
+
+  .back__icon {
+    font-size: 1.5rem;
+    font-weight: lighter;
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+
 .nav__icon:hover, .nav__icon:active{
     color: var(--primary-color)
   }
@@ -851,6 +859,18 @@ input#file-upload {
   text-align: justify;
 }
 
+.card-detail-content-description > p {
+  
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.card-detail-content-edit-delete > span {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+
 .card-detail-content-description-uploader {
 padding: 0px 20px 0px 20px;
   margin-bottom: 0px;
@@ -866,12 +886,12 @@ padding: 0px 20px 0px 20px;
   }
 
   .card-detail-content-img {
-  width: 40%;
+  width: 45%;
   float: left;
   }
 
   .card-detail-content-description {
-  width: 60%;
+  width: 55%;
   float: left;
   padding: 0px 20px;
   margin: 0px;
@@ -883,7 +903,7 @@ padding: 0px 20px 0px 20px;
     -webkit-box-align: center;
     align-items: center;
     column-gap: 10px;
-    width: 70%;
+    width: 45%;
     margin-top: 0px;
   }
 
@@ -1321,7 +1341,7 @@ margin:0;
   margin:10px 0px;
   width:50%;
   padding: 5px 40px;
-  width:max-content;
+  width:100%;
   text-align: center;
   font-size: 15px;
   letter-spacing: 1px;

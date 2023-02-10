@@ -1,5 +1,5 @@
 <nav id="nav-bar" class="scrolled">
-  <a><h2>{{tool.name}}</h2></a>
+  <a href="/"><h2><i class='bx bx-chevron-left back__icon'></i>{{tool.name}}</h2></a>
 </nav>
 <div class="card-detail-container-wrap">
   <div class="card-detail-container">
@@ -25,12 +25,7 @@
       </div>
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
-      </div>
-      </div>
-      <div class="card-detail-content-description-uploader">
-        <p>Uploaded by: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong></p>
-      </div>  
-      <div class="card-detail-content-edit-delete">
+        <div class="card-detail-content-edit-delete">
          <span>
           {{#if isLoggedInUserCreator}} 
             <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
@@ -38,6 +33,12 @@
           {{/if}}    
         </span>
       </div>
+      </div>
+      </div>
+      <div class="card-detail-content-description-uploader">
+        <p>Uploaded by: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong></p>
+      </div>  
+      
     
       {{#if items}}
     <h2>You might also be interested in:</h2>
