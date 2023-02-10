@@ -5,10 +5,14 @@
 <p>Here you can create lists and manage your favourites. You can remove them from your favourites by clicking the bookmark icon.</p>
 <a href="/lists/new" id="edit-tool-btn">Create New List</a>
     {{#if lists}}
-    <div class="cards-wrapped-container">
       {{#each lists}}
-      {{>listCard this}}
-      {{/each}}
+    <div class="container">
+      <div class="card">
+          <ul class="list">
+            {{>listCard this}}
+            {{/each}}
+          </ul>  
+      </div>
     </div>
     {{else}}
       <div>

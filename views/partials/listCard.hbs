@@ -1,4 +1,4 @@
-<div class="card-small-container-wrap">
+{{!-- <div class="card-small-container-wrap">
   <div class="card-small-container-list" id="{{_id}}">
     <div class="card-small-img-container-list">
       <span class="card-small-img-span">
@@ -23,6 +23,27 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+
+      <li class="waves-effect">
+        <div class="valign-wrapper">
+<i class='bx bx-folder nav__icon'></i>
+  <a href="/lists/{{_id}}"><h3>{{listName}}</h3></a>
+        </div>
+        
+        <div class="valign-wrapper-row">
+          <div class="title" id="{{_id}}">
+            <span>Jan 9, 2017</span>
+          </div>
+                  <div class="card-small-link-container-list">
+          <a href="/lists/{{_id}}/edit" class="submit-btn-small-card">Edit List</a>
+        </div>
+        <div class="card-small-link-container-list">
+          <a href="/lists/{{_id}}/delete" class="submit-btn-small-card">Delete List</a>
+        </div>
+        </div>
+        </div>
+      </div>
+      </li>
 
 
