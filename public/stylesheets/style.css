@@ -138,7 +138,7 @@ header{
   align-items: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 header h1 {
   text-decoration: underline;
@@ -265,7 +265,6 @@ nav {
 #index-form{
   width:clamp(100px,90vw,1200px);
   text-align: center;
-  margin-top: 15px;
 }
 
 /* MAIN SEARCH */
