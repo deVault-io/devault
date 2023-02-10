@@ -1477,18 +1477,37 @@ margin:0;
   width:90vw;
   margin-bottom: 10px;
 }
-.advanced-search-container fieldset{
-  width:90vw;
-  border: 1px solid var(--primary-border-color);
+.advanced-search-main-container{
+  position: absolute;
+  z-index: 99;
+  background-color: var(--primary-white);
+  width: 90vw !important;
+  height: 100vh;
+  padding: 0;
+  box-shadow: none;
+  padding-left:10px;
+  border-radius: 0;
+}
+.advanced-search-field-container,.advanced-search-tag-container,.advanced-search-time-container{
+border-bottom: 1px solid var(--primary-border-color);
+}
+.advanced-search-applybutton{
+  border-radius: 8px;
+  width: 50%;
+  height: 40px;
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--primary-color);
+  color: var(--primary-white);
+  margin:5px auto;
+  margin-bottom: 70px;
 }
-fieldset>legend{
-  width:100%;
-  font-size: larger;
-  
+.hidden{
+ display:none;
 }
+
 .discover-field-card-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1496,6 +1515,7 @@ fieldset>legend{
   grid-row-gap: 1rem;
   width: 90vw;
   margin: 0 auto;
+  border-radius: 0;
 }
 
 .discover-field-card {

@@ -82,7 +82,7 @@
   </nav>
     {{{ body }}}
     <script>
-              {{!-- NAVBAR SHADOWN ON SCROLL --}}
+  
       const navBar = document.getElementById('nav-menu');
       window.onscroll = function(){
         if (window.scrollY >22){
@@ -91,7 +91,7 @@
           navBar.classList.remove('scrolled')
         }
       }
-      {{!-- DARK MODE SETTINGS --}}
+
       const btn = document.querySelector(".btn-toggle");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -101,7 +101,7 @@ if (currentTheme == "dark") {
 } else if (currentTheme == "light") {
   document.body.classList.toggle("light-theme");
 }
-          {{!-- DARK MODE SCRIPT --}}
+     
 btn.addEventListener("click", function () {
   if (prefersDarkScheme.matches) {
     document.body.classList.toggle("light-theme");
@@ -120,7 +120,7 @@ btn.addEventListener("click", function () {
     el.classList.remove("dark-theme");
     el.classList.add(theme + "-theme");
   });
-
+  
   localStorage.setItem("theme", theme);
 });
 $('option').mousedown(function(e) {
@@ -135,7 +135,7 @@ $('option').mousedown(function(e) {
     }, 0);
     
     return false;
-});
+}); 
     </script>
     <script>
     const input = document.getElementById("file-upload")
@@ -160,6 +160,24 @@ $('option').mousedown(function(e) {
         imagesArray.splice(index, 1)
         displayImages()
       }
+
+const searchToggleBtn = document.querySelector('.search-toggle-btn');
+const discoverFieldGrid = document.querySelector('.discover-field-grid');
+const advancedSearchMainContainer = document.querySelector('.advanced-search-main-container');
+const advancedSearchContainer = document.querySelector('.advanced-search-container');
+
+searchToggleBtn.addEventListener('click', () => {
+  console.log('im being clicked')
+  if (advancedSearchMainContainer.classList.contains('hidden')) {
+    discoverFieldGrid.classList.add('hidden');
+    advancedSearchMainContainer.classList.remove('hidden');
+    advancedSearchContainer.classList.add('hidden');
+  } else {
+    discoverFieldGrid.classList.remove('hidden');
+    advancedSearchMainContainer.classList.add('hidden');
+    advancedSearchContainer.classList.remove('hidden');
+  }
+});
     </script> 
 </body>
 </html>
