@@ -1,6 +1,8 @@
-<div class="form-container-login">
-  <h1>Editing {{tool.name}} </h1>
-  <form  class="login" action="/tools/{{tool._id}}/edit" method="POST">
+<nav id="nav-bar" class="scrolled">
+  <a href="/tools/{{tool._id}}"><h2><i class='bx bx-chevron-left back__icon'></i>Edit Tool</h2></a>
+</nav>
+<div class="form-container-lists">
+  <form  class="list" action="/tools/{{tool._id}}/edit" method="POST">
     <div class="input-group">
       <input required type="text" name="name" value="{{tool.name}}" autocomplete="off" class="input"/>
       <label class="user-label">Tool Name</label>
@@ -14,9 +16,8 @@
       <label class="user-label">Tool Website</label>
     </div>
     <div class="input-group">
-      <input required type="text" name="image" value="{{tool.image}}" autocomplete="off" class="input"/>
-      <label class="user-label">Tool Image</label>
-    </div>
+      <input id="file-upload" type="file" name="imageFile" value="{{tool.imageFile}}" accept="image/jpeg, image/png, image/jpg">
+    </div> 
     <div class="input-group">
       <select id="field" name="field" value="{{tool.field}}" autocomplete="off" class="input">
         <option value="UX/UI">UX/UI</option>
