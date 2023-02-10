@@ -66,7 +66,7 @@ router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   console.log(list)
   try {
     const lists = await Lists.find({user: { $eq: user }});
-    res.render('lists/selectList', {user, lists});
+    res.render('lists/selectList', {user, tool, lists});
   } catch (error) {
     next(error)
   }
