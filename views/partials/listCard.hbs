@@ -1,9 +1,14 @@
 <li class="waves-effect">
   <div class="valign-wrapper">
-    <i class='bx bx-folder nav__icon'></i>
+    <div class="valign-wrapper-name">
+    <i class='bx bx-folder list__icon'></i>
     <a href="/lists/{{_id}}">
       <h3>{{listName}}</h3>
     </a>
+    </div>
+    <div class="valign-wrapper-img">
+      <img src="{{image}}" alt="{{name}}" id="list-container-img">
+    </div>
   </div>
   <div class="valign-wrapper-row">
     <div class="title" id="{{_id}}">
