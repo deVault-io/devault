@@ -1,54 +1,63 @@
 <nav id="nav-bar" class="scrolled">
   <a><h2>Discover</h2></a>
 </nav>
-<div class="advanced-search-container">
+
 <form action="/tools/finesearch" method="post">
-  <fieldset>
-    <legend>What are you looking for?:</legend>
+<div class="advanced-search-container">
     <div class="advanced-search-bar-container">
-    <div>
-      <label for="search">Search:</label>
       <input type="text" id="search" name="search">
-    </div>
-    <div>
       <input type="submit" value="Submit">
     </div>
+    <div class="advanced-search-filter-container">
+
     </div>
-    <div class="advanced-search-main-container">
-      <div class="advanced-search-fiedlandtag-container">
-      <div>
-      <label for="field">Field:</label>
-      <select id="field" name="field">
-         <option value="">Select Field</option>
-        {{#each field}}
-      <option value="{{this}}">{{this}}</option>
-  {{/each}} 
-      </select>
-    </div>
-    <div>
-      <label for="tags">Tags:</label>
-     <select id="tad-select" name="tag" multiple>
-         <option value="">Select tags</option>
-       {{#each tag}}
-      <option value="{{this}}">{{this}}</option>
-  {{/each}} 
-      </select>
-    </div>
-    </div>
-    <div class="advanced-search-time-container">
-      <label for="time">Upload:</label>
-     <select id="time" name="time">
-         <option value="">Uploaded:</option>
-      <option value="today">today</option>
-      <option value="last-week">Last week</option>
-      <option value="last-month">Last month</option>
-      <option value="last-sixth-months">Last six months</option>
-      </select>
-      </div>
-    </div>
-  </fieldset>
-</form>
 </div>
+                {{!-- HIDDEN PAGE  --}}
+   <div class="advanced-search-main-container">
+  <div class="advanced-search-field-container">
+    <label>Field:</label>
+    {{#each field}}
+      <div class="advanced-search-field-option">
+        <input type="radio" id="field-{{this}}" name="field" value="{{this}}">
+        <label for="field-{{this}}">{{this}}</label>
+      </div>
+    {{/each}} 
+  </div>
+  <div class="advanced-search-tag-container">
+    <label>Tags:</label>
+    {{#each tag}}
+        <div class="advanced-search-tag-option checkBox">
+           <label for="tag-{{this}}">
+          <input type="checkbox" id="tag-{{this}}" name="tag" value="{{this}}">
+         {{this}}</label>
+        </div>
+    {{/each}} 
+  </div>
+  <div class="advanced-search-time-container">
+    <label>Upload:</label>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-today" name="time" value="today">
+      <label for="time-today">Today</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-week" name="time" value="last-week">
+      <label for="time-last-week">Last week</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-month" name="time" value="last-month">
+      <label for="time-last-month">Last month</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-six-months" name="time" value="last-six-months">
+      <label for="time-last-six-months">Last six months</label>
+    </div>
+  </div>
+  <div class="advanced-search-applybutton search-toggle-btn">
+    Apply filters
+  </div>
+</div>
+</form>
+
 <div class="discover-field-card-grid">
   <a href="tools/search/Back End">
   <div class="discover-field-card ">
