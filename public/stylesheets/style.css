@@ -1657,6 +1657,17 @@ nav#nav-bar > a:hover {
   margin-left: 75px;
 }
 
+.list-container-img {
+  width: 115%;
+}
+
+.list-container-img > img {
+  vertical-align: middle;
+  border-style: none;
+  width: 100%;
+  height: 150px;
+}
+
 .list {
   margin: 0;
 }

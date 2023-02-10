@@ -61,6 +61,19 @@ router.post('/profile/editAvatar', isLoggedIn, fileUploader.single("image"), asy
   }
 });
 
+// @desc    lists of favorites view
+// @route   GET /
+// @access  Private
+router.get('/lists', isLoggedIn, async function (req, res, next) {
+  const user = req.session.currentUser;
+  try {
+    const lists = await Lists.find({user: { $eq: user }}).populate('user');
+    res.render('lists/favsListProfile', {user, lists});
+  } catch (error) {
+    next(error)
+  }
+});
+
 // @desc    Delete profile 
 // @route   GET /profile/edit
 // @access  Private

@@ -32,7 +32,7 @@ router.post('/new', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   const { listName, image } = req.body;
   try {
-    const createdList = await Lists.create({ default: false, listName, image: 'https://i.imgur.com/ExgDzpE.png', user });
+    const createdList = await Lists.create({ default: false, listName, image, user });
     res.redirect(`/lists/${createdList._id}`);
   } catch (error) {
     next(error)
@@ -42,7 +42,7 @@ router.post('/new', isLoggedIn, async function (req, res, next) {
 // @desc    Gets ONE list
 // @route   GET /:listId
 // @access  Private
-router.get('/:listId', async function (req, res, next) {
+router.get('/:listId', isLoggedIn, async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
   const list = await Lists.findById(listId);
@@ -96,7 +96,7 @@ router.get('/:toolId/:listId/add', isLoggedIn, async (req, res, next) => {
 // @desc    Tools to add to list
 // @route   GET /:listId/add
 // @access  Private
-router.get('/:listId/add', async function (req, res, next) {
+router.get('/:listId/add', isLoggedIn, async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
   try {
@@ -224,7 +224,7 @@ router.post("/:listId/search", async function (req, res, next) {
 // @desc    Edit one list view
 // @route   GET /lists/:listId/edit
 // @access  Private
-router.get("/:listId/edit", async function (req, res, next) {
+router.get("/:listId/edit", isLoggedIn, async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
   try {

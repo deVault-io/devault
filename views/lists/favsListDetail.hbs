@@ -1,6 +1,9 @@
 <nav id="nav-bar" class="scrolled">
-  <a href="/lists"><h2>← {{list.listName}}</h2></a>
+  <a href="/lists"><h2><i class='bx bx-chevron-left back__icon'></i>{{list.listName}}</h2></a>
 </nav>
+<div class="list-container-img">
+  <img src="{{list.image}}" alt="{{name}}" id="list-container-img">
+</div>
 <div class="form-container-lists" id="{{list.id}}">
   <p>Hey {{user.username}}, these are the tools you have favourited.</p>
   <a href="/lists/{{list.id}}/add" id="edit-tool-btn">Add more tools to {{list.listName}}</a>
