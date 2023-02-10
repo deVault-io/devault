@@ -180,10 +180,12 @@ module.exports = router;
 
 router.get("/tools/tools/search/:itemToSearch", async function (req, res, next) {
   const fieldToSearch = req.params.itemToSearch;
-  console.log(`field to search in get route ${fieldToSearch}`);
   const user = req.session.currentUser;
-  const filter = filterSearchItems(fieldToSearch)
-  console.log(fieldToSearch)
+  const filter = [
+    { field: fieldToSearch },
+    { tag: fieldToSearch }
+    ];
+  
   if (filter.length > 0) {
     try {
       const items = await Tool.aggregate([
