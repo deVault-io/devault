@@ -1476,6 +1476,69 @@ margin:0;
 .advanced-search-container{
   width:90vw;
   margin-bottom: 10px;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+}
+.advanced-search-bar-container{
+  width:100%;
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ border-radius: 10px;
+ border:2px solid var(--primary-border-color);
+ padding:10px 5px;
+}
+.advanced-search-bar-container:active{
+border: 1px solid var(--primary-color);
+}
+.advanced-search-bar-container>input{
+  width:90%;
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+.advanced-search-bar-container>button{
+  border: 0;
+  background-color: transparent;
+}
+.advanced-search-bar-container>button>i{
+  font-size: 1.5rem;
+  color: var(--primary-border-color)
+}
+.advanced-search-bar-container>button>i:focus{
+  transform: scale(1.5);
+  color: var(--primary-color);
+}
+.advanced-search-filterandsort-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  gap:var(--main-gap);
+}
+.advanced-search-filter-container,.advanced-search-sort-container{
+  width:50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border:2px solid var(--primary-border-color);
+  padding:10px 5px;
+}
+.advanced-search-filter-container{
+  font-size: 1.2rem;
+}
+.advanced-search-filter-container i{
+  font-size: 1.2rem;
+}
+.advanced-search-sort-container{
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  align-items:center;
 }
 .advanced-search-main-container{
   position: absolute;
@@ -1488,8 +1551,9 @@ margin:0;
   padding-left:10px;
   border-radius: 0;
 }
-.advanced-search-field-container,.advanced-search-tag-container,.advanced-search-time-container{
+.advanced-search-field-container,.advanced-search-tag-container{
 border-bottom: 1px solid var(--primary-border-color);
+padding-bottom: 20px;
 }
 .advanced-search-applybutton{
   border-radius: 8px;
@@ -1501,7 +1565,7 @@ border-bottom: 1px solid var(--primary-border-color);
   text-align: center;
   background-color: var(--primary-color);
   color: var(--primary-white);
-  margin:5px auto;
+  margin:15px auto;
   margin-bottom: 70px;
 }
 .hidden{
@@ -1524,9 +1588,6 @@ border-bottom: 1px solid var(--primary-border-color);
   overflow: hidden;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   position: relative;
-}
-.discover-field-card-content{
-  
 }
 div.back-end{
   background: linear-gradient(to right, var(--primary-color), #4c58c6);
@@ -1694,7 +1755,6 @@ nav#nav-bar > a:hover {
 
 .list li {
   padding: 0 20px;
-  witdh: 60%;
 }
 
 .list li a {

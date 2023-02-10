@@ -5,15 +5,22 @@
 <form action="/tools/finesearch" method="post">
 <div class="advanced-search-container">
     <div class="advanced-search-bar-container">
-      <input type="text" id="search" name="search">
-      <input type="submit" value="Submit">
+      <input type="text" id="search" name="search" placeholder="Search into the vault">
+      <button type="submit" value="Submit"> <i class='bx bx-search'></i></button>
     </div>
-    <div class="advanced-search-filter-container">
+    <div class="advanced-search-filterandsort-container">
+    <div class="advanced-search-filter-container search-toggle-btn">
+      Filter <i class='bx bx-filter-alt' ></i>
+    </div>
+    <div class="advanced-search-sort-container">
+      Sort by rating:  
+      <input type="checkbox" id="time-today" name="time" value="today">
+    </div>
+  </div>
 
-    </div>
 </div>
                 {{!-- HIDDEN PAGE  --}}
-   <div class="advanced-search-main-container">
+ <div class="advanced-search-main-container">
   <div class="advanced-search-field-container">
     <label>Field:</label>
     {{#each field}}
