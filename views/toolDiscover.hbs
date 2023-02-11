@@ -9,7 +9,7 @@
       <button type="submit" value="Submit"> <i class='bx bx-search'></i></button>
     </div>
     <div class="advanced-search-filterandsort-container">
-    <div class="advanced-search-filter-container search-toggle-btn">
+    <div class="advanced-search-filter-container" id="search-filter-toggle-btn">
       Filter <i class='bx bx-filter-alt' ></i>
     </div>
     <div class="advanced-search-sort-container">
@@ -19,7 +19,7 @@
   </div>
 </div>
                 {{!-- HIDDEN PAGE  --}}
- <div class="advanced-search-main-container">
+ <div class="advanced-search-main-container hidden">
   <div class="advanced-search-field-container">
     <label>Field:</label>
     {{#each field}}
@@ -58,7 +58,7 @@
       <label for="time-last-six-months">Last six months</label>
     </div>
   </div>
-  <div class="advanced-search-applybutton search-toggle-btn">
+  <div class="advanced-search-applybutton" id="search-apply-toggle-btn">
     Apply filters
   </div>
 </div>
