@@ -25,7 +25,11 @@
 
 </div>
 
-
+<div class="cards-wrapped-container">
+  {{#each tools}}
+    {{>toolCard this}}
+  {{/each}}
+</div>
 {{#if items}}
 <h2 class="search-page-header" id="search-page-header">THESE ARE THE AMAZING TOOLS WE FOUND FOR YOU:</h2>
 {{#each items}}

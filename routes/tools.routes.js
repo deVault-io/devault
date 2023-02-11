@@ -5,8 +5,7 @@ const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const fileUploader = require("../config/cloudinary.config");
-const {flattenMap,sortRelatedItems,filterSearchItems} = require("../utils");
-
+const { flattenMap, sortRelatedItems, filterSearchItems, calculateTime } = require("../utils");
 
 // @desc    Tool new rout form
 // @route   GET /tools/new
@@ -22,12 +21,12 @@ router.get("/tools/new", isLoggedIn, function (req, res, next) {
 router.get("/tools/myTools", isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
-    const tools = await Tool.find({user: { $eq: user }});
-    console.log(tools)
-  res.render("myTools", { user, tools });
+    const tools = await Tool.find({ user: { $eq: user } });
+    console.log(tools);
+    res.render("myTools", { user, tools });
   } catch (error) {
-  next(error);
-}
+    next(error);
+  }
 });
 
 // @desc    View for all categories and advanced search tool
@@ -53,15 +52,16 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate("user");
-    console.log(toolId) //I dont underestand why tool is not  picked.
-    console.log(tool)
-    const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+    console.log(toolId); //I dont underestand why tool is not  picked.
+    console.log(tool);
+    const isLoggedInUserCreator =
+      tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
     });
-    const items = sortRelatedItems(tool,otherTools);
-    res.render("newToolDetail", { user, tool, items, isLoggedInUserCreator});
+    const items = sortRelatedItems(tool, otherTools);
+    res.render("newToolDetail", { user, tool, items, isLoggedInUserCreator });
   } catch (error) {
     next(error);
   }
@@ -155,17 +155,43 @@ router.post("/tools/finesearch", async function (req, res, next) {
     time: timeToSearch,
   } = req.body;
   const user = req.session.currentUser;
-  const filter = filterSearchItems(textToSearch,nameToSearch,fieldToSearch,tagToSearch,timeToSearch)
+  const filter = filterSearchItems(
+    textToSearch,
+    nameToSearch,
+    fieldToSearch,
+    tagToSearch,
+    timeToSearch
+  );
   if (filter.length > 0) {
     try {
-      const items = await Tool.aggregate([
+      const tools = await Tool.aggregate([
         {
           $match: {
             $or: filter,
           },
         },
+        {
+          $lookup: {
+            from: "favs",
+            localField: "_id",
+            foreignField: "tool",
+            as: "favs",
+          },
+        },
+        {
+          $addFields: {
+            favCount: { $size: "$favs" },
+          },
+        },
+        {
+          $sort: { createdAt: -1 },
+        },
       ]);
-      res.render("toolSearchResults", { user, items });
+      const populatedTools = await Tool.populate(tools, { path: "user" });
+    populatedTools.forEach(tool => {
+      tool.createdAgo = calculateTime(tool.createdAt);
+    });
+      res.render("toolSearchResults", { user, tools:populatedTools });
     } catch (error) {
       console.error(error);
       next(error);
@@ -178,27 +204,47 @@ module.exports = router;
 // @route   POST /tools/search
 // @access  Public
 
-router.get("/tools/tools/search/:itemToSearch", async function (req, res, next) {
-  const fieldToSearch = req.params.itemToSearch;
-  const user = req.session.currentUser;
-  const filter = [
-    { field: fieldToSearch },
-    { tag: fieldToSearch }
-    ];
-  
-  if (filter.length > 0) {
-    try {
-      const items = await Tool.aggregate([
-        {
-          $match: {
-            $or: filter,
+router.get(
+  "/tools/tools/search/:itemToSearch",
+  async function (req, res, next) {
+    const fieldToSearch = req.params.itemToSearch;
+    const user = req.session.currentUser;
+    const filter = [{ field: fieldToSearch }, { tag: fieldToSearch }];
+
+    if (filter.length > 0) {
+      try {
+        const tools = await Tool.aggregate([
+          {
+            $match: {
+              $or: filter,
+            },
           },
-        },
-      ]);
-      res.render("toolSearchResults", { user, items });
-    } catch (error) {
-      console.error(error);
-      next(error);
+          {
+            $lookup: {
+              from: "favs",
+              localField: "_id",
+              foreignField: "tool",
+              as: "favs",
+            },
+          },
+          {
+            $addFields: {
+              favCount: { $size: "$favs" },
+            },
+          },
+          {
+            $sort: { createdAt: -1 },
+          },
+        ]);
+        const populatedTools = await Tool.populate(tools, { path: "user" });
+      populatedTools.forEach(tool => {
+        tool.createdAgo = calculateTime(tool.createdAt);
+      });
+        res.render("toolSearchResults", { user, tools:populatedTools });
+      } catch (error) {
+        console.error(error);
+        next(error);
+      }
     }
   }
-});
+);
