@@ -989,6 +989,17 @@ padding: 0px 20px 0px 20px;
     float: left;
     }
   
+    .card-detail-container-wrap{
+      width: 100%;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 5%;
+    }
+
     .card-detail-content-description {
       width: 100%;
       float: left;
