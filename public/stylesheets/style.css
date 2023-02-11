@@ -1592,7 +1592,6 @@ border: 1px solid var(--primary-color);
   z-index: 99;
   background-color: var(--primary-white);
   width: 90vw !important;
-  height: 100vh;
   padding: 0;
   box-shadow: none;
   padding-left:10px;
