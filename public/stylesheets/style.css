@@ -1597,6 +1597,7 @@ border: 1px solid var(--primary-color);
   box-shadow: none;
   padding-left:10px;
   border-radius: 0;
+  padding-bottom:100px;
 }
 .advanced-search-field-container,.advanced-search-tag-container{
 border-bottom: 1px solid var(--primary-border-color);
