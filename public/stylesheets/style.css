@@ -215,6 +215,7 @@ nav {
   justify-content: space-around;
   list-style-type: none;
   margin:0;
+  align-items: center;
 }
 
 .nav__name {
@@ -224,6 +225,13 @@ nav {
   
 .nav__icon {
   font-size: 2rem;
+  font-weight: lighter;
+  color: var(--seconday-color);
+  text-decoration: none;
+}
+
+.nav__icon_plus {
+  font-size: 3rem;
   font-weight: lighter;
   color: var(--seconday-color);
   text-decoration: none;
