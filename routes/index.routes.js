@@ -32,10 +32,9 @@ router.get('/', async function (req, res, next) {
     ]).exec();
     const populatedTools = await Tool.populate(tools, { path: "user" });
     populatedTools.forEach(tool => {
-      tool.createdAgo = calculateTime(tool.createdAt);
+    tool.createdAgo = calculateTime(tool.createdAt);
     });
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
-    console.log(tag)
     res.render('index', { user,tools: populatedTools, tag });
   } catch (error) {
     next(error)

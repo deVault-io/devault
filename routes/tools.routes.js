@@ -22,7 +22,6 @@ router.get("/tools/myTools", isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tools = await Tool.find({ user: { $eq: user } });
-    console.log(tools);
     res.render("myTools", { user, tools });
   } catch (error) {
     next(error);
@@ -52,8 +51,6 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate("user");
-    console.log(toolId); //I dont underestand why tool is not  picked.
-    console.log(tool);
     const isLoggedInUserCreator =
       tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
@@ -162,6 +159,9 @@ router.post("/tools/finesearch", async function (req, res, next) {
     tagToSearch,
     timeToSearch
   );
+  const toolsToTag = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
+  const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
   if (filter.length > 0) {
     try {
       const tools = await Tool.aggregate([
@@ -191,7 +191,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     populatedTools.forEach(tool => {
       tool.createdAgo = calculateTime(tool.createdAt);
     });
-      res.render("toolSearchResults", { user, tools:populatedTools });
+      res.render("toolSearchResults", { user, tools:populatedTools,field,tag });
     } catch (error) {
       console.error(error);
       next(error);
@@ -210,7 +210,9 @@ router.get(
     const fieldToSearch = req.params.itemToSearch;
     const user = req.session.currentUser;
     const filter = [{ field: fieldToSearch }, { tag: fieldToSearch }];
-
+    const toolsToTag = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
+  const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
     if (filter.length > 0) {
       try {
         const tools = await Tool.aggregate([
@@ -240,7 +242,7 @@ router.get(
       populatedTools.forEach(tool => {
         tool.createdAgo = calculateTime(tool.createdAt);
       });
-        res.render("toolSearchResults", { user, tools:populatedTools });
+        res.render("toolSearchResults", { user, tools:populatedTools ,field,tag});
       } catch (error) {
         console.error(error);
         next(error);

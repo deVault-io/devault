@@ -167,10 +167,10 @@ $('option').mousedown(function(e) {
         displayImages()
       }
 
-const searchToggleBtn = document.querySelector('.search-toggle-btn');
-const discoverFieldGrid = document.querySelector('.discover-field-grid');
-const advancedSearchMainContainer = document.querySelector('.advanced-search-main-container');
-const advancedSearchContainer = document.querySelector('.advanced-search-container');
+const searchToggleBtn = document.getElementsByClassName('search-toggle-btn');
+const discoverFieldGrid = document.getElementsByClassName('discover-field-grid');
+const advancedSearchMainContainer = document.getElementsByClassName('advanced-search-main-container');
+const advancedSearchContainer = document.getElementsByClassName('advanced-search-container');
 
 searchToggleBtn.addEventListener('click', () => {
   console.log('im being clicked')

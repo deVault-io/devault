@@ -1,62 +1,72 @@
+<nav id="nav-bar" class="scrolled">
+  <a href="/"><h2><i class='bx bx-chevron-left back__icon'></i>Discover</h2></a>
+</nav>
+
+<form action="/tools/finesearch" method="post">
 <div class="advanced-search-container">
-<form action="/" method="post">
-  <fieldset>
-    <legend>Search Tool</legend>
-    <div>
-      <label for="search">Search:</label>
-      <input type="text" id="search" name="search">
+    <div class="advanced-search-bar-container">
+      <input type="text" id="search" name="search" placeholder="Search into the vault">
+      <button type="submit" value="Submit"> <i class='bx bx-search'></i></button>
     </div>
-    <div>
-      <label for="field">Field:</label>
-      <select id="field" name="field">
-        <option value="UX/UI">UX/UI</option>
-      </select>
+    <div class="advanced-search-filterandsort-container">
+    <div class="advanced-search-filter-container search-toggle-btn">
+      Filter <i class='bx bx-filter-alt' ></i>
     </div>
-    <div>
-      <label for="tags">Tags:</label>
-      </select>
+    <div class="advanced-search-sort-container">
+      Sort by rating:  
+      <input type="checkbox" name="rating" value="rating">
     </div>
-    <div>
-      <input type="submit" value="Submit">
-    </div>
-  </fieldset>
-</form>
-
-
+  </div>
 </div>
+                {{!-- HIDDEN PAGE  --}}
+ <div class="advanced-search-main-container">
+  <div class="advanced-search-field-container">
+    <label>Field:</label>
+    {{#each field}}
+      <div class="advanced-search-field-option">
+        <input type="radio" id="field-{{this}}" name="field" value="{{this}}">
+        <label for="field-{{this}}">{{this}}</label>
+      </div>
+    {{/each}} 
+  </div>
+  <div class="advanced-search-tag-container">
+    <label>Tags:</label>
+    {{#each tag}}
+        <div class="advanced-search-tag-option checkBox">
+           <label for="tag-{{this}}">
+          <input type="checkbox" id="tag-{{this}}" name="tag" value="{{this}}">
+         {{this}}</label>
+        </div>
+    {{/each}} 
+  </div>
+  <div class="advanced-search-time-container">
+    <label>Upload:</label>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-today" name="time" value="today">
+      <label for="time-today">Today</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-week" name="time" value="last-week">
+      <label for="time-last-week">Last week</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-month" name="time" value="last-month">
+      <label for="time-last-month">Last month</label>
+    </div>
+    <div class="advanced-search-time-option">
+      <input type="radio" id="time-last-six-months" name="time" value="last-six-months">
+      <label for="time-last-six-months">Last six months</label>
+    </div>
+  </div>
+  <div class="advanced-search-applybutton search-toggle-btn">
+    Apply filters
+  </div>
+</div>
+</form>
 
 <div class="cards-wrapped-container">
   {{#each tools}}
     {{>toolCard this}}
   {{/each}}
 </div>
-{{#if items}}
-<h2 class="search-page-header" id="search-page-header">THESE ARE THE AMAZING TOOLS WE FOUND FOR YOU:</h2>
-{{#each items}}
-<div class="card-container" id="detail-card">
-    <div class="tool-image">
-    <img width="350px" src={{this.image}} alt={{this.name}}/>
-  </div>
-    <h1 class="tool-name">{{this.name}}</h1>
-<div class="tool-description-box">
-    <p>{{this.description}}</p>
-     <p>Uploaded by: {{this.user.username}} </p>
-  </div>
-   <div class="tool-link">
-      <a class="submit-btn-small" href={{this.url}}>Check Website</a>
-    </div>
-     <div class="tool-header-content">
-      <a href="/favs" class="nav__link active-link">
-        <i class='bx bx-bookmark-heart nav__icon'></i>
-        <span class="nav__name">Favs</span>
-      </a>
-    </div>    
-  <span class="btn-span">
-    {{#if isLoggedInUserCreator}} 
-        <a href="/tools/{{this._id}}/delete" id="delete-tool-btn">Delete</a>
-        <a href="/tools/{{this._id}}/edit" id="edit-tool-btn">Edit tool</a>
-    {{/if}}    
-    </span>
-</div>
-{{/each}}
-{{/if}}
+
