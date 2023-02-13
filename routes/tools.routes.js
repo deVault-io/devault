@@ -4,6 +4,7 @@ const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
+const Votes = require("../models/Votes.model");
 const fileUploader = require("../config/cloudinary.config");
 const { flattenMap, sortRelatedItems, filterSearchItems, calculateTime } = require("../utils");
 
@@ -198,7 +199,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     }
   }
 });
-module.exports = router;
+
 
 // @desc    Takes the inputs from params
 // @route   POST /tools/search
@@ -250,3 +251,40 @@ router.get(
     }
   }
 );
+
+/* // @desc    Edit one list view
+// @route   GET /lists/:listId/edit
+// @access  Private
+router.get("/:toolId/vote", isLoggedIn, async function (req, res, next) {
+  const { toolId } = req.params;
+  const user = req.session.currentUser;
+  try {
+    const tool = await Lists.findById(listId).populate("user");
+    res.render("lists/favsListEdit", { user, list });
+  } catch (error) {
+    next(error);
+  }
+});  */
+
+// @desc    Edit one list form
+// @route   POST /lists/:listId/edit
+// @access  Private
+router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
+  const { toolId } = req.params;
+  const user = req.session.currentUser;
+  const { rating } = req.body;
+  try {
+    const tool = await Tool.findById(toolId).populate('user');
+    let votedTool = await Votes.findOneAndUpdate(
+      { tool: toolId, user: user._id },
+      { rating },
+      { upsert: true, new: true }
+    );
+    console.log(votedTool)
+    res.redirect('/');
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
