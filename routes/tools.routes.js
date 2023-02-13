@@ -151,6 +151,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     field: fieldToSearch,
     tag: tagToSearch,
     time: timeToSearch,
+    rating: rating
   } = req.body;
   const user = req.session.currentUser;
   const filter = filterSearchItems(
@@ -158,7 +159,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     nameToSearch,
     fieldToSearch,
     tagToSearch,
-    timeToSearch
+    timeToSearch,rating
   );
   const toolsToTag = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
   const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
