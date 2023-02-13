@@ -85,7 +85,7 @@ const sortRelatedItems = (tool,otherTools)=>{
       }
     }
 
-  const filterSearchItems = function(textToSearch,nameToSearch, fieldToSearch,tagToSearch,timeToSearch){
+  const filterSearchItems = function(textToSearch,nameToSearch, fieldToSearch,tagToSearch,timeToSearch,rating){
       filter = [];
   if (textToSearch) {
     const words = textToSearch
@@ -137,6 +137,9 @@ const sortRelatedItems = (tool,otherTools)=>{
   }
   if (fieldToSearch) {
     filter.push({ field: fieldToSearch });
+  }
+  if (rating) {
+
   }
   if (timeToSearch) {
     let currentDate = new Date();

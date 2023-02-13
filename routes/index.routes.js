@@ -27,12 +27,30 @@ router.get('/', async function (req, res, next) {
         }
       },
       {
+        $lookup: {
+          from: "votes",
+          localField: "_id",
+          foreignField: "tool",
+          as: "votes",
+        },
+      },
+      {
+        $addFields: {
+          avgRating:{ $ifNull: [{$avg: "$votes.rating"}, 0] },
+        },
+      },
+      {
         $sort: { createdAt: -1 }
       },
     ]).exec();
     const populatedTools = await Tool.populate(tools, { path: "user" });
     populatedTools.forEach(tool => {
     tool.createdAgo = calculateTime(tool.createdAt);
+    if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
+    tool.avgRating = tool.avgRating.toFixed(1);
+    } else {
+      tool.avgRating = null
+    }
     });
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
     res.render('index', { user,tools: populatedTools, tag });
