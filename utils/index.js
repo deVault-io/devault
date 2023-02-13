@@ -146,7 +146,7 @@ const sortRelatedItems = (tool,otherTools)=>{
     let range = { $gte: new Date(0) };
     switch (timeToSearch) {
       case "today":
-        range = { $gte: currentDate };
+        range = { $gte: new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), 0, 0, 0)};
         break;
       case "last-week":
         range = {
