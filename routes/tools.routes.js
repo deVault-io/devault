@@ -165,6 +165,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
   const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
   const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
   if (filter.length > 0) {
+    const sortField = rating ? 'avgRating' : 'createdAt';
     try {
       const tools = await Tool.aggregate([
         {
@@ -199,13 +200,14 @@ router.post("/tools/finesearch", async function (req, res, next) {
           },
         },
         {
-          $sort: { createdAt: -1 },
+          $sort: { [sortField]: -1 },
         },
       ]);
       const populatedTools = await Tool.populate(tools, { path: "user" });
     populatedTools.forEach(tool => {
       tool.createdAgo = calculateTime(tool.createdAt);
     });
+    console.log(populatedTools)
       res.render("toolSearchResults", { user, tools:populatedTools,field,tag });
     } catch (error) {
       console.error(error);
