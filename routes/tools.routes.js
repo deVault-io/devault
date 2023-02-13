@@ -185,6 +185,19 @@ router.post("/tools/finesearch", async function (req, res, next) {
           },
         },
         {
+          $lookup: {
+            from: "votes",
+            localField: "_id",
+            foreignField: "tool",
+            as: "votes",
+          },
+        },
+        {
+          $addFields: {
+            avgRating: { $avg: "$votes.rating" },
+          },
+        },
+        {
           $sort: { createdAt: -1 },
         },
       ]);
