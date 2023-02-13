@@ -1186,11 +1186,13 @@ font-size: 1.2rem;
   display: flex;
   flex-direction: row;
   align-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-small-user-container-details {
   display: flex;
-  width: 100%;
+  flex-direction: row;
 }
 
 .card-small-user-container img{
@@ -1199,17 +1201,21 @@ font-size: 1.2rem;
   height: 40px;
   margin-right: 10px;
 }
-
+.card-small-user-container-details-img{
+  display: flex;
+  flex-direction: row;
+}
 .card-small-user-info-container{
 margin:0;
 display: flex;
 flex-direction: column;
-width: 75%;
 }
-
 .card-small-user-info-rating {
   display: flex;
   align-items: end;
+}
+.card-small-user-info-rating i{
+  color: var(--primary-color);
 }
 
 .card-small-user-info-container h5{
