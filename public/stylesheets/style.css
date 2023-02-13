@@ -1188,6 +1188,10 @@ font-size: 1.2rem;
   align-content: center;
 }
 
+.card-small-user-container-details {
+  display: flex;
+}
+
 .card-small-user-container img{
   border-radius: 50%;
   width: 40px;
@@ -1197,6 +1201,8 @@ font-size: 1.2rem;
 
 .card-small-user-info-container{
 margin:0;
+display: flex;
+flex-direction: column;
 }
 .card-small-user-info-container h5{
   margin:0;
