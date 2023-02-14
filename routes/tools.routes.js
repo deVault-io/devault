@@ -370,4 +370,46 @@ router.post('/tools/:toolId/review', isLoggedIn, async function (req, res, next)
   }
 });
 
+// @desc    Edit one review
+// @route   GET /tools/:toolId/:reviewId/edit
+// @access  Private
+router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res, next) {
+  const { toolId, reviewId } = req.params;
+  const user = req.session.currentUser;
+  try {
+    const review = await Reviews.findById(reviewId).populate("user");
+    res.render("reviews/reviewEdit", { user, review });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Edit one review form
+// @route   POST /tools/:toolId/:reviewId/edit
+// @access  Private
+router.post("/tools/:toolId/:reviewId/edit", isLoggedIn, async (req, res, next) => {
+  const { toolId, reviewId } = req.params;
+  const user = req.session.currentUser;
+  const { review  } = req.body;
+  try {
+    await Reviews.findByIdAndUpdate(reviewId, { review, user: user }, { new: true });
+    res.redirect(`/tools/${toolId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Delete one review
+// @route   GET /tools/:toolId/:reviewId/delete
+// @access  Private
+router.get("/tools/:toolId/:reviewId/delete", isLoggedIn, async (req, res, next) => {
+  const { toolId, reviewId } = req.params;
+  try {
+    await Reviews.deleteOne({ _id: reviewId });
+    res.redirect(`/tools/${toolId}`);;
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

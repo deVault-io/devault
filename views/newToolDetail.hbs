@@ -65,7 +65,9 @@
             </div>
             <div class="user-review-user-container">
               <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong>
-              </div>
+              <a href="/tools/{{tool._id}}/{{review._id}}/edit" class="card-small-fav-btn"id="none-tool-btn">Edit Review</a>
+              <a href="/tools/{{tool._id}}/{{review._id}}/delete" class="card-small-fav-btn"id="none-tool-btn">Delete Review</a>
+            </div>
            </div>
             {{/each}}
              </div>
