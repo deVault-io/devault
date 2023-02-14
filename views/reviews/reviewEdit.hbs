@@ -1,0 +1,11 @@
+<nav id="nav-bar" class="scrolled">
+  <a href="/"><h2><i class='bx bx-chevron-left back__icon'></i>Edit Review</h2></a>
+</nav>
+<div class="form-container-lists">
+  <form method="POST" action="/reviews/{{review._id}}/edit">
+    <div class="card-detail-comment-box-container">
+      <textarea required type="text" value="{{review.review}}" name="review" class="comment"></textarea>
+      <button type="submit">Save changes</button>
+    </div>
+  </form>
+</div>

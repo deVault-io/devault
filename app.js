@@ -58,7 +58,7 @@ const indexRoutes = require("./routes/index.routes");
 const usersRoutes = require("./routes/users.routes");
 const toolsRoutes = require("./routes/tools.routes");
 const authRoutes = require("./routes/auth.routes");
-const listsRoutes = require("./routes/lists.routes")
+const listsRoutes = require("./routes/lists.routes");
 
 app.use("/", indexRoutes);
 app.use("/", usersRoutes);
