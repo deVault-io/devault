@@ -1112,6 +1112,7 @@ input#file-upload {
 .card-small-container-wrap {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 }
 
 .card-small-container{
