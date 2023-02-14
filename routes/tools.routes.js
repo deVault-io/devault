@@ -61,9 +61,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       _id: { $ne: tool._id },
     });
     const items = sortRelatedItems(tool, otherTools);
-  
-    // Calculate the average rating
-    const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0);
+    const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
     const avgRating = votes.length > 0 ? sumRatings / votes.length : 0;
     const createdAgo =  calculateTime(tool.createdAt)
 
