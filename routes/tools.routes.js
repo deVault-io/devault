@@ -5,6 +5,7 @@ const isLoggedIn = require("../middlewares");
 const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const Votes = require("../models/Votes.model");
+const Reviews = require("../models/Reviews.model");
 const fileUploader = require("../config/cloudinary.config");
 const { flattenMap, sortRelatedItems, filterSearchItems, calculateTime } = require("../utils");
 
@@ -52,6 +53,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const tool = await Tool.findById(toolId).populate("user");
+    const reviews = await Reviews.find({ tool: toolId }).populate("user");
     const isLoggedInUserCreator =
       tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
@@ -59,7 +61,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       _id: { $ne: tool._id },
     });
     const items = sortRelatedItems(tool, otherTools);
-    res.render("newToolDetail", { user, tool, items, isLoggedInUserCreator });
+    res.render("newToolDetail", { user, tool, items, reviews, isLoggedInUserCreator });
   } catch (error) {
     next(error);
   }
@@ -268,26 +270,13 @@ router.get(
   }
 );
 
-/* // @desc    Edit one list view
-// @route   GET /lists/:listId/edit
-// @access  Private
-router.get("/:toolId/vote", isLoggedIn, async function (req, res, next) {
-  const { toolId } = req.params;
-  const user = req.session.currentUser;
-  try {
-    const tool = await Lists.findById(listId).populate("user");
-    res.render("lists/favsListEdit", { user, list });
-  } catch (error) {
-    next(error);
-  }
-});  */
-
 // @desc    Edit one list form
 // @route   POST /lists/:listId/edit
 // @access  Private
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
+  console.log(user)
   const { rating } = req.body;
   try {
     const tool = await Tool.findById(toolId).populate('user');
@@ -300,6 +289,23 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
     res.redirect('/');
   } catch (error) {
     next(error);
+  }
+});
+
+/* POST new review */
+/* ROUTE /tools/:toolId/review */
+// @access  Private
+
+router.post('/tools/:toolId/review', isLoggedIn, async function (req, res, next) {
+  const { review } = req.body;
+  const user = req.session.currentUser;
+  console.log(user)
+  const { toolId } = req.params;
+  try {
+    await Reviews.create({ review, user: user._id, tool: toolId });
+    res.redirect(`/tools/${toolId}`)
+  } catch (error) {
+    next(error)
   }
 });
 
