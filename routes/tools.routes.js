@@ -377,6 +377,7 @@ router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res
   const user = req.session.currentUser;
   try {
     const review = await Reviews.findById(reviewId).populate("user");
+    console.log(review)
     res.render("reviews/reviewEdit", { user, review });
   } catch (error) {
     next(error);
@@ -388,8 +389,10 @@ router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res
 // @access  Private
 router.post("/tools/:toolId/:reviewId/edit", isLoggedIn, async (req, res, next) => {
   const { toolId, reviewId } = req.params;
+  console.log(toolId)
   const user = req.session.currentUser;
-  const { review  } = req.body;
+  const { review } = req.body;
+  
   try {
     await Reviews.findByIdAndUpdate(reviewId, { review, user: user }, { new: true });
     res.redirect(`/tools/${toolId}`);
@@ -405,7 +408,7 @@ router.get("/tools/:toolId/:reviewId/delete", isLoggedIn, async (req, res, next)
   const { toolId, reviewId } = req.params;
   try {
     await Reviews.deleteOne({ _id: reviewId });
-    res.redirect(`/tools/${toolId}`);;
+    res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
   }
