@@ -51,16 +51,67 @@ router.get("/tools/discover", async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  console.log(user)
   try {
     const tool = await Tool.findById(toolId).populate("user");
     const reviews = await Reviews.find({ tool: toolId }).populate("user");
     const votes = await Votes.find({ tool: toolId });
-    const otherTools = await Tool.find({
-      field: tool.field,
-      _id: { $ne: tool._id },
-    });
+    const otherTools = await Tool.aggregate([
+      {
+        $match: {
+          field: tool.field,
+          _id: { $ne: tool._id },
+        },
+      },
+      {
+        $lookup: {
+          from: "favs",
+          localField: "_id",
+          foreignField: "tool",
+          as: "favs",
+        },
+      },
+      {
+        $addFields: {
+          favCount: { $size: "$favs" },
+        },
+      },
+      {
+        $lookup: {
+          from: "votes",
+          localField: "_id",
+          foreignField: "tool",
+          as: "votes",
+        },
+      },
+      {
+        $addFields: {
+          avgRating: { $ifNull: [{$avg: "$votes.rating"}, 0] },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $addFields: {
+          user: { $arrayElemAt: ["$user", 0] },
+        },
+      },
+    ]);
+    otherTools.forEach(tool => {
+      tool.createdAgo = calculateTime(tool.createdAt);
+      if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
+        tool.avgRating = tool.avgRating.toFixed(1);
+        } else {
+          tool.avgRating = null
+        }
+        });
     const items = sortRelatedItems(tool, otherTools);
+    console.log(`items ${items}`)
     const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
     const avgRating = votes.length > 0 ? sumRatings / votes.length : 0;
     const createdAgo =  calculateTime(tool.createdAt)
