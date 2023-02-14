@@ -57,7 +57,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
-    });
+    })
     const items = sortRelatedItems(tool, otherTools);
     res.render("newToolDetail", { user, tool, items, isLoggedInUserCreator });
   } catch (error) {
