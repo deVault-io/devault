@@ -51,17 +51,28 @@ router.get("/tools/discover", async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
+  console.log(user)
   try {
+    if (user == undefined) {
     const tool = await Tool.findById(toolId).populate("user");
     const reviews = await Reviews.find({ tool: toolId }).populate("user");
-    const isLoggedInUserCreator =
-      tool.user._id.toString() == user._id ? true : false;
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
     });
     const items = sortRelatedItems(tool, otherTools);
-    res.render("newToolDetail", { user, tool, items, reviews, isLoggedInUserCreator });
+    res.render("newToolDetail", { user, tool, items, reviews });
+    } else {
+      const tool = await Tool.findById(toolId).populate("user");
+      const reviews = await Reviews.find({ tool: toolId }).populate("user");
+      const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
+      const otherTools = await Tool.find({
+        field: tool.field,
+        _id: { $ne: tool._id },
+      });
+      const items = sortRelatedItems(tool, otherTools);
+      res.render("newToolDetail", { user, tool, items, reviews, isLoggedInUserCreator });
+    }
   } catch (error) {
     next(error);
   }
@@ -98,7 +109,7 @@ router.post(
 // @desc    Edit one tool view
 // @route   GET /tools/:toolId/edit
 // @access  Private
-router.get("/tools/:toolId/edit", async function (req, res, next) {
+router.get("/tools/:toolId/edit", isLoggedIn, async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   try {
@@ -112,7 +123,7 @@ router.get("/tools/:toolId/edit", async function (req, res, next) {
 // @desc    Edit one tool form
 // @route   POST /tools/:toolId/edit
 // @access  Private
-router.post("/tools/:toolId/edit", async (req, res, next) => {
+router.post("/tools/:toolId/edit", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
   const { name, description, image, url, field, tag } = req.body;
@@ -132,7 +143,7 @@ router.post("/tools/:toolId/edit", async (req, res, next) => {
 // @desc    Delete one tool
 // @route   GET /tools/:toolId/delete
 // @access  Private
-router.get("/tools/:toolId/delete", async (req, res, next) => {
+router.get("/tools/:toolId/delete", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   try {
     await Favs.deleteMany({ tool: toolId });
@@ -299,7 +310,6 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
 router.post('/tools/:toolId/review', isLoggedIn, async function (req, res, next) {
   const { review } = req.body;
   const user = req.session.currentUser;
-  console.log(user)
   const { toolId } = req.params;
   try {
     await Reviews.create({ review, user: user._id, tool: toolId });

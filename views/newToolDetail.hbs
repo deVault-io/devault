@@ -22,6 +22,7 @@
       </div>
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
+        {{#if user}}
         <div class="card-detail-content-edit-delete">
           <form class="list" action="/tools/{{tool._id}}/vote" method="POST">
           <fieldset class="rating">
@@ -38,18 +39,19 @@
           </fieldset>
            <button type="submit" class="submit-btn">Rate</button>
         </form>
+        {{/if}}
           {{#if reviews}}
             {{#each reviews}}
               <p>{{this.review}} by <strong>{{this.user.username}}</strong></p>
             {{/each}}
           {{/if}}
+          {{#if user}}
         <form method="POST" action="/tools/{{tool._id}}/review">
           <label>How would you rate this tool?</label>
           <input required type="text" placeholder="I really liked this show" name="review"/>
-          {{!-- <label>User's name:</label>
-          <input type="text" placeholder="John Doe" name="username"/> --}}
           <button type="submit">Add review</button>
         </form>
+        {{/if}}
          <span>
           {{#if isLoggedInUserCreator}} 
             <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
