@@ -37,23 +37,21 @@ el.classList.remove("light-theme");
 el.classList.remove("dark-theme");
 el.classList.add(theme + "-theme");
 });
+localStorage.setItem("theme", theme);
 });
+$('option').mousedown(function(e) {
+e.preventDefault();
+var originalScrollTop = $(this).parent().scrollTop();
+console.log(originalScrollTop);
+$(this).prop('selected', $(this).prop('selected') ? false : true);
+var self = this;
+$(this).parent().focus();
+setTimeout(function() {
+  $(self).parent().scrollTop(originalScrollTop);
+}, 0);
 
-// localStorage.setItem("theme", theme);
-// });
-// $('option').mousedown(function(e) {
-// e.preventDefault();
-// var originalScrollTop = $(this).parent().scrollTop();
-// console.log(originalScrollTop);
-// $(this).prop('selected', $(this).prop('selected') ? false : true);
-// var self = this;
-// $(this).parent().focus();
-// setTimeout(function() {
-//   $(self).parent().scrollTop(originalScrollTop);
-// }, 0);
-
-// return false;
-// }); 
+return false;
+}); 
 
 // const input = document.getElementById("file-upload")
 // const output = document.querySelector("file-upload")
