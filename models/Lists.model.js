@@ -14,7 +14,6 @@ const listSchema = new Schema(
     },
     image: {
       type: String,
-      trim: true,
       default: 'https://i.imgur.com/ExgDzpE.png',
     },
     user: {

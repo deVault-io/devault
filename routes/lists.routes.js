@@ -4,6 +4,7 @@ const Tool = require("../models/Tool.model");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
 const isLoggedIn = require('../middlewares');
+const fileUploader = require("../config/cloudinary.config");
 
 // @desc    lists of favorites view
 // @route   GET /
@@ -28,11 +29,11 @@ router.get('/new', isLoggedIn, function (req, res, next) {
 // @desc    creates a new list
 // @route   POST /new
 // @access  Private
-router.post('/new', isLoggedIn, async function (req, res, next) {
+router.post('/new', isLoggedIn, fileUploader.single("image"), async function (req, res, next) {
   const user = req.session.currentUser;
   const { listName, image } = req.body;
   try {
-    const createdList = await Lists.create({ default: false, listName, image, user });
+    const createdList = await Lists.create({ default: false, listName, image: req.file.path, user: user });
     res.redirect(`/lists/${createdList._id}`);
   } catch (error) {
     next(error)

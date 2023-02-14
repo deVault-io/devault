@@ -5,12 +5,12 @@ const toolSchema = new Schema(
     name: {
       type: String,
       trim: true,
-      required: [true, 'Username is required.'],
+      required: [true, 'Tool Name is required.'],
       unique: true
     },
     description: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'Description is required.'],
       lowercase: true,
       trim: true
     },
