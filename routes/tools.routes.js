@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Tool = require("../models/Tool.model");
 const isLoggedIn = require("../middlewares");
-const exclude = require("../data/exclude");
 const Favs = require("../models/Favs.model");
 const Votes = require("../models/Votes.model");
 const Reviews = require("../models/Reviews.model");

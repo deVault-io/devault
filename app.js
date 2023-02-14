@@ -14,7 +14,7 @@ const passport = require('passport');
 const flash = require('connect-flash'); */
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("./models/User.model");
-const List = require("./models/Lists.model");
+
 
 // cookies and loggers
 app.use(logger('dev'));

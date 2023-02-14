@@ -13,7 +13,15 @@ router.get('/', isLoggedIn, async function (req, res, next) {
   const user = req.session.currentUser;
   try {
     const lists = await Lists.find({user: { $eq: user }}).populate('user');
-    res.render('lists/favsList', {user, lists});
+    const formattedLists = lists.map(list => ({
+      ...list.toObject(),
+      createdAt: list.createdAt.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })
+    }));
+    res.render('lists/favsList', {user, lists:formattedLists});
   } catch (error) {
     next(error)
   }
