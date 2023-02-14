@@ -147,6 +147,8 @@ router.get("/tools/:toolId/delete", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   try {
     await Favs.deleteMany({ tool: toolId });
+    await Reviews.deleteMany({ tool: toolId });
+    await Votes.deleteMany({ tool: toolId });
     await Tool.deleteOne({ _id: toolId });
     res.redirect("/");
   } catch (error) {
