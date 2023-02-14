@@ -1208,10 +1208,11 @@ input#file-upload {
 .card-small-content-textbox-container{
 display: block;
 }
-.card-small-tool-anchor{
+.card-small-tool-anchor,.card-small-tool-anchor:hover,.card-small-tool-anchor:active{
   color: inherit;
     text-decoration: none
 }
+
 .card-small-content-header-container{
   display: flex;
   justify-content: space-between;
