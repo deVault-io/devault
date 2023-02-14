@@ -22,9 +22,14 @@
       </div>
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
+        <div class="card-detail-content-description-uploader">
+        <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong> {{createdAgo}}</p>
+        <h5><i class='bx bxs-star' ></i>{{avgRating}}</h5>
+      </div>  
         {{#if user}}
         <div class="card-detail-content-edit-delete">
-          <form class="list" action="/tools/{{tool._id}}/vote" method="POST">
+          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" >
+          <div class="rating-container">
           <fieldset class="rating">
             <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
             <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
@@ -37,22 +42,36 @@
             <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
             <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
           </fieldset>
-           <button type="submit" class="submit-btn">Rate</button>
+           <button type="submit" class="rating-submit-btn">Rate</button>
+           </div>
         </form>
         {{/if}}
-          {{#if reviews}}
-          <h2>User Reviews</h2>
-            {{#each reviews}}
-              <p>{{this.review}} by <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{this.user.username}}</strong></p>
-            {{/each}}
-          {{/if}}
-          {{#if user}}
+         {{#if user}}
+          <h2>Tell us your opinion</h2>
         <form method="POST" action="/tools/{{tool._id}}/review">
-          <label>How would you rate this tool?</label>
-          <input required type="text" placeholder="I really liked this tool" name="review"/>
+         <div class="card-detail-comment-box-container">
+          <textarea required type="text" placeholder="I really liked this tool" name="review" class="comment"></textarea>
           <button type="submit">Add review</button>
+            </div>
         </form>
         {{/if}}
+          <h2>User Reviews</h2>
+          {{#if reviews}}
+          <div class="user-review-container-wrapper">
+            {{#each reviews}}
+          <div class="user-review-container">
+            <div class="user-review-content-container">
+               <p>{{this.review}}</p>
+            </div>
+            <div class="user-review-user-container">
+              <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong>
+              </div>
+           </div>
+            {{/each}}
+             </div>
+            {{else}}
+            <p> No reviews yet! Be the first one!</p>
+          {{/if}}
          <span>
           {{#if isLoggedInUserCreator}} 
             <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
@@ -62,9 +81,7 @@
       </div>
       </div>
       </div>
-      <div class="card-detail-content-description-uploader">
-        <p>Uploaded by: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong></p>
-      </div>  
+      
       
     
       {{#if items}}

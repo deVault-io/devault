@@ -53,27 +53,27 @@ router.get("/tools/:toolId", async function (req, res, next) {
   const user = req.session.currentUser;
   console.log(user)
   try {
-    if (user == undefined) {
     const tool = await Tool.findById(toolId).populate("user");
     const reviews = await Reviews.find({ tool: toolId }).populate("user");
+    const votes = await Votes.find({ tool: toolId });
     const otherTools = await Tool.find({
       field: tool.field,
       _id: { $ne: tool._id },
-    })
+    });
     const items = sortRelatedItems(tool, otherTools);
-    res.render("newToolDetail", { user, tool, items, reviews });
+  
+    // Calculate the average rating
+    const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0);
+    const avgRating = votes.length > 0 ? sumRatings / votes.length : 0;
+    const createdAgo =  calculateTime(tool.createdAt)
+
+    if (user == undefined) {
+      res.render("newToolDetail", { user, tool, items, votes });
     } else {
-      const tool = await Tool.findById(toolId).populate("user");
-      const reviews = await Reviews.find({ tool: toolId }).populate("user");
       const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
-      const otherTools = await Tool.find({
-        field: tool.field,
-        _id: { $ne: tool._id },
-      });
-      const items = sortRelatedItems(tool, otherTools);
-      res.render("newToolDetail", { user, tool, items, reviews, isLoggedInUserCreator });
+      res.render("newToolDetail", { user, tool, items, reviews, avgRating,createdAgo, isLoggedInUserCreator });
     }
-  } catch (error) {
+  }  catch (error) {
     next(error);
   }
 });
