@@ -113,7 +113,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const items = sortRelatedItems(tool, otherTools);
     console.log(`items ${items}`)
     const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
-    const avgRating = votes.length > 0 ? sumRatings / votes.length : 0;
+    const avgRating = votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo =  calculateTime(tool.createdAt)
 
     if (user == undefined) {
