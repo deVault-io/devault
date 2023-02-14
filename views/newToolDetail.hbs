@@ -62,13 +62,18 @@
           <div class="user-review-container">
             <div class="user-review-content-container">
                <p>{{this.review}}</p>
+                <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
+                <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-trash'></i></a>
+               
             </div>
             <div class="user-review-user-container">
-              <div class="user-review-crud-container"></div><div class="user-review-user-info"><img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong></div>
+              <div class="user-review-crud-container">
+                <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
+                <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-trash'></i></a>
               </div>
-              <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong>
-              <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn">Edit Review</a>
-              <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn">Delete Review</a>
+              <div class="user-review-user-info"><img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong></div>
+              </div>
+              
             </div>
            </div>
             {{/each}}
