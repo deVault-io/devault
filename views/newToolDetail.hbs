@@ -61,23 +61,19 @@
             {{#each reviews}}
           <div class="user-review-container">
             <div class="user-review-content-container">
-               <p>{{this.review}}</p>
+              <div class="review">
+                <p>{{this.review}}</p>
+              </div>
+              <div class="linkz">
                 <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
                 <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-trash'></i></a>
-               
+              </div>             
             </div>
             <div class="user-review-user-container">
-<<<<<<< HEAD
-              <div class="user-review-crud-container">
-                <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
-                <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-trash'></i></a>
-=======
-              <div class="user-review-crud-container"> </div><div class="user-review-user-info"><img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong></div>
->>>>>>> darkmodefix
+              <div class="user-review-user-info">
+                <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;">
+                <strong> {{this.user.username}}</strong></div>
               </div>
-              <div class="user-review-user-info"><img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;"><strong> {{this.user.username}}</strong></div>
-              </div>
-              
             </div>
            </div>
             {{/each}}

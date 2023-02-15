@@ -347,7 +347,7 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
       { upsert: true, new: true }
     );
     console.log(votedTool)
-    res.redirect('/');
+    res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
   }
