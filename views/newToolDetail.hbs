@@ -23,7 +23,13 @@
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
         <div class="card-detail-content-description-uploader">
-        <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong> {{createdAgo}}</p>
+        <div class="card-detail-uploader-wrapper">
+        <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 45px; border-radius: 20px;"></p>
+         <div class="card-detail-uploader-info">
+          <p><strong> {{tool.user.username}}</strong></p>
+          <p class="card-uploader-time">{{createdAgo}}</p>
+          </div>
+      </div>
         <h5><i class='bx bxs-star' ></i>{{avgRating}}</h5>
       </div>  
         {{#if user}}
@@ -72,10 +78,18 @@
               {{/if}}           
             </div>
             <div class="user-review-user-container">
-              <div class="user-review-user-info">
-                <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;">
-                <strong> {{this.user.username}}</strong></div>
-              </div>
+           
+              <div class="user-review-rating-container">
+             <i class='bx bxs-star' ></i>{{userRating}}
+             </div>
+            
+            <div class="card-review-userinfo-container">
+              <div class="card-detail-uploader-info">
+                  <strong>{{user.username}}</strong>
+                  <p class="card-uploader-time">{{createdAgo}}</p>
+                  </div> 
+                  <img src="{{user.image}}"  alt="avatar" style="width: 35px; height: 35px;border-radius: 50%;"> 
+                </div>
             </div>
            </div>
             {{/each}}

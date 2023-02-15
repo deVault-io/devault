@@ -891,7 +891,6 @@ input#file-upload {
 }
 
 .card-detail-content-description {
-  
   margin: 20px 0px;
   text-align: justify;
 }
@@ -915,6 +914,31 @@ input#file-upload {
   justify-content: space-between;
   align-items: baseline;
 }
+.card-detail-uploader-wrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.card-detail-uploader-wrapper>*{
+  margin:0;
+}
+.card-detail-uploader-info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  align-items: flex-end;
+}
+.card-detail-uploader-wrapper>.card-detail-uploader-info{
+  align-items: flex-start;
+}
+.card-detail-uploader-info>*{
+  margin:0;
+  padding:0;
+}
+.card-uploader-time{
+  opacity: 0.5;
+  font-size: smaller;
+}
 .card-detail-content-description-uploader>h5>.bxs-star{
   font-size: 1.4rem;
   color: var(--primary-color);
@@ -929,7 +953,7 @@ input#file-upload {
   width: 100%;
   align-items: center;
   padding: 0;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 .rating-submit-btn{
   align-self: center;
@@ -1022,10 +1046,22 @@ input#file-upload {
 }
 .user-review-user-container{
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-between;
+  align-items: center;
+  gap: 5px;
+}
+.user-review-rating-container>.bx{
+  font-size: larger;
+  color: var(--primary-color);
 }
 .user-review-user-container strong{
   font-size: smaller;
+}
+.card-review-userinfo-container{
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+  align-items: center;
 }
 /* STYLES CARD DETAIL NOT MOBILE */
 
@@ -1665,7 +1701,9 @@ flex-direction: column;
   width: 90vw;
   margin:0;
 }
-
+.advanced-search-form{
+  transition: ease-out 0.5s;
+}
 .advanced-search-container{
   width:90vw;
   margin-bottom: 10px;

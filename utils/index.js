@@ -50,7 +50,6 @@ const sortRelatedItems = (tool,otherTools)=>{
         const similarity = descriptionWords.filter((word) =>
           descriptionVariant.includes(word)
         ).length;
-        console.log(JSON.stringify(otherTools, null, 2))
         return { ...t, similarity };
       })
       .sort((a, b) => b.similarity - a.similarity)
