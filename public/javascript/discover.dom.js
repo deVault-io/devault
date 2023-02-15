@@ -1,0 +1,23 @@
+window.addEventListener('load', () => {
+    const searchToggleFilterBtn = document.getElementById('search-filter-toggle-btn');
+    const searchToggleApplyBtn = document.getElementById('search-apply-toggle-btn');
+    const advancedSearchMainContainer = document.getElementsByClassName('advanced-search-main-container');
+
+    
+    searchToggleFilterBtn.addEventListener('click', () => {
+    console.log('im being clicked')
+    if (advancedSearchMainContainer[0].classList.contains('hidden')) {
+      advancedSearchMainContainer[0].classList.remove('hidden')
+    } else {
+    advancedSearchMainContainer[0].classList.add('hidden');
+    }
+  })
+  searchToggleApplyBtn.addEventListener('click', () => {
+    console.log('im being clicked apply')
+    if (advancedSearchMainContainer[0].classList.contains('hidden')) {
+      advancedSearchMainContainer[0].classList.remove('hidden')
+    } else {
+    advancedSearchMainContainer[0].classList.add('hidden');
+    }
+  })
+  })
