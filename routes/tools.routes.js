@@ -6,7 +6,12 @@ const Favs = require("../models/Favs.model");
 const Votes = require("../models/Votes.model");
 const Reviews = require("../models/Reviews.model");
 const fileUploader = require("../config/cloudinary.config");
-const { flattenMap, sortRelatedItems, filterSearchItems, calculateTime } = require("../utils");
+const {
+  flattenMap,
+  sortRelatedItems,
+  filterSearchItems,
+  calculateTime,
+} = require("../utils");
 
 // @desc    Tool new rout form
 // @route   GET /tools/new
@@ -84,7 +89,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       },
       {
         $addFields: {
-          avgRating: { $ifNull: [{$avg: "$votes.rating"}, 0] },
+          avgRating: { $ifNull: [{ $avg: "$votes.rating" }, 0] },
         },
       },
       {
@@ -101,27 +106,49 @@ router.get("/tools/:toolId", async function (req, res, next) {
         },
       },
     ]);
-    otherTools.forEach(tool => {
+    console.log(otherTools);
+    otherTools.forEach((tool) => {
       tool.createdAgo = calculateTime(tool.createdAt);
       if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
         tool.avgRating = tool.avgRating.toFixed(1);
-        } else {
-          tool.avgRating = null
-        }
-        });
+      } else {
+        tool.avgRating = null;
+      }
+    });
+    reviews.forEach(review => {
+      review.createdAgo = calculateTime(review.createdAt);
+      // Add rating associated with user commenting for the tool
+      const userVote = votes.find(vote => vote.user.toString() === review.user._id.toString());
+      if (userVote) {
+        review.userRating = userVote.rating;
+      } else {
+        review.userRating = null;
+      }
+    });
     const items = sortRelatedItems(tool, otherTools);
-    console.log(`items ${items}`)
-    const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
-    const avgRating = votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
-    const createdAgo =  calculateTime(tool.createdAt)
+    const sumRatings = votes
+      .reduce((sum, votes) => sum + votes.rating, 0)
+      .toFixed(1);
+    const avgRating =
+      votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
+    const createdAgo = calculateTime(tool.createdAt);
 
     if (user == undefined) {
       res.render("newToolDetail", { user, tool, items, votes });
     } else {
-      const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
-      res.render("newToolDetail", { user, tool, items, reviews, avgRating,createdAgo, isLoggedInUserCreator });
+      const isLoggedInUserCreator =
+        tool.user._id.toString() == user._id ? true : false;
+      res.render("newToolDetail", {
+        user,
+        tool,
+        items,
+        reviews,
+        avgRating,
+        createdAgo,
+        isLoggedInUserCreator,
+      });
     }
-  }  catch (error) {
+  } catch (error) {
     next(error);
   }
 });
@@ -214,7 +241,7 @@ router.post("/tools/finesearch", async function (req, res, next) {
     field: fieldToSearch,
     tag: tagToSearch,
     time: timeToSearch,
-    rating: rating
+    rating: rating,
   } = req.body;
   const user = req.session.currentUser;
   const filter = filterSearchItems(
@@ -222,13 +249,16 @@ router.post("/tools/finesearch", async function (req, res, next) {
     nameToSearch,
     fieldToSearch,
     tagToSearch,
-    timeToSearch,rating
+    timeToSearch,
+    rating
   );
-  const toolsToTag = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+  const toolsToTag = await Tool.find({})
+    .sort({ createdAt: -1 })
+    .populate("user");
   const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
   const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
   if (filter.length > 0) {
-    const sortField = rating ? 'avgRating' : 'createdAt';
+    const sortField = rating ? "avgRating" : "createdAt";
     try {
       const tools = await Tool.aggregate([
         {
@@ -267,18 +297,22 @@ router.post("/tools/finesearch", async function (req, res, next) {
         },
       ]);
       const populatedTools = await Tool.populate(tools, { path: "user" });
-    populatedTools.forEach(tool => {
-      tool.createdAgo = calculateTime(tool.createdAt);
-    });
-    console.log(populatedTools)
-      res.render("toolSearchResults", { user, tools:populatedTools,field,tag });
+      populatedTools.forEach((tool) => {
+        tool.createdAgo = calculateTime(tool.createdAt);
+      });
+      console.log(populatedTools);
+      res.render("toolSearchResults", {
+        user,
+        tools: populatedTools,
+        field,
+        tag,
+      });
     } catch (error) {
       console.error(error);
       next(error);
     }
   }
 });
-
 
 // @desc    Takes the inputs from params
 // @route   POST /tools/search
@@ -290,9 +324,11 @@ router.get(
     const fieldToSearch = req.params.itemToSearch;
     const user = req.session.currentUser;
     const filter = [{ field: fieldToSearch }, { tag: fieldToSearch }];
-    const toolsToTag = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
-  const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
-  const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
+    const toolsToTag = await Tool.find({})
+      .sort({ createdAt: -1 })
+      .populate("user");
+    const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
+    const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
     if (filter.length > 0) {
       try {
         const tools = await Tool.aggregate([
@@ -319,10 +355,15 @@ router.get(
           },
         ]);
         const populatedTools = await Tool.populate(tools, { path: "user" });
-      populatedTools.forEach(tool => {
-        tool.createdAgo = calculateTime(tool.createdAt);
-      });
-        res.render("toolSearchResults", { user, tools:populatedTools ,field,tag});
+        populatedTools.forEach((tool) => {
+          tool.createdAgo = calculateTime(tool.createdAt);
+        });
+        res.render("toolSearchResults", {
+          user,
+          tools: populatedTools,
+          field,
+          tag,
+        });
       } catch (error) {
         console.error(error);
         next(error);
@@ -337,16 +378,16 @@ router.get(
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  console.log(user)
+  console.log(user);
   const { rating } = req.body;
   try {
-    const tool = await Tool.findById(toolId).populate('user');
+    const tool = await Tool.findById(toolId).populate("user");
     let votedTool = await Votes.findOneAndUpdate(
       { tool: toolId, user: user._id },
       { rating },
       { upsert: true, new: true }
     );
-    console.log(votedTool)
+    console.log(votedTool);
     res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
@@ -357,61 +398,81 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
 /* ROUTE /tools/:toolId/review */
 // @access  Private
 
-router.post('/tools/:toolId/review', isLoggedIn, async function (req, res, next) {
-  const { review } = req.body;
-  const user = req.session.currentUser;
-  const { toolId } = req.params;
-  try {
-    await Reviews.create({ review, user: user._id, tool: toolId });
-    res.redirect(`/tools/${toolId}`)
-  } catch (error) {
-    next(error)
+router.post(
+  "/tools/:toolId/review",
+  isLoggedIn,
+  async function (req, res, next) {
+    const { review } = req.body;
+    const user = req.session.currentUser;
+    const { toolId } = req.params;
+    try {
+      await Reviews.create({ review, user: user._id, tool: toolId });
+      res.redirect(`/tools/${toolId}`);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Edit one review
 // @route   GET /tools/:toolId/:reviewId/edit
 // @access  Private
-router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res, next) {
-  const { toolId, reviewId } = req.params;
-  const user = req.session.currentUser;
-  try {
-    const review = await Reviews.findById(reviewId).populate("user");
-    console.log(review)
-    res.render("reviews/reviewEdit", { user, review });
-  } catch (error) {
-    next(error);
+router.get(
+  "/tools/:toolId/:reviewId/edit",
+  isLoggedIn,
+  async function (req, res, next) {
+    const { toolId, reviewId } = req.params;
+    const user = req.session.currentUser;
+    try {
+      const review = await Reviews.findById(reviewId).populate("user");
+      console.log(review);
+      res.render("reviews/reviewEdit", { user, review });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Edit one review form
 // @route   POST /tools/:toolId/:reviewId/edit
 // @access  Private
-router.post("/tools/:toolId/:reviewId/edit", isLoggedIn, async (req, res, next) => {
-  const { toolId, reviewId } = req.params;
-  console.log(toolId)
-  const user = req.session.currentUser;
-  const { review } = req.body;
-  
-  try {
-    await Reviews.findByIdAndUpdate(reviewId, { review, user: user }, { new: true });
-    res.redirect(`/tools/${toolId}`);
-  } catch (error) {
-    next(error);
+router.post(
+  "/tools/:toolId/:reviewId/edit",
+  isLoggedIn,
+  async (req, res, next) => {
+    const { toolId, reviewId } = req.params;
+    console.log(toolId);
+    const user = req.session.currentUser;
+    const { review } = req.body;
+
+    try {
+      await Reviews.findByIdAndUpdate(
+        reviewId,
+        { review, user: user },
+        { new: true }
+      );
+      res.redirect(`/tools/${toolId}`);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // @desc    Delete one review
 // @route   GET /tools/:toolId/:reviewId/delete
 // @access  Private
-router.get("/tools/:toolId/:reviewId/delete", isLoggedIn, async (req, res, next) => {
-  const { toolId, reviewId } = req.params;
-  try {
-    await Reviews.deleteOne({ _id: reviewId });
-    res.redirect(`/tools/${toolId}`);
-  } catch (error) {
-    next(error);
+router.get(
+  "/tools/:toolId/:reviewId/delete",
+  isLoggedIn,
+  async (req, res, next) => {
+    const { toolId, reviewId } = req.params;
+    try {
+      await Reviews.deleteOne({ _id: reviewId });
+      res.redirect(`/tools/${toolId}`);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = router;
