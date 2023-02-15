@@ -3,8 +3,11 @@ const router = express.Router();
 const Tool = require("../models/Tool.model");
 const Favs = require("../models/Favs.model");
 const Lists = require("../models/Lists.model");
+const Fav = require("../models/Favs.model.js")
 const isLoggedIn = require('../middlewares');
 const fileUploader = require("../config/cloudinary.config");
+const {flattenMap,calculateTime} = require("../utils")
+const mongoose = require('mongoose');
 
 // @desc    lists of favorites view
 // @route   GET /
@@ -54,11 +57,62 @@ router.post('/new', isLoggedIn, fileUploader.single("image"), async function (re
 router.get('/:listId', isLoggedIn, async function (req, res, next) {
   const { listId } = req.params;
   const user = req.session.currentUser;
-  const list = await Lists.findById(listId);
-  const tools = await Tool.find({}).populate('user');
-  const favs = await Favs.find({list: { $eq: listId }}).populate('tool').populate('user').populate('list');
   try {
-    res.render('lists/favsListDetail', { user, tools, list, favs });
+  const favs = await Fav.find({ list: listId }).populate('tool');
+  const tools = favs.map((fav) => fav.tool);
+  const list = await Lists.findById(listId);
+  const toolIds = tools.map((tool) => tool._id);
+
+  const populatedTools = await Tool.aggregate([
+    {
+      $match: {
+        _id: {
+          $in: toolIds,
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: 'favs',
+        localField: '_id',
+        foreignField: 'tool',
+        as: 'favs',
+      },
+    },
+    {
+      $addFields: {
+        favCount: { $size: '$favs' },
+      },
+    },
+    {
+      $lookup: {
+        from: 'votes',
+        localField: '_id',
+        foreignField: 'tool',
+        as: 'votes',
+      },
+    },
+    {
+      $addFields: {
+        avgRating: { $ifNull: [{ $avg: '$votes.rating' }, 0] },
+      },
+    },
+    {
+      $sort: { createdAt: -1 },
+    },
+  ]).exec();
+  
+ const userPopulate = await Tool.populate(populatedTools, { path: "user" });
+  userPopulate.forEach((tool) => {
+    tool.createdAgo = calculateTime(tool.createdAt);
+    if (typeof tool.avgRating === 'number' && tool.avgRating > 0) {
+      tool.avgRating = tool.avgRating.toFixed(1);
+    } else {
+      tool.avgRating = null;
+    }
+  });
+  
+    res.render('lists/favsListDetail', { user, tools:userPopulate, list });
   } catch (error) {
     next(error)
   }
@@ -72,7 +126,6 @@ router.get('/:toolId/fav', isLoggedIn, async (req, res, next) => {
   const user = req.session.currentUser;
   const tool = await Tool.findById(toolId).populate('user');
   const list = await Lists.find({user: user});
-  console.log(list)
   try {
     const lists = await Lists.find({user: { $eq: user }});
     res.render('lists/selectList', {user, tool, lists});
@@ -249,13 +302,11 @@ router.get("/:listId/edit", isLoggedIn, async function (req, res, next) {
 // @access  Private
 router.post("/:listId/edit", isLoggedIn, async (req, res, next) => {
   const { listId } = req.params;
-  console.log(listId)
   const user = req.session.currentUser;
   const { listName, image  } = req.body;
   try {
     const list = await Lists.findById(listId).populate("user");
     const editedList = await Lists.findByIdAndUpdate(listId, { listName, image, user: user }, { new: true });
-    console.log(editedList)
     res.redirect(`/lists/${editedList._id}`);
   } catch (error) {
     next(error);

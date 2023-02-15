@@ -8,8 +8,8 @@
   <p>Hey {{user.username}}, these are the tools you have favourited.</p>
   <a href="/tools/discover" id="edit-tool-btn">Add more tools to {{list.listName}}</a>
   <div class="cards-wrapped-container">
-    {{#each favs}}
-      {{>favCard this}}
+    {{#each tools}}
+      {{>toolCard this}}
     {{/each}}
   </div>
 </div>
