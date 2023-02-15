@@ -138,7 +138,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const createdAgo = calculateTime(tool.createdAt);
 
     if (user == undefined) {
-      res.render("newToolDetail", { user, tool, items, votes, reviews });
+      res.render("newToolDetail", { user, tool, items, votes, reviews,avgRating,createdAgo });
     } else {
       const isLoggedInUserCreator =
         tool.user._id.toString() == user._id ? true : false;

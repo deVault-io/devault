@@ -1014,6 +1014,48 @@ input#file-upload {
   gap: 10px;
   width: 100%;
 }
+
+.linkz {
+  display: flex;
+  gap: 12px;
+  margin: 10px;
+}
+
+.user-review-container{
+  border-bottom:1px solid var(--primary-border-color);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+.user-review-content-container{
+  /* border:1px solid  var(--primary-color);
+  border-radius: 12px;
+  border-bottom-right-radius: 0px;
+  padding: 5px;
+  margin-right: 14px; */
+  position: relative;
+	background-color:#d0edfb ;
+	border-radius: .4em;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+.user-review-content-container:after{
+  
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 75%;
+	width: 0;
+	height: 0;
+	border: 13px solid transparent;
+	border-top-color: #d0edfb ;
+	border-bottom: 0;
+	margin-left: -13px;
+	margin-bottom: -13px;
+ 
+}
+.user-review-content-container>*{
+  margin: 0;
+}
 .user-review-content-container p::before {
   content: "“"; /* Unicode character for opening quotation mark */
   font-size: 1.5rem; /* Adjust font size as desired */
@@ -1024,25 +1066,6 @@ input#file-upload {
   content: "”"; /* Unicode character for closing quotation mark */
   font-size: 1.5rem; /* Adjust font size as desired */
   margin-left: 0.5rem; /* Adjust spacing as desired */
-}
-.user-review-content-container {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-}
-.linkz {
-  display: flex;
-  gap: 12px;
-  margin: 10px;
-}
-
-.user-review-container{
-  border:1px solid var(--primary-border-color);
-  border-radius: 8px;
-  padding: 10px;
- 
 }
 .user-review-user-container{
   display: flex;
