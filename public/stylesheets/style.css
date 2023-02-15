@@ -1836,10 +1836,11 @@ div.devops{
   margin-bottom: 35px;
 }
 .cards-wrapped-container{
-  width:90vw;
+  width: 90vw;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin: 30px;
 }
 .list-add-container {
   display: flex;
@@ -1853,7 +1854,7 @@ div.devops{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-
+    margin-bottom: 130px;
   }
 
   .card-container {
