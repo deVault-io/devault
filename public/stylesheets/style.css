@@ -662,7 +662,7 @@ input.input-old[required]:before {
  }
 
  select[multiple]:focus option:checked {
-  background: #b6a3cc linear-gradient(0deg, #b6a3cc 0%, #b6a3cc 100%);
+  background: #0ea4e99f;
   font-weight: bold;
   }
  
