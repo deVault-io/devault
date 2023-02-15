@@ -53,6 +53,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
   try {
     const tool = await Tool.findById(toolId).populate("user");
     const reviews = await Reviews.find({ tool: toolId }).populate("user");
+    const userReviews = await Reviews.find({ tool: toolId, user: user._id })
     const votes = await Votes.find({ tool: toolId });
     const otherTools = await Tool.aggregate([
       {
@@ -110,16 +111,17 @@ router.get("/tools/:toolId", async function (req, res, next) {
         }
         });
     const items = sortRelatedItems(tool, otherTools);
-    console.log(`items ${items}`)
     const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
     const avgRating = votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo =  calculateTime(tool.createdAt)
 
     if (user == undefined) {
-      res.render("newToolDetail", { user, tool, items, votes });
+      res.render("newToolDetail", { user, tool, items, votes, reviews });
     } else {
       const isLoggedInUserCreator = tool.user._id.toString() == user._id ? true : false;
-      res.render("newToolDetail", { user, tool, items, reviews, avgRating,createdAgo, isLoggedInUserCreator });
+      const isLoggedInUserReviewer = userReviews.user == user._id ? true : false;  
+      console.log(userReviews)
+      res.render("newToolDetail", { user, tool, items, reviews, avgRating,createdAgo, isLoggedInUserCreator, isLoggedInUserReviewer });
     }
   }  catch (error) {
     next(error);
@@ -270,7 +272,6 @@ router.post("/tools/finesearch", async function (req, res, next) {
     populatedTools.forEach(tool => {
       tool.createdAgo = calculateTime(tool.createdAt);
     });
-    console.log(populatedTools)
       res.render("toolSearchResults", { user, tools:populatedTools,field,tag });
     } catch (error) {
       console.error(error);
@@ -337,7 +338,6 @@ router.get(
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  console.log(user)
   const { rating } = req.body;
   try {
     const tool = await Tool.findById(toolId).populate('user');
@@ -346,7 +346,6 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
       { rating },
       { upsert: true, new: true }
     );
-    console.log(votedTool)
     res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
@@ -377,7 +376,6 @@ router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res
   const user = req.session.currentUser;
   try {
     const review = await Reviews.findById(reviewId).populate("user");
-    console.log(review)
     res.render("reviews/reviewEdit", { user, review });
   } catch (error) {
     next(error);
@@ -389,10 +387,8 @@ router.get("/tools/:toolId/:reviewId/edit", isLoggedIn, async function (req, res
 // @access  Private
 router.post("/tools/:toolId/:reviewId/edit", isLoggedIn, async (req, res, next) => {
   const { toolId, reviewId } = req.params;
-  console.log(toolId)
   const user = req.session.currentUser;
   const { review } = req.body;
-  
   try {
     await Reviews.findByIdAndUpdate(reviewId, { review, user: user }, { new: true });
     res.redirect(`/tools/${toolId}`);
