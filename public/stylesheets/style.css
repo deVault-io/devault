@@ -527,19 +527,19 @@ form > label {
 
 /* SUBMIT BUTTONS */
 .submit-btn {
-  width: 70%;
+  width: 95%;
   align-self: center;
-  margin: 30px 30px 7px 30px;
+  margin: 30px 0px 7px 0px;
   padding: 15px 30px;
   text-align: center;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 1px;
   text-decoration: none;
   color: var(--seconday-color);
-  background: transparent;
+  background: #0000;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid  var(--seconday-color);
+  border: 2px solid var(--seconday-color);
   border-radius: 10px;
   box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
@@ -699,13 +699,12 @@ input#file-upload {
 
 /* USER PROFILE PAGE STYLING */
 .profile-container {
-  padding:0 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 80vh;
-    margin-top:70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 75vh;
+  margin-top: 60px;
 }   
      
 .user-avatar {
