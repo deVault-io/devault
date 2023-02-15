@@ -1442,7 +1442,7 @@ flex-direction: column;
   flex-direction: row;
   width: 100%;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .card-small-link-container-list {
@@ -1545,7 +1545,8 @@ flex-direction: column;
   margin-bottom: 50px;
 }
 #delete-tool-btn,#edit-tool-btn{
-  margin:10px 0px;
+  margin-top: 30px;
+  max-width: 500px;
   width:50%;
   padding: 5px 40px;
   width:100%;
