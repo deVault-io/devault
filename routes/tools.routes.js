@@ -110,7 +110,6 @@ router.get("/tools/:toolId", async function (req, res, next) {
         },
       },
     ]);
-    console.log(otherTools);
     otherTools.forEach((tool) => {
       tool.createdAgo = calculateTime(tool.createdAt);
       if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
@@ -131,16 +130,21 @@ router.get("/tools/:toolId", async function (req, res, next) {
         review.userRating = null;
       }
     });
+    let userVote = null;
+    if (user) {
+      userVote = await votes.find(vote => vote.user.toString() === user._id.toString()).rating;
+    }
     const items = sortRelatedItems(tool, otherTools);
     const sumRatings = votes
       .reduce((sum, votes) => sum + votes.rating, 0)
       .toFixed(1);
     const avgRating =
-      votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
+    votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo = calculateTime(tool.createdAt);
 
     if (user == undefined) {
       res.render("newToolDetail", {
+        userVote,
         user,
         tool,
         items,
@@ -154,8 +158,8 @@ router.get("/tools/:toolId", async function (req, res, next) {
         tool.user._id.toString() == user._id ? true : false;
       const isLoggedInUserReviewer =
         userReviews.user == user._id ? true : false;
-      console.log(userReviews);
       res.render("newToolDetail", {
+        userVote,
         user,
         tool,
         items,
@@ -323,7 +327,6 @@ router.post("/tools/finesearch", async function (req, res, next) {
           tool.avgRating = null;
         }
       });
-      console.log(populatedTools);
       res.render("toolSearchResults", {
         user,
         tools: populatedTools,
@@ -419,7 +422,6 @@ router.get(
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  console.log(user);
   const { rating } = req.body;
   try {
     const tool = await Tool.findById(toolId).populate("user");
@@ -428,7 +430,6 @@ router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
       { rating },
       { upsert: true, new: true }
     );
-    console.log(votedTool);
     res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
@@ -466,7 +467,6 @@ router.get(
     const user = req.session.currentUser;
     try {
       const review = await Reviews.findById(reviewId).populate("user");
-      console.log(review);
       res.render("reviews/reviewEdit", { user, review });
     } catch (error) {
       next(error);
@@ -482,7 +482,6 @@ router.post(
   isLoggedIn,
   async (req, res, next) => {
     const { toolId, reviewId } = req.params;
-    console.log(toolId);
     const user = req.session.currentUser;
     const { review } = req.body;
 

@@ -34,7 +34,7 @@
       </div>  
         {{#if user}}
         <div class="card-detail-content-edit-delete">
-          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" >
+          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" data-user-vote="{{userVote}}">
           <div class="rating-container">
           <fieldset class="rating">
             <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -120,4 +120,6 @@
   </div>
 </div> 
 </div>
+<script src="/javascript/toolid.dom.js">
+    </script> 
 

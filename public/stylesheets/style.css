@@ -2141,6 +2141,7 @@ h1 { font-size: 1.5em; margin: 10px; }
   color: #ddd; 
  float: right; 
 }
+.voted ~ label { color: #FFD700;  }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 
