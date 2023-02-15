@@ -472,7 +472,7 @@ form.list {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width:70%;
+  width:90%;
   margin-top: 50px;
 }
 
@@ -966,7 +966,9 @@ input#file-upload {
   flex-direction: column;
   align-items: flex-end;
   gap: var(--main-gap);
+  width: 100%;
 }
+
 .card-detail-comment-box-container button{
   padding: 3px 7px;
   text-align: center;

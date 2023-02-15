@@ -2,7 +2,7 @@
   <a href="/tools/{{review.tool}}"><h2><i class='bx bx-chevron-left back__icon'></i>Edit Review</h2></a>
 </nav>
 <div class="form-container-lists">
-  <form method="POST" action="/tools/{{review.tool}}/{{review._id}}/edit">
+  <form class="list" method="POST" action="/tools/{{review.tool}}/{{review._id}}/edit">
     <div class="card-detail-comment-box-container">
       <textarea required type="text" value="{{review.review}}" name="review" class="comment"></textarea>
       <button type="submit">Save changes</button>
