@@ -126,18 +126,21 @@ router.get(
     failureRedirect: "/",
     keepSessionInfo: true
   }),
-  function (req, res) {
-    User.findById(req.session.passport.user)
-    .then(user => {
-      req.session.currentUser = user;
-      List.create({user: user._id, default: true});
-      res.redirect('/profile')
-    })
-    .catch(err => {
-      res.redirect('/')
-    })
-  }
-);
+    async function (req, res) {
+      try {
+        const user = await User.findById(req.session.passport.user);
+        req.session.currentUser = user;
+        const listCreated = await List.findOne({ user: user._id, default: true});
+        if (!listCreated) {
+          await List.create({user: user._id, default: true});
+        }
+        res.redirect('/profile')
+      }
+      catch(err) {
+        res.redirect('/')
+      }
+    }
+  );
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout
