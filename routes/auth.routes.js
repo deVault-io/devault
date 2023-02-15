@@ -103,7 +103,7 @@ passport.authenticate('local', {
 })
 );
 
-// @desc    Autehtnticates google loggin
+// @desc    Authenticates google loggin
 // @route   GET /google
 // @access  Public
 router.get(
@@ -130,8 +130,9 @@ router.get(
     User.findById(req.session.passport.user)
     .then(user => {
       req.session.currentUser = user;
+      List.create({user: user._id, default: true});
       res.redirect('/profile')
-    }) 
+    })
     .catch(err => {
       res.redirect('/')
     })
