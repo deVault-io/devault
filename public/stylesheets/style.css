@@ -1010,9 +1010,17 @@ input#file-upload {
 }
 .user-review-content-container {
   width: 100%;
-  background-color: white;
+  background-color: #fff;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
 }
+.linkz {
+  display: flex;
+  gap: 12px;
+  margin: 10px;
+}
+
 .user-review-container{
   border:1px solid var(--primary-border-color);
   border-radius: 8px;
