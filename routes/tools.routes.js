@@ -55,10 +55,13 @@ router.get("/tools/discover", async function (req, res, next) {
 router.get("/tools/:toolId", async function (req, res, next) {
   const { toolId } = req.params;
   const user = req.session.currentUser;
+  let userReviews = []
   try {
     const tool = await Tool.findById(toolId).populate("user");
     const reviews = await Reviews.find({ tool: toolId }).populate("user");
-    const userReviews = await Reviews.find({ tool: toolId, user: user._id })
+    if (user){
+      userReviews = await Reviews.find({ tool: toolId, user: user._id })
+    }
     const votes = await Votes.find({ tool: toolId });
     const otherTools = await Tool.aggregate([
       {
