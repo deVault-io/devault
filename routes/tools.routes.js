@@ -133,9 +133,6 @@ router.get("/tools/:toolId", async function (req, res, next) {
     const avgRating =
       votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo = calculateTime(tool.createdAt);
-    const sumRatings = votes.reduce((sum, votes) => sum + votes.rating, 0).toFixed(1);
-    const avgRating = votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
-    const createdAgo =  calculateTime(tool.createdAt)
 
     if (user == undefined) {
       res.render("newToolDetail", { user, tool, items, votes, reviews });
@@ -152,7 +149,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         avgRating,
         createdAgo,
         isLoggedInUserCreator,
-     , isLoggedInUserReviewer });
+      isLoggedInUserReviewer });
     }
   } catch (error) {
     next(error);
