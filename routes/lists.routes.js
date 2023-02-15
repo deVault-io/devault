@@ -62,7 +62,6 @@ router.get('/:listId', isLoggedIn, async function (req, res, next) {
   const tools = favs.map((fav) => fav.tool);
   const list = await Lists.findById(listId);
   const toolIds = tools.map((tool) => tool._id);
-
   const populatedTools = await Tool.aggregate([
     {
       $match: {
