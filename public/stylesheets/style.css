@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: var(--primary-white);
+  background-color: var(--primary-gray);
   margin-bottom: 100px;
   display: flex ;
   flex-direction:column;
@@ -33,6 +33,7 @@ li a {
   --primary-purple-light: #b6a3cc;
   --primary-purlple-dark: #441b72;
   --primary-white: #fafafa;
+  --primary-gray: #f7f7f7;
   --primary-black: #252323;
   --secondary-black:#3a3a3a;
   --primary-red: rgb(225, 144, 144);
@@ -108,7 +109,7 @@ bx bx-bookmark-heart nav__icon-white, bx bx-link-external nav__icon-white {
   }
   body.light-theme {
     --text-color: var(--primary-black);
-    --bkg-color: var(--primary-white);
+    --bkg-color: var(--primary-gray);
   }
   .light-theme .nav, .light-theme .btn, .light-theme .card-container  {
     --text-color: var(--primary-black);
@@ -454,7 +455,7 @@ div.scrollmenu a:hover {
   width: clamp(50px,30%,400px);
   bottom: 100px;
   opacity: 0.7;
-  margin-top: 20px;
+  margin-top: 70px;
 }
 
 
@@ -464,6 +465,7 @@ form.login {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 285px;
 }
 
 form.list {
@@ -471,7 +473,7 @@ form.list {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width:70%;
+  width:90%;
   margin-top: 50px;
 }
 
@@ -495,6 +497,7 @@ form > label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 40px;
 }
 
 /* ERRORS */
@@ -526,19 +529,19 @@ form > label {
 
 /* SUBMIT BUTTONS */
 .submit-btn {
-  width: 70%;
+  width: 95%;
   align-self: center;
-  margin: 30px 30px 7px 30px;
+  margin: 30px 0px 7px 0px;
   padding: 15px 30px;
   text-align: center;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 1px;
   text-decoration: none;
   color: var(--seconday-color);
-  background: transparent;
+  background: #0000;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid  var(--seconday-color);
+  border: 2px solid var(--seconday-color);
   border-radius: 10px;
   box-shadow: 0px 10px 15px -11px var(--primary-color);
 }
@@ -546,7 +549,7 @@ form > label {
 .submit-btn-google {
   width: 100%;
   align-self: center;
-  margin: 30px 30px 7px 30px;
+  margin: 30px;
   padding: 15px 30px;
   text-align: center;
   font-size: 18px;
@@ -661,7 +664,7 @@ input.input-old[required]:before {
  }
 
  select[multiple]:focus option:checked {
-  background: #b6a3cc linear-gradient(0deg, #b6a3cc 0%, #b6a3cc 100%);
+  background: #0ea4e99f;
   font-weight: bold;
   }
  
@@ -698,13 +701,12 @@ input#file-upload {
 
 /* USER PROFILE PAGE STYLING */
 .profile-container {
-  padding:0 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 80vh;
-    margin-top:70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 75vh;
+  margin-top: 60px;
 }   
      
 .user-avatar {
@@ -761,7 +763,8 @@ input#file-upload {
   -webkit-justify-content: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 15%;
+  margin-top: 10%;
+  margin-bottom: 15%;
 }
 
 .card-detail-container {
@@ -965,7 +968,9 @@ input#file-upload {
   flex-direction: column;
   align-items: flex-end;
   gap: var(--main-gap);
+  width: 100%;
 }
+
 .card-detail-comment-box-container button{
   padding: 3px 7px;
   text-align: center;
@@ -1009,9 +1014,17 @@ input#file-upload {
 }
 .user-review-content-container {
   width: 100%;
-  background-color: white;
+  background-color: #fff;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
 }
+.linkz {
+  display: flex;
+  gap: 12px;
+  margin: 10px;
+}
+
 .user-review-container{
   border:1px solid var(--primary-border-color);
   border-radius: 8px;
@@ -1093,7 +1106,8 @@ input#file-upload {
       -webkit-justify-content: center;
       justify-content: center;
       flex-direction: column;
-      margin-top: 5%;
+      margin-top: 3%;
+      margin-bottom: 5%;
     }
 
     .card-detail-content-description {
@@ -1115,9 +1129,11 @@ input#file-upload {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 50px;
+  gap: 50px;
 }
 
 .card-small-container{
+  background-color: var(--primary-white);
   border: 1px solid var(--primary-border-color);
   padding-top: 0px;
   border-radius: 8px;
@@ -1166,6 +1182,7 @@ input#file-upload {
   transition: all .2s ease-in-out;
   overflow: hidden;
 }
+
 .card-small-img-span{
   box-sizing: border-box;
   display: block;
@@ -1181,6 +1198,15 @@ input#file-upload {
   bottom: 0;
   right: 0;
 }
+
+.card-small-img-span > img {
+  transition: transform .5s ease;
+}
+
+.card-small-img-span:hover > img {
+  transform: scale(1.5);
+}
+
 #small-container-img{
   position: absolute;
   top: 0;
@@ -1427,7 +1453,7 @@ flex-direction: column;
   flex-direction: row;
   width: 100%;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .card-small-link-container-list {
@@ -1530,7 +1556,8 @@ flex-direction: column;
   margin-bottom: 50px;
 }
 #delete-tool-btn,#edit-tool-btn{
-  margin:10px 0px;
+  margin-top: 30px;
+  max-width: 500px;
   width:50%;
   padding: 5px 40px;
   width:100%;
@@ -1836,10 +1863,11 @@ div.devops{
   margin-bottom: 35px;
 }
 .cards-wrapped-container{
-  width:90vw;
+  width: 90vw;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin: 30px;
 }
 .list-add-container {
   display: flex;
@@ -1853,7 +1881,7 @@ div.devops{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-
+    margin-bottom: 130px;
   }
 
   .card-container {
