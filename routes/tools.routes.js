@@ -118,22 +118,30 @@ router.get("/tools/:toolId", async function (req, res, next) {
         tool.avgRating = null;
       }
     });
-    reviews.forEach((review) => {
-      review.createdAgo = calculateTime(review.createdAt);
+    const reviewsWithOwnershipInfo = reviews.map(review => {
+      const reviewObj = review.toObject();
+      reviewObj.createdAgo = calculateTime(review.createdAt);
+      
       // Add rating associated with user commenting for the tool
-      const userVote = votes.find(
-        (vote) => vote.user.toString() === review.user._id.toString()
-      );
+      const userVote = votes.find(vote => vote.user.toString() === review.user._id.toString());
       if (userVote) {
-        review.userRating = userVote.rating;
+        reviewObj.userRating = userVote.rating;
       } else {
-        review.userRating = null;
+        reviewObj.userRating = null;
       }
+      
+      // Add ownership information for current user
+      reviewObj.isCurrentUserReviewer = review.user._id.toString() === user._id;
+      
+      return reviewObj;
     });
+
+    // sends the toolcreator vote to handlebars
     let userVote = null;
     if (user) {
       userVote = await votes.find(vote => vote.user.toString() === user._id.toString()).rating;
     }
+   
     const items = sortRelatedItems(tool, otherTools);
     const sumRatings = votes
       .reduce((sum, votes) => sum + votes.rating, 0)
@@ -156,18 +164,16 @@ router.get("/tools/:toolId", async function (req, res, next) {
     } else {
       const isLoggedInUserCreator =
         tool.user._id.toString() == user._id ? true : false;
-      const isLoggedInUserReviewer =
-        userReviews.user == user._id ? true : false;
+          
       res.render("newToolDetail", {
         userVote,
         user,
         tool,
         items,
-        reviews,
+        reviews:reviewsWithOwnershipInfo,
         avgRating,
         createdAgo,
         isLoggedInUserCreator,
-        isLoggedInUserReviewer,
       });
     }
   } catch (error) {
