@@ -150,7 +150,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         reviewObj.userRating = userVote.rating;
         reviewObj.isCurrentUserReviewer = false;
       }
-      console.log(reviewObj.userRating);
+      console.log(reviewObj);
       return reviewObj;
     });
 
@@ -172,7 +172,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         tool,
         items,
         votes,
-        reviews,
+        reviews:reviewsWithOwnershipInfo,
         avgRating,
         createdAgo,
       });
