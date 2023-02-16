@@ -1141,7 +1141,7 @@ div.card-detail-fieldtag-container a.DevOps {
   content: '';
 	position: absolute;
 	bottom: 0;
-	left: 75%;
+	left: 90%;
 	width: 0;
 	height: 0;
 	border: 13px solid transparent;
@@ -1196,6 +1196,7 @@ div.card-detail-fieldtag-container a.DevOps {
   flex-direction: row;
   gap:5px;
   align-items: center;
+  margin-right: 17px;
 }
 /* STYLES CARD DETAIL NOT MOBILE */
 

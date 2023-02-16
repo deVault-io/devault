@@ -142,12 +142,15 @@ router.get("/tools/:toolId", async function (req, res, next) {
       const userVote = votes.find(
         (vote) => vote.user.toString() === review.user._id.toString()
       );
-      if (userVote) {
+      if (userVote && user) {
         reviewObj.userRating = userVote.rating;
+        reviewObj.isCurrentUserReviewer =
+          review.user._id.toString() === user._id;
       } else {
-        reviewObj.userRating = null;
+        reviewObj.userRating = userVote.rating;
+        reviewObj.isCurrentUserReviewer = false;
       }
-      reviewObj.isCurrentUserReviewer = review.user._id.toString() === user._id;
+      console.log(reviewObj.userRating);
       return reviewObj;
     });
 
