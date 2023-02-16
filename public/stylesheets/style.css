@@ -26,6 +26,7 @@ li a {
   text-decoration: none !important;
 }
 
+
 /* APP COLOR VARIABLES */
 :root {
   --primary-color: #0ea5e9;
@@ -178,9 +179,17 @@ nav {
   border-top: 0.1px solid #0040851a;
 }
 
+.nav-logo {
+  display: none;
+}
+
 #nav-menu,#nav-bar{
   background-color: var(--primary-gray);
   z-index: 999;
+}
+
+.nav__name {
+  display: none;
 }
 
 .nav__list, 
@@ -893,8 +902,6 @@ input#file-upload {
 .card-detail-content-description {
   margin: 20px 0px;
   text-align: justify;
-  display: flex;
-  flex-direction: column;
 }
 
 .card-detail-content-description > p {
@@ -1239,6 +1246,53 @@ div.card-detail-fieldtag-container a.DevOps {
   body {
     padding: 0px 5%;
   }
+
+
+  header {
+    margin-top: 40px;
+  }
+
+  nav.scrolled#nav-bar{
+    display: none;
+  }
+
+  nav#nav-menu {
+    width: 100%;
+    height: 7.3vh;
+    background-color: var (--primary-white);
+    border: 1px var (--seconday-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  #addbtn, #navbtn, #discoverbtn, #homebtn, #librarybtn, #profilebtn, #loginbtn {
+    display: none;
+  }
+
+  .nav-logo {
+    width: 30%;
+    display: block;
+    margin-left: 6%;
+  }
+
+  .nav__list {
+    gap: 147px;
+    justify-content: center;
+    width: 92%;
+  }
+  
+  .nav__name {
+    display: flex;
+    font-size: 18px;
+    font-weight: 200;
+  }
+  
+
   .card-detail-content-img > a > img {
     width: 150%;
   }
@@ -1978,8 +2032,8 @@ padding-bottom: 20px;
 div.back-end{
   background: linear-gradient(to right, var(--primary-color), #4c58c6);
 }
-.front-end{
-  background: linear-gradient(to right, var(--primary-color), #4c58c6);
+div.front-end{
+  background: linear-gradient(to right, orange, #d3782d);
 }
 div.data-science{
   background: linear-gradient(to right, rgb(107, 220, 32), #1a9a5e);
@@ -2073,7 +2127,7 @@ div.devops{
 
 }
 
-/*GUILLE REFACTOR*/
+/* NAV REFACTOR */
 nav#nav-bar {
   width: 100%;
   height: 6.3vh;
