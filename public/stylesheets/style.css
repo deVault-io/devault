@@ -1017,14 +1017,18 @@ input#file-upload {
 
 .linkz {
   display: flex;
-  gap: 12px;
-  margin: 10px;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: flex-end;
 }
-
+.linkz>a>*{
+  font-size: 1.5rem;
+}
 .user-review-container{
   border-bottom:1px solid var(--primary-border-color);
   margin-bottom: 10px;
   padding-bottom: 5px;
+  justify-content: flex-end;
 }
 .user-review-content-container{
   /* border:1px solid  var(--primary-color);
@@ -1073,9 +1077,17 @@ input#file-upload {
   align-items: center;
   gap: 5px;
 }
+.user-review-rating-container{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
 .user-review-rating-container>.bx{
   font-size: larger;
   color: var(--primary-color);
+}
+.user-review-rating-container>.user-reviewer-rating{
+  font-size: 1.2rem;
 }
 .user-review-user-container strong{
   font-size: smaller;

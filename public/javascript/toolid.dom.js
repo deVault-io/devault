@@ -20,6 +20,27 @@ function paintStars() {
           }
         });
       });
+      star.addEventListener('mouseover', function() {
+        // Remove "voted" class from all stars with bigger value
+        stars.forEach(otherStar => {
+          const otherStarValue = parseFloat(otherStar.value);
+          if (otherStarValue > starValue) {
+            otherStar.nextElementSibling.classList.remove("voted");
+          }
+        });
+      });
+      star.addEventListener('mouseout', function() {
+        // Add "voted" class to stars with smaller value
+        stars.forEach(otherStar => {
+          const otherStarValue = parseFloat(otherStar.value);
+          if (otherStarValue <= userVote) {
+            otherStar.nextElementSibling.classList.add("voted");
+          }
+          if (otherStarValue - userVote <= 0.5) {
+            otherStar.nextElementSibling.classList.add("voted");
+          }
+        });
+      });
     });
   }
   
