@@ -42,7 +42,7 @@ router.get('/new', isLoggedIn, function (req, res, next) {
 // @access  Private
 router.post('/new', isLoggedIn, fileUploader.single("image"), async function (req, res, next) {
   function getRandomColor() {
-    const randomColors = ["Back","Front","Data","UX","Blockchain","Productivity","Task","cyber","Mobile","Cloud","Machine","DevOps"];
+    const randomColors = ["BackBkg","FrontBkg","DataBkg","UXBkg","BlockchainBkg","ProductivityBkg","TaskBkg","CyberBkg","MobileBkg","CloudBkg","MachineBkg","DevOpsBkg"];
     return randomColors[Math.floor(Math.random() * randomColors.length)];
   }
   const user = req.session.currentUser;
