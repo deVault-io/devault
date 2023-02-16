@@ -11,6 +11,7 @@ const {
   sortRelatedItems,
   filterSearchItems,
   calculateTime,
+  getPropertyArray,
 } = require("../utils");
 
 // @desc    Tool new rout form
@@ -112,18 +113,19 @@ router.get("/tools/:toolId", async function (req, res, next) {
       },
     ]);
 
-// sends the toolcreator vote to handlebars
-let userVote = null;
-if (user) {
-  voteInDb = await votes.find(
-    (vote) => vote.user.toString() === user._id.toString())
-    if(voteInDb){
-          userVote=voteInDb.rating
+    // sends the toolcreator vote to handlebars
+    let userVote = null;
+    if (user) {
+      voteInDb = await votes.find(
+        (vote) => vote.user.toString() === user._id.toString()
+      );
+      if (voteInDb) {
+        userVote = voteInDb.rating;
+      }
     }
-}    
-    //adds created ago and createdago to the related tools or othertools
+    //adds avgratings and createdago to the related tools or othertools
     otherTools.forEach((tool) => {
-      console.log(tool.avgRating)
+      console.log(tool.avgRating);
       tool.createdAgo = calculateTime(tool.createdAt);
       if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
         tool.avgRating = tool.avgRating.toFixed(1);
@@ -131,14 +133,12 @@ if (user) {
         delete tool.avgRating;
       }
     });
-     
     const items = sortRelatedItems(tool, otherTools);
 
+    //sends createdago,rating associated to the commentor and ownership info to the reviews
     const reviewsWithOwnershipInfo = reviews.map((review) => {
       const reviewObj = review.toObject();
       reviewObj.createdAgo = calculateTime(review.createdAt);
-
-      // Add rating associated with user commenting for the tool
       const userVote = votes.find(
         (vote) => vote.user.toString() === review.user._id.toString()
       );
@@ -147,15 +147,10 @@ if (user) {
       } else {
         reviewObj.userRating = null;
       }
-
-      // Add ownership information for current user
       reviewObj.isCurrentUserReviewer = review.user._id.toString() === user._id;
-
       return reviewObj;
     });
 
-   
-   
     // data for the toolID to be printed: avg rating and createdago time
     const sumRatings = votes
       .reduce((sum, votes) => sum + votes.rating, 0)
@@ -163,9 +158,12 @@ if (user) {
     const avgRating =
       votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo = calculateTime(tool.createdAt);
+    const toolTags = getPropertyArray(tool, "tag");
+    console.log(toolTags);
 
     if (user == undefined) {
       res.render("newToolDetail", {
+        toolTags,
         userVote,
         user,
         tool,
@@ -180,6 +178,7 @@ if (user) {
         tool.user._id.toString() == user._id ? true : false;
       res.render("newToolDetail", {
         userVote,
+        toolTags,
         user,
         tool,
         items,
