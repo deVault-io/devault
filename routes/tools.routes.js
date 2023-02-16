@@ -123,13 +123,17 @@ if (user) {
 }    
     //adds created ago and createdago to the related tools or othertools
     otherTools.forEach((tool) => {
+      console.log(tool.avgRating)
       tool.createdAgo = calculateTime(tool.createdAt);
       if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
         tool.avgRating = tool.avgRating.toFixed(1);
       } else {
-        tool.avgRating = null;
+        delete tool.avgRating;
       }
     });
+     
+    const items = sortRelatedItems(tool, otherTools);
+
     const reviewsWithOwnershipInfo = reviews.map((review) => {
       const reviewObj = review.toObject();
       reviewObj.createdAgo = calculateTime(review.createdAt);
@@ -150,9 +154,8 @@ if (user) {
       return reviewObj;
     });
 
-    
-
-    const items = sortRelatedItems(tool, otherTools);
+   
+   
     // data for the toolID to be printed: avg rating and createdago time
     const sumRatings = votes
       .reduce((sum, votes) => sum + votes.rating, 0)

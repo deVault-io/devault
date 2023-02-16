@@ -1071,9 +1071,14 @@ input#file-upload {
   font-size: 1.5rem; /* Adjust font size as desired */
   margin-left: 0.5rem; /* Adjust spacing as desired */
 }
+.bottom-review-container{
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+}
 .user-review-user-container{
   display: flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   align-items: center;
   gap: 5px;
 }

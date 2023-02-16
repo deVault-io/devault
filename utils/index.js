@@ -139,9 +139,6 @@ const sortRelatedItems = (tool,otherTools)=>{
   if (fieldToSearch) {
     filter.push({ field: fieldToSearch });
   }
-  if (rating) {
-
-  }
   if (timeToSearch) {
     let currentDate = new Date();
     let range = { $gte: new Date(0) };

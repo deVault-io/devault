@@ -70,6 +70,13 @@
               <div class="review">
                 <p>{{this.review}}</p>
               </div>
+              <div class="bottom-review-container">
+              <div class="user-review-rating-container">
+                {{#if userRating}}
+             <i class='bx bxs-star' ></i>
+             <strong class="user-reviewer-rating">{{userRating}}</strong>
+             {{/if}}
+             </div>
               {{#if isCurrentUserReviewer}} 
               <div class="linkz">
                 <a href="/tools/{{tool._id}}/{{this._id}}/edit" id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
@@ -77,11 +84,9 @@
               </div>  
               {{/if}}           
             </div>
+            </div>
             <div class="user-review-user-container">
-              <div class="user-review-rating-container">
-             <i class='bx bxs-star' ></i>
-             <strong class="user-reviewer-rating">{{userRating}}</strong>
-             </div>
+              
             
             <div class="card-review-userinfo-container">
               <div class="card-detail-uploader-info">
