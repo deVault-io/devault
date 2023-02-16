@@ -962,7 +962,7 @@ div.card-detail-fieldtag-container a.Data {
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.UX {
+div.card-detail-fieldtag-container a.UX, .UX {
   background: linear-gradient(to right, rgb(196, 98, 224), #6b127f);
   border: 0;
   color:var(--primary-white)
@@ -2189,10 +2189,10 @@ nav#nav-bar > a > h2{
   width: 115%;
 }
 
-.list-container-img > img {
+.list-container-img, .UX{
   vertical-align: middle;
   border-style: none;
-  width: 100%;
+  width: 100vw;
   height: 150px;
 }
 
@@ -2245,7 +2245,7 @@ display:flex;
   align-self: baseline;
 }
 
-.valign-wrapper-img > img {
+.valign-wrapper> .UX{
   vertical-align: middle;
   border-style: none;
   height: 20px;
