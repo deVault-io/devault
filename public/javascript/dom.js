@@ -1,3 +1,4 @@
+//enables navbar shadow on scroll
 const navBar = document.getElementById('nav-menu');
 window.onscroll = function(){
   if (window.scrollY >22){

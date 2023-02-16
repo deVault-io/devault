@@ -1,4 +1,4 @@
-
+// paints the stars based on the user rating fot the toold shown in the detail
 function paintStars() {
     const ratingFormContainer = document.querySelector('.rating-form');
     const userVote = parseFloat(ratingFormContainer.getAttribute('data-user-vote'));

@@ -63,6 +63,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       userReviews = await Reviews.find({ tool: toolId, user: user._id });
     }
     const votes = await Votes.find({ tool: toolId });
+    //aggregate that returns related items to the detail view
     const otherTools = await Tool.aggregate([
       {
         $match: {
@@ -110,6 +111,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
         },
       },
     ]);
+    //adds created ago and createdago to the related tools or othertools
     otherTools.forEach((tool) => {
       tool.createdAgo = calculateTime(tool.createdAt);
       if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
@@ -118,36 +120,41 @@ router.get("/tools/:toolId", async function (req, res, next) {
         tool.avgRating = null;
       }
     });
-    const reviewsWithOwnershipInfo = reviews.map(review => {
+    const reviewsWithOwnershipInfo = reviews.map((review) => {
       const reviewObj = review.toObject();
       reviewObj.createdAgo = calculateTime(review.createdAt);
-      
+
       // Add rating associated with user commenting for the tool
-      const userVote = votes.find(vote => vote.user.toString() === review.user._id.toString());
+      const userVote = votes.find(
+        (vote) => vote.user.toString() === review.user._id.toString()
+      );
       if (userVote) {
         reviewObj.userRating = userVote.rating;
       } else {
         reviewObj.userRating = null;
       }
-      
+
       // Add ownership information for current user
       reviewObj.isCurrentUserReviewer = review.user._id.toString() === user._id;
-      
+
       return reviewObj;
     });
 
     // sends the toolcreator vote to handlebars
     let userVote = null;
     if (user) {
-      userVote = await votes.find(vote => vote.user.toString() === user._id.toString()).rating;
+      userVote = await votes.find(
+        (vote) => vote.user.toString() === user._id.toString()
+      ).rating;
     }
-   
+
     const items = sortRelatedItems(tool, otherTools);
+    // data for the toolID to be printed: avg rating and createdago time
     const sumRatings = votes
       .reduce((sum, votes) => sum + votes.rating, 0)
       .toFixed(1);
     const avgRating =
-    votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
+      votes.length > 0 ? Math.round((sumRatings / votes.length) * 10) / 10 : 0;
     const createdAgo = calculateTime(tool.createdAt);
 
     if (user == undefined) {
@@ -164,13 +171,12 @@ router.get("/tools/:toolId", async function (req, res, next) {
     } else {
       const isLoggedInUserCreator =
         tool.user._id.toString() == user._id ? true : false;
-          
       res.render("newToolDetail", {
         userVote,
         user,
         tool,
         items,
-        reviews:reviewsWithOwnershipInfo,
+        reviews: reviewsWithOwnershipInfo,
         avgRating,
         createdAgo,
         isLoggedInUserCreator,

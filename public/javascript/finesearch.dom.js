@@ -1,3 +1,4 @@
+//enables the toggle button for the advanced filters in the search results pages
 window.addEventListener('load', () => {
     const searchToggleFilterBtn2 = document.getElementById('search-filter-toggle-btn2');
     const searchToggleApplyBtn2 = document.getElementById('search-apply-toggle-btn2');

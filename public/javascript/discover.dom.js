@@ -1,3 +1,4 @@
+//enables the toggle button for the advanced filters in the discover view
 window.addEventListener('load', () => {
     const searchToggleFilterBtn = document.getElementById('search-filter-toggle-btn');
     const searchToggleApplyBtn = document.getElementById('search-apply-toggle-btn');
