@@ -111,6 +111,16 @@ router.get("/tools/:toolId", async function (req, res, next) {
         },
       },
     ]);
+
+// sends the toolcreator vote to handlebars
+let userVote = null;
+if (user) {
+  voteInDb = await votes.find(
+    (vote) => vote.user.toString() === user._id.toString())
+    if(voteInDb){
+          userVote=voteInDb.rating
+    }
+}    
     //adds created ago and createdago to the related tools or othertools
     otherTools.forEach((tool) => {
       tool.createdAgo = calculateTime(tool.createdAt);
@@ -140,13 +150,7 @@ router.get("/tools/:toolId", async function (req, res, next) {
       return reviewObj;
     });
 
-    // sends the toolcreator vote to handlebars
-    let userVote = null;
-    if (user) {
-      userVote = await votes.find(
-        (vote) => vote.user.toString() === user._id.toString()
-      ).rating;
-    }
+    
 
     const items = sortRelatedItems(tool, otherTools);
     // data for the toolID to be printed: avg rating and createdago time
