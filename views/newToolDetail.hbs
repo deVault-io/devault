@@ -23,12 +23,18 @@
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
         <div class="card-detail-content-description-uploader">
-        <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 35px; border-radius: 20px;"><strong> {{tool.user.username}}</strong> {{createdAgo}}</p>
+        <div class="card-detail-uploader-wrapper">
+        <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 45px; border-radius: 20px;"></p>
+         <div class="card-detail-uploader-info">
+          <p><strong> {{tool.user.username}}</strong></p>
+          <p class="card-uploader-time">{{createdAgo}}</p>
+          </div>
+      </div>
         <h5><i class='bx bxs-star' ></i>{{avgRating}}</h5>
       </div>  
         {{#if user}}
         <div class="card-detail-content-edit-delete">
-          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" >
+          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" data-user-vote="{{userVote}}">
           <div class="rating-container">
           <fieldset class="rating">
             <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -46,13 +52,13 @@
            </div>
         </form>
         {{/if}}
-         {{#if user}}
-          <h2>Tell us your opinion</h2>
+        {{#if user}}
+        <h2>Tell us your opinion</h2>
         <form method="POST" action="/tools/{{tool._id}}/review">
-         <div class="card-detail-comment-box-container">
-          <textarea required type="text" placeholder="I really liked this tool" name="review" class="comment"></textarea>
-          <button type="submit">Add review</button>
-            </div>
+          <div class="card-detail-comment-box-container">
+            <textarea required type="text" placeholder="I really liked this tool" name="review" class="comment"></textarea>
+            <button type="submit">Add review</button>
+          </div>
         </form>
         {{/if}}
           <h2>User Reviews</h2>
@@ -64,16 +70,31 @@
               <div class="review">
                 <p>{{this.review}}</p>
               </div>
+              <div class="bottom-review-container">
+              <div class="user-review-rating-container">
+                {{#if userRating}}
+             <i class='bx bxs-star' ></i>
+             <strong class="user-reviewer-rating">{{userRating}}</strong>
+             {{/if}}
+             </div>
+              {{#if isCurrentUserReviewer}} 
               <div class="linkz">
-                <a href="/tools/{{tool._id}}/{{this._id}}/edit" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
-                <a href="/tools/{{tool._id}}/{{this._id}}/delete" class="card-small-fav-btn"id="none-tool-btn"><i class='bx bx-trash'></i></a>
-              </div>             
+                <a href="/tools/{{tool._id}}/{{this._id}}/edit" id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
+                <a href="/tools/{{tool._id}}/{{this._id}}/delete" id="none-tool-btn"><i class='bx bx-trash'></i></a>
+              </div>  
+              {{/if}}           
+            </div>
             </div>
             <div class="user-review-user-container">
-              <div class="user-review-user-info">
-                <img src={{this.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 20px; border-radius: 20px;">
-                <strong> {{this.user.username}}</strong></div>
-              </div>
+              
+            
+            <div class="card-review-userinfo-container">
+              <div class="card-detail-uploader-info">
+                  <strong>{{user.username}}</strong>
+                  <p class="card-uploader-time">{{createdAgo}}</p>
+                  </div> 
+                  <img src="{{user.image}}"  alt="avatar" style="width: 35px; height: 35px;border-radius: 50%;"> 
+                </div>
             </div>
            </div>
             {{/each}}
@@ -104,4 +125,6 @@
   </div>
 </div> 
 </div>
+<script src="/javascript/toolid.dom.js">
+    </script> 
 

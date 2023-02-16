@@ -73,7 +73,6 @@ router.post('/login', async (req, res, next) => {
       const passwordMatch = await bcrypt.compare(password, userInDB.hashedPassword);
       if (passwordMatch) {
         req.session.currentUser = userInDB;
-        console.log(userInDB)
         res.render('auth/profile', {user: userInDB});
       } else {
         res.render('auth/login',  { error: 'Unable to authenticate user' });
@@ -103,7 +102,7 @@ passport.authenticate('local', {
 })
 );
 
-// @desc    Autehtnticates google loggin
+// @desc    Authenticates google loggin
 // @route   GET /google
 // @access  Public
 router.get(
@@ -126,17 +125,21 @@ router.get(
     failureRedirect: "/",
     keepSessionInfo: true
   }),
-  function (req, res) {
-    User.findById(req.session.passport.user)
-    .then(user => {
-      req.session.currentUser = user;
-      res.redirect('/profile')
-    }) 
-    .catch(err => {
-      res.redirect('/')
-    })
-  }
-);
+    async function (req, res) {
+      try {
+        const user = await User.findById(req.session.passport.user);
+        req.session.currentUser = user;
+        const listCreated = await List.findOne({ user: user._id, default: true});
+        if (!listCreated) {
+          await List.create({user: user._id, default: true});
+        }
+        res.redirect('/profile')
+      }
+      catch(err) {
+        res.redirect('/')
+      }
+    }
+  );
 
 // @desc    Destroy user session and log out
 // @route   POST /auth/logout

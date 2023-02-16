@@ -49,7 +49,7 @@ router.get('/', async function (req, res, next) {
     if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
     tool.avgRating = tool.avgRating.toFixed(1);
     } else {
-      tool.avgRating = null
+      delete tool.avgRating;
     }
     });
     const tag = [...new Set(flattenMap(tools, tool => tool.tag))];
