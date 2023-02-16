@@ -22,9 +22,21 @@
       </div>
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
+         <div class="card-detail-fieldtag-container">
+          
+          <a href="/tools/tools/search/{{tool.field}}" class="{{tool.field}}">{{tool.field}}</a> 
+          {{#if toolTags}}
+            {{#each toolTags}}
+             
+        <a href="/tools/tools/search/{{this}}" class="{{this}}">{{this}}</a> 
+            {{/each}}
+          {{/if}}
+         
+         </div>
         <div class="card-detail-content-description-uploader">
         <div class="card-detail-uploader-wrapper">
         <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 45px; border-radius: 20px;"></p>
+        
          <div class="card-detail-uploader-info">
           <p><strong> {{tool.user.username}}</strong></p>
           <p class="card-uploader-time">{{createdAgo}}</p>
