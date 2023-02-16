@@ -26,6 +26,7 @@ li a {
   text-decoration: none !important;
 }
 
+
 /* APP COLOR VARIABLES */
 :root {
   --primary-color: #0ea5e9;
@@ -178,9 +179,17 @@ nav {
   border-top: 0.1px solid #0040851a;
 }
 
+.nav-logo {
+  display: none;
+}
+
 #nav-menu,#nav-bar{
   background-color: var(--primary-gray);
   z-index: 999;
+}
+
+.nav__name {
+  display: none;
 }
 
 .nav__list, 
@@ -905,7 +914,99 @@ input#file-upload {
     width: 100%;
     gap: 10px;
 }
-
+div.card-detail-fieldtag-container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  gap: 5px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+div.card-detail-fieldtag-container a {
+  flex-shrink: 3;
+  padding:0 10px;
+	height: 2em;
+	line-height: 2em;
+	background-color: #fff;
+	border: 1px solid var(--seconday-color);
+	border-radius: 999px;
+	white-space: nowrap;
+	color: var(--seconday-color);
+	font-size: 15px;
+	text-decoration: none;
+	-webkit-transition: .2s;
+	transition: .2s;
+}
+div.card-detail-fieldtag-container a:hover,div.card-detail-fieldtag-container a:active {
+  background-color: var(--seconday-color);
+  transform: scale(1.1);
+}
+div.card-detail-fieldtag-container .tagBubble:active,div.card-detail-fieldtag-container .tagBubble:hover {
+  background-color: var(--seconday-color);
+  transform: scale(1.1);
+  color: var(--primary-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+div.card-detail-fieldtag-container a.Back {
+  background: linear-gradient(to right, var(--primary-color), #4c58c6);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Front {
+  background: linear-gradient(to right, var(--primary-color), #4c58c6);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Data {
+  background: linear-gradient(to right, rgb(107, 220, 32), #1a9a5e);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.UX, .UX {
+  background: linear-gradient(to right, rgb(196, 98, 224), #6b127f);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Blockchain {
+  background: linear-gradient(to right, rgb(189, 189, 189), #d29e9e);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Productivity {
+  background: linear-gradient(to right, rgb(55, 240, 209), #1f8e8c);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Task {
+  background: linear-gradient(to right, rgb(224, 204, 113), #fe483e);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Cyber  {
+  background: linear-gradient(to right, rgb(225, 147, 236), #be18c6);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Mobile {
+  background: linear-gradient(to right, rgb(253, 161, 24), #ebbf73);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Cloud {
+  background: linear-gradient(to right, rgb(129, 206, 230), #4646ca);
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.Machine {
+  background: linear-gradient(to right, #9ad26c, rgb(23, 187, 2));
+  border: 0;
+  color:var(--primary-white)
+}
+div.card-detail-fieldtag-container a.DevOps {
+  background: linear-gradient(to right, rgb(101, 227, 204), #05974e);
+  border: 0;
+  color:var(--primary-white)
+}
 .card-detail-content-description-uploader {
   margin-bottom: 0px;
   font-size: 15px;
@@ -1047,7 +1148,7 @@ input#file-upload {
   content: '';
 	position: absolute;
 	bottom: 0;
-	left: 75%;
+	left: 90%;
 	width: 0;
 	height: 0;
 	border: 13px solid transparent;
@@ -1102,6 +1203,7 @@ input#file-upload {
   flex-direction: row;
   gap:5px;
   align-items: center;
+  margin-right: 17px;
 }
 /* STYLES CARD DETAIL NOT MOBILE */
 
@@ -1144,6 +1246,53 @@ input#file-upload {
   body {
     padding: 0px 5%;
   }
+
+
+  header {
+    margin-top: 40px;
+  }
+
+  nav.scrolled#nav-bar{
+    display: none;
+  }
+
+  nav#nav-menu {
+    width: 100%;
+    height: 7.3vh;
+    background-color: var (--primary-white);
+    border: 1px var (--seconday-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  #addbtn, #navbtn, #discoverbtn, #homebtn, #librarybtn, #profilebtn, #loginbtn {
+    display: none;
+  }
+
+  .nav-logo {
+    width: 30%;
+    display: block;
+    margin-left: 6%;
+  }
+
+  .nav__list {
+    gap: 147px;
+    justify-content: center;
+    width: 92%;
+  }
+  
+  .nav__name {
+    display: flex;
+    font-size: 18px;
+    font-weight: 200;
+  }
+  
+
   .card-detail-content-img > a > img {
     width: 150%;
   }
@@ -1745,7 +1894,7 @@ flex-direction: column;
   transition: ease-out 0.5s;
 }
 .advanced-search-container{
-  width:90vw;
+  width:clamp(400px,90vw,800px);
   margin-bottom: 10px;
   margin-top: 60px;
   display: flex;
@@ -1828,6 +1977,11 @@ border: 1px solid var(--primary-color);
   box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.3);
  padding-bottom: 80px;
 }
+@media (min-width: 769px) {
+  .advanced-search-main-container{
+    max-width: 50%;
+  }
+}
 .advanced-search-field-container,.advanced-search-tag-container{
 border-bottom: 1px solid var(--primary-border-color);
 padding-bottom: 20px;
@@ -1855,10 +2009,14 @@ padding-bottom: 20px;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   width: 90vw;
- 
   border-radius: 0;
 }
-
+@media (min-width: 769px) {
+  .discover-field-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+  }
+}
 .discover-field-card {
   height: 70px;
   border-radius: 0.5rem;
@@ -1969,7 +2127,7 @@ div.devops{
 
 }
 
-/*GUILLE REFACTOR*/
+/* NAV REFACTOR */
 nav#nav-bar {
   width: 100%;
   height: 6.3vh;
@@ -2031,10 +2189,10 @@ nav#nav-bar > a > h2{
   width: 115%;
 }
 
-.list-container-img > img {
+.list-container-img, .UX{
   vertical-align: middle;
   border-style: none;
-  width: 100%;
+  width: 100vw;
   height: 150px;
 }
 
@@ -2087,7 +2245,7 @@ display:flex;
   align-self: baseline;
 }
 
-.valign-wrapper-img > img {
+.valign-wrapper> .UX{
   vertical-align: middle;
   border-style: none;
   height: 20px;
@@ -2170,3 +2328,4 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+

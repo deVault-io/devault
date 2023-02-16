@@ -42,6 +42,13 @@ function paintStars() {
         });
       });
     });
+  
+    // Add margin-bottom to iframe with id "messenger-button"
+    const messengerButton = document.getElementById("messenger-button");
+    if (messengerButton) {
+      messengerButton.style.marginBottom = "80px";
+    }
   }
   
   window.addEventListener('load', paintStars);
+  
