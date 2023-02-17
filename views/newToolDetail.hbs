@@ -139,6 +139,9 @@
                 {{!-- DESKYOP HTML --}}
 <div class="card-detail-container-desktop">
     <div class="card-detail-desktop-left-container">
+<div class="desktop-right-header {{tool.field}}">
+        <h2>{{tool.name}}</h2>
+        </div>
       <div class="card-detail-content-img">
         <a><img width="350px" src={{tool.imageFile}} alt={{tool.name}}/>
         <div></div>
@@ -206,9 +209,7 @@
 
     <div class="card-detail-desktop-right-container">
       <div class="desktop-right-header-container">
-        <div class="desktop-right-header {{tool.field}}">
-        <h2>{{tool.name}}</h2>
-        </div>
+        
         <div class="desktop-right-description">
           <h2>Description</h2>
           <p>{{tool.description}}</p>
