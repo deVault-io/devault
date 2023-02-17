@@ -1909,7 +1909,7 @@ flex-direction: column;
   padding-top: 0px;
   border-radius: 8px;
   max-width: 400px;
-  min-height: 160px;
+  min-height: 210px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -1960,7 +1960,7 @@ flex-direction: column;
   flex-direction: row;
   justify-content: space-evenly;
   gap: 10px;
-  width:75px;
+  width:150px;
 }
 
 .submit-btn-small-card {
@@ -2293,10 +2293,11 @@ padding-bottom: 20px;
   max-width: 90vw;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 3rem;
+  grid-column-gap: 1rem;
   grid-row-gap: 1rem;
   width: 90vw;
   border-radius: 0;
+  margin-bottom: 20px;
 }
 .best-24h-container{
   width: 90vw;
@@ -2492,7 +2493,7 @@ nav#nav-bar > a > h2{
 }
 .listHeader{
   font-weight: 600;
-  font-size: max(30px, min(12vw, 8vh)); 
+  font-size: max(20px, min(10vw, 8vh)); 
   line-height:65px;
   letter-spacing: 10px;
   text-align: center;
@@ -2502,7 +2503,7 @@ nav#nav-bar > a > h2{
   background-clip: text;
   background-size: 400%;
   animation: move 15s ease infinite;
-  background-image: linear-gradient( 68.7deg,  rgba(29,173,235,1) 53.2%, rgb(186, 192, 242) 29.8%, 68.2%, rgb(41, 143, 237) 13.4% );
+  background-image: linear-gradient( 68.7deg,  var(--primary-white) 53.2%, var(--primary-color) 29.8%, 68.2%, rgb(41, 143, 237) 13.4% );
 }
 
 @keyframes move {

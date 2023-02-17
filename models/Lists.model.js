@@ -14,7 +14,7 @@ const listSchema = new Schema(
     },
     image: {
       type: String,
-      default: 'https://i.imgur.com/ExgDzpE.png',
+      default: 'BackBkg',
     },
     user: {
         type: Schema.Types.ObjectId,
