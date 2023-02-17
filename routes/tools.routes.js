@@ -39,12 +39,61 @@ router.get("/tools/myTools", isLoggedIn, async function (req, res, next) {
 // @route   GET /tools/discover
 // @access  Public
 router.get("/tools/discover", async function (req, res, next) {
+  const user = req.session.currentUser;
   try {
-    const user = req.session.currentUser;
-    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+    const now = new Date();
+    const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+
+    const tools = await Tool.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: twentyFourHoursAgo }
+        }
+      },
+      {
+        $lookup: {
+          from: 'favs',
+          localField: '_id',
+          foreignField: 'tool',
+          as: 'favs'
+        }
+      },
+      {
+        $addFields: {
+          favCount: { $size: "$favs" }
+        }
+      },
+      {
+        $lookup: {
+          from: "votes",
+          localField: "_id",
+          foreignField: "tool",
+          as: "votes",
+        },
+      },
+      {
+        $addFields: {
+          avgRating: { $ifNull: [{$avg: "$votes.rating"}, 0] },
+        },
+      },
+      {
+        $sort: { avgRating: -1 }
+      }
+    ]).exec();
+
+    const populatedTools = await Tool.populate(tools, { path: "user" });
+    populatedTools.forEach(tool => {
+      tool.createdAgo = calculateTime(tool.createdAt);
+      if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
+        tool.avgRating = tool.avgRating.toFixed(1);
+      } else {
+        delete tool.avgRating;
+      }
+    });
+    
     const tag = [...new Set(flattenMap(tools, (tool) => tool.tag))];
     const field = [...new Set(flattenMap(tools, (tool) => tool.field))];
-    res.render("toolDiscover", { user, field, tag, tools });
+    res.render("toolDiscover", {  user, field, tag, tools });
   } catch (error) {
     next(error);
   }
