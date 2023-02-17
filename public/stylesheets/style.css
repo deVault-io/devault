@@ -1289,7 +1289,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   }
 
   .nav__item:last-child {
-    margin-left: 10vw;
+    margin-left: 8vw;
   }
 
   #addbtn, #navbtn, #discoverbtn, #homebtn, #librarybtn, #loginbtn {
@@ -1301,7 +1301,6 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   }
 
   .nav-logo {
-    width: 15%;
     display: block;
     margin-left: 7vw;
   }
@@ -1313,9 +1312,9 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   }
 
   .nav__list {
-    gap: 6vw;
+    gap: 10vw;
     justify-content: center;
-    width: 78vw;
+    width: 85vw;
   }
   
   .nav__name {
