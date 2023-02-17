@@ -28,7 +28,7 @@
       <li class="nav__item">
         <a href="/" class="nav__link active-link">
           <i class='bx bx-home-alt-2 nav__icon' id="homebtn"></i>
-          <span class="nav__name">Home</span>
+          <span class="nav__name">{{!-- Home --}}</span>
         </a>
       </li>
         <li class="nav__item">
@@ -40,7 +40,7 @@
       <li class="nav__item">
         <a href="/tools/new" class="nav__link active-link">
           <i class='bx bxs-plus-circle nav__icon_plus' id="addbtn"></i>
-          <span class="nav__name">Add</span>
+          <span class="nav__name">Submit</span>
         </a>
       </li>
       <li class="nav__item">
@@ -49,17 +49,21 @@
           <span class="nav__name">Library</span> 
         </a>
       </li>
-       <li>
-        <a href="/profile" class="nav__link active-link">
-          <img src={{user.image}} class='bx bx-cog nav__icon' id="profilebtn" alt="avatar" style="width: 35px; border-radius: 20px;"> 
+       <li class="nav__item">
+        <a href="/profile" class="nav__link_log active-link">
+          <img src={{user.image}} class='bx bx-cog nav__icon' id="profilebtn" alt="avatar" style="width: 25px; border-radius: 20px; height: 25px"> 
           <span class="nav__name">Profile</span>
+        </a>
+        <a href="/profile" class="nav__link_go active-link">
+          <img src={{user.image}} id="profilebtn" alt="avatar" style="width: 25px; border-radius: 20px; height: 25px"> 
+          <span class="nav__name" id="user_logged">{{user.username}}</span>
         </a>
       </li>
      {{else}}    
       <li class="nav__item">
         <a href="/" class="nav__link active-link">
           <i class='bx bx-home-alt-2 nav__icon' id="homebtn"></i>
-          <span class="nav__name">Home</span>
+          <span class="nav__name">{{!-- Home --}}</span>
         </a>
       </li>
         <li class="nav__item">
@@ -71,7 +75,7 @@
       <li class="nav__item">
         <a href="/tools/new" class="nav__link active-link">
           <i class='bx bxs-plus-circle nav__icon' id="addbtn"></i>
-          <span class="nav__name">Add</span>
+          <span class="nav__name">Submit</span>
         </a>
       </li>
       <li class="nav__item">
@@ -81,9 +85,13 @@
         </a>
       </li>
       <li class="nav__item">
-        <a href="/auth/login" class="nav__link active-link">
+        <a href="/auth/login" class="nav__link_log active-link">
           <i class='bx bx-log-in-circle nav__icon'id="loginbtn" ></i>
           <span class="nav__name">Login</span>
+        </a> 
+        <a href="/auth/google" class="nav__link_go active-link">
+          <img width="20px" height="20px" src="https://avelhafabrica.es/wp-content/uploads/2019/01/new-google-favicon-512.png">
+          <span class="nav__name" style="font-size: 15px">Login</span>
         </a>
       </li> 
       {{/if}}

@@ -199,6 +199,11 @@ nav {
   
 }
 
+.nav__link_go {
+  display: none;
+  font-size: 15px;
+}
+
 .nav__link {
   flex-direction: column;
   align-items: center;
@@ -426,14 +431,24 @@ div.scrollmenu a:hover {
   margin-top: 5vh;
   width:100%;
   margin-top: 40px;
+ padding-bottom: 50px;
 }
 
 .form-container-lists {
-  width: 100%;
+  width:90vw;
+  height: auto;
   margin-top: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 100px;
+}
+.form-container-lists:last-child{
+  margin-bottom: 100px;
+}
+.list-card-container {
+  margin-top: 15px;
+  width: 300px;
 }
 
 .form-container-lists-detail {
@@ -923,8 +938,8 @@ div.card-detail-fieldtag-container{
   flex-wrap: wrap;
 }
 div.card-detail-fieldtag-container a {
-  flex-shrink: 3;
-  padding:0 10px;
+ max-width: 25%;
+  padding:0 5px;
 	height: 2em;
 	line-height: 2em;
 	background-color: #fff;
@@ -936,6 +951,8 @@ div.card-detail-fieldtag-container a {
 	text-decoration: none;
 	-webkit-transition: .2s;
 	transition: .2s;
+  overflow: hidden;
+  text-align: center;
 }
 div.card-detail-fieldtag-container a:hover,div.card-detail-fieldtag-container a:active {
   background-color: var(--seconday-color);
@@ -947,22 +964,22 @@ div.card-detail-fieldtag-container .tagBubble:active,div.card-detail-fieldtag-co
   color: var(--primary-white);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 }
-div.card-detail-fieldtag-container a.Back {
+div.card-detail-fieldtag-container a.Back,.BackBkg {
   background: linear-gradient(to right, var(--primary-color), #4c58c6);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Front {
+div.card-detail-fieldtag-container a.Front,.FrontBkg {
   background: linear-gradient(to right, var(--primary-color), #4c58c6);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Data {
+div.card-detail-fieldtag-container a.Data,.DataBkg {
   background: linear-gradient(to right, rgb(107, 220, 32), #1a9a5e);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.UX, .UX {
+div.card-detail-fieldtag-container a.UX,.UXBkg {
   background: linear-gradient(to right, rgb(196, 98, 224), #6b127f);
   border: 0;
   color:var(--primary-white)
@@ -972,37 +989,37 @@ div.card-detail-fieldtag-container a.Blockchain {
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Productivity {
+div.card-detail-fieldtag-container a.Productivity,.ProductivityBkg {
   background: linear-gradient(to right, rgb(55, 240, 209), #1f8e8c);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Task {
+div.card-detail-fieldtag-container a.Task,.TaskBkg {
   background: linear-gradient(to right, rgb(224, 204, 113), #fe483e);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Cyber  {
+div.card-detail-fieldtag-container a.Cyber,.CyberBkg  {
   background: linear-gradient(to right, rgb(225, 147, 236), #be18c6);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Mobile {
+div.card-detail-fieldtag-container a.Mobile,.MobileBkg {
   background: linear-gradient(to right, rgb(253, 161, 24), #ebbf73);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Cloud {
+div.card-detail-fieldtag-container a.Cloud ,.CloudBkg{
   background: linear-gradient(to right, rgb(129, 206, 230), #4646ca);
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Machine {
+div.card-detail-fieldtag-container a.Machine,.MachineBkg {
   background: linear-gradient(to right, #9ad26c, rgb(23, 187, 2));
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.DevOps {
+div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   background: linear-gradient(to right, rgb(101, 227, 204), #05974e);
   border: 0;
   color:var(--primary-white)
@@ -1268,30 +1285,78 @@ div.card-detail-fieldtag-container a.DevOps {
     top: 0;
     left: 0;
     z-index: 1000;
+    border: 1px solid #eaeaea;
   }
 
-  #addbtn, #navbtn, #discoverbtn, #homebtn, #librarybtn, #profilebtn, #loginbtn {
+  .nav__item:last-child {
+    margin-left: 8vw;
+  }
+
+  #addbtn, #navbtn, #discoverbtn, #homebtn, #librarybtn, #loginbtn {
     display: none;
   }
 
+  #user_logged {
+    font-size: 13px;
+  }
+
   .nav-logo {
-    width: 30%;
     display: block;
-    margin-left: 6%;
+    margin-left: 7vw;
+  }
+
+  .active-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   .nav__list {
-    gap: 147px;
+    gap: 10vw;
     justify-content: center;
-    width: 92%;
+    width: 85vw;
   }
   
   .nav__name {
     display: flex;
     font-size: 18px;
     font-weight: 200;
+    margin-left: 0.4vw;
+  }
+
+  .nav__link_log {
+    display: none;
   }
   
+  .nav__link_go  {
+    max-width: 100%;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.8125rem;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 32px;
+    color: #000000de;
+    border-radius: 16px;
+    white-space: nowrap;
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    cursor: default;
+    outline: 0px;
+    text-decoration: none;
+    padding: 5px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    background-color: #0000;
+    border: 1px solid #bdbdbd;
+  }
+
+  img#profilebtn {
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+  }
 
   .card-detail-content-img > a > img {
     width: 150%;
@@ -1675,8 +1740,7 @@ flex-direction: column;
   flex-direction: row;
   justify-content: space-evenly;
   gap: 10px;
-  width: 75%;
-  /* padding: 10px; */
+  width:75px;
 }
 
 .submit-btn-small-card {
@@ -2156,10 +2220,6 @@ nav#nav-bar > a > h2{
   font-weight: 100;
 }
 
-.container {
-  margin-top: 30px;
-  max-width: 500px;
-}
 
 .card {
   overflow: auto;
@@ -2186,7 +2246,40 @@ nav#nav-bar > a > h2{
 }
 
 .list-container-img {
+  margin-top:35px;
   width: 115%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@use postcss-preset-env {
+  stage: 0;
+}
+.listHeader{
+  font-weight: 600;
+  font-size: max(30px, min(12vw, 8vh)); 
+  line-height:65px;
+  letter-spacing: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 400%;
+  animation: move 15s ease infinite;
+  background-image: linear-gradient( 68.7deg,  rgba(29,173,235,1) 53.2%, rgb(186, 192, 242) 29.8%, 68.2%, rgb(41, 143, 237) 13.4% );
+}
+
+@keyframes move {
+  0%,100%{
+      background-position: 200% 0%;
+  }
+
+  50%{
+      background-position: 0% 200%;
+  }
 }
 
 .list-container-img, .UX{
@@ -2222,6 +2315,7 @@ display:flex;
 
 .list li .valign-wrapper-row {
   display: flex;
+  justify-content: space-between;
   height: 45px;
   align-items: baseline;
   margin-top: 15px;
@@ -2245,7 +2339,7 @@ display:flex;
   align-self: baseline;
 }
 
-.valign-wrapper> .UX{
+.valign-wrapper> .TaskBkg,.valign-wrapper>.DevOpsBkg,.valign-wrapper>.BackBkg,.valign-wrapper>.FrontBkg,.valign-wrapper>.DataBkg,.valign-wrapper>.UXBkg,.valign-wrapper>.BlockchainBkg,.valign-wrapper>.ProductivityBkg,.valign-wrapper>.CyberBkg,.valign-wrapper>.MobileBkg,.valign-wrapper>.CloudBkg,.valign-wrapper>.MachineBkg{
   vertical-align: middle;
   border-style: none;
   height: 20px;
@@ -2275,12 +2369,11 @@ display: flex;
 }
 
 .valign-wrapper > div.title  {
-  display: flex;
-  width: 100%;
+  
   }
 
   .list li .valign-wrapper-row > div.title {
-    width: 100%;
+  
   }
 
   /* RATING */
