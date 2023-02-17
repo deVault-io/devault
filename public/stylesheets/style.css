@@ -1329,6 +1329,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   .card-detail-container-wrap{
     padding:0;
     margin:0;
+    display:none;
   }
   
   .card-detail-container-desktop{
@@ -1349,6 +1350,9 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   width: 100%;
   height:250px;
   overflow: hidden;
+}
+.span-usercreator-btns{
+  align-self: center;
 }
 .card-detail-content-img>a>*{
   width: 100%;
