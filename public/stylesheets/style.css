@@ -2514,12 +2514,12 @@ nav#nav-bar > a > h2{
   }
 }
 
-.list-container-img, .UX{
+/* .list-container-img, .UX{
   vertical-align: middle;
   border-style: none;
   width: 100vw;
   height: 150px;
-}
+} */
 
 .list {
   margin: 0;
