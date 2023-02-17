@@ -165,23 +165,23 @@
           {{/if}}
          </div>
         {{#if user}}
-          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" data-user-vote="{{userVote}}">
-          <div class="rating-container">
-          <fieldset class="rating">
-            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-            <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-            <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-            <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-            <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-            <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-          </fieldset>
-           <button type="submit" class="rating-submit-btn">Rate</button>
-           </div>
-        </form>
+             <form class="rating-form" id="second-rating-form" action="/tools/{{tool._id}}/vote" method="POST" data-user-vote="{{userVote}}">
+  <div class="rating-container">
+    <fieldset class="rating">
+      <input type="radio" id="second-star5" name="secondRating" value="5" /><label class = "full" for="second-star5" title="Awesome - 5 stars"></label>
+      <input type="radio" id="second-star4half" name="secondRating" value="4.5" /><label class="half" for="second-star4half" title="Pretty good - 4.5 stars"></label>
+      <input type="radio" id="second-star4" name="secondRating" value="4" /><label class = "full" for="second-star4" title="Pretty good - 4 stars"></label>
+      <input type="radio" id="second-star3half" name="secondRating" value="3.5" /><label class="half" for="second-star3half" title="Meh - 3.5 stars"></label>
+      <input type="radio" id="second-star3" name="secondRating" value="3" /><label class = "full" for="second-star3" title="Meh - 3 stars"></label>
+      <input type="radio" id="second-star2half" name="secondRating" value="2.5" /><label class="half" for="second-star2half" title="Kinda bad - 2.5 stars"></label>
+      <input type="radio" id="second-star2" name="secondRating" value="2" /><label class = "full" for="second-star2" title="Kinda bad - 2 stars"></label>
+      <input type="radio" id="second-star1half" name="secondRating" value="1.5" /><label class="half" for="second-star1half" title="Meh - 1.5 stars"></label>
+      <input type="radio" id="second-star1" name="secondRating" value="1" /><label class = "full" for="second-star1" title="Sucks big time - 1 star"></label>
+      <input type="radio" id="second-starhalf" name="secondRating" value="0.5" /><label class="half" for="second-starhalf" title="Sucks big time - 0.5 stars"></label>
+    </fieldset>
+    <button type="submit" class="rating-submit-btn">Rate</button>
+  </div>
+</form>
         {{/if}}
         
          <div class="card-detail-header-buttons">

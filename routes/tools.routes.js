@@ -441,14 +441,23 @@ router.get(
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  const { rating } = req.body;
+  const { rating, secondRating } = req.body;
   try {
+    if(rating){
     const tool = await Tool.findById(toolId).populate("user");
     let votedTool = await Votes.findOneAndUpdate(
       { tool: toolId, user: user._id },
       { rating },
       { upsert: true, new: true }
     );
+    } else{
+      let rating = secondRating
+      const tool = await Tool.findById(toolId).populate("user");
+    let votedTool = await Votes.findOneAndUpdate(
+      { tool: toolId, user: user._id },
+      { rating },
+      { upsert: true, new: true });
+    }
     res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
