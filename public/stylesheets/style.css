@@ -2193,7 +2193,40 @@ nav#nav-bar > a > h2{
 }
 
 .list-container-img {
+  margin-top:35px;
   width: 115%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@use postcss-preset-env {
+  stage: 0;
+}
+.listHeader{
+  font-weight: 600;
+  font-size: max(30px, min(12vw, 8vh)); 
+  line-height:65px;
+  letter-spacing: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 400%;
+  animation: move 15s ease infinite;
+  background-image: linear-gradient( 68.7deg,  rgba(29,173,235,1) 53.2%, rgb(186, 192, 242) 29.8%, 68.2%, rgb(41, 143, 237) 13.4% );
+}
+
+@keyframes move {
+  0%,100%{
+      background-position: 200% 0%;
+  }
+
+  50%{
+      background-position: 0% 200%;
+  }
 }
 
 .list-container-img, .UX{
