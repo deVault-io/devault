@@ -1346,9 +1346,6 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
     background-color: var(--primary-white);
     border-top: 0.1px solid #0040851a;
   }
-
-
-  
 }
 
 @media (max-width: 770px){
@@ -1363,7 +1360,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   .card-detail-container{
     display:none
   }
-  .card-detail-container-wrap{
+  #card-detail-container-wrap,.card-detail-container-wrap{
     padding:0;
     margin:0;
     display:none;
@@ -1442,7 +1439,6 @@ font-size: 1.4rem;
   flex-direction: row;
   gap: 20px;
   width: 100%;
-
 }
 .desktop-right-header{
   width:100%;
@@ -2238,10 +2234,9 @@ border: 1px solid var(--primary-color);
 .advanced-search-filter-container{
   font-size: 1.2rem;
 }
-.advanced-search-applybutton:hover,.advanced-search-applybutton:active,.advanced-search-filter-container:active,.advanced-search-filter-container:hover{
+#search-apply-toggle-btn2:active,#search-apply-toggle-btn2:hover,#search-apply-toggle-btn:active,#search-apply-toggle-btn:hover,.advanced-search-applybutton:hover,.advanced-search-applybutton:active,.advanced-search-filter-container:active,.advanced-search-filter-container:hover{
   transform: scale(1.1);
   transition: 0.2s;
-
 }
 .advanced-search-filter-container i{
   font-size: 1.2rem;
@@ -2273,7 +2268,7 @@ border: 1px solid var(--primary-color);
 border-bottom: 1px solid var(--primary-border-color);
 padding-bottom: 20px;
 }
-.advanced-search-applybutton{
+#search-apply-toggle-btn2,#search-apply-toggle-btn,.advanced-search-applybutton{
   border-radius: 8px;
   width: 50%;
   height: 40px;
@@ -2285,6 +2280,9 @@ padding-bottom: 20px;
   color: var(--primary-white);
   margin:15px auto;
   margin-bottom: 30px;
+}
+.apply-close-btn-containers{
+  margin-top: 30px;
 }
 .hidden{
  display:none;
