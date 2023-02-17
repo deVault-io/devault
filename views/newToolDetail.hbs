@@ -23,7 +23,6 @@
       <div class="card-detail-content-description">
         <p>{{tool.description}}</p>
          <div class="card-detail-fieldtag-container">
-          
           <a href="/tools/tools/search/{{tool.field}}" class="{{tool.field}}">{{tool.field}}</a> 
           {{#if toolTags}}
             {{#each toolTags}}
@@ -137,6 +136,143 @@
   </div>
 </div> 
 </div>
+                {{!-- DESKYOP HTML --}}
+<div class="card-detail-container-desktop">
+    <div class="card-detail-desktop-left-container">
+      <div class="card-detail-content-img">
+        <a><img width="350px" src={{tool.imageFile}} alt={{tool.name}}/>
+        <div></div>
+        </a>
+      </div>
+       <div class="card-detail-content-description-uploader">
+        <div class="card-detail-uploader-wrapper">
+          <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 45px; border-radius: 20px;"></p>
+        
+          <div class="card-detail-uploader-info">
+          <p><strong class="desktop-toolcreator-name"> {{tool.user.username}}</strong></p>
+          <p class="card-uploader-time">{{createdAgo}}</p>
+          </div>
+          </div>
+          <h5 class="toolratingtext"><i class='bx bxs-star toolratingstar' ></i>{{avgRating}}</h5>
+        </div> 
+        <div class="card-detail-fieldtag-container">
+          <a href="/tools/tools/search/{{tool.field}}" class="{{tool.field}}">{{tool.field}}</a> 
+          {{#if toolTags}}
+            {{#each toolTags}}
+             
+        <a href="/tools/tools/search/{{this}}" class="{{this}} tagBubble">{{this}}</a> 
+            {{/each}}
+          {{/if}}
+         </div>
+        {{#if user}}
+          <form class="rating-form" action="/tools/{{tool._id}}/vote" method="POST" data-user-vote="{{userVote}}">
+          <div class="rating-container">
+          <fieldset class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+            <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+            <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+            <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+            <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+          </fieldset>
+           <button type="submit" class="rating-submit-btn">Rate</button>
+           </div>
+        </form>
+        {{/if}}
+        
+         <div class="card-detail-header-buttons">
+          <div class="card-detail-header-buttons-link">
+            <a href={{tool.url}}><i class='bx bx-link-external nav__icon-white'></i>Visit Website</a>
+          </div>
+          <div class="card-detail-header-buttons-link">
+            <a href="/lists/{{tool._id}}/fav"><i class='bx bx-bookmark-heart nav__icon-white'></i>Add Fav</a> 
+          </div>
+        </div>
+         {{#if items}}
+        <h2>You might also be interested in:</h2>
+        <div class="card-small-container-wrap"> 
+          {{#each items}}
+          {{>randomCard this}}
+          {{/each}}
+          {{/if}}
+        </div>
+    </div>
+   
+
+
+    <div class="card-detail-desktop-right-container">
+      <div class="desktop-right-header-container">
+        <div class="desktop-right-header {{tool.field}}">
+        <h2>{{tool.name}}</h2>
+        </div>
+        <div class="desktop-right-description">
+          <h2>Description</h2>
+          <p>{{tool.description}}</p>
+        </div>
+      </div>
+      {{#if user}}
+        <h2>Tell us your opinion about {{tool.name}}!</h2>
+        <form method="POST" action="/tools/{{tool._id}}/review">
+          <div class="card-detail-comment-box-container">
+            <textarea required type="text" placeholder="I really liked this tool" name="review" class="comment"></textarea>
+            <button type="submit">Add review</button>
+          </div>
+        </form>
+        {{/if}}
+         <h2>User Reviews</h2>
+          {{#if reviews}}
+          <div class="user-review-container-wrapper">
+            {{#each reviews}}
+          <div class="user-review-container">
+            <div class="user-review-content-container">
+              <div class="review">
+                <p>{{this.review}}</p>
+              </div>
+              <div class="bottom-review-container">
+              <div class="user-review-rating-container">
+                {{#if userRating}}
+             <i class='bx bxs-star' ></i>
+             <strong class="user-reviewer-rating">{{userRating}}</strong>
+             {{/if}}
+             </div>
+              {{#if isCurrentUserReviewer}} 
+              <div class="linkz">
+                <a href="/tools/{{tool._id}}/{{this._id}}/edit" id="none-tool-btn"><i class='bx bx-edit-alt'></i></a>
+                <a href="/tools/{{tool._id}}/{{this._id}}/delete" id="none-tool-btn"><i class='bx bx-trash'></i></a>
+              </div>  
+              {{/if}}           
+            </div>
+            </div>
+            <div class="user-review-user-container">
+              
+            
+            <div class="card-review-userinfo-container">
+              <div class="card-detail-uploader-info">
+                  <strong>{{user.username}}</strong>
+                  <p class="card-uploader-time">{{createdAgo}}</p>
+                  </div> 
+                  <img src="{{user.image}}"  alt="avatar" style="width: 35px; height: 35px;border-radius: 50%;"> 
+                </div>
+            </div>
+           </div>
+            {{/each}}
+             </div>
+            {{else}}
+            <p> No reviews yet! Be the first one!</p>
+          {{/if}}
+         <span>
+          {{#if isLoggedInUserCreator}} 
+            <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
+            <a href="/tools/{{tool._id}}/edit" id="edit-tool-btn">Edit tool</a>
+          {{/if}}    
+        </span>
+    </div>
+</div>
+
 <script src="/javascript/toolid.dom.js">
     </script> 
 
