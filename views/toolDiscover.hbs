@@ -150,5 +150,15 @@
   </div>
   </a>
 </div>
+
+<div class="best-24h-container">
+  <h2>Best recent tools in the Vault</h2>
+  <div class="best-24h-cards-wrapper">
+    {{#each tools}}
+    {{>toolCard this}}
+  {{/each}}
+  
+  </div>
+</div>
 <script src="/javascript/discover.dom.js">
     </script> 

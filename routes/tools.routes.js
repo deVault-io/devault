@@ -39,12 +39,61 @@ router.get("/tools/myTools", isLoggedIn, async function (req, res, next) {
 // @route   GET /tools/discover
 // @access  Public
 router.get("/tools/discover", async function (req, res, next) {
+  const user = req.session.currentUser;
   try {
-    const user = req.session.currentUser;
-    const tools = await Tool.find({}).sort({ createdAt: -1 }).populate("user");
+    const now = new Date();
+    const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+
+    const tools = await Tool.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: twentyFourHoursAgo }
+        }
+      },
+      {
+        $lookup: {
+          from: 'favs',
+          localField: '_id',
+          foreignField: 'tool',
+          as: 'favs'
+        }
+      },
+      {
+        $addFields: {
+          favCount: { $size: "$favs" }
+        }
+      },
+      {
+        $lookup: {
+          from: "votes",
+          localField: "_id",
+          foreignField: "tool",
+          as: "votes",
+        },
+      },
+      {
+        $addFields: {
+          avgRating: { $ifNull: [{$avg: "$votes.rating"}, 0] },
+        },
+      },
+      {
+        $sort: { avgRating: -1 }
+      }
+    ]).exec();
+
+    const populatedTools = await Tool.populate(tools, { path: "user" });
+    populatedTools.forEach(tool => {
+      tool.createdAgo = calculateTime(tool.createdAt);
+      if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
+        tool.avgRating = tool.avgRating.toFixed(1);
+      } else {
+        delete tool.avgRating;
+      }
+    });
+    
     const tag = [...new Set(flattenMap(tools, (tool) => tool.tag))];
     const field = [...new Set(flattenMap(tools, (tool) => tool.field))];
-    res.render("toolDiscover", { user, field, tag, tools });
+    res.render("toolDiscover", {  user, field, tag, tools });
   } catch (error) {
     next(error);
   }
@@ -441,14 +490,23 @@ router.get(
 router.post("/tools/:toolId/vote", isLoggedIn, async (req, res, next) => {
   const { toolId } = req.params;
   const user = req.session.currentUser;
-  const { rating } = req.body;
+  const { rating, secondRating } = req.body;
   try {
+    if(rating){
     const tool = await Tool.findById(toolId).populate("user");
     let votedTool = await Votes.findOneAndUpdate(
       { tool: toolId, user: user._id },
       { rating },
       { upsert: true, new: true }
     );
+    } else{
+      let rating = secondRating
+      const tool = await Tool.findById(toolId).populate("user");
+    let votedTool = await Votes.findOneAndUpdate(
+      { tool: toolId, user: user._id },
+      { rating },
+      { upsert: true, new: true });
+    }
     res.redirect(`/tools/${toolId}`);
   } catch (error) {
     next(error);
