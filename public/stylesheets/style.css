@@ -1314,17 +1314,8 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
     border-top: 0.1px solid #0040851a;
   }
 
-  #bluenav > p {
-    color: var(--primary-white);
-    font-size: 15px;
-    display: flex;
-    margin-top: 45px;
-    padding: 0px 13vw;
-    font-weight: 100;
-  }
-
   #bluenav {
-    width: 100%;
+    width: 105%;
     height: 8vh;
     display: flex;
     position: fixed;
@@ -1333,6 +1324,15 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
     z-index: 9998;
     background-color: var(--seconday-color);
     border-top: 0.1px solid #0040851a;
+  }
+
+  #bluenav > p {
+    color: var(--primary-white);
+    font-size: 16px;
+    display: flex;
+    margin-top: 45px;
+    padding: 0px 13vw;
+    font-weight: 100;
   }
 
   #nav-menu {
