@@ -184,7 +184,7 @@ nav {
 }
 
 #nav-menu,#nav-bar{
-  background-color: var(--primary-gray);
+  background-color: var(--primary-white);
   z-index: 999;
 }
 
@@ -1266,7 +1266,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
 
 
   header {
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
   nav.scrolled#nav-bar{
