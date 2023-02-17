@@ -1111,7 +1111,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+.rating > input:checked ~ label:hover ~ label { color: #FFD700;  } 
 .rating-submit-btn{
   align-self: center;
   padding: 3px 7px;
@@ -2210,7 +2210,7 @@ border: 1px solid var(--primary-color);
   position: absolute;
   z-index: 99;
   background-color: var(--primary-white);
-  width: 90vw !important;
+  width: 100% !important;
   padding: 0;
   box-shadow: none;
   padding-left:10px;

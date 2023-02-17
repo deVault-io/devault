@@ -1,6 +1,6 @@
-// paints the stars based on the user rating fot the toold shown in the detail
 function paintStars() {
-    const ratingFormContainer = document.querySelector('.rating-form');
+  const ratingFormContainers = document.querySelectorAll('.rating-form');
+  ratingFormContainers.forEach(ratingFormContainer => {
     const userVote = parseFloat(ratingFormContainer.getAttribute('data-user-vote'));
     const stars = ratingFormContainer.querySelectorAll('.rating input[type="radio"]');
     stars.forEach(star => {
@@ -37,18 +37,18 @@ function paintStars() {
             otherStar.nextElementSibling.classList.add("voted");
           }
           if (otherStarValue - userVote <= 0.5) {
-            otherStar.nextElementSibling.classList.add("voted");
+            star.nextElementSibling.classList.add("voted");
           }
         });
       });
     });
+  });
   
-    // Add margin-bottom to iframe with id "messenger-button"
-    const messengerButton = document.getElementById("messenger-button");
-    if (messengerButton) {
-      messengerButton.style.marginBottom = "80px";
-    }
+  // Add margin-bottom to iframe with id "messenger-button"
+  const messengerButton = document.getElementById("messenger-button");
+  if (messengerButton) {
+    messengerButton.style.marginBottom = "80px";
   }
-  
-  window.addEventListener('load', paintStars);
-  
+}
+
+window.addEventListener('load', paintStars);
