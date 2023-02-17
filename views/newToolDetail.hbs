@@ -1,7 +1,7 @@
 <nav id="nav-bar" class="scrolled">
   <a href="/"><h2><i class='bx bx-chevron-left back__icon'></i>{{tool.name}}</h2></a>
 </nav>
-<div class="card-detail-container-wrap">
+<div class="card-detail-container-wrap" id="card-detail-container-wrap">
   <div class="card-detail-container">
     <div class="card-detail-header">
       <div class="card-detail-header-buttons">
@@ -139,7 +139,7 @@
                 {{!-- DESKYOP HTML --}}
 <div class="card-detail-container-desktop">
     <div class="card-detail-desktop-left-container">
-<div class="desktop-right-header {{tool.field}}">
+      <div class="desktop-right-header {{tool.field}}">
         <h2>{{tool.name}}</h2>
         </div>
       <div class="card-detail-content-img">
@@ -147,6 +147,12 @@
         <div></div>
         </a>
       </div>
+      <span class="span-usercreator-btns">
+          {{#if isLoggedInUserCreator}} 
+            <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
+            <a href="/tools/{{tool._id}}/edit" id="edit-tool-btn">Edit tool</a>
+          {{/if}}    
+        </span>
        <div class="card-detail-content-description-uploader">
         <div class="card-detail-uploader-wrapper">
           <p>By: <img src={{tool.user.image}} class='bx bx-cog nav__icon' alt="avatar" style="width: 45px; border-radius: 20px;"></p>
@@ -205,8 +211,6 @@
         </div>
     </div>
    
-
-
     <div class="card-detail-desktop-right-container">
       <div class="desktop-right-header-container">
         
@@ -265,12 +269,7 @@
             {{else}}
             <p> No reviews yet! Be the first one!</p>
           {{/if}}
-         <span>
-          {{#if isLoggedInUserCreator}} 
-            <a href="/tools/{{tool._id}}/delete" id="delete-tool-btn">Delete</a>
-            <a href="/tools/{{tool._id}}/edit" id="edit-tool-btn">Edit tool</a>
-          {{/if}}    
-        </span>
+         
     </div>
 </div>
 
