@@ -184,7 +184,7 @@ nav {
 }
 
 #nav-menu,#nav-bar{
-  background-color: var(--primary-gray);
+  background-color: var(--primary-white);
   z-index: 999;
 }
 
