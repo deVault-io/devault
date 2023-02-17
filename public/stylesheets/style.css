@@ -1314,6 +1314,11 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
   }
 }
 
+@media (max-width: 770px){
+  .card-detail-container-desktop{
+    display:none;
+  }
+}
 @media (min-width: 770px) {
   body {
     padding: 0px;
@@ -1325,6 +1330,7 @@ div.card-detail-fieldtag-container a.DevOps,.DevOpsBkg {
     padding:0;
     margin:0;
   }
+  
   .card-detail-container-desktop{
     width:90vw;
     margin-top: 80px;
