@@ -138,18 +138,16 @@ router.get("/tools/:toolId", async function (req, res, next) {
     //sends createdago,rating associated to the commentor and ownership info to the reviews
     const reviewsWithOwnershipInfo = reviews.map((review) => {
       const reviewObj = review.toObject();
-      reviewObj.createdAgo = calculateTime(review.createdAt);
-      const userVote = votes.find(
-        (vote) => vote.user.toString() === review.user._id.toString()
-      );
-      if (userVote && user) {
-        reviewObj.userRating = userVote.rating;
-        reviewObj.isCurrentUserReviewer =
-          review.user._id.toString() === user._id;
-      } else {
-        reviewObj.userRating = userVote.rating;
-        reviewObj.isCurrentUserReviewer = false;
-      }
+  reviewObj.createdAgo = calculateTime(review.createdAt);
+  reviewObj.isCurrentUserReviewer = user && (review.user._id.toString() === user._id);
+  const userVote = votes.find(
+    (vote) => vote.user.toString() === review.user._id.toString()
+  );
+  if (userVote) {
+    reviewObj.userRating = userVote.rating;
+  } else {
+    reviewObj.userRating = null;
+  }
       console.log(reviewObj);
       return reviewObj;
     });
