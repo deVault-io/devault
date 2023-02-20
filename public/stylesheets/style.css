@@ -983,7 +983,7 @@ div.card-detail-fieldtag-container a.UX,.UXBkg {
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Blockchain {
+div.card-detail-fieldtag-container a.BlockchainBkg {
   background: linear-gradient(to right, rgb(189, 189, 189), #d29e9e);
   border: 0;
   color:var(--primary-white)
