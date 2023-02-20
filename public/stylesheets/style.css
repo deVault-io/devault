@@ -2319,6 +2319,9 @@ padding-bottom: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 1500px;
   }
   .best-24h-container{
     margin-top: 20px;
