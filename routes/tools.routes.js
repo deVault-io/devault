@@ -43,7 +43,37 @@ router.get("/tools/discover", async function (req, res, next) {
   try {
     const now = new Date();
     const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-
+    const allTools =await Tool.aggregate([
+      {
+        $lookup: {
+          from: 'favs',
+          localField: '_id',
+          foreignField: 'tool',
+          as: 'favs'
+        }
+      },
+      {
+        $addFields: {
+          favCount: { $size: "$favs" }
+        }
+      },
+      {
+        $lookup: {
+          from: "votes",
+          localField: "_id",
+          foreignField: "tool",
+          as: "votes",
+        },
+      },
+      {
+        $addFields: {
+          avgRating:{ $ifNull: [{$avg: "$votes.rating"}, 0] },
+        },
+      },
+      {
+        $sort: { createdAt: -1 }
+      },
+    ]).exec();
     const tools = await Tool.aggregate([
       {
         $match: {
@@ -91,8 +121,11 @@ router.get("/tools/discover", async function (req, res, next) {
       }
     });
     
-    const tag = [...new Set(flattenMap(tools, (tool) => tool.tag))];
-    const field = [...new Set(flattenMap(tools, (tool) => tool.field))];
+    const tag = [...new Set(flattenMap(allTools, (tool) => tool.tag))];
+    const field = [...new Set(flattenMap(allTools, (tool) => tool.field))];
+    console.log(tools)
+    console.log(tag)
+    console.log(field)
     res.render("toolDiscover", {  user, field, tag, tools });
   } catch (error) {
     next(error);
@@ -347,6 +380,64 @@ router.post("/tools/finesearch", async function (req, res, next) {
     .populate("user");
   const tag = [...new Set(flattenMap(toolsToTag, (tool) => tool.tag))];
   const field = [...new Set(flattenMap(toolsToTag, (tool) => tool.field))];
+  if (!textToSearch && !fieldToSearch && !tagToSearch && !timeToSearch && rating) {
+    try {
+      const tools = await Tool.aggregate([
+        {
+          $lookup: {
+            from: "favs",
+            localField: "_id",
+            foreignField: "tool",
+            as: "favs",
+          },
+        },
+        {
+          $addFields: {
+            favCount: { $size: "$favs" },
+          },
+        },
+        {
+          $lookup: {
+            from: "votes",
+            localField: "_id",
+            foreignField: "tool",
+            as: "votes",
+          },
+        },
+        {
+          $addFields: {
+            avgRating: { $avg: "$votes.rating" },
+          },
+        },
+        {
+          $sort: { avgRating: -1 },
+        },
+        {
+          $limit: 30,
+        },
+      ]);
+      const populatedTools = await Tool.populate(tools, { path: "user" });
+      populatedTools.forEach((tool) => {
+        tool.createdAgo = calculateTime(tool.createdAt);
+        if (typeof tool.avgRating === "number" && tool.avgRating > 0) {
+          tool.avgRating = tool.avgRating.toFixed(1);
+        } else {
+          tool.avgRating = null;
+        }
+      });
+      res.render("toolSearchResults", {
+        user,
+        tools: populatedTools,
+        field,
+        tag,
+      });
+      return;
+    } catch (error) {
+      console.error(error);
+      next(error);
+      return;
+    }
+  }
   if (filter.length > 0) {
     const sortField = rating ? "avgRating" : "createdAt";
     try {

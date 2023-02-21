@@ -983,7 +983,7 @@ div.card-detail-fieldtag-container a.UX,.UXBkg {
   border: 0;
   color:var(--primary-white)
 }
-div.card-detail-fieldtag-container a.Blockchain {
+div.card-detail-fieldtag-container a.BlockchainBkg {
   background: linear-gradient(to right, rgb(189, 189, 189), #d29e9e);
   border: 0;
   color:var(--primary-white)
@@ -2319,6 +2319,9 @@ padding-bottom: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 1500px;
   }
   .best-24h-container{
     margin-top: 20px;
