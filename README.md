@@ -227,7 +227,7 @@ const reviewSchema = new Schema(
   }
 );
 ```
-
+User Routes 
 | Description                   | Method | Route               | Access  | req.body or req.params            |
 |-------------------------------|--------|---------------------|---------|-----------------------------------|
 | Profile view                  | GET    | `/profile`          | Private |                                   |
@@ -238,4 +238,22 @@ const reviewSchema = new Schema(
 | Lists of favorites view       | GET    | `/profile/lists`    | Private |                                   |
 | Delete profile                | GET    | `/profile/delete`   | Private |                                   |
 
+Tool Routes 
+
+| Description                                  | Method | Route                           | Access  | req.body or req.params                 |
+|----------------------------------------------|--------|---------------------------------|---------|----------------------------------------|
+| New tool view                                | GET    | `/tools/new`                    | Private |                                        |
+| My tools view                                | GET    | `/tools/myTools`                | Private |                                        |
+| Discover tools view                          | GET    | `/tools/discover`               | Public  |                                        |
+| Tool detail view                             | GET    | `/tools/:toolId`                | Public  | `{ toolId }`                           |
+| Create a new tool                            | POST   | `/tools/new`                    | Private | `{ name, description, image, url, field, tag }` (file in req.file.path) |
+| Edit one tool form                           | POST   | `/tools/:toolId/edit`           | Private | `{ toolId, name, description, image, url, field, tag }` |
+| Delete one tool                              | GET    | `/tools/:toolId/delete`         | Private | `{ toolId }`                           |
+| Take inputs from the search form             | POST   | `/tools/finesearch`             | Public  | `{ textToSearch, nameToSearch, fieldToSearch, tagToSearch, timeToSearch, rating }` |
+| Takes inputs from params                     | GET    | `/tools/tools/search/:itemToSearch`| Public  | `{ itemToSearch }` |
+| Edit one list form                           | POST   | `/tools/:toolId/vote`           | Private | `{ toolId, rating, secondRating }`    |
+| Post new review                              | POST   | `/tools/:toolId/review`         | Private | `{ toolId, review }`                  |
+| Edit one review view                         | GET    | `/tools/:toolId/:reviewId/edit` | Private | `{ toolId, reviewId }`                |
+| Edit one review form                         | POST   | `/tools/:toolId/:reviewId/edit` | Private | `{ toolId, reviewId, review }`        |
+| Delete one review                            | GET    | `/tools/:toolId/:reviewId/delete`| Private | `{ toolId, reviewId }`                |
 
