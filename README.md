@@ -304,13 +304,13 @@ Auth Routes
 ## Screenshots
 
 <p align="center">
-<img width="60%" src="https://i.imgur.com/3MAO4JX_d.jpg">
+<img width="60%" src="https://i.imgur.com/3MAO4JX_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 </p>
 <p align="center">
-<img width="60%" src="https://i.imgur.com/ILGkCXZ_d.jpg">
+<img width="60%" src="https://i.imgur.com/ILGkCXZ_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 </p>
 <p align="center">
-<img width="60%" src="https://i.imgur.com/IjqJEjM_d.jpg">
+<img width="60%" src="https://i.imgur.com/IjqJEjM_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
 </p>
 
 
