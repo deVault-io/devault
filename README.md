@@ -293,4 +293,17 @@ Auth Routes
 | Destroy user session and log out             | GET    | `/auth/logout`                    | Private  |                                              |
 
 
+## Useful links
+
+- [Github Repo](https://github.com/deVault-io/devault)
+- [Trello](https://github.com/deVault-io/devault)
+- [Deployed version](https://devault-app.fly.dev/)
+
+## Screenshots
+
+## Screenshots
+
+![App Screenshot](https://i.imgur.com/3MAO4JX_d.jpg?maxwidth=520&shape=thumb&fidelity=high)
+![App Screenshot](https://i.imgur.com/ILGkCXZ_d.jpg?maxwidth=520&shape=thumb&fidelity=high)
+![App Screenshot](https://i.imgur.com/IjqJEjM_d.jpg?maxwidth=520&shape=thumb&fidelity=high)
 
