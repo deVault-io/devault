@@ -89,6 +89,7 @@ Tribe stories
   }
 );
   ```
+  Tool Model
   ```js
   const toolSchema = new Schema(
   {
@@ -127,8 +128,9 @@ Tribe stories
         required:true,
         min: [3, 'At least 3 tags are required.']
     },
-    ```
+  ```
   List Model
+  
   ```js
   const listSchema = new Schema(
   {
@@ -150,6 +152,29 @@ Tribe stories
         type: Schema.Types.ObjectId,
         ref: 'User',
     }
+  },
+  {
+    timestamps: true
+  }
+);
+```
+Votes Model
+```js
+const voteSchema = new Schema(
+  {
+    tool: {
+        type: Schema.Types.ObjectId,
+        ref: 'Tool'
+      },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    rating: {
+      type: Number,
+      required: [true, 'Please rate'],
+      default: 5,
+    },
   },
   {
     timestamps: true
