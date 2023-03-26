@@ -304,7 +304,7 @@ Auth Routes
 ## Screenshots
 
 <p align="center">
-<img width="100%" src="https://i.imgur.com/3MAO4JX_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
+<img width="100%" src="https://imgur.com/3MAO4JX.jpg">
 </p>
 <p align="center">
 <img width="50%" src="https://i.imgur.com/ILGkCXZ_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
