@@ -228,4 +228,14 @@ const reviewSchema = new Schema(
 );
 ```
 
+| Description                   | Method | Route               | Access  | req.body or req.params            |
+|-------------------------------|--------|---------------------|---------|-----------------------------------|
+| Profile view                  | GET    | `/profile`          | Private |                                   |
+| Edit profile view             | GET    | `/profile/edit`     | Private |                                   |
+| Edit profile view post        | POST   | `/profile/edit`     | Private | `{ username, email }`             |
+| Edit profile avatar view      | GET    | `/profile/editAvatar`| Private |                                   |
+| Edit profile avatar view post | POST   | `/profile/editAvatar`| Private | `{ image }` (file in req.file.path)|
+| Lists of favorites view       | GET    | `/profile/lists`    | Private |                                   |
+| Delete profile                | GET    | `/profile/delete`   | Private |                                   |
+
 
