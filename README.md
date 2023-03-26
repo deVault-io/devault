@@ -257,3 +257,40 @@ Tool Routes
 | Edit one review form                         | POST   | `/tools/:toolId/:reviewId/edit` | Private | `{ toolId, reviewId, review }`        |
 | Delete one review                            | GET    | `/tools/:toolId/:reviewId/delete`| Private | `{ toolId, reviewId }`                |
 
+List/Fav routes
+
+| Description                             | Method | Route                   | Access  | req.body or req.params            |
+|-----------------------------------------|--------|-------------------------|---------|------------------------------------|
+| Lists of favorites view                 | GET    | `/`                     | Private |                                    |
+| New list view                           | GET    | `/new`                  | Private |                                    |
+| Create a new list                       | POST   | `/new`                  | Private | `{ listName, image }` (file in req.file.path) |
+| Get one list                            | GET    | `/:listId`              | Private | `{ listId }`                      |
+| Tool select list to add                 | GET    | `/:toolId/fav`          | Private | `{ toolId }`                      |
+| Add one tool to fav                     | GET    | `/:toolId/:listId/add`  | Private | `{ toolId, listId }`              |
+| Tools to add to list                    | GET    | `/:listId/add`          | Private | `{ listId }`                      |
+| Take inputs from the search form        | POST   | `/:listId/search`       | Public  | `{ listId, textToSearch, nameToSearch, fieldToSearch, tagToSearch, timeToSearch }` |
+| Edit one list view                      | GET    | `/lists/:listId/edit`   | Private | `{ listId }`                      |
+| Edit one list form                      | POST   | `/lists/:listId/edit`   | Private | `{ listId, listName, image }`     |
+| Delete one list                         | GET    | `/lists/:listId/delete` | Private | `{ listId }`                      |
+
+Index route
+
+| Description                             | Method | Route                   | Access  | req.body or req.params            |
+|-----------------------------------------|--------|-------------------------|---------|------------------------------------|
+| App home page                           | GET    | `/`                     | Public  |                                    |
+
+Auth Routes
+| Description                                  | Method | Route                             | Access   | req.body or req.params                        |
+|----------------------------------------------|--------|-----------------------------------|----------|----------------------------------------------|
+| Displays form view to sign up                | GET    | `/auth/signup`                    | Public   |                                              |
+| Sends user auth data to create a new user    | POST   | `/auth/signup`                    | Public   | `username, email, password, image, aboutMe`  |
+| Displays form view to log in                 | GET    | `/auth/login`                     | Public   |                                              |
+| Sends user auth data to authenticate user    | POST   | `/auth/login`                     | Public   | `email, password`                            |
+| Displays form view to Login PassportJS       | GET    | `/auth/passportLogin`             | Public   |                                              |
+| Sends user auth data to authenticate user    | POST   | `/auth/passportLogin`             | Public   | `email, password`                            |
+| Authenticates google loggin                  | GET    | `/auth/google`                    | Public   |                                              |
+| Authenticates google loggin                  | GET    | `/auth/google/callback`           | Public   |                                              |
+| Destroy user session and log out             | GET    | `/auth/logout`                    | Private  |                                              |
+
+
+
