@@ -10,7 +10,7 @@ This is a project devoloped by Guillermo García and Jorge Méndez for the secon
 ## Wireframes & concept board
 
 <p align="center">
-<img width="100%" src="https://i.imgur.com/iepIstu_d.jpg?maxwidth=520&shape=thumb&fidelity=high">
+<img width="100%" src="https://imgur.com/iepIstu.png">
 </p>
 
 ## User stories (MVP)
