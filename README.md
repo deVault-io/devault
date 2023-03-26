@@ -89,6 +89,34 @@ Tribe stories
   }
 );
   ```
+  List Model
+  ```js
+  const listSchema = new Schema(
+  {
+    default: {
+      type: Boolean,
+      default: false,
+    },
+    listName: {
+      type: String,
+      trim: true,
+      required: [true, 'List name is required.'],
+      default: 'My Favourites',
+    },
+    image: {
+      type: String,
+      default: 'BackBkg',
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
   Favourite Model
 ```js 
 
