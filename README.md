@@ -14,7 +14,6 @@ This is a project devoloped by Guillermo García and Jorge Méndez for the secon
 </p>
 
 ## User stories (MVP)
-Tribe stories
 - User can sign up and create and account
 - User can login
 - User can log out
