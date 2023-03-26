@@ -303,7 +303,14 @@ Auth Routes
 
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/3MAO4JX_d.jpg)
-![App Screenshot](https://i.imgur.com/ILGkCXZ_d.jpg)
-![App Screenshot](https://i.imgur.com/IjqJEjM_d.jpg)
+<p align="center">
+<img width="60%" src="https://i.imgur.com/3MAO4JX_d.jpg">
+</p>
+<p align="center">
+<img width="60%" src="https://i.imgur.com/ILGkCXZ_d.jpg">
+</p>
+<p align="center">
+<img width="60%" src="https://i.imgur.com/IjqJEjM_d.jpg">
+</p>
+
 
